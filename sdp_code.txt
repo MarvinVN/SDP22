@@ -1,0 +1,140 @@
+**UNRELATED IDEA: RFID readers only activate on a player's turn with LED lights to indicate whose turn it is. otherwise - async? TBD
+
+For implementation, follow roadmap: Card --> Deck (mostly for testing) --> Card --> Player --> GameState --> Game --> Blackjack --> Holdem
+
+Gamestate - the literal state of the game, essentially all the cards on the board, the bets, and the total pot
+		Player - the players of the game, which includes actual people and the AI (Blackjack)
+			Hand - simple array of the player's cards
+				Card - the card, of course, and its info
+			Bet - the bet of the player
+
+Bet: Variables: Total Bet, currBet
+	Methods: getTotalBet, addBet, resetBet
+
+Hand: Array
+	Methods: getHand, emptyHand, addCard, removeCard
+Card: DIctionary {UID, ID} --> ex: {123456789: 'As'} (ace of spades")
+				RFID --> lookup ID w/UID, get rank with card[0] and suit with card[1], get color by suit (or even do something like 'Asb' --> Ace of Spades, Black)
+				arrays needed: rank[A, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K], suit[s, c, d, h], color[red, black]
+				Methods: getID, getSuit, getRank, getColor, getUID
+
+Player: Variables: playerNum, (Bet Variables), Hand
+	Methods: (Hand Methods), (Bet Methods), addMoney, removeMoney
+
+Gamestate: Variables: numOfPlayers, players, currGame, Pot, Deck
+		Methods: restartGame, gets, dealCards, shuffleDeck
+
+Pseudocode for gameState.py:
+imports
+class gameState():
+	def __init__(self):
+		//TODO
+	def restartGame(self):
+		for x in hands:
+			x.emptyHand()
+		restartDeck()
+	def getNumOfPlayers(self):
+			return self.numOfPlayers
+	def getHands(self):
+			return self.hands
+	def getPlayerHand(self, player): //0 for house, 1 for player 1, 2 for player 2, etc.
+			return hands[player]
+	def dealCards(self, num):
+			for x in self.numOfPlayers:
+				for y in range(num):
+					x.addCard(deck.pop) 
+	def shuffleDeck(self):
+			random.shuffle(deck)
+
+^^For above, things are still subject to change. Keeping in mind many methods/apsects are for testing purposes. Other variables/methods are surely to be added 
+
+Play Program to test --> separate programs (blackjack.py, holdem.py) w/ necessary game imports 
+Test Blackjack 1 player, 1 House:
+Start game --> put in bet/buy in --> Deal cards to players --> player can hit/stand --> house hits/stands until 17 --> check win conditions --> deal out bets
+Test Hold'em 2 players:
+Start game --> Deal cards to players --> checks/bets/folds --> river 3 cards --> checks/bets/folds --> river 1 card (4 total) --> checks/bets/folds --> river 1 card (5 total) --cont.
+checks/bets/folds --> out of remaining players, calculate best hand --> deal out bets
+
+Game.py <-- Blackjack.py
+	^-------- Holdem.py
+
+(focusing on testing/implementation for now, full integration with the actual system will come later; another version.)
+
+Rough Pseudocode for Game.py
+imports
+Game():
+	while(1):
+		numPlayers = raw_input("How many players do you have?")
+			if numPlayers not a number:
+				print("Please choose a number)
+				continue()
+		choice = raw_input("What game do you want to play? (Blackjack/Hold'em)")
+		if choice = blackjack: blackjack(numPlayers)
+		elif choice = holdem: holdem(numPlayers)
+		else: print("Please choose a valid option")
+END
+
+Rough Pseudocode for Blackjack.py
+imports
+Blackjack(numPlayers):
+	int bets[]
+	string choice = ""
+	gs = gameState(numPlayers) //initalize the gamestate with given number of players
+	gs.shuffleDeck()
+	for x in range(numPlayers):
+		bets.append(raw_input("Player {x}, how much do you bet?")) //for this particular implementation, the house will pay 2 to 1
+	gs.dealCards(2)
+	for x in range(numPlayers):	//settle player turns
+		while(1):	//find better conditional?
+			total = calcHand(gs.player[x].hand)
+			if total < 21:
+				choice = raw_input(Player {x}, will you hit or stand?)
+				if choice == hit:
+					gs.player[x].addCard(1)
+				elif choice == stand:
+					break()
+			elif total == 21: 
+				print("You got 21!")
+				break()
+			else:
+				print("Bust! Sorry.")
+				break()
+	houseTotal = houseTurn(gs.player[0].hand)
+	if houseTotal == 21:
+		print("House wins!")
+		settleBets ----------------------------------------------------------------------------------------------------
+		
+
+def calcHand(hand):
+	total = 0
+	for card in hand:
+	    if card[0] == "J" or card[0] == "Q" or card[0] == "K": total+= 10
+	    elif card[0] == "A":
+	        if total >= 11: total+= 1
+	    	else: total+= 11
+	    else: total += card
+    return total
+def houseTurn(hand):
+	total = 0
+	while(1):
+		total = calcHand(hand)
+		if total < 17: 
+			gs.player[0].addCard(1)
+			continue()
+		else: break()
+	return total
+def settleBet(n): //'b' for dealer bust, 'w' for dealer 21, 'u' for dealer under 21
+			
+		
+	
+		
+		
+		
+	
+
+
+
+
+	
+	
+
