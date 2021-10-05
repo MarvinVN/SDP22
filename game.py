@@ -17,6 +17,7 @@ class Card:
     def __repr__(self):
         return self.show()
 
+    #return card to print
     def show(self):
         if self.rank == 1:
             rank = "A"
