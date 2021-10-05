@@ -1,11 +1,14 @@
 from game import *
+from gameState import *
 
-#Deck testing
-deck = Deck()
-#deck.shuffle()
-deck.show()
+gs = gameState(1)
+gs.dealCards(2)
+gs.showAllHands()
 
-#Player testing
-#marvin = Player(1)
-#marvin.draw(deck, 2)
-#marvin.showHand()
+gs.restartGame(True)
+gs.getPlayerHand(0)
+
+gs.restartGame(False)
+gs.deck.shuffle()
+gs.dealCards(2)
+gs.showAllHands()
