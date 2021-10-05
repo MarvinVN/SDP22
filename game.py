@@ -1,5 +1,6 @@
 import random
 
+#in full implementation, RFID will be scanned and looked up in dictionary for suit/rank
 class Card:
 
     #rank = ['A', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
@@ -32,6 +33,7 @@ class Card:
 
         return "{}{}".format(rank, self.suit)
 
+#will be mostly unneeded in full implementation
 class Deck:  
     def __init__(self):
         self.cards = []
