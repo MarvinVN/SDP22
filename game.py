@@ -9,6 +9,7 @@ class Card:
         self.rank = rank
         self.suit = suit
 
+    #functions to help print out card
     def __unicode__(self):
         return self.show()
     def __str__(self):
