@@ -32,6 +32,16 @@ class gameState:
         for x in self.players:
             x.showHand()
 
+    def getBets(self): 
+        bets = [0] #dealer doesn't bet, set at 0
+        for x in self.players:
+            bets.append(x.getTotalBet)
+        return bets
+
+    def resetBets(self):
+        for x in self.players:
+            x.resetBet()
+
     def dealCards(self, num):
         for x in range(self.numPlay):
             self.players[x].draw(self.deck, num)

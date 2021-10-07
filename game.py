@@ -1,6 +1,7 @@
 import random
 
 #in full implementation, RFID will be scanned and looked up in dictionary for suit/rank
+#think about ways to do this... async?
 class Card:
 
     #rank = ['A', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
@@ -18,7 +19,6 @@ class Card:
     def __repr__(self):
         return self.show()
 
-    #return card to print
     def show(self):
         if self.rank == 1:
             rank = "A"
@@ -59,6 +59,8 @@ class Player:
     def __init__(self, pos):
         self.pos = pos
         self.hand = []
+        self.wallet = 1000
+        self.totalBet = 0
 
     def draw(self, deck, num):
         for x in range(num):
@@ -66,8 +68,30 @@ class Player:
             if card:
                 self.hand.append(card)
             else:
-                return False
+                return False #unlikely event, but figure out what to do here anyways
         return True
+
+    def getWallet(self):
+        return self.wallet
+
+    def addWallet(self, num):
+        self.wallet += num
+
+    def getTotalBet(self):
+        return self.totalBet
+
+    def addBet(self, num):
+        if num <= self.wallet:
+            self.totalBet += num
+            self.wallet -= num
+        else:
+            return False #will change
+    
+    def resetBet(self):
+        self.totalBet = 0
+
+    def allIn(self):
+        self.addBet(self.wallet)
 
     def showHand(self):
         print("Player {}'s hand: {}".format(self.pos, self.hand))
