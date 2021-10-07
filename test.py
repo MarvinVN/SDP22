@@ -1,14 +1,21 @@
-from game import *
 from gameState import *
 
 gs = gameState(1)
-gs.dealCards(2)
-gs.showAllHands()
+print(gs.players[1].getWallet())
+print(gs.players[1].getTotalBet())
 
-gs.restartGame(True)
-gs.getPlayerHand(0)
+print("------------------bet 250-----------------------")
+gs.players[1].addBet(250)
+print(gs.players[1].getWallet())
+print(gs.players[1].getTotalBet())
 
-gs.restartGame(False)
-gs.deck.shuffle()
-gs.dealCards(2)
-gs.showAllHands()
+print("------------------go all in-----------------------")
+gs.players[1].allIn()
+print(gs.players[1].getWallet())
+print(gs.players[1].getTotalBet())
+
+print("------------------reset bet, add 500-----------------------")
+gs.players[1].addWallet(500)
+gs.resetBets()
+print(gs.players[1].getWallet())
+print(gs.players[1].getTotalBet())
