@@ -1,0 +1,16 @@
+-------------TODO------------------------
+
+Blackjack:
+	- clean up score()
+	- skip players when their wallet reaches 0, reset game when all wallets reach 0
+	- quit() --> return to menu
+	- the "menu"
+	- tell every player individually they lost/how much they won
+
+Gamestate:
+	- user input for starting wallet
+	- change how false numPlay inputs are handled
+
+Game:
+	- change how overbetting is handled
+
