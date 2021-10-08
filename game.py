@@ -71,15 +71,6 @@ class Player:
                 return False #unlikely event, but figure out what to do here anyways
         return True
 
-    def getWallet(self):
-        return self.wallet
-
-    def addWallet(self, num):
-        self.wallet += num
-
-    def getTotalBet(self):
-        return self.totalBet
-
     def addBet(self, num):
         if num <= self.wallet:
             self.totalBet += num

@@ -2,16 +2,32 @@ from gameState import *
 
 def main():
     totals = []
-    gs = gameState((int)(input("How many people are playing?")))
-    gs.dealCards(2)
+    while(1):
+        gs = gameState((int)(input("How many people are playing?")))
+        gs.deck.shuffle()
+        gs.dealCards(2)
 
-    for x in range(1, gs.numPlay):
-        totals[x] = playerTurn(gs.players[x], gs.deck)
-    totals[0] = dealerTurn(gs.players[0], gs.deck)
+        totals.append(0)
+        for x in range(1, gs.numPlay):
+            totals.append(playerTurn(gs.players[x], gs.deck))
+        totals[0] = dealerTurn(gs.players[0], gs.deck)
+        score(gs.players, totals)
 
+        play_again = input("Play again (y/n)?").lower
+        if play_again == 'y':
+            continue
+        elif play_again == 'n':
+            quit() #temporary, should go to some sort of splash s
+        else:
+            print("\n Invalid answer, quitting.")
+            quit() #same as above
+    
 def playerTurn(player, deck):
+    move = ''
     while move != 's':
         total = checkValue(player.hand)
+        player.showHand()
+        print("Total value: {}".format(total))
         if total > 21:
             print("Bust!")
             break
@@ -28,6 +44,8 @@ def dealerTurn(player, deck):
     total = 0
     while total < 17:
         total = checkValue(player.hand)
+        player.showHand()
+        print(": {}".format(total))
         if total >= 17:
             break
         else:
@@ -37,9 +55,9 @@ def dealerTurn(player, deck):
 def checkValue(hand):
     val = 0
     for x in hand:
-        if x.rank in ['K', 'Q', 'J']:
+        if x.rank in [13, 12, 11]: #K, Q, J
             val += 10
-        elif x == 'A':
+        elif x == 1: #Ace
             if val >= 11:
                 val += 1
             else:
@@ -48,5 +66,39 @@ def checkValue(hand):
             val += x.rank
     return val
 
+#clean up
 def score(players, totals):
-    return 0
+    dealer_score = totals[0]
+    if dealer_score > 21:
+        for x in range(1, len(players)):
+            if totals[x] > 21:
+                settleBet(players[x], -1)
+            elif totals[x] == 21:
+                settleBet(players[x], 0)
+            else:
+                settleBet(players[x], 1)
+    elif dealer_score == 21:
+        for x in range(1, len(players)):
+            if totals[x] == 21:
+                settleBet(players[x], 0)
+            else:
+                settleBet(players[x], -1)
+    else:
+        for x in range(1, len(players)):
+            if totals[x] < dealer_score:
+                settleBet(players[x], -1)
+            elif totals[x] == dealer_score:
+                settleBet(players[x], 0)
+            else:
+                settleBet(players[x], 1)
+
+#system pays out 2 to 1
+def settleBet(player, res):
+    if res == 1:
+        player.wallet += player.totalBet * 2
+    elif res == 0:
+        player.wallet += player.totalBet
+    #if player loses, bet is just reset
+    player.resetBet()
+
+main()

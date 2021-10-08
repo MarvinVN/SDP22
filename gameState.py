@@ -28,7 +28,7 @@ class gameState:
     def getPlayerHand(self, player):
         return self.players[player].hand
 
-    def showAllHands(self): #debugging purposes
+    def showAllHands(self):
         for x in self.players:
             x.showHand()
 
