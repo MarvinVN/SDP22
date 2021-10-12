@@ -41,6 +41,12 @@ class gameState:
     def resetBets(self):
         for x in self.players:
             x.resetBet()
+    
+    def showWallets(self):
+        wallets = []
+        for x in self.players:
+            wallets.append(x.wallet)
+        print(wallets)
 
     def dealCards(self, num):
         for x in range(self.numPlay):

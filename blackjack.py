@@ -3,7 +3,7 @@ from gameState import *
 def main():
     totals = []
     while(1):
-        gs = gameState((int)(input("How many people are playing?")))
+        gs = gameState((int)(input("How many people are playing?\n")))
         gs.deck.shuffle()
         gs.dealCards(2)
 
@@ -13,7 +13,9 @@ def main():
         totals[0] = dealerTurn(gs.players[0], gs.deck)
         score(gs.players, totals)
 
-        play_again = input("Play again (y/n)?").lower
+        gs.showWallets()
+
+        play_again = input("Play again (y/n)?\n").lower
         if play_again == 'y':
             continue
         elif play_again == 'n':
@@ -24,6 +26,8 @@ def main():
     
 def playerTurn(player, deck):
     move = ''
+    bet = (int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
+    player.addBet(bet) #handle invalid inputs (if bet > wallet, if no number is given <-- this one shouldnt be a problem when GUI is in place)
     while move != 's':
         total = checkValue(player.hand)
         player.showHand()
