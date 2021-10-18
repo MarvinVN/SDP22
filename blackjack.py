@@ -1,9 +1,12 @@
 from gameState import *
 
 def main():
-    totals = []
+    gs = gameState(1)
     while(1):
-        gs = gameState((int)(input("How many people are playing?\n")))
+        totals = []
+        gs.setPlayers((int)(input("How many people are playing?\n")))
+        gs.resetHands()
+        gs.deck.build()
         gs.deck.shuffle()
         gs.dealCards(2)
 
@@ -15,10 +18,10 @@ def main():
 
         gs.showWallets()
 
-        play_again = input("Play again (y/n)?\n").lower
-        if play_again == 'y':
+        play_again = input("Play again (y/n)?\n").lower()
+        if play_again == "y":
             continue
-        elif play_again == 'n':
+        elif play_again == "n":
             quit() #temporary, should go to some sort of splash s
         else:
             print("\n Invalid answer, quitting.")
@@ -73,6 +76,7 @@ def checkValue(hand):
 #clean up
 def score(players, totals):
     dealer_score = totals[0]
+    print("Totals: {}".format(totals)) #debug
     if dealer_score > 21:
         for x in range(1, len(players)):
             if totals[x] > 21:
@@ -89,7 +93,7 @@ def score(players, totals):
                 settleBet(players[x], -1)
     else:
         for x in range(1, len(players)):
-            if totals[x] < dealer_score:
+            if totals[x] < dealer_score or totals[x] > 21:
                 settleBet(players[x], -1)
             elif totals[x] == dealer_score:
                 settleBet(players[x], 0)
