@@ -1,4 +1,4 @@
-from game import *
+from game import Card, Deck, Player
 
 class gameState:
     def __init__(self, numPlay):
@@ -9,7 +9,7 @@ class gameState:
 
     def setPlayers(self, numPlay):
         if numPlay not in [1, 2, 3, 4]:
-            return False #might need to change behavior
+            return False #might need to change behavior... probably not; just make it 4 buttons
 
         prevNum = self.numPlay
         self.numPlay = numPlay + 1 #plus 1 needed for dealer

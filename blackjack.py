@@ -1,4 +1,4 @@
-from gameState import *
+from gameState import gameState
 
 def main():
     gs = gameState(1)
@@ -109,4 +109,5 @@ def settleBet(player, res):
     #if player loses, bet is just reset
     player.resetBet()
 
-main()
+if __name__ == "__main__":
+    main()
