@@ -1,28 +1,28 @@
 from gameState import gameState
 
 def main():
-    gs = gameState(1)
-    while(1):
+    gs = gameState(1) #initialize gamestate
+    while(1):   #main game loop
         totals = []
         gs.setPlayers((int)(input("How many people are playing?\n")))
         gs.resetHands()
         gs.deck.build()
         gs.deck.shuffle()
-        gs.dealCards(2)
+        gs.dealCards(2) # num of cards
 
-        totals.append(0)
-        for x in range(1, gs.numPlay):
+        totals.append(0) #temp dealer score; needs to be calculated after players
+        for x in range(1, gs.numPlay): #Player turns
             totals.append(playerTurn(gs.players[x], gs.deck))
-        totals[0] = dealerTurn(gs.players[0], gs.deck)
+        totals[0] = dealerTurn(gs.players[0], gs.deck) #dealer turn
         score(gs.players, totals)
 
-        gs.showWallets()
+        gs.showWallets() #debugging
 
         play_again = input("Play again (y/n)?\n").lower()
         if play_again == "y":
             continue
         elif play_again == "n":
-            quit() #temporary, should go to some sort of splash s
+            quit() #temporary, should go back to menu screen
         else:
             print("\n Invalid answer, quitting.")
             quit() #same as above
@@ -101,6 +101,7 @@ def score(players, totals):
                 settleBet(players[x], 1)
 
 #system pays out 2 to 1
+#res: 1=win, 0=tie, -1=loss
 def settleBet(player, res):
     if res == 1:
         player.wallet += player.totalBet * 2
