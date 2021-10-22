@@ -24,6 +24,7 @@ class MainWindow(qtw.QWidget):
 		start_game_button = qtw.QPushButton("START GAME",
 			clicked = lambda: press_it())
 		self.layout().addWidget(start_game_button)
+		#hi marvin
 
 
 
