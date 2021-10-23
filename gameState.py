@@ -14,7 +14,7 @@ class gameState:
         prevNum = self.numPlay
         self.numPlay = numPlay + 1 #plus 1 needed for dealer
 
-        #player 0 reserved for dealer, 1-4 for users
+        #player(index) 0 reserved for dealer, 1-4 for users
         if prevNum < self.numPlay: #if more players than previous game, initialize players
             for x in range(prevNum, self.numPlay):
                 self.players.append(Player(x)) 
