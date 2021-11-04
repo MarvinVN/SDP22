@@ -1,4 +1,7 @@
 from gameState import gameState
+import PyQt5.QtWidgets as qtw
+import PyQt5.QtGui as qtg
+import PyQt5.QtCore as qtc
 
 def main():
     gs = gameState(1)
