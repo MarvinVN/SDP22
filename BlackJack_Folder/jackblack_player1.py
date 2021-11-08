@@ -1,8 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from jackblack_player_game import Ui_MainWindow
 
 
 class Ui_Player1_MainWindow(object):
-    def bet_it(self):
+    def bet_it(self, p1_mw):
         for i in reversed(range(self.formLayout.count())): 
             self.formLayout.itemAt(i).widget().setParent(None)
 
@@ -37,7 +38,7 @@ class Ui_Player1_MainWindow(object):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.scroll_bet)
 
         # ok button
-        self.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.ok_it())
+        self.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow(p1_mw))
         self.ok_pushButton.setText("OK")
         self.ok_pushButton.setGeometry(QtCore.QRect(160, 160, 311, 61))
         font = QtGui.QFont()
@@ -62,25 +63,31 @@ class Ui_Player1_MainWindow(object):
         self.hbox.addWidget(self.ok_button)
         self.centralwidget.layout().addLayout(self.hbox)
         """
+    def double_it(self):
+        self.thing = self.thing * 2
+        self.ui.current_bet_field.setPlainText(str(self.thing))
 
-
-    def ok_it(self):
-        for i in reversed(range(self.formLayoutWidget.layout().count())): 
-            self.formLayoutWidget.layout().itemAt(i).widget().deleteLater()
-
-        self.test_label = QtWidgets.QLabel("YAYYYYY")
-        self.formLayoutWidget.layout().addWidget(self.test_label)
-
+    def openWindow(self, main_w):
+        temp_w = main_w
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        #self.ui.current_bet_field.setPlainText(str(temp_w.scroll_bet.value))
+        self.thing = self.scroll_bet.value()
+        self.ui.current_bet_field.setPlainText(str(self.thing))
+        temp_w.hide()
+        #self.ui.double_button.clicked.connect(double_it())
 
 
     def setupUi(self, Player1_MainWindow):
         Player1_MainWindow.setObjectName("Player1_MainWindow")
-        Player1_MainWindow.resize(610, 368)
+        Player1_MainWindow.resize(480, 320)
         self.centralwidget = QtWidgets.QWidget(Player1_MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         # making a form layout
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(160, 150, 381, 214))
+        self.formLayoutWidget.setGeometry(130, 100, 230, 200)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -88,7 +95,7 @@ class Ui_Player1_MainWindow(object):
 
         self.player1_label = QtWidgets.QLabel(self.centralwidget)
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.player1_label)
-        self.player1_label.setGeometry(QtCore.QRect(170, 60, 291, 71))
+        #self.player1_label.setGeometry(170, 60, 291, 71)
         font = QtGui.QFont()
         font.setPointSize(48)
         self.player1_label.setFont(font)
@@ -97,8 +104,8 @@ class Ui_Player1_MainWindow(object):
         self.player1_label.setObjectName("player1_label")
 
 
-        self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it())
-        self.ready_pushButton.setGeometry(QtCore.QRect(170, 160, 291, 61))
+        self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it(Player1_MainWindow))
+        self.ready_pushButton.setGeometry(100, 160, 250, 61)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.ready_pushButton.setFont(font)
