@@ -2,7 +2,7 @@ import random
 import serial, sys
 port = '/dev/cu.usbserial-1410'
 baudrate = 115200
-ser = serial.Serial(port,baudrate,timeout=1)
+#ser = serial.Serial(port,baudrate,timeout=1)
 
 #in full implementation, RFID will be scanned and looked up in dictionary for suit/rank
 #think about ways to do this...
@@ -41,9 +41,17 @@ class Deck:
 
     def build(self):
         self.cards = []
-        for suit in ['♠', '♥', '♦', '♣']:
+        for suit in ['S', 'H', 'D', 'C']:
             for rank in range(1,14):
-                self.cards.append(Card(rank, suit))
+                if rank == 1:
+                    rank = "A"
+                elif rank == 11:
+                    rank = "J"
+                elif rank == 12:
+                    rank = "Q"
+                elif rank == 13:
+                    rank = "K"
+                self.cards.append("{}{}".format(rank,suit))
 
     #will talk to shuffler
     def shuffle(self):
@@ -52,9 +60,10 @@ class Deck:
 
     #will talk to dealer
     def deal(self):
-        data = ser.readline().decode()
+        data = 'QH' #ser.readline().decode()
         if data != '':
             data = data.split('\r')
+            self.cards.remove(data[0])
             return data[0]
         
     def show(self):
