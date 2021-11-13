@@ -2,12 +2,15 @@ from gameState import gameState
 import PyQt5.QtWidgets as qtw
 import PyQt5.QtGui as qtg
 import PyQt5.QtCore as qtc
+from jackblack_homepage import Ui_MainWindow
 
+# change this file to interact with GUI
 def main():
     gs = gameState(1)
     while(1):
         totals = []
-        gs.setPlayers((int)(input("How many people are playing?\n")))
+        # need to figure out ui
+        gs.setPlayers((int)(input(Ui_MainWindow.ui.gameModeSelect1ComboBox.currentText())))
         gs.resetHands()
         gs.deck.build()
         gs.deck.shuffle()

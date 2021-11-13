@@ -1,12 +1,30 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
+# maybe add a struct for Player information?
 class Ui_MainWindow(object):
+    # when the "DOUBLE" button is pressed, update the value of current bet, display update
     def double_it(self):
         value = self.current_bet_field.toPlainText()
         value = int(value) * 2
         self.current_bet_field.setPlainText(str(value))
 
+    # when "STAND" button is pressed, do nothing to current bet, do nothing to cards, reveal dealer cards
+    def stand_it(self):
+        pass
+
+    # when "HIT" button is pressed, do nothing to current bet, add another card to player
+    def hit_it(self):
+        pass
+
+    # display cards dealt to the player, save card information
+    def player_cards(self):
+        pass
+
+    # deal cards to dealer, save card information, hide cards until STAND is pressed
+    def dealer_cards(self):
+        pass
+
+    # setting up main window and components
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(480, 320)
@@ -62,13 +80,13 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
         self.hit_button.setObjectName("hit_button")
         self.verticalLayout.addWidget(self.hit_button)
         self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
         self.double_button.setObjectName("double_button")
         self.verticalLayout.addWidget(self.double_button)
-        self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
         self.stand_button.setObjectName("stand_button")
         self.verticalLayout.addWidget(self.stand_button)
         self.label = QtWidgets.QLabel(self.centralwidget)
