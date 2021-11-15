@@ -74,16 +74,29 @@ class Ui_MainWindow(object):
 class Ui_SettingsWindow(object):
 
     def __init__(self):
-        pass
+        self.numPlayers = "0"
+        self.startingAmount = 0
+        # change these eventually
+        self.gameMode = ""
+        self.userInput = ""
 
     def openWindow(self, settings_w):
+        # storing the setting values into variables
+        self.numPlayers = self.numberOfPlayersComboBox.currentText()
+        self.startingAmount = self.startingAmountSpinBox.value()
+        self.gameMode = self.gameModeSelect1ComboBox.currentText()
+        self.userInput = self.insert.text()
+
+        # opening up the confirmation box with user-selected settings
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_dialogbox()
         self.ui.setupUi(self.window, settings_w)
-        self.ui.confirm_list_widget.addItems(["Number of Players: " + self.numberOfPlayersComboBox.currentText(),
-            "Starting Amount: " + str(self.startingAmountSpinBox.value()),
-            "Game Mode: " + self.gameModeSelect1ComboBox.currentText(),
-            "User Input: " + self.insert.text()])
+
+        # displaying the values onto confirmation box
+        self.ui.confirm_list_widget.addItems(["Number of Players: " + self.numPlayers,
+            "Starting Amount: " + str(self.startingAmount),
+            "Game Mode: " + self.gameMode,
+            "User Input: " + self.userInput])
         self.window.show()
 
     def setupUi(self, SettingsWindow):
