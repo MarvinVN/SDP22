@@ -250,7 +250,7 @@ class Ui_confirm_dialogbox(object):
 class Ui_Player_ReadyWindow(object):
 
     def __init(self):
-        pass
+        self.bet = 0
 
     def bet_it(self, p1_mw):
         for i in reversed(range(self.formLayout.count())): 
@@ -273,7 +273,7 @@ class Ui_Player_ReadyWindow(object):
         self.betting_label.setAlignment(QtCore.Qt.AlignCenter)
         self.betting_label.setObjectName("betting_label")
 
-        # betting amount
+        # betting amount scroll bar
         self.scroll_bet = QtWidgets.QSpinBox(self.centralwidget,
             maximum=500,
             minimum=10,
@@ -313,18 +313,23 @@ class Ui_Player_ReadyWindow(object):
         self.centralwidget.layout().addLayout(self.hbox)
         """
     def double_it(self):
-        self.thing = self.thing * 2
-        self.ui.current_bet_field.setPlainText(str(self.thing))
+        #self.display_bet = self.display_bet * 2
+        self.bet = self.bet * 2
+        self.ui.current_bet_field.setPlainText(str(self.bet))
 
     def openWindow(self, main_w):
+        # open new window for game play GUI
         temp_w = main_w
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_GameWindow()
         self.ui.setupUi(self.window)
         self.window.show()
         #self.ui.current_bet_field.setPlainText(str(temp_w.scroll_bet.value))
-        self.thing = self.scroll_bet.value()
-        self.ui.current_bet_field.setPlainText(str(self.thing))
+
+        # displaying the betting amount
+        self.bet = self.scroll_bet.value()
+        #self.display_bet = self.bet
+        self.ui.current_bet_field.setPlainText(str(self.bet))
         temp_w.hide()
         #self.ui.double_button.clicked.connect(double_it())
 
