@@ -73,9 +73,9 @@ class Ui_MainWindow(object):
 
 class Ui_SettingsWindow(object):
 
-	def __init__(self):
-		pass
-    
+    def __init__(self):
+        pass
+
     def openWindow(self, settings_w):
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_dialogbox()
@@ -95,7 +95,6 @@ class Ui_SettingsWindow(object):
         self.centralwidget = QtWidgets.QWidget(SettingsWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        #self.label.setGeometry(QtCore.QRect(150, 40, 421, 91))
         self.label.setGeometry(160, 20, 170, 30)
         font = QtGui.QFont()
         font.setPointSize(14)
@@ -112,9 +111,6 @@ class Ui_SettingsWindow(object):
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.numberOfPlayersLabel)
         self.numberOfPlayersComboBox = QtWidgets.QComboBox(self.formLayoutWidget)
         self.numberOfPlayersComboBox.setObjectName("numberOfPlayersComboBox")
-        #font2 = QtGui.QFont()
-        # font2.setPointSize(24)
-        #self.numberOfPlayersComboBox.setFont(font2)
         self.numberOfPlayersComboBox.addItem("")
         self.numberOfPlayersComboBox.addItem("")
         self.numberOfPlayersComboBox.addItem("")
@@ -154,7 +150,6 @@ class Ui_SettingsWindow(object):
         self.statusbar = QtWidgets.QStatusBar(SettingsWindow)
         self.statusbar.setObjectName("statusbar")
         SettingsWindow.setStatusBar(self.statusbar)
-
         self.retranslateUi(SettingsWindow)
         QtCore.QMetaObject.connectSlotsByName(SettingsWindow)
 
@@ -180,8 +175,8 @@ class Ui_SettingsWindow(object):
 
 class Ui_confirm_dialogbox(object):
 
-	def __init__(self):
-		pass
+    def __init__(self):
+        pass
 
     def confirm_connection(self, set_w):
         # need to open new window and hide settings window
@@ -241,8 +236,8 @@ class Ui_confirm_dialogbox(object):
 
 class Ui_Player_ReadyWindow(object):
 
-	def __init(self):
-		pass
+    def __init(self):
+        pass
 
     def bet_it(self, p1_mw):
         for i in reversed(range(self.formLayout.count())): 
@@ -380,8 +375,8 @@ class Ui_Player_ReadyWindow(object):
 
 class Ui_GameWindow(object):
 
-	def __init__(self):
-		pass
+    def __init__(self):
+        pass
 
     # when the "DOUBLE" button is pressed, update the value of current bet, display update
     def double_it(self):
