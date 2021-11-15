@@ -89,7 +89,7 @@ class Ui_SettingsWindow(object):
 
         # opening up the confirmation box with user-selected settings
         self.window = QtWidgets.QDialog()
-        self.ui = Ui_confirm_dialogbox()
+        self.ui = Ui_confirm_dialogbox(self.numPlayers, self.startingAmount, self.gameMode, self.userInput)
         self.ui.setupUi(self.window, settings_w)
 
         # displaying the values onto confirmation box
@@ -188,15 +188,18 @@ class Ui_SettingsWindow(object):
 
 class Ui_confirm_dialogbox(object):
 
-    def __init__(self):
-        pass
+    def __init__(self, numPlayers, startingAmount, gameMode, userInput):
+        self.numPlayers = numPlayers
+        self.startingAmount = startingAmount
+        self.gameMode = gameMode
+        self.userInput = userInput
 
     def confirm_connection(self, set_w):
         # need to open new window and hide settings window
         #temp_w = setting_w
         set_w.hide()
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Player_ReadyWindow()
+        self.ui = Ui_Player_ReadyWindow(self.numPlayers, self.startingAmount, self.gameMode, self.userInput)
         self.ui.setupUi(self.window)
         self.window.show()
 
@@ -249,7 +252,11 @@ class Ui_confirm_dialogbox(object):
 
 class Ui_Player_ReadyWindow(object):
 
-    def __init(self):
+    def __init__(self, numPlayers, startingAmount, gameMode, userInput):
+        self.numPlayers = numPlayers
+        self.startingAmount = startingAmount
+        self.gameMode = gameMode
+        self.userInput = userInput
         self.bet = 0
 
     def bet_it(self, p1_mw):
@@ -312,16 +319,16 @@ class Ui_Player_ReadyWindow(object):
         self.hbox.addWidget(self.ok_button)
         self.centralwidget.layout().addLayout(self.hbox)
         """
-    def double_it(self):
-        #self.display_bet = self.display_bet * 2
-        self.bet = self.bet * 2
-        self.ui.current_bet_field.setPlainText(str(self.bet))
+    # def double_it(self):
+    #     #self.display_bet = self.display_bet * 2
+    #     self.bet = self.bet * 2
+    #     self.ui.current_bet_field.setPlainText(str(self.bet))
 
     def openWindow(self, main_w):
         # open new window for game play GUI
         temp_w = main_w
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_GameWindow()
+        self.ui = Ui_GameWindow(self.numPlayers, self.startingAmount, self.gameMode, self.userInput, self.bet)
         self.ui.setupUi(self.window)
         self.window.show()
         #self.ui.current_bet_field.setPlainText(str(temp_w.scroll_bet.value))
@@ -393,14 +400,29 @@ class Ui_Player_ReadyWindow(object):
 
 class Ui_GameWindow(object):
 
-    def __init__(self):
-        pass
+    def __init__(self, numPlayers, startingAmount, gameMode, userInput, bet):
+        self.numPlayers = numPlayers
+        self.startingAmount = startingAmount
+        self.gameMode = gameMode
+        self.userInput = userInput
+        self.bet = bet
+        self.double_button_clicked = False
 
     # when the "DOUBLE" button is pressed, update the value of current bet, display update
     def double_it(self):
-        value = self.current_bet_field.toPlainText()
-        value = int(value) * 2
-        self.current_bet_field.setPlainText(str(value))
+        if self.double_button_clicked:
+            pass
+        else:
+            value = self.current_bet_field.toPlainText()
+            value = int(value) * 2
+            self.current_bet_field.setPlainText(str(value))
+            self.bet = value
+            # this code below is to test whether the self.bet is updated properly
+            # self.dealer_left_field.setPlainText(str(self.bet))
+
+        self.double_button_clicked = True
+        # self.bet = self.bet * 2
+        # self.current_bet_field.setPlainText(str(self.bet))
 
     # when "STAND" button is pressed, do nothing to current bet, do nothing to cards, reveal dealer cards
     def stand_it(self):
@@ -464,9 +486,11 @@ class Ui_GameWindow(object):
         self.current_bet_field.setGeometry(QtCore.QRect(20, 180, 81, 81))
         self.current_bet_field.setObjectName("current_bet_field")
 
+        # creating the amount left label
         self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
         self.amount_left_label.setGeometry(QtCore.QRect(380, 10, 91, 20))
         self.amount_left_label.setObjectName("amount_left_label")
+        #self.amount_left_label.setText = Ui_SettingsWindow().startingAmount
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(370, 170, 91, 91))
