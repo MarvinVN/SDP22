@@ -6,11 +6,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 ###########################################################
 #################### MAIN WINDOW CLASS ####################
 ###########################################################
+
+
 class Ui_MainWindow(object):
-    """
-    def __init__(self, settings_ui):
-        self.settings_ui = settings_ui
-    """
+
+    def __init__(self):
+        pass
 
     def mainToSettings(self, current_w):
         temp_w = current_w
@@ -71,6 +72,9 @@ class Ui_MainWindow(object):
 
 
 class Ui_SettingsWindow(object):
+
+	def __init__(self):
+		pass
     
     def openWindow(self, settings_w):
         self.window = QtWidgets.QDialog()
@@ -175,6 +179,10 @@ class Ui_SettingsWindow(object):
 
 
 class Ui_confirm_dialogbox(object):
+
+	def __init__(self):
+		pass
+
     def confirm_connection(self, set_w):
         # need to open new window and hide settings window
         #temp_w = setting_w
@@ -232,6 +240,10 @@ class Ui_confirm_dialogbox(object):
 ###########################################################
 
 class Ui_Player_ReadyWindow(object):
+
+	def __init(self):
+		pass
+
     def bet_it(self, p1_mw):
         for i in reversed(range(self.formLayout.count())): 
             self.formLayout.itemAt(i).widget().setParent(None)
@@ -367,6 +379,10 @@ class Ui_Player_ReadyWindow(object):
 ###########################################################
 
 class Ui_GameWindow(object):
+
+	def __init__(self):
+		pass
+
     # when the "DOUBLE" button is pressed, update the value of current bet, display update
     def double_it(self):
         value = self.current_bet_field.toPlainText()
