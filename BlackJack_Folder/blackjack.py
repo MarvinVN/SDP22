@@ -1,24 +1,26 @@
 from gameState import gameState
-import PyQt5.QtWidgets as qtw
-import PyQt5.QtGui as qtg
-import PyQt5.QtCore as qtc
-from jackblack_homepage import Ui_MainWindow
+# import PyQt5.QtWidgets as qtw
+# import PyQt5.QtGui as qtg
+# import PyQt5.QtCore as qtc
+# from jackblack_homepage import Ui_MainWindow
 
 # change this file to interact with GUI
-def start_game():
+def start_game(numPlayers, startingAmount, bet):
     gs = gameState(1)
     while(1):
         totals = []
         # need to figure out ui
-        gs.setPlayers((int)(input("How many ppl?")))
+        #gs.setPlayers((int)(input("How many ppl?")))
+        gs.setPlayers(numPlayers)
         gs.resetHands()
         gs.deck.build()
         gs.deck.shuffle()
+        # store these cards into the GUI player's cards?
         gs.dealCards(2)
 
         totals.append(0)
         for x in range(1, gs.numPlay):
-            totals.append(playerTurn(gs.players[x], gs.deck))
+            totals.append(playerTurn(gs.players[x], gs.deck, startingAmount, bet))
         totals[0] = dealerTurn(gs.players[0], gs.deck)
         score(gs.players, totals)
 
@@ -33,9 +35,9 @@ def start_game():
             print("\n Invalid answer, quitting.")
             quit() #same as above
     
-def playerTurn(player, deck):
+def playerTurn(player, deck, startingAmount, bet):
     move = ''
-    bet = (int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
+    # bet = (int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
     player.addBet(bet) #handle invalid inputs (if bet > wallet, if no number is given <-- this one shouldnt be a problem when GUI is in place)
     while move != 's':
         total = checkValue(player.hand)

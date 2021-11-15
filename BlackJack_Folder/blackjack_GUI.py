@@ -1,5 +1,6 @@
 # new file with the GUI classes
 from PyQt5 import QtCore, QtGui, QtWidgets
+import blackjack
 
 # touch display 3.5 inch: 320x480 res
 
@@ -331,7 +332,9 @@ class Ui_Player_ReadyWindow(object):
         self.ui = Ui_GameWindow(self.numPlayers, self.startingAmount, self.gameMode, self.userInput, self.bet)
         self.ui.setupUi(self.window)
         self.window.show()
-        #self.ui.current_bet_field.setPlainText(str(temp_w.scroll_bet.value))
+        # below code runs infinite loop
+        # blackjack.start_game(self.numPlayers, self.startingAmount, self.bet)
+        # self.ui.current_bet_field.setPlainText(str(temp_w.scroll_bet.value))
 
         # displaying the betting amount
         self.bet = self.scroll_bet.value()
@@ -402,7 +405,7 @@ class Ui_GameWindow(object):
 
     def __init__(self, numPlayers, startingAmount, gameMode, userInput, bet):
         self.numPlayers = numPlayers
-        self.startingAmount = startingAmount
+        self.currentAmount = startingAmount
         self.gameMode = gameMode
         self.userInput = userInput
         self.bet = bet
@@ -418,7 +421,7 @@ class Ui_GameWindow(object):
             self.current_bet_field.setPlainText(str(value))
             self.bet = value
             # this code below is to test whether the self.bet is updated properly
-            # self.dealer_left_field.setPlainText(str(self.bet))
+            #self.dealer_left_field.setPlainText(str(self.currentAmount))
 
         self.double_button_clicked = True
         # self.bet = self.bet * 2
@@ -487,10 +490,12 @@ class Ui_GameWindow(object):
         self.current_bet_field.setObjectName("current_bet_field")
 
         # creating the amount left label
+        font.setPointSize(5)
         self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
+        self.amount_left_label.setFont(font)
         self.amount_left_label.setGeometry(QtCore.QRect(380, 10, 91, 20))
         self.amount_left_label.setObjectName("amount_left_label")
-        #self.amount_left_label.setText = Ui_SettingsWindow().startingAmount
+        #self.amount_left_label.setText(str(self.currentAmount))
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(370, 170, 91, 91))
@@ -507,6 +512,8 @@ class Ui_GameWindow(object):
         self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
         self.stand_button.setObjectName("stand_button")
         self.verticalLayout.addWidget(self.stand_button)
+
+        font.setPointSize(6)
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(200, 160, 61, 20))
         self.label.setObjectName("label")
@@ -516,6 +523,10 @@ class Ui_GameWindow(object):
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(30, 160, 71, 20))
         self.label_3.setObjectName("label_3")
+        self.label.setFont(font)
+        self.label_2.setFont(font)
+        self.label_3.setFont(font)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 480, 22))
@@ -531,7 +542,7 @@ class Ui_GameWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.amount_left_label.setText(_translate("MainWindow", "Amount Left: "))
+        self.amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
         self.hit_button.setText(_translate("MainWindow", "HIT"))
         self.double_button.setText(_translate("MainWindow", "DOUBLE"))
         self.stand_button.setText(_translate("MainWindow", "STAND"))
