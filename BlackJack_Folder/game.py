@@ -53,10 +53,10 @@ class Deck:
             print(card.show())
 
 class Player:
-    def __init__(self, pos):
+    def __init__(self, pos): # (start_amount)
         self.pos = pos
         self.hand = []
-        self.wallet = 1000
+        self.wallet = 1000  # start_amount
         self.totalBet = 0
 
     def draw(self, deck, num):

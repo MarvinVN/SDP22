@@ -5,10 +5,10 @@ from jackblack_settings_page import Ui_SettingsWindow
 # touch display 3.5 inch: 320x480 res
 
 class Ui_MainWindow(object):
-
+    """
     def __init__(self, settings_ui):
         self.settings_ui = settings_ui
-        
+    """
 
     def openWindow(self, main_w):
         temp_w = main_w

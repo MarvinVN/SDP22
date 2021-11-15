@@ -3,6 +3,7 @@ from jackblack_confirm_box import Ui_confirm_dialogbox
 
 
 class Ui_SettingsWindow(object):
+    
     def openWindow(self, settings_w):
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_dialogbox()
