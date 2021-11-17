@@ -5,35 +5,36 @@ from gameState import gameState
 # from jackblack_homepage import Ui_MainWindow
 
 # change this file to interact with GUI
-def start_game(numPlayers, startingAmount, bet):
+def start_game(numPlayers, playerWallets, bet): #playerWallet = array of wallets
     gs = gameState(1)
-    while(1):
-        totals = []
-        # need to figure out ui
-        #gs.setPlayers((int)(input("How many ppl?")))
-        gs.setPlayers(numPlayers)
-        gs.resetHands()
-        gs.deck.build()
-        gs.deck.shuffle()
-        # store these cards into the GUI player's cards?
-        gs.dealCards(2)
+    totals = []
+    # need to figure out ui
+    #gs.setPlayers((int)(input("How many ppl?")))
+    gs.setPlayers(numPlayers)
+    gs.resetHands()
+    gs.deck.build()
+    gs.deck.shuffle()
+    # store these cards into the GUI player's cards?
+    gs.dealCards(2)
 
-        totals.append(0)
-        for x in range(1, gs.numPlay):
-            totals.append(playerTurn(gs.players[x], gs.deck, startingAmount, bet))
-        totals[0] = dealerTurn(gs.players[0], gs.deck)
-        score(gs.players, totals)
+    totals.append(0)
+    for x in range(1, gs.numPlay):
+        totals.append(playerTurn(gs.players[x], gs.deck, startingAmount, bet))
+    totals[0] = dealerTurn(gs.players[0], gs.deck)
+    score(gs.players, totals)
 
-        gs.showWallets()
+    gs.showWallets()
 
-        play_again = input("Play again (y/n)?\n").lower()
-        if play_again == "y":
-            continue
-        elif play_again == "n":
-            quit() #temporary, should go to some sort of splash s
-        else:
-            print("\n Invalid answer, quitting.")
-            quit() #same as above
+    play_again = input("Play again (y/n)?\n").lower()
+    if play_again == "y":
+        playerWallets = gs.getWallets()
+        #GUI input for numPlayers, bet
+        start_game(numPlayers, playerWallets, bet)
+    elif play_again == "n":
+        quit() #temporary, should go to some sort of splash s
+    else:
+        print("\n Invalid answer, quitting.")
+        quit() #same as above
     
 def playerTurn(player, deck, startingAmount, bet):
     move = ''

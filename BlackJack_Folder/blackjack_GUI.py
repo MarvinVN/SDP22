@@ -513,6 +513,7 @@ class Ui_GameWindow(object):
         self.stand_button.setObjectName("stand_button")
         self.verticalLayout.addWidget(self.stand_button)
 
+        # change font size to be a lot bigger; maybe size 10?
         font.setPointSize(6)
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(200, 160, 61, 20))
