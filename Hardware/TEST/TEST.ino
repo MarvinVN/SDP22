@@ -3,25 +3,33 @@
 const int stepsPerRevolution = 2045;
 const int Dispensor = 2;
 
-Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);
+Stepper myStepper = Stepper(stepsPerRevolution, 8, 9, 10, 11);
 void setup() {
   pinMode (Dispensor, OUTPUT);
-  //max is about 10
+  // max is about 10
   myStepper.setSpeed(5);
   Serial.begin(9600);
-  for(int i = 0; i < 10; i++){
-    myStepper.step(stepsPerRevolution/5);
-    delay(1000);
-    digitalWrite(Dispensor, HIGH);
-    delay(115);
-    digitalWrite(Dispensor, LOW);
-    delay(1000);
+  for(int y = 0; y < 2 ; y++){
+     delay(1000);
+     digitalWrite(Dispensor, HIGH);
+     delay(115);
+     digitalWrite(Dispensor, LOW);
+     delay(1000);
+     for(int i = 0; i < 4; i++){
+        myStepper.step(stepsPerRevolution/5);
+        delay(1000);
+        digitalWrite(Dispensor, HIGH);
+        delay(115);
+        digitalWrite(Dispensor, LOW);
+        delay(1000);
+    }
+    myStepper.step(-stepsPerRevolution);
   }
   Serial.print("Done Shuffling ");
   Serial.println("Waiting for input ");
 }
 void loop() {
-  //2048 full rotation
+  // 2048 full rotation
   // Step one revolution in one direction:
     char playerRequest;
     int playerRequestInt;
@@ -37,7 +45,7 @@ void loop() {
         delay(115);
         digitalWrite(Dispensor, LOW);
         delay(1000);
-        myStepper.step(((stepsPerRevolution/5) * (5 - (playerRequestInt - 1))) + 3);
+        myStepper.step(-(stepsPerRevolution/5) * (playerRequestInt - 1));
         Serial.print("Waiting for input: ");
       } else {
         return;
