@@ -2,6 +2,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import blackjack
 
+HEIGHT = 480
+WIDTH = 800
+
 # touch display 3.5 inch: 320x480 res
 
 ###########################################################
@@ -24,8 +27,8 @@ class Ui_MainWindow(object):
 
 
     def setupUi(self, MainWindow):
-        self.width = 480
-        self.height = 320
+        self.width = WIDTH
+        self.height = HEIGHT
         MainWindow.setObjectName("MainWindow")
         #MainWindow.resize(320, 480)
         MainWindow.resize(self.width, self.height)
@@ -34,16 +37,16 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.mainToSettings(MainWindow))
         # setGeometry(left, top, width, height)
         #self.pushButton.setGeometry(QtCore.QRect(190, 280, 421, 141))
-        self.pushButton.setGeometry(150, 180, 180, 50)
+        self.pushButton.setGeometry(240, 300, 310, 50)
         font = QtGui.QFont()
         font.setPointSize(18)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(self.centralwidget)
         #self.label.setGeometry(QtCore.QRect(190, 140, 421, 111))
-        self.label.setGeometry(140, 90, 211, 60)
+        self.label.setGeometry(220, 200, 360, 70)
         font = QtGui.QFont()
-        font.setPointSize(26)
+        font.setPointSize(30)
         font.setBold(True)
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
@@ -102,20 +105,20 @@ class Ui_SettingsWindow(object):
 
     def setupUi(self, SettingsWindow):
         SettingsWindow.setObjectName("SettingsWindow")
-        SettingsWindow.resize(480, 320)
+        SettingsWindow.resize(WIDTH, HEIGHT)
         font = QtGui.QFont()
         font.setPointSize(12)
         SettingsWindow.setFont(font)
         self.centralwidget = QtWidgets.QWidget(SettingsWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(160, 20, 170, 30)
+        self.label.setGeometry(300, 50, 360, 70)
         font = QtGui.QFont()
         font.setPointSize(14)
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(70, 100, 350, 180)
+        self.formLayoutWidget.setGeometry(180, 130, 500, 200)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -209,9 +212,9 @@ class Ui_confirm_dialogbox(object):
 
     def setupUi(self, confirm_dialogbox, SettingsWindow):
         confirm_dialogbox.setObjectName("confirm_dialogbox")
-        confirm_dialogbox.resize(400, 300)
+        confirm_dialogbox.resize(WIDTH, HEIGHT)
         self.buttonBox = QtWidgets.QDialogButtonBox(confirm_dialogbox)
-        self.buttonBox.setGeometry(QtCore.QRect(30, 240, 341, 32))
+        self.buttonBox.setGeometry(180, 260, 500, 200)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
@@ -219,7 +222,7 @@ class Ui_confirm_dialogbox(object):
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
 
         self.widget = QtWidgets.QWidget(confirm_dialogbox)
-        self.widget.setGeometry(QtCore.QRect(40, 10, 308, 228))
+        self.widget.setGeometry(180, 100, 500, 200)
         self.widget.setObjectName("widget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -273,7 +276,7 @@ class Ui_Player_ReadyWindow(object):
         self.betting_label = QtWidgets.QLabel(self.centralwidget)
         self.betting_label.setText("Betting for this round?")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.betting_label)
-        self.betting_label.setGeometry(QtCore.QRect(170, 60, 291, 71))
+        self.betting_label.setGeometry(180, 100, 500, 200)
         font = QtGui.QFont()
         font.setPointSize(16)
         self.betting_label.setFont(font)
@@ -287,7 +290,7 @@ class Ui_Player_ReadyWindow(object):
             minimum=10,
             value=10,
             singleStep=10)
-        self.scroll_bet.setGeometry(QtCore.QRect(160, 160, 311, 61))
+        self.scroll_bet.setGeometry(400, 100, 500, 200)
         font = QtGui.QFont()
         font.setPointSize(16)
         self.scroll_bet.setFont(font)
@@ -297,7 +300,7 @@ class Ui_Player_ReadyWindow(object):
         # ok button
         self.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow(p1_mw))
         self.ok_pushButton.setText("OK")
-        self.ok_pushButton.setGeometry(QtCore.QRect(160, 160, 311, 61))
+        self.ok_pushButton.setGeometry(180, 170, 500, 200)
         font = QtGui.QFont()
         font.setPointSize(16)
         self.ready_pushButton.setFont(font)
@@ -333,7 +336,11 @@ class Ui_Player_ReadyWindow(object):
         self.ui.setupUi(self.window)
         self.window.show()
         # below code runs infinite loop
+        # this next line of code would be the start of a new event
         # blackjack.start_game(self.numPlayers, self.startingAmount, self.bet)
+
+        # 
+
         # self.ui.current_bet_field.setPlainText(str(temp_w.scroll_bet.value))
 
         # displaying the betting amount
@@ -346,12 +353,12 @@ class Ui_Player_ReadyWindow(object):
 
     def setupUi(self, Player_ReadyWindow):
         Player_ReadyWindow.setObjectName("Player_ReadyWindow")
-        Player_ReadyWindow.resize(480, 320)
+        Player_ReadyWindow.resize(WIDTH, HEIGHT)
         self.centralwidget = QtWidgets.QWidget(Player_ReadyWindow)
         self.centralwidget.setObjectName("centralwidget")
         # making a form layout
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(130, 100, 230, 200)
+        self.formLayoutWidget.setGeometry(150, 130, 500, 200)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -390,8 +397,8 @@ class Ui_Player_ReadyWindow(object):
 
     def retranslateUi(self, Player_ReadyWindow):
         _translate = QtCore.QCoreApplication.translate
-        Player_ReadyWindow.setWindowTitle(_translate("Player_ReadyWindow", "Player"))
-        self.player_label.setText(_translate("Player_ReadyWindow", "Player"))
+        Player_ReadyWindow.setWindowTitle(_translate("Player_ReadyWindow", "Player 1"))
+        self.player_label.setText(_translate("Player_ReadyWindow", "Player 1"))
         #self.betting_label.setText(_translate("Player1_MainWindow", "Betting for this round?"))
         self.ready_pushButton.setText(_translate("Player_ReadyWindow", "PRESS HERE WHEN READY!"))
         #self.ok_pushButton.setText(_translate("Player1_MainWindow", "OK"))
@@ -446,11 +453,11 @@ class Ui_GameWindow(object):
     # setting up main window and components
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(480, 320)
+        MainWindow.resize(WIDTH, HEIGHT)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(150, 180, 160, 80))
+        self.horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
@@ -466,7 +473,7 @@ class Ui_GameWindow(object):
         self.your_cards_layout.addWidget(self.your_cards_right_field)
 
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(150, 10, 160, 80))
+        self.horizontalLayoutWidget_2.setGeometry(250, 30, 300, 150)
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
 
         self.dealer_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
@@ -486,19 +493,19 @@ class Ui_GameWindow(object):
         font = QtGui.QFont()
         font.setPointSize(20)
         self.current_bet_field.setFont(font)
-        self.current_bet_field.setGeometry(QtCore.QRect(20, 180, 81, 81))
+        self.current_bet_field.setGeometry(100, 310, 110, 110)
         self.current_bet_field.setObjectName("current_bet_field")
 
         # creating the amount left label
-        font.setPointSize(5)
+        font.setPointSize(10)
         self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
         self.amount_left_label.setFont(font)
-        self.amount_left_label.setGeometry(QtCore.QRect(380, 10, 91, 20))
+        self.amount_left_label.setGeometry(600, 10, 300, 50)
         self.amount_left_label.setObjectName("amount_left_label")
         #self.amount_left_label.setText(str(self.currentAmount))
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(370, 170, 91, 91))
+        self.verticalLayoutWidget.setGeometry(600, 280, 100, 150)
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -514,15 +521,15 @@ class Ui_GameWindow(object):
         self.verticalLayout.addWidget(self.stand_button)
 
         # change font size to be a lot bigger; maybe size 10?
-        font.setPointSize(6)
+        font.setPointSize(10)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(200, 160, 61, 20))
+        self.label.setGeometry(355, 200, 110, 110)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(190, 100, 81, 16))
+        self.label_2.setGeometry(355, 140, 140, 110)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(30, 160, 71, 20))
+        self.label_3.setGeometry(110, 230, 110, 110)
         self.label_3.setObjectName("label_3")
         self.label.setFont(font)
         self.label_2.setFont(font)
