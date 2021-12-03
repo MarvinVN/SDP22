@@ -1,9 +1,6 @@
 import random
-import serial, sys
-port = '/dev/cu.usbserial-1410'
-baudrate = 115200
-#ser = serial.Serial(port,baudrate,timeout=1)
-
+import serial
+import time
 #in full implementation, RFID will be scanned and looked up in dictionary for suit/rank
 #think about ways to do this...
 class Card:
@@ -55,16 +52,39 @@ class Deck:
 
     #will talk to shuffler
     def shuffle(self):
-        random.shuffle(self.cards)
+        print("Shuffling")
+        ArduinoUnoSerial = serial.Serial('/dev/cu.usbserial-1410', 115200)
+        ArduinoUnoSerial.write('0'.encode())
+        time.sleep(6)     
         #shuffle the deck
 
     #will talk to dealer
     def deal(self):
-        data = 'QH' #ser.readline().decode()
+        data = self.RFID()
         if data != '':
             data = data.split('\r')
             self.cards.remove(data[0])
             return data[0]
+
+    def RFID(self):
+        port = '/dev/cu.usbserial-1410'
+        baudrate = 115200
+        ser = serial.Serial(port,baudrate,timeout=1)
+        data = ''
+        print("waiting for Card")
+        while len(data) < 1:
+            try:
+                data = ser.readline().decode()
+            except:
+                print("Error")
+        if len(data) > 2:
+            print(data)
+            print("CHEATING DECTECTED")
+            while True:
+                time.sleep(1)
+        else:
+            print(data)
+        return data
         
     def show(self):
         for card in self.cards:
