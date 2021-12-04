@@ -53,9 +53,9 @@ class Deck:
     #will talk to shuffler
     def shuffle(self):
         print("Shuffling")
-        #ArduinoUnoSerial = serial.Serial('/dev/cu.usbserial-1410', 115200)
-        #ArduinoUnoSerial.write('0'.encode())
-        #time.sleep(6)     
+        ArduinoUnoSerial = serial.Serial('/dev/cu.usbserial-1410', 115200)
+        ArduinoUnoSerial.write('0'.encode())
+        time.sleep(6)     
         #shuffle the deck
 
     #will talk to dealer
