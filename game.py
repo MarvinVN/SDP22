@@ -4,7 +4,6 @@ import time
 #in full implementation, RFID will be scanned and looked up in dictionary for suit/rank
 #think about ways to do this...
 class Card:
-
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
@@ -53,7 +52,9 @@ class Deck:
     #will talk to shuffler
     def shuffle(self):
         print("Shuffling")
-        ArduinoUnoSerial = serial.Serial('/dev/cu.usbserial-1410', 115200)
+        port = '/dev/cu.usbserial-1410'
+        baudrate = 115200
+        ArduinoUnoSerial = serial.Serial(port, baudrate, timeout=1)
         ArduinoUnoSerial.write('0'.encode())
         time.sleep(6)     
         #shuffle the deck
