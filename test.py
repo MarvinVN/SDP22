@@ -1,15 +1,15 @@
-import serial, sys
+import time #time library to be able setup lenght of led lighting
+import serial
 
-def RFID():
-    port = '/dev/cu.usbserial-1410'
-    baudrate = 115200
-    ser = serial.Serial(port,baudrate,timeout=1)
-    data = ''
-    while len(data) < 1:
-        try:
-            data = ser.readline().decode()
-        except:
-            print("Error")
-        print(data)
-    return data
+#board = Arduino(Arduino.AUTODETECT) #detect Arduino with Autodetect
+port = '/dev/cu.usbserial-1410'
+x = '0'
+baudrate = 115200
+ser = serial.Serial(port,baudrate,timeout=1)
+
+time.sleep(2)
+ser.write(bytes(x, 'utf-8'))
+
+
+
 

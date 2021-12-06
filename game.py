@@ -33,6 +33,7 @@ class Card:
 class Deck:  
     def __init__(self):
         self.cards = []
+        self.cardsused = []
         self.build()
 
     def build(self):
@@ -54,8 +55,10 @@ class Deck:
         print("Shuffling")
         port = '/dev/cu.usbserial-1410'
         baudrate = 115200
-        ArduinoUnoSerial = serial.Serial(port, baudrate, timeout=1)
-        ArduinoUnoSerial.write('0'.encode())
+        x = '0'
+        ser = serial.Serial(port, baudrate, timeout=1)
+        time.sleep(2)
+        ser.write(bytes(x, 'utf-8'))
         time.sleep(6)     
         #shuffle the deck
 
@@ -64,6 +67,7 @@ class Deck:
         data = self.RFID()
         if data != '':
             data = data.split('\r')
+            self.cardsused.append(data[0])
             self.cards.remove(data[0])
             return data[0]
 
@@ -71,10 +75,14 @@ class Deck:
         port = '/dev/cu.usbserial-1410'
         baudrate = 115200
         ser = serial.Serial(port,baudrate,timeout=1)
+        x = '1'
         data = ''
         print("waiting for Card")
-        while len(data) < 1:
+        while len(data) < 1 or data in self.cardsused:
             try:
+                time.sleep(2)
+                ser.write(bytes(x, 'utf-8'))
+                time.sleep(2)
                 data = ser.readline().decode()
             except:
                 print("Error")
