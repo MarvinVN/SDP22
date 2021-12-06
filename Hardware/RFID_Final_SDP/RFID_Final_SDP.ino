@@ -70,6 +70,7 @@ const int Shuffler = 2;
 
 void setup(void) {
   Serial.begin(115200);
+  Serial.setTimeout(1);
   while (!Serial) delay(10); // for Leonardo/Micro/Zero
   nfc.begin();
   uint32_t versiondata = nfc.getFirmwareVersion();
@@ -92,38 +93,41 @@ void loop(void) {
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
   // 'uid' will be populated with the UID, and uidLength will indicate
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
-  
-  //success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
-  
-  if (success) {
-    delay(200);
-    int valid = 0;
-    for (j = 0; j < 52; j++){
-      for (i = 0; i<7; i++){ 
-        if (uid[i] != cards[j][i]){
-          break;
-        }
-        if (i == 6){
-          Serial.print(names[j]);
-          Serial.println();
-          valid = 1;
-        }
-      }
-    }
-    if (valid == 0) {
-      Serial.print("Invalid Card");
-      Serial.println();
-     }
+
+   if (Serial.available() > 0) {    // is a character available?
+      //playerRequest = Serial.read();
+      //playerRequestInt = playerRequest - '0'; //gets the int of the char
+      int playerRequestByte = Serial.readString().toInt();
+        if (playerRequestByte == 0){
+          pinMode(Shuffler, OUTPUT);
+          digitalWrite(Shuffler, HIGH);
+          delay(5000);
+          digitalWrite(Shuffler, LOW);
+     }if (playerRequestByte == 1){
+          success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
+            if (success) {
+              delay(200);
+              int valid = 0;
+              for (j = 0; j < 52; j++){
+                for (i = 0; i<7; i++){ 
+                  if (uid[i] != cards[j][i]){
+                    break;
+                  }
+                  if (i == 6){
+                    Serial.print(names[j]);
+                    delay(200);
+                    valid = 1;
+                  }
+                }
+              }
+              if (valid == 0) {
+                Serial.print("Invalid Card");
+
+               }
+            }
+                
+               }
+               }
+    
+     
   }
- if (Serial.available() > 0) {    // is a character available?
-    playerRequest = Serial.read();
-    playerRequestInt = playerRequest - '0'; //gets the int of the char
-    Serial.print(playerRequestInt);
-      if (playerRequestInt == 0){
-        pinMode(Shuffler, OUTPUT);
-        digitalWrite(Shuffler, HIGH);
-        delay(5000);
-        digitalWrite(Shuffler, LOW);
-     }
-  }
-}
