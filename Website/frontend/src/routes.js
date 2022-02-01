@@ -1,16 +1,17 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import App from './Mainpage';
-//import nextpage from './nextpage';
+import MainPage from './MainPage'
+import TeamPage from './TeamPage';
 
-const Main = () => {
+const ourroutes = () => {
   return (
-    <Switch> {/* The Switch decides which component to show based on the current URL.*/}
-      <Route exact path='/' component={App}></Route>
-      {/*<Route exact path='/nextpage' component={nextpage}></Route>*/}
-    </Switch>
+    <div>
+    <Routes> {/* The Switch decides which component to show based on the current URL.*/}
+      <Route path='/TeamPage' component={TeamPage}/>
+    </Routes>
+    </div>
   );
 }
 
-export default Main;
+export default ourroutes;
