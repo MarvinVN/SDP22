@@ -1,6 +1,7 @@
 # new file with the GUI classes
 from PyQt5 import QtCore, QtGui, QtWidgets
-import blackjack
+import blackjack, blackjack_globals
+import multiprocessing as mp
 
 HEIGHT = 480
 WIDTH = 800
@@ -330,6 +331,7 @@ class Ui_Player_ReadyWindow(object):
 
     def openWindow(self, main_w):
         # open new window for game play GUI
+        self.startBlackJack()
         temp_w = main_w
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_GameWindow(self.numPlayers, self.startingAmount, self.gameMode, self.userInput, self.bet)
@@ -349,6 +351,13 @@ class Ui_Player_ReadyWindow(object):
         self.ui.current_bet_field.setPlainText(str(self.bet))
         temp_w.hide()
         #self.ui.double_button.clicked.connect(double_it())
+
+    def startBlackJack(self):
+        # officially start the game once bets are in place
+        game_process = mp.Process(target=blackjack.start_game, args=(self.numPlayers,self.startingAmount,self.bet))
+        game_process.start()
+        game_process_pid = game_process.pid
+        print("Game pid: ", game_process_pid)
 
 
     def setupUi(self, Player_ReadyWindow):
@@ -434,16 +443,24 @@ class Ui_GameWindow(object):
         # self.bet = self.bet * 2
         # self.current_bet_field.setPlainText(str(self.bet))
 
+    # TODO
     # when "STAND" button is pressed, do nothing to current bet, do nothing to cards, reveal dealer cards
     def stand_it(self):
+        writeBjQueue("s")
         pass
 
+    # TODO
     # when "HIT" button is pressed, do nothing to current bet, add another card to player
     def hit_it(self):
+        writeBjQueue("h")
         pass
 
+    def exit_it(self):
+        game_process.terminate()
+        game_process.join()
+
     # display cards dealt to the player, save card information
-    def player_cards(self):
+    def update_cards(self):
         pass
 
     # deal cards to dealer, save card information, hide cards until STAND is pressed
@@ -519,6 +536,9 @@ class Ui_GameWindow(object):
         self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
         self.stand_button.setObjectName("stand_button")
         self.verticalLayout.addWidget(self.stand_button)
+        self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
+        self.exit_button.setObjectName("exit_button")
+        self.verticalLayout.addWidget(self.exit_button)
 
         # change font size to be a lot bigger; maybe size 10?
         font.setPointSize(10)
@@ -554,6 +574,7 @@ class Ui_GameWindow(object):
         self.hit_button.setText(_translate("MainWindow", "HIT"))
         self.double_button.setText(_translate("MainWindow", "DOUBLE"))
         self.stand_button.setText(_translate("MainWindow", "STAND"))
+        self.exit_button.setText(_translate("MainWindow", "EXIT GAME"))
         self.label.setText(_translate("MainWindow", "Your Cards:"))
         self.label_2.setText(_translate("MainWindow", "Dealer\'s Cards:"))
         self.label_3.setText(_translate("MainWindow", "Current Bet:"))

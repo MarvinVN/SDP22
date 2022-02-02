@@ -1,10 +1,13 @@
 from gameState import gameState
+import multiprocessing as mp
+import blackjack_globals
 # import PyQt5.QtWidgets as qtw
 # import PyQt5.QtGui as qtg
 # import PyQt5.QtCore as qtc
 # from jackblack_homepage import Ui_MainWindow
 
-# change this file to interact with GUI
+
+
 def start_game(numPlayers, playerWallets, bet): #playerWallet = array of wallets
     gs = gameState(1)
     totals = []
@@ -19,7 +22,7 @@ def start_game(numPlayers, playerWallets, bet): #playerWallet = array of wallets
 
     totals.append(0)
     for x in range(1, gs.numPlay):
-        totals.append(playerTurn(gs.players[x], gs.deck, startingAmount, bet))
+        totals.append(playerTurn(gs.players[x], gs.deck, bet))
     totals[0] = dealerTurn(gs.players[0], gs.deck)
     score(gs.players, totals)
 
@@ -31,15 +34,17 @@ def start_game(numPlayers, playerWallets, bet): #playerWallet = array of wallets
         #GUI input for numPlayers, bet
         start_game(numPlayers, playerWallets, bet)
     elif play_again == "n":
-        quit() #temporary, should go to some sort of splash s
+        quit() #temporary, should go back to menu
     else:
         print("\n Invalid answer, quitting.")
         quit() #same as above
     
-def playerTurn(player, deck, startingAmount, bet):
+def playerTurn(player, deck, bet):
     move = ''
     # bet = (int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
-    player.addBet(bet) #handle invalid inputs (if bet > wallet, if no number is given <-- this one shouldnt be a problem when GUI is in place)
+    #player.addBet(bet) #handle invalid inputs (if bet > wallet, if no number is given <-- this one shouldnt be a problem when GUI is in place)
+    #(int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
+    player.addBet(bet)
     while move != 's':
         total = checkValue(player.hand)
         player.showHand()
@@ -51,7 +56,10 @@ def playerTurn(player, deck, startingAmount, bet):
             print("21!")
             break
         else:
-            move = input("Do you want to hit or stand (h/s)?").lower()
+            # TODO: wait for input from GUI (i.e Hit or Stand buttons)
+            # TODO: read from gui_to_bj_queue
+            # move = readBjQueue()
+            # move = input("Do you want to hit or stand (h/s)?").lower()
             if move == 'h':
                 player.draw(deck, 1)
     return total

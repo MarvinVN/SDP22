@@ -1,4 +1,5 @@
 from game import Card, Deck, Player
+import blackjack_globals
 
 class gameState:
     def __init__(self, numPlay):
@@ -58,3 +59,4 @@ class gameState:
     def dealCards(self, num):
         for x in range(self.numPlay):
             self.players[x].draw(self.deck, num)
+            
