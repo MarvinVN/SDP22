@@ -1,15 +1,19 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, IndexRoute} from 'react-router-dom';
 
-import MainPage from './MainPage'
-import TeamPage from './TeamPage';
+import MainPage from './Pages/MainPage'
+import TeamPage from './Pages/TeamPage';
 
 const ourroutes = () => {
   return (
     <div>
-    <Routes> {/* The Switch decides which component to show based on the current URL.*/}
-      <Route path='/TeamPage' component={TeamPage}/>
-    </Routes>
+      <BrowserRouter>
+      <Routes> {/* The Switch decides which component to show based on the current URL.*/}
+        <IndexRoute component={MainPage}/>
+        <Route path='/TeamPage' component={TeamPage}/>
+      </Routes>
+      </BrowserRouter>
+    
     </div>
   );
 }
