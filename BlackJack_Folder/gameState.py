@@ -29,7 +29,7 @@ class gameState:
     def resetHands(self):
         for x in self.players:
             x.hand = []
-
+ 
     def showAllHands(self):
         for x in self.players:
             x.showHand()
@@ -59,4 +59,3 @@ class gameState:
     def dealCards(self, num):
         for x in range(self.numPlay):
             self.players[x].draw(self.deck, num)
-            

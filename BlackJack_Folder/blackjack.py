@@ -1,34 +1,66 @@
 from gameState import gameState
 import multiprocessing as mp
 import blackjack_globals
-# import PyQt5.QtWidgets as qtw
-# import PyQt5.QtGui as qtg
-# import PyQt5.QtCore as qtc
-# from jackblack_homepage import Ui_MainWindow
+
+from blackjack_globals import Message
 
 
-
-def start_game(numPlayers, playerWallets, bet): #playerWallet = array of wallets
+def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     gs = gameState(1)
     totals = []
-    # need to figure out ui
-    #gs.setPlayers((int)(input("How many ppl?")))
-    gs.setPlayers(numPlayers)
-    gs.resetHands()
-    gs.deck.build()
-    gs.deck.shuffle()
-    # store these cards into the GUI player's cards?
-    gs.dealCards(2)
+
+    count = 0
+    done = False
+    while not done:
+        msg = gui_to_bj_queue.get()
+        if msg.id == "game_start":
+            numPlayers = msg.content[0]
+            playerWallets = msg.content[1]
+            bet = msg.content[2]
+            
+            msg0, msg1 = start_game(gs, numPlayers, playerWallets, bet)
+            bj_to_gui_queue.put(msg0)
+            bj_to_gui_queue.put(msg1)
+            playerTurn(gs.players[1], gs.deck)
+            #count += 1
+        elif msg.id == "stand":
+            dealerTurn(gs.players[0], gs.deck)
+            msg0 = Message("dealer_cards", gs.players[0].hand)
+            bj_to_gui_queue.put(msg0)
+            print("Player 1's total: ", checkValue(gs.players[1].hand))
+            done = True
+            #count += 1
+        elif msg.id == "hit":
+            gs.players[1].draw(gs.deck, 1)
+            msg1 = Message("player_cards", gs.players[1].hand)
+            bj_to_gui_queue.put(msg1)
+            playerTurn(gs.players[1], gs.deck)
+            if checkValue(gs.players[1].hand) > 21:
+                done = True
+            #count += 1
+        elif msg.id == "double":
+            pass
+        elif msg.id == "exit":
+            pass
+        else:
+            pass
 
     totals.append(0)
-    for x in range(1, gs.numPlay):
-        totals.append(playerTurn(gs.players[x], gs.deck, bet))
+    totals.append(playerTurn(gs.players[1], gs.deck))
     totals[0] = dealerTurn(gs.players[0], gs.deck)
     score(gs.players, totals)
-
     gs.showWallets()
+    # totals.append(0)
+    # for x in range(1, gs.numPlay):
+    #     totals.append(playerTurn(gs.players[x], gs.deck, bet))
+    # totals[0] = dealerTurn(gs.players[0], gs.deck)
+    # score(gs.players, totals)
 
-    play_again = input("Play again (y/n)?\n").lower()
+    # gs.showWallets()
+
+    """
+    # play_again = input("Play again (y/n)?\n").lower()
+    play_again = blackjack_globals.readBjQueue
     if play_again == "y":
         playerWallets = gs.getWallets()
         #GUI input for numPlayers, bet
@@ -38,30 +70,35 @@ def start_game(numPlayers, playerWallets, bet): #playerWallet = array of wallets
     else:
         print("\n Invalid answer, quitting.")
         quit() #same as above
-    
-def playerTurn(player, deck, bet):
-    move = ''
-    # bet = (int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
-    #player.addBet(bet) #handle invalid inputs (if bet > wallet, if no number is given <-- this one shouldnt be a problem when GUI is in place)
-    #(int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
-    player.addBet(bet)
-    while move != 's':
-        total = checkValue(player.hand)
-        player.showHand()
-        print("Total value: {}".format(total))
-        if total > 21:
-            print("Bust!")
-            break
-        elif total == 21:
-            print("21!")
-            break
-        else:
-            # TODO: wait for input from GUI (i.e Hit or Stand buttons)
-            # TODO: read from gui_to_bj_queue
-            # move = readBjQueue()
-            # move = input("Do you want to hit or stand (h/s)?").lower()
-            if move == 'h':
-                player.draw(deck, 1)
+    """
+
+# initializing the start of a game
+def start_game(gs, numPlayers, playerAmount, bet):
+    gs.setPlayers(numPlayers)
+    gs.resetHands()
+    gs.deck.build()
+    gs.deck.shuffle()
+    gs.dealCards(2)
+
+    # temporary for one player; need to change for multiple players
+    gs.players[1].addBet(bet)
+
+    msg0 = Message("dealer_cards", gs.players[0].hand)
+    msg1 = Message("player_cards", gs.players[1].hand)
+
+    return msg0, msg1
+
+def playerTurn(player, deck):
+    total = checkValue(player.hand)
+    player.showHand()
+    print("Total value: {}".format(total))
+
+    if total > 21:
+        print("Bust!")
+    elif total == 21:
+        print("21!")
+    else:
+        print(total)
     return total
 
 def dealerTurn(player, deck):

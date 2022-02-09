@@ -81,5 +81,6 @@ class Player:
     def allIn(self):
         self.addBet(self.wallet)
 
+    # TODO: change so that instead of printing, it sends to GUI queue and have GUI read it.
     def showHand(self):
         print("Player {}'s hand: {}".format(self.pos, self.hand))
