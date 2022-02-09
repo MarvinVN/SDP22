@@ -27,7 +27,7 @@ const int Shuffler = 2;
 void main(void) {
     DDRD = 0xFF; // makes port d output
     while(1){
-        PORTD = 0xFF;   // turns on port pd0
+        PORTD |= 0b00000010;   // turns on port pd0
         _delay_ms(5000);
         PORTD = 0x00;
         _delay_ms(5000);        
