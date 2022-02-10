@@ -23,7 +23,7 @@ int period;
 
 void main(void) {
     DDRD = 0xFF; // makes port d output
-    DDRB = 0xFF;
+    DDRC = 0x0F;
     period = 100;	
     
     
@@ -36,24 +36,26 @@ void main(void) {
 
     /* loop */
     while(1){
-        PORTB = 0x09;
-        _delay_ms(1000);
-        PORTB = 0x08;
-        _delay_ms(1000);
-        PORTB = 0x0C;
-        _delay_ms(1000);
-        PORTB = 0x04;
-        _delay_ms(1000);
-        PORTB = 0x06;
-        _delay_ms(1000);
-        PORTB = 0x02;
-        _delay_ms(1000);
-        PORTB = 0x03;
-        _delay_ms(1000);
-        PORTB = 0x01;
-        _delay_ms(1000);
+        PORTC = 0b00000001;
+        _delay_ms(2);
+         PORTC = 0b00000011;
+        _delay_ms(2);
+        PORTC = 0b00000010;
+        _delay_ms(2);
+         PORTC = 0b000000110;
+        _delay_ms(2);
+        PORTC = 0b00000100;
+        _delay_ms(2);
+         PORTC = 0b00001100;
+        _delay_ms(2);
+        PORTC = 0b00001000;
+        _delay_ms(2);
+         PORTC = 0b00001001;
+        _delay_ms(2);
+
+
     }
-    PORTB = 0x09;
+    PORTC = 0x09;
     _delay_ms(1000);
 }
 
