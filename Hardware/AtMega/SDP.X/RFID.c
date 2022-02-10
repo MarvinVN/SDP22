@@ -4,7 +4,7 @@
  *
  * Created on February 8, 2022, 12:29 PM
  */
-#define F_CPU 1000000UL
+#define F_CPU 8000000UL	
 
 #include <xc.h>
 #include "util/delay.h"
@@ -18,11 +18,15 @@
 char playerRequest;
 int playerRequestInt;
 const int Shuffler = 2;
+int period;
 
 
 void main(void) {
     DDRD = 0xFF; // makes port d output
     DDRB = 0xFF;
+    period = 100;	
+    
+    
     //PORTD |= 0b00000010;   // turns on port pd0
     //_delay_ms(5000);
     //PORTD = 0x00;
@@ -31,24 +35,25 @@ void main(void) {
 
 
     /* loop */
-    while (1) {
-        PORTB = 0b00000111;
-        _delay_ms(200);
-        PORTB = 0b00000011;
-        _delay_ms(200);
-        PORTB = 0b00001011;
-        _delay_ms(200);
-        PORTB = 0b00001001;
-        _delay_ms(200);
-        PORTB = 0b00001101;
-        _delay_ms(200);
-        PORTB = 0b00001100;
-        _delay_ms(200);
-        PORTB = 0b00001110;
-        _delay_ms(200);
-        PORTB = 0b00000110;
-        _delay_ms(200);
+    while(1){
+        PORTB = 0x09;
+        _delay_ms(1000);
+        PORTB = 0x08;
+        _delay_ms(1000);
+        PORTB = 0x0C;
+        _delay_ms(1000);
+        PORTB = 0x04;
+        _delay_ms(1000);
+        PORTB = 0x06;
+        _delay_ms(1000);
+        PORTB = 0x02;
+        _delay_ms(1000);
+        PORTB = 0x03;
+        _delay_ms(1000);
+        PORTB = 0x01;
+        _delay_ms(1000);
     }
-    return;
+    PORTB = 0x09;
+    _delay_ms(1000);
 }
 
