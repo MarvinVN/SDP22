@@ -3,9 +3,8 @@ function TeamPage() {
   return (
     <div >
         <p>
-          SDP 2022
+          Team
         </p>
-        <p>Please</p>
     </div>
   );
 }
