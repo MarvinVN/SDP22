@@ -14,6 +14,7 @@
 
 
 
+
 char playerRequest;
 int playerRequestInt;
 const int Shuffler = 2;
@@ -31,8 +32,9 @@ void main(void) {
     //PORTD = 0x00;
     //_delay_ms(5000);        
 
-
-
+    //one revolution is 2048/4
+    //to each player that is 2048/20 =~ 102.4
+    
     /* loop */
     for(int i = 0; i<2048/4; i++){
         PORTC = 0b00000001;
@@ -51,8 +53,6 @@ void main(void) {
         _delay_ms(5);
          PORTC = 0b00001001;
         _delay_ms(5);
-
-
     }
     PORTC = 0x09;
     _delay_ms(1000);
