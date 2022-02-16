@@ -84,8 +84,6 @@ def score(players, totals):
         for x in range(1, len(players)):
             if totals[x] > 21:
                 settleBet(players[x], -1)
-            elif totals[x] == 21:
-                settleBet(players[x], 0)
             else:
                 settleBet(players[x], 1)
     elif dealer_score == 21:
