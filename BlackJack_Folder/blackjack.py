@@ -27,29 +27,66 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             dealerTurn(gs.players[0], gs.deck)
             msg0 = Message("dealer_cards", gs.players[0].hand)
             bj_to_gui_queue.put(msg0)
-            print("Player 1's total: ", checkValue(gs.players[1].hand))
+            #print("Player 1's total: ", checkValue(gs.players[1].hand))
+
+            totals.append(0)
+            totals.append(playerTurn(gs.players[1], gs.deck))
+            totals[0] = dealerTurn(gs.players[0], gs.deck)
+            score(gs.players, totals)
+            gs.showWallets()
+
+            msg2 = Message("wallet", gs.players[1].wallet)
+            bj_to_gui_queue.put(msg2)
             done = True
             #count += 1
         elif msg.id == "hit":
             gs.players[1].draw(gs.deck, 1)
+
+            if checkValue(gs.players[1].hand) >= 21:
+                totals.append(0)
+                totals.append(playerTurn(gs.players[1], gs.deck))
+                totals[0] = dealerTurn(gs.players[0], gs.deck)
+                score(gs.players, totals)
+                gs.showWallets()
+                msg2 = Message("wallet", gs.players[1].wallet)
+                bj_to_gui_queue.put(msg2)
+                done = True
+            else:
+                msg1 = Message("player_cards", gs.players[1].hand)
+                bj_to_gui_queue.put(msg1)
+                playerTurn(gs.players[1], gs.deck)
+            #done = True
+            #count += 1
+        elif msg.id == "double":
+            # only adding original bet, since original bet was already included
+            gs.players[1].draw(gs.deck, 1)
             msg1 = Message("player_cards", gs.players[1].hand)
             bj_to_gui_queue.put(msg1)
             playerTurn(gs.players[1], gs.deck)
-            if checkValue(gs.players[1].hand) > 21:
-                done = True
-            #count += 1
-        elif msg.id == "double":
-            pass
+
+            bet = msg.content
+            gs.players[1].addBet(bet)
+            double = bet * 2
+
+            totals.append(0)
+            totals.append(playerTurn(gs.players[1], gs.deck))
+            totals[0] = dealerTurn(gs.players[0], gs.deck)
+            score(gs.players, totals)
+            gs.showWallets()
+
+            msg2 = Message("wallet", gs.players[1].wallet)
+            bj_to_gui_queue.put(msg2)
+
+            msg3 = Message("doubled", double)
+            bj_to_gui_queue.put(msg3)
+
+            done = True
         elif msg.id == "exit":
             pass
         else:
             pass
 
-    totals.append(0)
-    totals.append(playerTurn(gs.players[1], gs.deck))
-    totals[0] = dealerTurn(gs.players[0], gs.deck)
-    score(gs.players, totals)
-    gs.showWallets()
+
     # totals.append(0)
     # for x in range(1, gs.numPlay):
     #     totals.append(playerTurn(gs.players[x], gs.deck, bet))
@@ -135,8 +172,6 @@ def score(players, totals):
         for x in range(1, len(players)):
             if totals[x] > 21:
                 settleBet(players[x], -1)
-            elif totals[x] == 21:
-                settleBet(players[x], 0)
             else:
                 settleBet(players[x], 1)
     elif dealer_score == 21:
