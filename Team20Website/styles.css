@@ -1,0 +1,11 @@
+.names-container {
+    padding: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.pro-img {
+    height: 200px;
+    width:  200px; 
+}

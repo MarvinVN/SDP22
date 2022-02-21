@@ -2,11 +2,13 @@ from game import Card, Deck, Player
 import blackjack_globals
 
 class gameState:
-    def __init__(self, numPlay):
+    def __init__(self, numPlay, gameMode, userInput):
         self.numPlay = 0
         self.players = []
         self.deck = Deck()
         self.setPlayers(numPlay)
+        self.gameMode = gameMode
+        self.userInput = userInput
 
     def setPlayers(self, numPlay):
         if numPlay not in [1, 2, 3, 4]:

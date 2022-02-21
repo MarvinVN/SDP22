@@ -457,7 +457,7 @@ class Ui_Player_ReadyWindow(object):
         self.bet = self.scroll_bet.value()
 
         # creating/putting message to queue
-        start_msg = Message("game_start", [self.numPlayers, self.startingAmount, self.bet])
+        start_msg = Message("game_start", [self.numPlayers, self.startingAmount, self.bet, self.gameMode, self.userInput])
         gui_to_bj_queue.put(start_msg)
 
         # printing game_process pid (for debugging/killing process)
