@@ -28,6 +28,7 @@ class gameState:
     def getPlayerHand(self, player):
         return self.players[player].hand
 
+    # maybe use this to reset hands?
     def resetHands(self):
         for x in self.players:
             x.hand = []

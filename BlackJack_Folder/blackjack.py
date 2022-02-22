@@ -21,6 +21,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         done_round = False
         while not done_round:
             # maybe put this line outside this while loop?
+            # TODO: after last player finishes their turn, need to clear screen, remove their cards, and give them new cards
             msg = gui_to_bj_queue.get()
             if msg.id == "game_start" and rounds == 0:
                 rounds = rounds + 1
