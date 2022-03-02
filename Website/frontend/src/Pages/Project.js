@@ -5,6 +5,9 @@ function Project() {
           <p>
             Project
           </p>
+          <div style={{background:'red', width:'50%', height:'100'}}>
+            <p>hi</p>
+          </div>
       </div>
     );
   }
