@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <avr/io.h>
-//#include <Adafruit_PN532.h>
+
 
 
 
@@ -32,28 +32,27 @@ void main(void) {
     //PORTD = 0x00;
     //_delay_ms(5000);        
 
-
-
+    //one revolution is 2048/4
+    //to each player that is 2048/20 =~ 102.4
+    
     /* loop */
-    while(1){
+    for(int i = 0; i<2048/4; i++){
         PORTC = 0b00000001;
-        _delay_ms(2);
+        _delay_ms(5);
          PORTC = 0b00000011;
-        _delay_ms(2);
+        _delay_ms(5);
         PORTC = 0b00000010;
-        _delay_ms(2);
+        _delay_ms(5);
          PORTC = 0b000000110;
-        _delay_ms(2);
+        _delay_ms(5);
         PORTC = 0b00000100;
-        _delay_ms(2);
+        _delay_ms(5);
          PORTC = 0b00001100;
-        _delay_ms(2);
+        _delay_ms(5);
         PORTC = 0b00001000;
-        _delay_ms(2);
+        _delay_ms(5);
          PORTC = 0b00001001;
-        _delay_ms(2);
-
-
+        _delay_ms(5);
     }
     PORTC = 0x09;
     _delay_ms(1000);
