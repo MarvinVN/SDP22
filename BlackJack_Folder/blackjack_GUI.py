@@ -420,6 +420,7 @@ class Ui_Player_ReadyWindow(object):
         self.startBlackJack() 
 
         # checking IDs in message queue/grabbing message contents (player cards)
+        # this needs to account for multiple rounds
         while(1):
             msg = bj_to_gui_queue.get()
             if msg.id == "player_cards":
@@ -540,7 +541,26 @@ class Ui_GameWindow(object):
         self.player_cards = playerCards
         self.double_button_clicked = False
 
+    def done_round(self):
+        while(1):
+            msg0 = bj_to_gui_queue.get()
+
+            if msg0.id == "player_cards":
+                self.player_cards = msg0.content
+                self.your_cards_left_field.setPlainText(str(self.player_cards))
+                self.your_cards_right_field.setPlainText(str(""))
+            elif msg0.id == "dealer_cards":
+                self.dealer_cards = msg0.content
+                self.dealer_left_field.setPlainText(str(self.dealer_cards))
+                self.dealer_right_field.setPlainText(str(""))
+                break
+            elif msg0.id == "GAME OVER!":
+                self.your_cards_left_field.setPlainText(str("GAME OVER!!"))
+            else:
+                pass
+
     # UPON DOUBLE BUTTON PRESSED; UPDATE BET VALUE
+    # FIX END ROUND PART
     def double_it(self):
         self.double_button_clicked = True
 
@@ -567,6 +587,10 @@ class Ui_GameWindow(object):
                     value = msg1.content
                     self.bet = value
                     self.current_bet_field.setPlainText(str(value))
+                elif msg1.id == "done_round":
+                    # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
+                    self.double_button_clicked == False
+                    self.done_round()
                     break
                 else:
                     pass
@@ -590,6 +614,8 @@ class Ui_GameWindow(object):
             elif msg.id == "wallet":
                 self.currentAmount = msg.content
                 self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            elif msg.id == "done_round":
+                self.done_round()
                 break
             else:
                 pass
@@ -612,6 +638,9 @@ class Ui_GameWindow(object):
             elif msg.id == "wallet":
                 self.currentAmount = msg.content
                 self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+                break
+            elif msg.id == "done_round":
+                self.done_round()
                 break
             else:
                 pass
