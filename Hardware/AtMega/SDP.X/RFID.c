@@ -4,7 +4,7 @@
  *
  * Created on February 8, 2022, 12:29 PM
  */
-#define F_CPU 20000000UL	
+#define F CPU 1000000UL	
 
 #include <xc.h>
 #include "util/delay.h"
@@ -12,6 +12,17 @@
 #include <stdlib.h>
 #include <avr/io.h>
 
+// ATmega328P Configuration Bit Settings
+// 'C' source line config statements
+#include <avr/io.h>
+
+FUSES = {
+	.low = 0x7F, // LOW {SUT_CKSEL=EXTXOSC_8MHZ_XX_16KCK_14CK_65MS, CKOUT=CLEAR, CKDIV8=SET}
+	.high = 0xD9, // HIGH {BOOTRST=CLEAR, BOOTSZ=2048W_3800, EESAVE=CLEAR, WDTON=CLEAR, SPIEN=SET, DWEN=CLEAR, RSTDISBL=CLEAR}
+	.extended = 0xFF, // EXTENDED {BODLEVEL=DISABLED}
+};
+
+LOCKBITS = 0xFF; // {LB=NO_LOCK, BLB0=NO_LOCK, BLB1=NO_LOCK}
 
 
 

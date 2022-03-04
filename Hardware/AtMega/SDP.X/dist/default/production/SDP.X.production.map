@@ -3,7 +3,7 @@ Archive member included to satisfy reference by file (symbol)
 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
                               /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o (exit)
 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_copy_data.o)
-                              build/default/production/RFID.o (__do_clear_bss)
+                              build/default/production/RFID.o (__do_copy_data)
 
 Allocating common symbols
 Common symbol       size              file
@@ -297,14 +297,18 @@ END GROUP
  *(.eeprom*)
                 0x0000000000810000                __eeprom_end = .
 
-.fuse
+.fuse           0x0000000000820000        0x3
  *(.fuse)
+ .fuse          0x0000000000820000        0x3 build/default/production/RFID.o
+                0x0000000000820000                __fuse
  *(.lfuse)
  *(.hfuse)
  *(.efuse)
 
-.lock
+.lock           0x0000000000830000        0x1
  *(.lock*)
+ .lock          0x0000000000830000        0x1 build/default/production/RFID.o
+                0x0000000000830000                __lock
 
 .signature
  *(.signature*)
@@ -363,20 +367,20 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0xb35
+.debug_info     0x0000000000000000      0xba2
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_info    0x00000000000005f4      0x541 build/default/production/RFID.o
+ .debug_info    0x00000000000005f4      0x5ae build/default/production/RFID.o
 
-.debug_abbrev   0x0000000000000000      0x693
+.debug_abbrev   0x0000000000000000      0x6af
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_abbrev  0x00000000000005a2       0xf1 build/default/production/RFID.o
+ .debug_abbrev  0x00000000000005a2      0x10d build/default/production/RFID.o
 
-.debug_line     0x0000000000000000      0x316
+.debug_line     0x0000000000000000      0x356
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x137 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_line    0x0000000000000137      0x1df build/default/production/RFID.o
+ .debug_line    0x0000000000000137      0x21f build/default/production/RFID.o
 
 .debug_frame    0x0000000000000000       0x24
  *(.debug_frame)
@@ -387,9 +391,9 @@ END GROUP
  .debug_str     0x0000000000000000      0x208 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
  .debug_str     0x0000000000000208        0x0 build/default/production/RFID.o
 
-.debug_loc      0x0000000000000000      0x2cf
+.debug_loc      0x0000000000000000      0x2bf
  *(.debug_loc)
- .debug_loc     0x0000000000000000      0x2cf build/default/production/RFID.o
+ .debug_loc     0x0000000000000000      0x2bf build/default/production/RFID.o
 
 .debug_macinfo
  *(.debug_macinfo)
