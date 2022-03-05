@@ -1,4 +1,4 @@
-from game import Card, Deck, Player
+from . import Card, Deck, Player
 
 class gameState:
     def __init__(self, numPlay):

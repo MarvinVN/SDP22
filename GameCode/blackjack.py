@@ -1,4 +1,4 @@
-from gameState import gameState
+from . import gameState
 
 def main():
     gs = gameState(1) #initialize gamestate
