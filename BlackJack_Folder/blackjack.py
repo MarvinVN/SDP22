@@ -7,10 +7,9 @@ from blackjack_globals import Message
 
 def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     gameMode = " "
-    userInput = 1200 # need to update this in the start_game
+    userInput = 1000 # need to update this in the start_game
     gs = gameState(1, gameMode, userInput)
     #gs.deck.build() #testing, unneeded?
-    totals = []
 
     #count = 0
 
@@ -20,7 +19,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     rounds = 0
     start_var = False
     while not done_game:
-
+        totals = []
         print("start game loop")
 
         if not start_var:
@@ -34,7 +33,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             playerWallets = msg.content[1]
             bet = msg.content[2]
             gameMode = msg.content[3]
-            userInput = msg.content[4]
+            gs.userInput = msg.content[4]
         
             msg0, msg1 = start_game(gs, numPlayers, playerWallets, bet, gameMode, userInput)
             gs.deck.build() #testing
@@ -57,23 +56,6 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             msg = gui_to_bj_queue.get()
             print("Message ID: " + msg.id)
 
-            """
-            msg = gui_to_bj_queue.get()
-            if msg.id == "game_start" and rounds == 0:
-                rounds = rounds + 1
-                numPlayers = msg.content[0]
-                playerWallets = msg.content[1]
-                bet = msg.content[2]
-                gameMode = msg.content[3]
-                userInput = msg.content[4]
-            
-                msg0, msg1 = start_game(gs, numPlayers, playerWallets, bet, gameMode, userInput)
-                gs.deck.build() #testing
-                gs.deck.shuffle() #testing
-                bj_to_gui_queue.put(msg0)
-                bj_to_gui_queue.put(msg1)
-                playerTurn(gs.players[1], gs.deck)
-            """
             if msg.id == "stand":
                 dealerTurn(gs.players[0], gs.deck)
                 msg0 = Message("dealer_cards", gs.players[0].hand)
@@ -83,11 +65,18 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 totals.append(0)
                 totals.append(playerTurn(gs.players[1], gs.deck))
                 totals[0] = dealerTurn(gs.players[0], gs.deck)
+                
                 score(gs.players, totals)
                 gs.showWallets()
+                
 
                 msg2 = Message("wallet", gs.players[1].wallet)
                 bj_to_gui_queue.put(msg2)
+                """
+                score(gs.players, totals)
+                gs.showWallets()
+                """
+
                 done_round = True
                 rounds = rounds + 1
                 # after each round is done, want to clear GUI (tell GUI round_ends) and deal out cards for new round
@@ -104,6 +93,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 gs.players[1].draw(gs.deck, 1)
 
                 if checkValue(gs.players[1].hand) >= 21:
+                    
                     totals.append(0)
                     totals.append(playerTurn(gs.players[1], gs.deck))
                     totals[0] = dealerTurn(gs.players[0], gs.deck)
@@ -111,6 +101,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     gs.showWallets()
                     msg2 = Message("wallet", gs.players[1].wallet)
                     bj_to_gui_queue.put(msg2)
+                    
                     done_round = True
                     rounds = rounds + 1
 
@@ -173,21 +164,28 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             #done_round = False
             print("done_round now false") #debug
             gs.resetHands()#test
+
+            # temporary for one player:
+            gs.players[1].resetBet()
+            gs.players[1].addBet(bet)
+
             gs.dealCards(2)
-            msg0 = Message("done_round", None)
+            msg0 = Message("done_round", gs.players[1].wallet)
             bj_to_gui_queue.put(msg0)
             msg1 = Message("player_cards", gs.players[1].hand)
             bj_to_gui_queue.put(msg1)
             playerTurn(gs.players[1], gs.deck)
             msg2 = Message("dealer_cards", gs.players[0].hand)
             bj_to_gui_queue.put(msg2)
+            if done_game == True:
+                msg0 = Message("GAME OVER!", None)
+                bj_to_gui_queue.put(msg0)
 
-        print("round loop end") #debug
-        print(f"done_round:{done_round} start_var:{start_var}")
+        print("----------------------------------------------------") #debug
+        print(f"done_round:{done_round} start_var:{start_var} done_game:{done_game}")
 
     print("game loop end") #debug
-    msg0 = Message("GAME OVER!", None)
-    bj_to_gui_queue.put(msg0)
+    
 
 # check game mode; ex. if game mode = # games, keep playing until number of games met
 
@@ -219,6 +217,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
 
     # temporary for one player; need to change for multiple players
     gs.players[1].addBet(bet)
+    gs.userInput = userInput
 
     msg0 = Message("dealer_cards", gs.players[0].hand)
     msg1 = Message("player_cards", gs.players[1].hand)
@@ -227,23 +226,23 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
 
 def playerTurn(player, deck):
     total = checkValue(player.hand)
-    player.showHand()
-    print("Total value: {}".format(total))
+    #player.showHand() this prints hand
+    #print("Player value: {}".format(total))
 
     if total > 21:
         print("Bust!")
     elif total == 21:
         print("21!")
     else:
-        print(total)
+        print("Player: {}" .format(total))
     return total
 
 def dealerTurn(player, deck):
     total = 0
     while total < 17:
         total = checkValue(player.hand)
-        player.showHand()
-        print(": {}".format(total))
+        #player.showHand()
+        print("Dealer: {}".format(total))
         if total >= 17:
             break
         else:
@@ -296,7 +295,7 @@ def settleBet(player, res):
     elif res == 0:
         player.wallet += player.totalBet
     #if player loses, bet is just reset
-    player.resetBet()
+    #player.resetBet()
 
 """
 if __name__ == "__main__":

@@ -14,6 +14,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
+#import RPi.GPIO as GPIO
+import blackjack_GPIO as GPIO
 
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480
@@ -27,7 +29,7 @@ font16 = QtGui.QFont('Helvetica',16)
 font18 = QtGui.QFont('Helvetica',18)
 font20 = QtGui.QFont('Helvetica',20)
 font30 = QtGui.QFont('Helvetica',30, QtGui.QFont.Bold)
-font48 = QtGui.QFont('Helvetica', 48)
+font48 = QtGui.QFont('Helvetica',48)
 
 # INITIAL SETTINGS
 number_of_players = "0"
@@ -395,6 +397,7 @@ class Ui_Player_ReadyWindow(object):
         self.betting_label.setAlignment(QtCore.Qt.AlignCenter)
         self.betting_label.setObjectName("betting_label")
 
+        """
         # betting amount scroll bar
         self.scroll_bet = QtWidgets.QSpinBox(self.centralwidget,
             maximum=500,
@@ -405,7 +408,32 @@ class Ui_Player_ReadyWindow(object):
         self.scroll_bet.setFont(font16)
         self.scroll_bet.setObjectName("scroll_bet")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.scroll_bet)
+        """
+        self.user_bet = QtWidgets.QLabel(self.centralwidget)
+        self.user_bet.setGeometry(400, 100, 500, 200)
+        self.user_bet.setFont(font16)
+        self.user_bet.setText("10")
+        self.user_bet.setObjectName("scroll_bet")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.user_bet)
 
+        not_ready = True
+        
+        while(not_ready):
+            if GPIO.input(p1_hit):
+                # increment betting
+                current_bet = int(self.user_bet.text())
+                self.user_bet.setText(str(current_bet+10))
+            elif GPIO.input(p1_stand):
+                # done betting, move onto next window
+                not_ready = False
+            elif GPIO.input(p1_double):
+                # decrement betting
+                current_bet = int(self.user_bet.text())
+                self.user_bet.setText(str(current_bet-10))
+            else:
+                pass
+
+        """        
         # ok button styles/layout
         self.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow(p1_mw))
         self.ok_pushButton.setText("OK")
@@ -413,6 +441,9 @@ class Ui_Player_ReadyWindow(object):
         self.ready_pushButton.setFont(font16)
         self.ready_pushButton.setObjectName("ok_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
+        """
+        self.openWindow(p1_mw)
+
 
     # START BLACKJACK GAME; OPEN GAME WINDOW
     def openWindow(self, main_w):
@@ -439,12 +470,13 @@ class Ui_Player_ReadyWindow(object):
         self.window.show()
 
         # displaying the betting amount
-        self.bet = self.scroll_bet.value()
+        #self.bet = self.scroll_bet.value()
+        self.bet = int(self.user_bet.text())
         self.ui.current_bet_field.setPlainText(str(self.bet))
         self.ui.your_cards_left_field.setPlainText(str(self.player_cards[0]))
         self.ui.your_cards_right_field.setPlainText(str(self.player_cards[1]))
-        self.ui.dealer_left_field.setPlainText(str(self.dealer_cards[0]))
-        self.ui.dealer_right_field.setPlainText(str(self.dealer_cards[1]))
+        #self.ui.dealer_left_field.setPlainText(str(self.dealer_cards[0]))
+        #self.ui.dealer_right_field.setPlainText(str(self.dealer_cards[1]))
 
         # close current betting window
         temp_w.hide()
@@ -455,7 +487,8 @@ class Ui_Player_ReadyWindow(object):
         game_process.start()
 
         # saving bet data from previous input
-        self.bet = self.scroll_bet.value()
+        #self.bet = self.scroll_bet.value()
+        self.bet = int(self.user_bet.text())
 
         # creating/putting message to queue
         start_msg = Message("game_start", [self.numPlayers, self.startingAmount, self.bet, self.gameMode, self.userInput])
@@ -518,6 +551,84 @@ class Ui_Player_ReadyWindow(object):
 ###################################################################
 ###################################################################
 ########                                                 ##########
+########                NEXT ROUND CLASS                 ##########
+########                                                 ##########
+########      This class creates the NEXT ROUND          ##########
+########     GUI and allows access to next round.        ##########
+########                                                 ##########
+###################################################################
+###################################################################
+
+class Ui_confirm_round(object):
+
+    """
+    # INITIALIZING THE GAME SETTINGS FROM PREVIOUS GUI
+    def __init__(self, number_of_players, initial_amount, game_mode, user_input):
+        self.number_of_players = number_of_players
+        self.initial_amount = initial_amount
+        self.game_mode = game_mode
+        self.user_input = user_input
+    """
+    
+    # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
+    def confirm_connection(self):
+        # need to open new window and hide settings window
+        #self.hide()
+        pass
+
+    # UPON CANCEL BUTTON PRESS: DO NOTHING
+    def reject_connection(self):
+        pass
+
+    # STYLES/SETUP OF CONFIRM BOX GUI
+    def setupUi(self, confirm_round):
+        confirm_round.setObjectName("confirm_round")
+        confirm_round.resize(WIDTH, HEIGHT)
+
+        # button styles/configurations
+        self.buttonBox = QtWidgets.QDialogButtonBox(confirm_round)
+        self.buttonBox.setGeometry(180, 260, 500, 200)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.buttonBox.accepted.connect(lambda: self.confirm_connection())
+        self.buttonBox.rejected.connect(lambda: self.reject_connection())
+
+        # confirm box geometry/layout
+        self.widget = QtWidgets.QWidget(confirm_round)
+        self.widget.setGeometry(180, 100, 500, 200)
+        self.widget.setObjectName("widget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+
+        # confirmation label text styles/layout
+        self.confirm_label = QtWidgets.QLabel(self.widget)
+        self.confirm_label.setFont(font10)
+        self.confirm_label.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.confirm_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.confirm_label.setObjectName("confirm_label")
+        self.verticalLayout.addWidget(self.confirm_label)
+        self.confirm_list_widget = QtWidgets.QListWidget(self.widget)
+        self.confirm_list_widget.setObjectName("confirm_list_widget")
+        self.verticalLayout.addWidget(self.confirm_list_widget)
+
+        # autogenerated styling
+        self.retranslateUi(confirm_round)
+        self.buttonBox.accepted.connect(confirm_round.accept)
+        self.buttonBox.rejected.connect(confirm_round.reject)
+        QtCore.QMetaObject.connectSlotsByName(confirm_round)
+
+    # AUTOGENERATED TRANSLATION FROM GUI TO PYTHON
+    def retranslateUi(self, confirm_round):
+        _translate = QtCore.QCoreApplication.translate
+        confirm_round.setWindowTitle(_translate("confirm_round", "Confirmation"))
+        self.confirm_label.setText(_translate("confirm_round", "READY FOR NEXT ROUND?"))
+
+
+###################################################################
+###################################################################
+########                                                 ##########
 ########                PLAYER GAME CLASS                ##########
 ########                                                 ##########
 ########      This class creates the Player Game         ##########
@@ -541,6 +652,14 @@ class Ui_GameWindow(object):
         self.player_cards = playerCards
         self.double_button_clicked = False
 
+        # TESTING THIS FUNCTION
+    def open_next_round(self):
+        # opening up the confirmation box with user-selected settings
+        self.window = QtWidgets.QDialog()
+        self.ui = Ui_confirm_round()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
     def done_round(self):
         while(1):
             msg0 = bj_to_gui_queue.get()
@@ -549,6 +668,9 @@ class Ui_GameWindow(object):
                 self.player_cards = msg0.content
                 self.your_cards_left_field.setPlainText(str(self.player_cards))
                 self.your_cards_right_field.setPlainText(str(""))
+                # reset the gui bet and starting amount here
+                self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+                self.current_bet_field.setPlainText(str(self.bet))
             elif msg0.id == "dealer_cards":
                 self.dealer_cards = msg0.content
                 self.dealer_left_field.setPlainText(str(self.dealer_cards))
@@ -556,6 +678,8 @@ class Ui_GameWindow(object):
                 break
             elif msg0.id == "GAME OVER!":
                 self.your_cards_left_field.setPlainText(str("GAME OVER!!"))
+                # FIX THIS ONE
+                break
             else:
                 pass
 
@@ -585,11 +709,14 @@ class Ui_GameWindow(object):
                     self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
                 elif msg1.id == "doubled":
                     value = msg1.content
-                    self.bet = value
+                    #self.bet = value
                     self.current_bet_field.setPlainText(str(value))
                 elif msg1.id == "done_round":
                     # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
                     self.double_button_clicked == False
+
+                    # self.bet = bet (reset?)
+                    self.open_next_round()
                     self.done_round()
                     break
                 else:
@@ -603,6 +730,7 @@ class Ui_GameWindow(object):
     # TODO
     # when "STAND" button is pressed, do nothing to current bet, do nothing to cards, reveal dealer cards
     def stand_it(self):
+        # not being incremented properly for the total amount here
         msg = Message("stand", None)
         gui_to_bj_queue.put(msg)
         self.dealer_cards = []
@@ -615,6 +743,7 @@ class Ui_GameWindow(object):
                 self.currentAmount = msg.content
                 self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             elif msg.id == "done_round":
+                self.open_next_round()
                 self.done_round()
                 break
             else:
@@ -772,6 +901,7 @@ class Ui_GameWindow(object):
 
 if __name__ == "__main__":
     import sys
+    initGPIO()
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
