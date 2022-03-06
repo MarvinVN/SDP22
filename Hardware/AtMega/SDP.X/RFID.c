@@ -48,6 +48,7 @@ void main(void) {
     //to each player that is 2048/20 =~ 102.4
     
     /* loop */
+    PORTD = 0b00000000;
     for(int i = 0; i<2048/4; i++){
         PORTC = 0b00000001;
         _delay_ms(5);
@@ -68,6 +69,15 @@ void main(void) {
     }
     PORTC = 0x09;
     _delay_ms(1000);
+    
+    
+
+    PORTD = 0b00000001;
+    _delay_ms(4000);
+    PORTD = 0b00000010;
+    _delay_ms(4000);
+    PORTD = 0b00000011;
+    PORTD = 0b00000000;
     
     
 }
