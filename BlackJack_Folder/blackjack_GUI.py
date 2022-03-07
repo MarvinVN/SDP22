@@ -21,7 +21,7 @@ HEIGHT = 480
 WIDTH = 800
 
 # TIME DELAY (IN MILLISECONDS)
-DELAYED = 1000
+DELAYED = 1500
 
 # GAME ENDS
 ENDED = False
@@ -589,7 +589,7 @@ class Ui_Player_ReadyWindow(object):
 ###################################################################
 ###################################################################
 
-"""
+
 class Ui_confirm_round(object):
     
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
@@ -644,7 +644,7 @@ class Ui_confirm_round(object):
         _translate = QtCore.QCoreApplication.translate
         confirm_round.setWindowTitle(_translate("confirm_round", "Confirmation"))
         self.confirm_label.setText(_translate("confirm_round", "READY FOR NEXT ROUND?"))
-"""
+
 
 ###################################################################
 ###################################################################
@@ -671,7 +671,7 @@ class Ui_GameWindow(object):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
-    """
+    
     def open_next_round(self, d_cards, p_cards, scoring, wallets):
         # opening up the next round screen
         self.window = QtWidgets.QDialog()
@@ -683,7 +683,7 @@ class Ui_GameWindow(object):
         self.ui.confirm_list_widget.addItems(["Dealer Cards: " + str(d_cards),
             "Player Cards: " + str(p_cards),
             "Round Score: " + str(scoring), "Current Wallets: " + str(wallets)])
-    """
+    
     def done_round(self):
         while(1):
             msg0 = bj_to_gui_queue.get()
@@ -700,9 +700,10 @@ class Ui_GameWindow(object):
                 self.dealer_left_field.setPlainText(str(self.dealer_cards[0]))
                 self.dealer_right_field.setPlainText(str(self.dealer_cards[1]))
                 break
-            elif msg0.id == "game_over":
+            elif msg0.id == "GAME OVER!":
                 # end the game
-                #self.exit_it()
+                self.exit_it() # TESTING (THIS WORKED!!)
+                # instead of exiting, have a screen pop up with "WINNER!" or "YOU LOST!"
                 break
             else:
                 pass
@@ -732,20 +733,21 @@ class Ui_GameWindow(object):
                 elif msg1.id == "done_round":
                     # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
                     self.double_button_clicked == False
-                    """
+                    
                     p1_cards = msg1.content[1]
                     d_cards = msg1.content[0]
                     scoring = msg1.content[2]
                     wallets = msg1.content[3]
-                    """
+                    
 
                     # self.bet = bet (reset?)
                     # adding time delay before going to next screen
-                    #QtTest.QTest.qWait(DELAYED)
+                    QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
-                    #self.open_next_round(d_cards, p1_cards, scoring, wallets)
-                    #QtTest.QTest.qWait(DELAYED)
+                    self.open_next_round(d_cards, p1_cards, scoring, wallets)
+                    QtTest.QTest.qWait(DELAYED)
                     self.done_round()
+                    break
                 else:
                     pass
         else:
@@ -770,20 +772,21 @@ class Ui_GameWindow(object):
                 self.currentAmount = msg.content
                 self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             elif msg.id == "done_round":
-                """
+                
                 p1_cards = msg.content[1]
                 d_cards = msg.content[0]
                 scoring = msg.content[2]
                 wallets = msg.content[3]
-                """
+                
 
                 # self.bet = bet (reset?)
                 # adding time delay before going to next screen?
-                #QtTest.QTest.qWait(DELAYED)
+                QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
-                #self.open_next_round(d_cards, p1_cards, scoring, wallets)
-                #QtTest.QTest.qWait(DELAYED)
+                self.open_next_round(d_cards, p1_cards, scoring, wallets)
+                QtTest.QTest.qWait(DELAYED)
                 self.done_round()
+                break
             else:
                 pass
         self.dealer_left_field.setPlainText(str(self.dealer_cards[0]))
