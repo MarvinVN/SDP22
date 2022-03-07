@@ -18,6 +18,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     done_round = False
     rounds = 0
     start_var = False
+    round_score = []
     while not done_game:
         totals = []
         print("start game loop")
@@ -66,7 +67,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 totals.append(playerTurn(gs.players[1], gs.deck))
                 totals[0] = dealerTurn(gs.players[0], gs.deck)
                 
-                score(gs.players, totals)
+                round_score = score(gs.players, totals)
                 gs.showWallets()
                 
 
@@ -97,7 +98,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     totals.append(0)
                     totals.append(playerTurn(gs.players[1], gs.deck))
                     totals[0] = dealerTurn(gs.players[0], gs.deck)
-                    score(gs.players, totals)
+                    round_score = score(gs.players, totals)
                     gs.showWallets()
                     msg2 = Message("wallet", gs.players[1].wallet)
                     bj_to_gui_queue.put(msg2)
@@ -132,7 +133,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 totals.append(0)
                 totals.append(playerTurn(gs.players[1], gs.deck))
                 totals[0] = dealerTurn(gs.players[0], gs.deck)
-                score(gs.players, totals)
+                round_score = score(gs.players, totals)
                 gs.showWallets()
 
                 msg2 = Message("wallet", gs.players[1].wallet)
@@ -163,23 +164,24 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         if start_var and done_round:
             #done_round = False
             print("done_round now false") #debug
+
+            #msg0 = Message("done_round", gs.players[1].wallet)
+            msg0 = Message("done_round", None)
+            #msg0 = Message("done_round", [gs.players[0].hand,gs.players[1].hand, round_score, gs.getWallets()])
+            bj_to_gui_queue.put(msg0)
+
             gs.resetHands()#test
+            gs.dealCards(2)
 
             # temporary for one player:
             gs.players[1].resetBet()
             gs.players[1].addBet(bet)
 
-            gs.dealCards(2)
-            msg0 = Message("done_round", gs.players[1].wallet)
-            bj_to_gui_queue.put(msg0)
             msg1 = Message("player_cards", gs.players[1].hand)
             bj_to_gui_queue.put(msg1)
             playerTurn(gs.players[1], gs.deck)
             msg2 = Message("dealer_cards", gs.players[0].hand)
             bj_to_gui_queue.put(msg2)
-            if done_game == True:
-                msg0 = Message("GAME OVER!", None)
-                bj_to_gui_queue.put(msg0)
 
         print("----------------------------------------------------") #debug
         print(f"done_round:{done_round} start_var:{start_var} done_game:{done_game}")
@@ -287,6 +289,7 @@ def score(players, totals):
                 settleBet(players[x], 0)
             else:
                 settleBet(players[x], 1)
+    return "{}".format(totals) # testing
 
 #system pays out 2 to 1
 def settleBet(player, res):
