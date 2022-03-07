@@ -38,6 +38,7 @@ class Deck:
 
     def build(self):
         self.cards = []
+        """
         for suit in ['S', 'H', 'D', 'C']:
             for rank in range(1,14):
                 if rank == 1:
@@ -49,9 +50,14 @@ class Deck:
                 elif rank == 13:
                     rank = "K"
                 self.cards.append("{}{}".format(rank,suit))
+        """
+        for suit in ['s', 'h', 'd', 'c']:
+            for rank in range(1,14):
+                self.cards.append(Card(rank,suit))
 
     #will talk to shuffler
     def shuffle(self):
+        """
         print("Shuffling")
         port = '/dev/cu.usbserial-1410'
         baudrate = 115200
@@ -61,15 +67,19 @@ class Deck:
         ser.write(bytes(x, 'utf-8'))
         time.sleep(6)     
         #shuffle the deck
+        """
+        random.shuffle(self.cards)
 
     #will talk to dealer
     def deal(self):
-        data = self.RFID()
+        """data = self.RFID()
         if data != '':
             data = data.split('\r')
             self.cardsused.append(data[0])
             self.cards.remove(data[0])
             return data[0]
+        """
+        return self.cards.pop()
 
     def RFID(self):
         port = '/dev/cu.usbserial-1410'
