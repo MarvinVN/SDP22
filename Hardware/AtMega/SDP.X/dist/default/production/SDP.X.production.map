@@ -5,13 +5,6 @@ Archive member included to satisfy reference by file (symbol)
 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_copy_data.o)
                               build/default/production/RFID.o (__do_copy_data)
 
-Allocating common symbols
-Common symbol       size              file
-
-playerRequest       0x1               build/default/production/RFID.o
-playerRequestInt    0x2               build/default/production/RFID.o
-period              0x2               build/default/production/RFID.o
-
 Discarded input sections
 
  .data          0x0000000000000000        0x0 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
@@ -19,8 +12,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/default/production/RFID.o
  .data          0x0000000000000000        0x0 build/default/production/RFID.o
  .bss           0x0000000000000000        0x0 build/default/production/RFID.o
- .progmemx.data.Shuffler
-                0x0000000000000000        0x2 build/default/production/RFID.o
  .text          0x0000000000000000        0x0 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
  .data          0x0000000000000000        0x0 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
  .bss           0x0000000000000000        0x0 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
@@ -183,7 +174,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000       0xc2
+.text           0x0000000000000000       0xbc
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
                 0x0000000000000000                __vectors
@@ -191,44 +182,43 @@ END GROUP
  *(.vectors)
  *(.progmem.gcc*)
  *(.dinit)
- .dinit         0x0000000000000068        0x5 data_init
-                0x000000000000006e                . = ALIGN (0x2)
- *fill*         0x000000000000006d        0x1 
-                0x000000000000006e                __trampolines_start = .
+ .dinit         0x0000000000000068        0x0 data_init
+                0x0000000000000068                . = ALIGN (0x2)
+                0x0000000000000068                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x000000000000006e        0x0 linker stubs
+ .trampolines   0x0000000000000068        0x0 linker stubs
  *(.trampolines*)
-                0x000000000000006e                __trampolines_end = .
+                0x0000000000000068                __trampolines_end = .
  *libprintf_flt.a:*(.progmem.data)
  *libc.a:*(.progmem.data)
-                0x000000000000006e                . = ALIGN (0x2)
+                0x0000000000000068                . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x000000000000006e                __ctors_start = .
+                0x0000000000000068                __ctors_start = .
  *(.ctors)
-                0x000000000000006e                __ctors_end = .
-                0x000000000000006e                __dtors_start = .
+                0x0000000000000068                __ctors_end = .
+                0x0000000000000068                __dtors_start = .
  *(.dtors)
-                0x000000000000006e                __dtors_end = .
+                0x0000000000000068                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x000000000000006e        0x0 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
-                0x000000000000006e                __init
+ .init0         0x0000000000000068        0x0 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
+                0x0000000000000068                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x000000000000006e        0xc /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
+ .init2         0x0000000000000068        0xc /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x000000000000007a       0x3c /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_copy_data.o)
-                0x000000000000007a                __do_copy_data
-                0x00000000000000a8                __do_clear_bss
+ .init4         0x0000000000000074       0x3c /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_copy_data.o)
+                0x0000000000000074                __do_copy_data
+                0x00000000000000a2                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -239,13 +229,13 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00000000000000b6        0x8 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
+ .init9         0x00000000000000b0        0x8 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
  *(.init9)
-                0x00000000000000be                . = ALIGN (0x2)
+                0x00000000000000b8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000000be        0x0 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
-                0x00000000000000be                exit
-                0x00000000000000be                _exit
+ .fini9         0x00000000000000b8        0x0 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
+                0x00000000000000b8                exit
+                0x00000000000000b8                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -264,11 +254,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000000be        0x4 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
+ .fini0         0x00000000000000b8        0x4 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000000c2                _etext = .
+                0x00000000000000bc                _etext = .
 
-.data           0x0000000000800100        0x0 load address 0x00000000000000c2
+.data           0x0000000000800100        0x0 load address 0x00000000000000bc
                 [!provide]                        PROVIDE (__data_start, .)
  *(.gnu.linkonce.d*)
  *(.gnu.linkonce.r*)
@@ -276,22 +266,18 @@ END GROUP
                 0x0000000000800100                _edata = .
                 [!provide]                        PROVIDE (__data_end, .)
 
-.bss            0x0000000000800100        0x5
+.bss            0x0000000000800100        0x0
                 [!provide]                        PROVIDE (__bss_start, .)
  *(COMMON)
- COMMON         0x0000000000800100        0x5 build/default/production/RFID.o
-                0x0000000000800100                playerRequest
-                0x0000000000800101                playerRequestInt
-                0x0000000000800103                period
                 [!provide]                        PROVIDE (__bss_end, .)
-                0x00000000000000c2                __data_load_start = LOADADDR (.data)
-                0x00000000000000c2                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000000000000bc                __data_load_start = LOADADDR (.data)
+                0x00000000000000bc                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0000000000800105        0x0
+.noinit         0x0000000000800100        0x0
                 [!provide]                        PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                        PROVIDE (__noinit_end, .)
-                0x0000000000800105                _end = .
+                0x0000000000800100                _end = .
 
 .eeprom         0x0000000000810000        0x0
  *(.eeprom*)
@@ -359,41 +345,41 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000       0x20
+.debug_aranges  0x0000000000000000       0x60
  *(.debug_aranges)
  .debug_aranges
-                0x0000000000000000       0x20 build/default/production/RFID.o
+                0x0000000000000000       0x60 build/default/production/RFID.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0xc14
+.debug_info     0x0000000000000000     0x1ee5
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_info    0x00000000000005f4      0x620 build/default/production/RFID.o
+ .debug_info    0x00000000000005f4     0x18f1 build/default/production/RFID.o
 
-.debug_abbrev   0x0000000000000000      0x6af
+.debug_abbrev   0x0000000000000000      0x74b
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_abbrev  0x00000000000005a2      0x10d build/default/production/RFID.o
+ .debug_abbrev  0x00000000000005a2      0x1a9 build/default/production/RFID.o
 
-.debug_line     0x0000000000000000      0x38f
+.debug_line     0x0000000000000000      0xddb
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x137 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_line    0x0000000000000137      0x258 build/default/production/RFID.o
+ .debug_line    0x0000000000000137      0xca4 build/default/production/RFID.o
 
-.debug_frame    0x0000000000000000       0x24
+.debug_frame    0x0000000000000000       0xa4
  *(.debug_frame)
- .debug_frame   0x0000000000000000       0x24 build/default/production/RFID.o
+ .debug_frame   0x0000000000000000       0xa4 build/default/production/RFID.o
 
-.debug_str      0x0000000000000000      0x208
+.debug_str      0x0000000000000000      0x211
  *(.debug_str)
  .debug_str     0x0000000000000000      0x208 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_str     0x0000000000000208        0x0 build/default/production/RFID.o
+ .debug_str     0x0000000000000208        0x9 build/default/production/RFID.o
 
-.debug_loc      0x0000000000000000      0x34f
+.debug_loc      0x0000000000000000     0x1aaf
  *(.debug_loc)
- .debug_loc     0x0000000000000000      0x34f build/default/production/RFID.o
+ .debug_loc     0x0000000000000000     0x1aaf build/default/production/RFID.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -413,9 +399,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x0000000000000000       0x10
+.debug_ranges   0x0000000000000000       0x50
  *(.debug_ranges)
- .debug_ranges  0x0000000000000000       0x10 build/default/production/RFID.o
+ .debug_ranges  0x0000000000000000       0x50 build/default/production/RFID.o
 
 .debug_macro
  *(.debug_macro)
@@ -428,35 +414,71 @@ LOAD data_init
  .note.gnu.avr.deviceinfo
                 0x0000000000000000       0x40 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
 
-.text.main      0x00000000000000c2       0xe8
- .text.main     0x00000000000000c2       0xe8 build/default/production/RFID.o
-                0x00000000000000c2                main
+.text.p3        0x00000000000000bc      0x154
+ .text.p3       0x00000000000000bc      0x154 build/default/production/RFID.o
+                0x00000000000000bc                p3
 
-.text           0x00000000000001aa        0x4
- .text          0x00000000000001aa        0x4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
-                0x00000000000001aa                __vector_20
-                0x00000000000001aa                __vector_1
-                0x00000000000001aa                __vector_24
-                0x00000000000001aa                __vector_12
-                0x00000000000001aa                __bad_interrupt
-                0x00000000000001aa                __vector_6
-                0x00000000000001aa                __vector_3
-                0x00000000000001aa                __vector_23
-                0x00000000000001aa                __vector_25
-                0x00000000000001aa                __vector_11
-                0x00000000000001aa                __vector_13
-                0x00000000000001aa                __vector_17
-                0x00000000000001aa                __vector_19
-                0x00000000000001aa                __vector_7
-                0x00000000000001aa                __vector_5
-                0x00000000000001aa                __vector_4
-                0x00000000000001aa                __vector_9
-                0x00000000000001aa                __vector_2
-                0x00000000000001aa                __vector_21
-                0x00000000000001aa                __vector_15
-                0x00000000000001aa                __vector_8
-                0x00000000000001aa                __vector_14
-                0x00000000000001aa                __vector_10
-                0x00000000000001aa                __vector_16
-                0x00000000000001aa                __vector_18
-                0x00000000000001aa                __vector_22
+.text.p4        0x0000000000000210      0x154
+ .text.p4       0x0000000000000210      0x154 build/default/production/RFID.o
+                0x0000000000000210                p4
+
+.text.p5        0x0000000000000364      0x154
+ .text.p5       0x0000000000000364      0x154 build/default/production/RFID.o
+                0x0000000000000364                p5
+
+.text.p2        0x00000000000004b8      0x14c
+ .text.p2       0x00000000000004b8      0x14c build/default/production/RFID.o
+                0x00000000000004b8                p2
+
+.text.fulldeal  0x0000000000000604       0x8e
+ .text.fulldeal
+                0x0000000000000604       0x8e build/default/production/RFID.o
+                0x0000000000000604                fulldeal
+
+.text.main      0x0000000000000692       0x74
+ .text.main     0x0000000000000692       0x74 build/default/production/RFID.o
+                0x0000000000000692                main
+
+.text.p1        0x0000000000000706       0x2a
+ .text.p1       0x0000000000000706       0x2a build/default/production/RFID.o
+                0x0000000000000706                p1
+
+.text.shuffler  0x0000000000000730       0x1c
+ .text.shuffler
+                0x0000000000000730       0x1c build/default/production/RFID.o
+                0x0000000000000730                shuffler
+
+.text.dispensor
+                0x000000000000074c       0x16
+ .text.dispensor
+                0x000000000000074c       0x16 build/default/production/RFID.o
+                0x000000000000074c                dispensor
+
+.text           0x0000000000000762        0x4
+ .text          0x0000000000000762        0x4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
+                0x0000000000000762                __vector_20
+                0x0000000000000762                __vector_1
+                0x0000000000000762                __vector_24
+                0x0000000000000762                __vector_12
+                0x0000000000000762                __bad_interrupt
+                0x0000000000000762                __vector_6
+                0x0000000000000762                __vector_3
+                0x0000000000000762                __vector_23
+                0x0000000000000762                __vector_25
+                0x0000000000000762                __vector_11
+                0x0000000000000762                __vector_13
+                0x0000000000000762                __vector_17
+                0x0000000000000762                __vector_19
+                0x0000000000000762                __vector_7
+                0x0000000000000762                __vector_5
+                0x0000000000000762                __vector_4
+                0x0000000000000762                __vector_9
+                0x0000000000000762                __vector_2
+                0x0000000000000762                __vector_21
+                0x0000000000000762                __vector_15
+                0x0000000000000762                __vector_8
+                0x0000000000000762                __vector_14
+                0x0000000000000762                __vector_10
+                0x0000000000000762                __vector_16
+                0x0000000000000762                __vector_18
+                0x0000000000000762                __vector_22
