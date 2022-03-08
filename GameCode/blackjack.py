@@ -7,6 +7,17 @@ buttons = {
     "stand": 26
 }
 
+states = {
+    "idle": [0,0,0],
+    "shuffler": [0,0,1],
+    "motor-init": [0,1,0],
+    "p1": [0,1,1],
+    "p2": [1,0,0],
+    "p3": [1,0,1],
+    "p4": [1,1,0],
+    "p5": [1,1,1]
+}
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(list(buttons.values()), GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
