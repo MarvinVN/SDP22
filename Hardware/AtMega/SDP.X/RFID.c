@@ -4,7 +4,7 @@
  *
  * Created on February 8, 2022, 12:29 PM
  */
-
+#define F_CPU 1000000UL
 #include <xc.h>
 #include "util/delay.h"
 #include <stdio.h>
@@ -12,8 +12,6 @@
 #include <avr/io.h>
 // ATmega328P Configuration Bit Settings
 // 'C' source line config statements
-
-#define F_CPU 1000000UL
 void fulldeal(void);
 void p1(void);
 void p2(void);
@@ -31,13 +29,15 @@ FUSES = {
 LOCKBITS = 0xFF; // {LB=NO_LOCK, BLB0=NO_LOCK, BLB1=NO_LOCK}
 
 
-
 void main(void) {
     DDRD &= ~(1 << PIND0);
     DDRD &= ~(1 << PIND1);
     DDRD &= ~(1 << PIND2);
-    DDRB = 0x0F; // makes port b output
+    DDRB = 0xFF; // makes port b output
     DDRC = 0xFF; // makes port C output
+    
+    PORTB = 0b00000000;
+
     while(1){
         if(!(PIND&(1<<2)) && (!(PIND&(1<<1))) && (PIND&(1<<0))){
             shuffler();
@@ -61,12 +61,21 @@ void main(void) {
             p5();
         }
     }
+    return;
 }
 
+
+void shuffler(void){
+    PORTB = 0b00000001;
+    _delay_ms(4000);
+    PORTB = 0b00000000;
+}
+
+
 void dispensor(void){
-    PORTB |= (1 << PB0);
-    _delay_ms(100);
-    PORTB |= ~(1 << PB0);
+    PORTB = 0b00000010;
+    _delay_ms(1000);
+    PORTB = 0b00000000;
 }
 
 void p1(void){
@@ -113,7 +122,7 @@ void p2(void){
             _delay_ms(5);
             PORTC = 0b00000001;
             _delay_ms(5);
-    }
+        }
     _delay_ms(500);
 }
 void p3(void){
@@ -300,13 +309,6 @@ void fulldeal(void){
             _delay_ms(5);
         }
         PORTC = 0x09;
-}
-
-
-void shuffler(void){
-    PORTB |= (1 << PB1);
-    _delay_ms(4000);
-    PORTB |= ~(1 << PB1);
 }
 
 
