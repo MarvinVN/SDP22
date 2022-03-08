@@ -353,33 +353,33 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x1ee5
+.debug_info     0x0000000000000000     0x21c2
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_info    0x00000000000005f4     0x18f1 build/default/production/RFID.o
+ .debug_info    0x00000000000005f4     0x1bce build/default/production/RFID.o
 
-.debug_abbrev   0x0000000000000000      0x74b
+.debug_abbrev   0x0000000000000000      0x722
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_abbrev  0x00000000000005a2      0x1a9 build/default/production/RFID.o
+ .debug_abbrev  0x00000000000005a2      0x180 build/default/production/RFID.o
 
-.debug_line     0x0000000000000000      0xddb
+.debug_line     0x0000000000000000      0xf36
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x137 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_line    0x0000000000000137      0xca4 build/default/production/RFID.o
+ .debug_line    0x0000000000000137      0xdff build/default/production/RFID.o
 
-.debug_frame    0x0000000000000000       0xa4
+.debug_frame    0x0000000000000000       0xd4
  *(.debug_frame)
- .debug_frame   0x0000000000000000       0xa4 build/default/production/RFID.o
+ .debug_frame   0x0000000000000000       0xd4 build/default/production/RFID.o
 
-.debug_str      0x0000000000000000      0x211
+.debug_str      0x0000000000000000      0x208
  *(.debug_str)
  .debug_str     0x0000000000000000      0x208 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_str     0x0000000000000208        0x9 build/default/production/RFID.o
+ .debug_str     0x0000000000000208        0x0 build/default/production/RFID.o
 
-.debug_loc      0x0000000000000000     0x1aaf
+.debug_loc      0x0000000000000000     0x1e6c
  *(.debug_loc)
- .debug_loc     0x0000000000000000     0x1aaf build/default/production/RFID.o
+ .debug_loc     0x0000000000000000     0x1e6c build/default/production/RFID.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -399,9 +399,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x0000000000000000       0x50
+.debug_ranges   0x0000000000000000       0x80
  *(.debug_ranges)
- .debug_ranges  0x0000000000000000       0x50 build/default/production/RFID.o
+ .debug_ranges  0x0000000000000000       0x80 build/default/production/RFID.o
 
 .debug_macro
  *(.debug_macro)
@@ -414,71 +414,71 @@ LOAD data_init
  .note.gnu.avr.deviceinfo
                 0x0000000000000000       0x40 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
 
-.text.p3        0x00000000000000bc      0x154
- .text.p3       0x00000000000000bc      0x154 build/default/production/RFID.o
-                0x00000000000000bc                p3
-
-.text.p4        0x0000000000000210      0x154
- .text.p4       0x0000000000000210      0x154 build/default/production/RFID.o
-                0x0000000000000210                p4
-
-.text.p5        0x0000000000000364      0x154
- .text.p5       0x0000000000000364      0x154 build/default/production/RFID.o
-                0x0000000000000364                p5
-
-.text.p2        0x00000000000004b8      0x14c
- .text.p2       0x00000000000004b8      0x14c build/default/production/RFID.o
-                0x00000000000004b8                p2
-
-.text.fulldeal  0x0000000000000604       0x8e
+.text.fulldeal  0x00000000000000bc      0x1aa
  .text.fulldeal
-                0x0000000000000604       0x8e build/default/production/RFID.o
-                0x0000000000000604                fulldeal
+                0x00000000000000bc      0x1aa build/default/production/RFID.o
+                0x00000000000000bc                fulldeal
 
-.text.main      0x0000000000000692       0x74
- .text.main     0x0000000000000692       0x74 build/default/production/RFID.o
-                0x0000000000000692                main
+.text.p3        0x0000000000000266      0x154
+ .text.p3       0x0000000000000266      0x154 build/default/production/RFID.o
+                0x0000000000000266                p3
 
-.text.p1        0x0000000000000706       0x2a
- .text.p1       0x0000000000000706       0x2a build/default/production/RFID.o
-                0x0000000000000706                p1
+.text.p4        0x00000000000003ba      0x154
+ .text.p4       0x00000000000003ba      0x154 build/default/production/RFID.o
+                0x00000000000003ba                p4
 
-.text.shuffler  0x0000000000000730       0x1c
+.text.p5        0x000000000000050e      0x154
+ .text.p5       0x000000000000050e      0x154 build/default/production/RFID.o
+                0x000000000000050e                p5
+
+.text.p2        0x0000000000000662      0x14c
+ .text.p2       0x0000000000000662      0x14c build/default/production/RFID.o
+                0x0000000000000662                p2
+
+.text.main      0x00000000000007ae       0x74
+ .text.main     0x00000000000007ae       0x74 build/default/production/RFID.o
+                0x00000000000007ae                main
+
+.text.p1        0x0000000000000822       0x2a
+ .text.p1       0x0000000000000822       0x2a build/default/production/RFID.o
+                0x0000000000000822                p1
+
+.text.shuffler  0x000000000000084c       0x1c
  .text.shuffler
-                0x0000000000000730       0x1c build/default/production/RFID.o
-                0x0000000000000730                shuffler
+                0x000000000000084c       0x1c build/default/production/RFID.o
+                0x000000000000084c                shuffler
 
 .text.dispensor
-                0x000000000000074c       0x16
+                0x0000000000000868       0x16
  .text.dispensor
-                0x000000000000074c       0x16 build/default/production/RFID.o
-                0x000000000000074c                dispensor
+                0x0000000000000868       0x16 build/default/production/RFID.o
+                0x0000000000000868                dispensor
 
-.text           0x0000000000000762        0x4
- .text          0x0000000000000762        0x4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
-                0x0000000000000762                __vector_20
-                0x0000000000000762                __vector_1
-                0x0000000000000762                __vector_24
-                0x0000000000000762                __vector_12
-                0x0000000000000762                __bad_interrupt
-                0x0000000000000762                __vector_6
-                0x0000000000000762                __vector_3
-                0x0000000000000762                __vector_23
-                0x0000000000000762                __vector_25
-                0x0000000000000762                __vector_11
-                0x0000000000000762                __vector_13
-                0x0000000000000762                __vector_17
-                0x0000000000000762                __vector_19
-                0x0000000000000762                __vector_7
-                0x0000000000000762                __vector_5
-                0x0000000000000762                __vector_4
-                0x0000000000000762                __vector_9
-                0x0000000000000762                __vector_2
-                0x0000000000000762                __vector_21
-                0x0000000000000762                __vector_15
-                0x0000000000000762                __vector_8
-                0x0000000000000762                __vector_14
-                0x0000000000000762                __vector_10
-                0x0000000000000762                __vector_16
-                0x0000000000000762                __vector_18
-                0x0000000000000762                __vector_22
+.text           0x000000000000087e        0x4
+ .text          0x000000000000087e        0x4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
+                0x000000000000087e                __vector_20
+                0x000000000000087e                __vector_1
+                0x000000000000087e                __vector_24
+                0x000000000000087e                __vector_12
+                0x000000000000087e                __bad_interrupt
+                0x000000000000087e                __vector_6
+                0x000000000000087e                __vector_3
+                0x000000000000087e                __vector_23
+                0x000000000000087e                __vector_25
+                0x000000000000087e                __vector_11
+                0x000000000000087e                __vector_13
+                0x000000000000087e                __vector_17
+                0x000000000000087e                __vector_19
+                0x000000000000087e                __vector_7
+                0x000000000000087e                __vector_5
+                0x000000000000087e                __vector_4
+                0x000000000000087e                __vector_9
+                0x000000000000087e                __vector_2
+                0x000000000000087e                __vector_21
+                0x000000000000087e                __vector_15
+                0x000000000000087e                __vector_8
+                0x000000000000087e                __vector_14
+                0x000000000000087e                __vector_10
+                0x000000000000087e                __vector_16
+                0x000000000000087e                __vector_18
+                0x000000000000087e                __vector_22

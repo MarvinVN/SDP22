@@ -21,6 +21,7 @@ void p3(void);
 void p4(void);
 void p5(void);
 void dispensor(void);
+void shuffler(void);
 FUSES = {
 	.low = 0x7F, // LOW {SUT_CKSEL=EXTXOSC_8MHZ_XX_16KCK_14CK_65MS, CKOUT=CLEAR, CKDIV8=SET}
 	.high = 0xD9, // HIGH {BOOTRST=CLEAR, BOOTSZ=2048W_3800, EESAVE=CLEAR, WDTON=CLEAR, SPIEN=SET, DWEN=CLEAR, RSTDISBL=CLEAR}
@@ -38,25 +39,25 @@ void main(void) {
     DDRB = 0x0F; // makes port b output
     DDRC = 0xFF; // makes port C output
     while(1){
-        if (((PIND & (1 << PIND0))!=0) && ((PIND & (1 << PIND1))==0) && ((PIND & (1 << PIND2))==0)){
+        if(!(PIND&(1<<2)) && (!(PIND&(1<<1))) && (PIND&(1<<0))){
             shuffler();
         }
-        if (((PIND & (1 << PIND0))==0) && ((PIND & (1 << PIND1))!=0) && ((PIND & (1 << PIND2))==0)){
+        if(!(PIND&(1<<2)) && ((PIND&(1<<1))) && (!(PIND&(1<<0)))){
             fulldeal();
         }
-        if (((PIND & (1 << PIND0))!=0) && ((PIND & (1 << PIND1))!=0) && ((PIND & (1 << PIND2))==0)){
+        if(!(PIND&(1<<2)) && ((PIND&(1<<1))) && (PIND&(1<<0))){
             p1();
         }
-        if (((PIND & (1 << PIND0))==0) && ((PIND & (1 << PIND1))==0) && ((PIND & (1 << PIND2))!=0)){
+        if((PIND&(1<<2)) && (!(PIND&(1<<1))) && (!(PIND&(1<<0)))){
             p2();
         }
-        if (((PIND & (1 << PIND0))==0) && ((PIND & (1 << PIND1))==0) && ((PIND & (1 << PIND2))!=0)){
+        if((PIND&(1<<2)) && (!(PIND&(1<<1))) && (PIND&(1<<0))){
             p3();
         }
-        if (((PIND & (1 << PIND0))==0) && ((PIND & (1 << PIND1))!=0) && ((PIND & (1 << PIND2))!=0)){
+        if((PIND&(1<<2)) && (!(PIND&(1<<1))) && (PIND&(1<<0))){
             p4();
         }
-        if (((PIND & (1 << PIND0))!=0) && ((PIND & (1 << PIND1))!=0) && ((PIND & (1 << PIND2))!=0)){
+        if((PIND&(1<<2)) && ((PIND&(1<<1))) && (PIND&(1<<0))){
             p5();
         }
     }
@@ -72,10 +73,9 @@ void p1(void){
     _delay_ms(1000);
     dispensor();
     _delay_ms(1000);
-    return;
 }
 void p2(void){
-        for(int i = 0; i<409; i++){
+        for(int i = 0; i<408/4; i++){
             PORTC = 0b00000001;
             _delay_ms(5);
              PORTC = 0b00000011;
@@ -96,7 +96,7 @@ void p2(void){
         _delay_ms(500);
         dispensor();
         _delay_ms(500);
-        for(int i = 0; i<409; i++){
+        for(int i = 0; i<408/4; i++){
             PORTC = 0b00001001;
             _delay_ms(5);
             PORTC = 0b00001000;
@@ -115,10 +115,9 @@ void p2(void){
             _delay_ms(5);
     }
     _delay_ms(500);
-    return;
 }
 void p3(void){
-        for(int i = 0; i<818; i++){
+        for(int i = 0; i<2048/10; i++){
             PORTC = 0b00000001;
             _delay_ms(5);
              PORTC = 0b00000011;
@@ -140,7 +139,7 @@ void p3(void){
         _delay_ms(1000);
         dispensor();
         _delay_ms(1000);
-        for(int i = 0; i<818; i++){
+        for(int i = 0; i<2048/10; i++){
             PORTC = 0b00001001;
             _delay_ms(5);
             PORTC = 0b00001000;
@@ -160,10 +159,9 @@ void p3(void){
     }
     PORTC = 0x09;
     _delay_ms(1000); 
-    return;
 }
 void p4(void){
-        for(int i = 0; i<1227; i++){
+        for(int i = 0; i<1228/4; i++){
             PORTC = 0b00000001;
             _delay_ms(5);
              PORTC = 0b00000011;
@@ -185,7 +183,7 @@ void p4(void){
         _delay_ms(1000);
         dispensor();
         _delay_ms(1000);
-        for(int i = 0; i<1227; i++){
+        for(int i = 0; i<1228/4; i++){
             PORTC = 0b00001001;
             _delay_ms(5);
             PORTC = 0b00001000;
@@ -205,10 +203,9 @@ void p4(void){
     }
     PORTC = 0x09;
     _delay_ms(1000);
-    return;
 }
 void p5(void){
-    for(int i = 0; i<1639; i++){
+    for(int i = 0; i<1640/4; i++){
             PORTC = 0b00000001;
             _delay_ms(5);
              PORTC = 0b00000011;
@@ -230,7 +227,7 @@ void p5(void){
         _delay_ms(1000);
         dispensor();
         _delay_ms(1000);
-        for(int i = 0; i<1639; i++){
+        for(int i = 0; i<1640/4; i++){
             PORTC = 0b00001001;
             _delay_ms(5);
             PORTC = 0b00001000;
@@ -250,7 +247,6 @@ void p5(void){
     }
     PORTC = 0x09;
     _delay_ms(1000);
-    return;
 }
 
 
@@ -259,8 +255,11 @@ void fulldeal(void){
     //to each player that is 2048/20 =~ 102.4
     
     /* loop */
-    for(int i = 0; i>5; i++){
-        for(int i = 0; i<409; i++){
+    _delay_ms(1000);
+    dispensor();
+    _delay_ms(1000);
+    for(int j = 0; j<4; j++){
+        for(int i = 0; i<2048/20; i++){
             PORTC = 0b00000001;
             _delay_ms(5);
              PORTC = 0b00000011;
@@ -278,32 +277,29 @@ void fulldeal(void){
              PORTC = 0b00001001;
             _delay_ms(5);
         }
-        PORTC = 0x09;
         _delay_ms(1000);
         dispensor();
         _delay_ms(1000);
     }
-    for(int i = 0; i<2045; i++){
-            PORTC = 0b00000001;
-            _delay_ms(5);
-             PORTC = 0b00000011;
-            _delay_ms(5);
-            PORTC = 0b00000010;
-            _delay_ms(5);
-             PORTC = 0b000000110;
-            _delay_ms(5);
-            PORTC = 0b00000100;
-            _delay_ms(5);
-             PORTC = 0b00001100;
+    for(int i = 0; i<(2048/4 - 2048/20); i++){
+            PORTC = 0b00001001;
             _delay_ms(5);
             PORTC = 0b00001000;
             _delay_ms(5);
-             PORTC = 0b00001001;
+             PORTC = 0b00001100;
+            _delay_ms(5);
+            PORTC = 0b00000100;
+            _delay_ms(5);
+             PORTC = 0b000000110;
+            _delay_ms(5);
+            PORTC = 0b00000010;
+            _delay_ms(5);
+             PORTC = 0b00000011;
+            _delay_ms(5);
+            PORTC = 0b00000001;
             _delay_ms(5);
         }
         PORTC = 0x09;
-    
-    return;
 }
 
 
