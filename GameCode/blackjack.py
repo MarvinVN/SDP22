@@ -1,25 +1,19 @@
 import RPi.GPIO as GPIO
 from time import sleep
 from gameState import gameState
+import test
 
 buttons = {
     "hit": 19,
     "stand": 26
 }
 
-states = {
-    "idle": [0,0,0],
-    "shuffler": [0,0,1],
-    "motor-init": [0,1,0],
-    "p1": [0,1,1],
-    "p2": [1,0,0],
-    "p3": [1,0,1],
-    "p4": [1,1,0],
-    "p5": [1,1,1]
-}
+pin_list = [16,20,21]
 
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 GPIO.setup(list(buttons.values()), GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(pin_list, GPIO.OUT, initial=GPIO.LOW)
 
 def main():
     gs = gameState(1) #initialize gamestate
@@ -29,7 +23,19 @@ def main():
         gs.resetHands()
         gs.deck.build()
         gs.deck.shuffle()
+
+        print("Shuffling...")
+        test.shuffle()
+
         gs.dealCards(2) #arg = num of cards
+        sleep(2)
+
+        print("Dealing...")
+        test.p1()
+        test.p2()
+
+        test.p1()
+        test.p2()
 
         totals.append(0) #temp dealer score; needs to be calculated after players
         for x in range(1, gs.numPlay): #Player turns
@@ -44,6 +50,7 @@ def main():
         if play_again == "h":
             continue
         elif play_again == "s":
+            GPIO.cleanup()
             quit() #temporary, should go back to menu screen
         else:
             print("\n Invalid answer, quitting.")
@@ -72,6 +79,7 @@ def playerTurn(player, deck):
             move = button_move()
             if move == 'h':
                 player.draw(deck, 1)
+                test.p2()
 
     return total
 
@@ -86,6 +94,8 @@ def dealerTurn(player, deck):
             break
         else:
             player.draw(deck, 1)
+            sleep(3)
+            test.p1()
         sleep(1)
     return total
 
