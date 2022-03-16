@@ -1,15 +1,18 @@
 from game import Card, Deck, Player
 
 class gameState:
+    #initialize gamestate with number of players
     def __init__(self, numPlay):
         self.numPlay = 0
         self.players = []
         self.deck = Deck()
         self.setPlayers(numPlay)
 
+    #set amount of players for current game
     def setPlayers(self, numPlay):
+        #will probably be unneeded; use the 4 buttons to choose 1-4 players
         if numPlay not in [1, 2, 3, 4]:
-            return False #might need to change behavior... probably not; just make it 4 buttons
+            return False 
 
         prevNum = self.numPlay
         self.numPlay = numPlay + 1 #plus 1 needed for dealer
@@ -22,33 +25,40 @@ class gameState:
             for x in range(prevNum-self.numPlay):
                 self.players.pop() 
 
+    #return player's hand
     def getPlayerHand(self, player):
         return self.players[player].hand
 
+    #resets all players' hands
     def resetHands(self):
         for x in self.players:
             x.hand = []
 
+    #prints all players' hands
     def showAllHands(self):
         for x in self.players:
             x.showHand()
 
+    #returns all players' bets
     def getBets(self): 
         bets = [0] #dealer doesn't bet, set at 0
         for x in self.players:
             bets.append(x.getTotalBet)
         return bets
 
+    #resets all players' bets
     def resetBets(self):
         for x in self.players:
             x.resetBet()
     
+    #prints all players' wallets
     def showWallets(self):
         wallets = []
         for x in self.players:
             wallets.append(x.wallet)
         print(wallets)
 
+    #deal cards to all players
     def dealCards(self, num):
         for x in range(self.numPlay):
             self.players[x].draw(self.deck, num)

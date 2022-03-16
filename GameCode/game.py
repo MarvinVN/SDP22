@@ -1,9 +1,9 @@
 import random
 import serial
 import time
-#in full implementation, RFID will be scanned and looked up in dictionary for suit/rank
-#think about ways to do this...
+
 class Card:
+    #initialize card with suit and rank
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
@@ -16,6 +16,7 @@ class Card:
     def __repr__(self):
         return self.show()
 
+    #print card
     def show(self):
         if self.rank == 1:
             rank = "A"
@@ -31,11 +32,13 @@ class Card:
         return "{}{}".format(rank, self.suit)
 
 class Deck:  
+    #initialize deck; used/dealt cards are taken from card to cardsused; for RFID validation and cheat prevention
     def __init__(self):
         self.cards = []
         self.cardsused = []
         self.build()
 
+    #build deck in order
     def build(self):
         self.cards = []
         """
@@ -55,7 +58,7 @@ class Deck:
             for rank in range(1,14):
                 self.cards.append(Card(rank,suit))
 
-    #will talk to shuffler
+    #currently just shuffles digital deck, can think about importing/using dealer.py here
     def shuffle(self):
         """
         print("Shuffling")
@@ -70,7 +73,7 @@ class Deck:
         """
         random.shuffle(self.cards)
 
-    #will talk to dealer
+    #deals digital deck; same as above
     def deal(self):
         """data = self.RFID()
         if data != '':
@@ -81,6 +84,7 @@ class Deck:
         """
         return self.cards.pop()
 
+    #TODO: integrate libnfc with this function or with deal function
     def RFID(self):
         port = '/dev/cu.usbserial-1410'
         baudrate = 115200
@@ -104,25 +108,29 @@ class Deck:
         else:
             print(data)
         return data
-        
+
+    #calls show() on each card to print out current deck
     def show(self):
         for card in self.cards:
             print(card.show())
 
 class Player:
+    #initalize player with position number
+    #TODO: once UI is realized, change wallet for user input
     def __init__(self, pos):
         self.pos = pos
         self.hand = []
-        self.wallet = 1000 #will be user input
+        self.wallet = 1000
         self.totalBet = 0
 
+    #draw from deck using deal()
     def draw(self, deck, num):
         for x in range(num):
             card = deck.deal()
             if card:
                 self.hand.append(card)
             else:
-                return False #unlikely event, but figure out what to do here anyways
+                return False
         return True
 
     #get money from wallet to bet
@@ -133,11 +141,14 @@ class Player:
         else:
             return False #will change
     
+    #resets bet to 0
     def resetBet(self):
         self.totalBet = 0
 
+    #not used, think about removing
     def allIn(self):
         self.addBet(self.wallet)
-
+    
+    #print player's hand
     def showHand(self):
         print("Player {}'s hand: {}".format(self.pos, self.hand))
