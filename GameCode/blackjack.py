@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 from gameState import gameState
-import test
+import dealer
 
 buttons = {
     "hit": 19,
@@ -10,6 +10,7 @@ buttons = {
 
 pin_list = [16,20,21]
 
+# RPi GPIO setup
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(list(buttons.values()), GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -19,23 +20,21 @@ def main():
     gs = gameState(1) #initialize gamestate
     while(1):   #main game loop
         totals = [] #list of hand totals
+
+        #set up gamestate
         gs.setPlayers((int)(input("How many people are playing?\n")))
         gs.resetHands()
         gs.deck.build()
         gs.deck.shuffle()
 
         print("Shuffling...")
-        test.shuffle()
+        dealer.shuffle()
 
         gs.dealCards(2) #arg = num of cards
         sleep(2)
 
         print("Dealing...")
-        test.p1()
-        test.p2()
-
-        test.p1()
-        test.p2()
+        dealer.init_deal() #need to be adjusted for 1-3 players
 
         totals.append(0) #temp dealer score; needs to be calculated after players
         for x in range(1, gs.numPlay): #Player turns
@@ -52,9 +51,19 @@ def main():
         elif play_again == "s":
             GPIO.cleanup()
             quit() #temporary, should go back to menu screen
-        else:
-            print("\n Invalid answer, quitting.")
-            quit() #same as above
+
+#takes in player.pos to deal a card to the appropriate player
+def playerDraw(pos):
+    if pos == 0:
+        dealer.p1()
+    elif pos == 1:
+        dealer.p2()
+    elif pos == 2:
+        dealer.p3()
+    elif pos == 3:
+        dealer.p4()
+    elif pos == 4:
+        dealer.p5()
 
 #takes in the player and deck as args, returns the value of player's hand    
 def playerTurn(player, deck):
@@ -79,7 +88,7 @@ def playerTurn(player, deck):
             move = button_move()
             if move == 'h':
                 player.draw(deck, 1)
-                test.p2()
+                playerDraw(player.pos)
 
     return total
 
@@ -95,7 +104,7 @@ def dealerTurn(player, deck):
         else:
             player.draw(deck, 1)
             sleep(3)
-            test.p1()
+            playerDraw(0)
         sleep(1)
     return total
 
