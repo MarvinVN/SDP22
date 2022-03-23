@@ -3,18 +3,20 @@ from time import sleep
 from gameState import gameState
 import dealer
 
-buttons = {
-    "hit": 19,
-    "stand": 26
+#input pins and their corresponding roles/players
+player_buttons = {
+    1: {"hit": 19, "stand": 26}
 }
 
-pin_list = [16,20,21]
+#categorize pins for setup
+input_pins = [x for pins in player_buttons.values() for x in pins.values()]
+output_pins = [16,20,21]
 
 # RPi GPIO setup
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(list(buttons.values()), GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(pin_list, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(input_pins, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
 
 def main():
     gs = gameState(1) #initialize gamestate
@@ -24,35 +26,40 @@ def main():
         #set up gamestate
         gs.setPlayers((int)(input("How many people are playing?\n")))
         gs.resetHands()
-        gs.deck.build()
-        gs.deck.shuffle()
+        gs.deck.build() #TODO: put outside of gameloop when implementing forced shuffle (no more cards)
 
+        gs.deck.shuffle()
         print("Shuffling...")
         dealer.shuffle()
 
-        gs.dealCards(2) #arg = num of cards
         sleep(2)
 
+        gs.dealCards(2) #arg = num of cards
         print("Dealing...")
         dealer.init_deal() #need to be adjusted for 1-3 players
 
         totals.append(0) #temp dealer score; needs to be calculated after players
-        for x in range(1, gs.numPlay): #Player turns
+
+        #loop through players turns
+        for x in range(1, gs.numPlay):
             totals.append(playerTurn(gs.players[x], gs.deck))
-        totals[0] = dealerTurn(gs.players[0], gs.deck) #dealer turn
+
+        #dealer turn
+        totals[0] = dealerTurn(gs.players[0], gs.deck)
+
         score(gs.players, totals)
 
         gs.showWallets() #debugging purposes
         
         print("Play again? (hit for yes, stand for no)\n")
-        play_again = button_move()
+        play_again = button_move(1) #player 1 decides to continue the game
         if play_again == "h":
             continue
         elif play_again == "s":
             GPIO.cleanup()
-            quit() #temporary, should go back to menu screen
+            quit() #should go to menu screen once GUI implemented
 
-#takes in player.pos to deal a card to the appropriate player
+#takes in player.pos to physically deal a card to the appropriate player
 def playerDraw(pos):
     if pos == 0:
         dealer.p1()
@@ -69,7 +76,7 @@ def playerDraw(pos):
 def playerTurn(player, deck):
     move = ''
     bet = (int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
-    player.addBet(bet) #handle invalid inputs (if bet > wallet, if no number is given <-- this one shouldnt be a problem when GUI is in place)
+    player.addBet(bet) 
     while move != 's':  #player move loop
         total = checkValue(player.hand)
         player.showHand()   #display cards in GUI
@@ -85,7 +92,7 @@ def playerTurn(player, deck):
             break
         else:
             print("Do you want to hit or stand (h/s)?")
-            move = button_move()
+            move = button_move(player.pos)
             if move == 'h':
                 player.draw(deck, 1)
                 playerDraw(player.pos)
@@ -109,21 +116,25 @@ def dealerTurn(player, deck):
     return total
 
 #change for multi-players when buttons are set up
-def button_move():
+def button_move(pos):
     move = ""
-    GPIO.add_event_detect(buttons["hit"], GPIO.FALLING, bouncetime=500)
-    GPIO.add_event_detect(buttons["stand"], GPIO.FALLING, bouncetime=500)
+    hit, stand = player_buttons[pos]["hit"], player_buttons[pos]["stand"]
+    
+    GPIO.add_event_detect(hit, GPIO.FALLING, bouncetime=500)
+    GPIO.add_event_detect(stand, GPIO.FALLING, bouncetime=500)
+
     while True:
         sleep(.01)
-        if GPIO.event_detected(buttons["hit"]):
+        if GPIO.event_detected(hit):
             move =  'h'
             break
-        elif GPIO.event_detected(buttons["stand"]):
+        elif GPIO.event_detected(stand):
             move =  's'
             break
         
-    GPIO.remove_event_detect(buttons["hit"])
-    GPIO.remove_event_detect(buttons["stand"])
+    GPIO.remove_event_detect(hit)
+    GPIO.remove_event_detect(stand)
+
     return move
 
 #takes a player's hand; returns value

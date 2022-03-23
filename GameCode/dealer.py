@@ -47,7 +47,7 @@ def shuffle():
     #GPIO.output(21, GPIO.LOW)
     sleep(1)  """
 
-    signal[states["shuffler"]]  #TODO: test this method with pi
+    signal(states["shuffler"])  #TODO: test this method with pi
 
 def init_deal():
     #GPIO.output(16, GPIO.HIGH)
