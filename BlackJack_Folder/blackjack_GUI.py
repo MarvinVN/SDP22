@@ -790,10 +790,20 @@ class Ui_GameWindow(QtCore.QObject):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
-        hb.timer.start()
-        sb.timer.start()
-        db.timer.start()
-        eb.timer.start()
+        #self.timer = qtc.QTimer(interval=50, timeout=self.check)
+        self.timer = qtc.QTimer(interval=50)
+
+        self.timer.timeout.connect(hb.check)
+        self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(db.check)
+        self.timer.timeout.connect(eb.check)
+
+        # just start one timer??
+        self.timer.start()
+        #hb.timer.start()
+        #sb.timer.start()
+        #db.timer.start()
+        #eb.timer.start()
 
 
         # testing the hw_buttons here
