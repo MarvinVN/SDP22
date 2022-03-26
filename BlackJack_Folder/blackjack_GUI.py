@@ -103,7 +103,7 @@ class Ui_MainWindow(QtCore.QObject):
 
     # SWITCH FROM MAIN WINDOW TO SETTINGS WINDOW
     def mainToSettings(self, current_w):
-        global count
+        global button_counter
         self.timer.stop() # TESTING STOP TIMER
         button_counter += 1 # changing state
         hb.button_press.disconnect() # TESTING DISCONNECTION
