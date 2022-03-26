@@ -1,5 +1,10 @@
 import RPi.GPIO as GPIO
 from time import sleep
+import board
+import busio
+from digitalio import DigitalInOut
+from adafruit_pn532.spi import PN532_SPI
+
 from gameState import gameState
 import dealer
 
@@ -10,13 +15,21 @@ player_buttons = {
 
 #categorize pins for setup
 input_pins = [x for pins in player_buttons.values() for x in pins.values()]
-output_pins = [16,20,21]
+output_pins = [5,16,20,21]
 
 # RPi GPIO setup
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(input_pins, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
+
+
+spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
+cs_pin = DigitalInOut(board.D5)
+pn532 = PN532_SPI(spi, cs_pin, debug=False)
+
+pn532.SAM_configuration()
+
 
 def main():
     gs = gameState(1) #initialize gamestate
@@ -34,10 +47,11 @@ def main():
 
         sleep(2)
 
-        gs.dealCards(2) #arg = num of cards
+        #TODO: sync timing of dealing/RFID loop
         print("Dealing...")
         dealer.init_deal() #need to be adjusted for 1-3 players
-
+        gs.dealCards(2) #arg = num of cards
+        
         totals.append(0) #temp dealer score; needs to be calculated after players
 
         #loop through players turns
