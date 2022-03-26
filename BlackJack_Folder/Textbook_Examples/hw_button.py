@@ -24,7 +24,6 @@ class HWButton(qtc.QObject):
         if pressed != self.pressed:
             if pressed:
                 self.button_press.emit()
-                print("button signal emitted")
             self.pressed = pressed
 
 
@@ -51,6 +50,10 @@ class MainWindow(qtw.QMainWindow):
         """
                         
         self.hwbutton = HWButton(8)
+        self.hwbutton_thread = qtc.QThread()
+        self.hwbutton.moveToThread(self.hwbutton_thread)
+        self.hwbutton_thread.start()
+
         self.hwbutton.button_press.connect(self.testingButton)
 
         # End main UI code
