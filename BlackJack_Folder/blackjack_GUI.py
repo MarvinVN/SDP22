@@ -46,7 +46,7 @@ e1 = 23
 hb = bjb.HWButton(h1)
 sb = bjb.HWButton(s1)
 db = bjb.HWButton(d1)
-eb = HWButton(e1)
+eb = bjb.HWButton(e1)
 
 # INITIAL SETTINGS
 number_of_players = "0"
