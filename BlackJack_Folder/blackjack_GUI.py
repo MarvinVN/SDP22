@@ -14,6 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
 import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
+import blackjack_buttons as bjb
 from RPi import GPIO
 
 # DIMENSIONS OF TOUCH DISPLAY
@@ -85,16 +86,6 @@ def check(self):
         if pressed4:
             eb.button_press.emit()
         eb.pressed = pressed4
-
-class HWButton(QtCore.QObject):
-
-    button_press = QtCore.pyqtSignal()
-
-    def __init__(self, pin):
-        super().__init__()
-        self.pin = pin
-        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        self.pressed = GPIO.input(self.pin) == GPIO.LOW
 
 
 
