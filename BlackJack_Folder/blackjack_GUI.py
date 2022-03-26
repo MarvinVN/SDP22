@@ -187,15 +187,12 @@ class Ui_SettingsWindow(QtCore.QObject):
     def incrementNumPlayer(self):
         index = self.numberOfPlayersComboBox.currentIndex()
         if index < 4:
-            #self.numberOfPlayersComboBox.setCurrentText(str(index+1))
-            self.numberOfPlayersComboBox.SelectedIndex(index)
-
+            self.numberOfPlayersComboBox.setCurrentIndex(index+1)
 
     def decrementNumPlayer(self):
         index = self.numberOfPlayersComboBox.currentIndex()
         if index > 0:
-            #self.numberOfPlayersComboBox.setCurrentIndex(index-1)
-            self.numberOfPlayersComboBox.SelectedIndex(index)
+            self.numberOfPlayersComboBox.setCurrentIndex(index-1)
 
     def continueNumPlayer(self):
         global button_counter
