@@ -483,6 +483,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
+        pass
 
 
     # STYLES/SETUP OF CONFIRM BOX GUI
