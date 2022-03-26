@@ -473,7 +473,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
     
 
     def okButton(self):
-        confirm_connection(self.SettingsWindow)
+        self.confirm_connection(self.SettingsWindow)
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, set_w):
