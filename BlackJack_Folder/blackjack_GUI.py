@@ -177,9 +177,9 @@ class Ui_SettingsWindow(QtCore.QObject):
         self.timer.start()
 
         # testing the hw_buttons here
-        hb.button_press.connect(lambda: self.decrementNumPlayer)
-        sb.button_press.connect(lambda: self.incrementNumPlayer)
-        db.button_press.connect(lambda: self.continueNumPlayer)
+        hb.button_press.connect(self.decrementNumPlayer)
+        sb.button_press.connect(self.incrementNumPlayer)
+        db.button_press.connect(self.continueNumPlayer)
         #eb.button_press.connect(lambda: self.mainToSettings(MainWindow))
 ##########################################
 
