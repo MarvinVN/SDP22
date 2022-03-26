@@ -1,13 +1,16 @@
 from gameState import gameState
+from game import Deck
 import multiprocessing as mp
 import blackjack_globals
+import time
 
 from blackjack_globals import Message
 
-
+t1 = time.time()
+t2 = time.time()
 def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     gameMode = " "
-    userInput = 1000 # need to update this in the start_game
+    userInput = 0 # need to update this in the start_game
     gs = gameState(1, gameMode, userInput)
     #gs.deck.build() #testing, unneeded?
 
@@ -20,9 +23,13 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     num_wins = 0
     game_duration = 0 # keep track of length of game
     start_var = False
+    bust = False
+    bj = False
     round_score = []
     while not done_game:
         totals = []
+        bust = False
+        bj = False
         print("start game loop")
 
         if not start_var:
@@ -31,14 +38,15 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
         if msg.id == "game_start":
             start_var = True
-            rounds = rounds + 1
+            #rounds = rounds + 1
             numPlayers = msg.content[0]
             playerWallets = msg.content[1]
             bet = msg.content[2]
             gameMode = msg.content[3]
             gs.userInput = msg.content[4]
+            print("Game Start User Input:" + str(gs.userInput))
         
-            msg0, msg1 = start_game(gs, numPlayers, playerWallets, bet, gameMode, userInput)
+            msg0, msg1 = start_game(gs, numPlayers, playerWallets, bet, gameMode, gs.userInput)
             gs.deck.build() #testing
             gs.deck.shuffle() #testing
             bj_to_gui_queue.put(msg0)
@@ -82,20 +90,27 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
                 done_round = True
                 rounds = rounds + 1
-                if checkValue(gs.players[1].hand) <= 21:
-                    if checkValue(gs.players[1].hand) > checkValue(gs.players[0].hand):
-                        num_wins = num_wins + 1
-                        print("Num Wins: " + str(num_wins))
-                else:
-                    print("Num Wins did not change.") # not printing
+                t2 = time.time()
+                total_time = (t2 - t1)
+                # check value of gameMode
+                #print("gameMode is: " + str(gs.gameMode))
 
+                if checkValue(gs.players[1].hand) > checkValue(gs.players[0].hand):
+                    num_wins = num_wins + 1
+                    print("Num Wins: " + str(num_wins))
+                elif checkValue(gs.players[0].hand) > 21:
+                    num_wins = num_wins + 1
+                else:
+                    pass                
+
+                #print("gs.players[1].wallet: " + str(gs.players[1].wallet))
+                #print("gs.userInput: " + str(gs.userInput))
                 # game end states (testing); none of these are printing
                 if gs.gameMode == "Winning Amount":
-                    if gs.players[1].wallet == gs.userInput:
+                    if gs.players[1].wallet >= gs.userInput:
                         done_game = True
                         print("Winning Amount Game Over")
                 elif gs.gameMode == "Number of Wins":
-                    print("The game mode is number of wins")
                     if num_wins == gs.userInput:
                         done_game = True
                         print("Number of Wins Game Over")
@@ -103,23 +118,17 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     if rounds == gs.userInput:
                         done_game = True
                         print("Total Games Game Over")
+                elif gs.gameMode == "Duration":
+                    if total_time >= gs.userInput:
+                        done_game = True
+                        print("Duration Game Over")
                 else:
                     print("nothing worked")
-                # after each round is done, want to clear GUI (tell GUI round_ends) and deal out cards for new round
 
-                """
-                # temporary: check player 1's wallet to userInput (winningAmount)
-                if gs.players[1].wallet >= gs.userInput:
-                    done_game = True
-                
-                if rounds == 3:
-                    done_game = True
-                """
-                #count += 1
             elif msg.id == "hit":
                 gs.players[1].draw(gs.deck, 1)
 
-                if checkValue(gs.players[1].hand) >= 21:
+                if checkValue(gs.players[1].hand) > 21:
                     
                     totals.append(0)
                     totals.append(playerTurn(gs.players[1], gs.deck))
@@ -131,20 +140,17 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     
                     done_round = True
                     rounds = rounds + 1
-
-                    if checkValue(gs.players[1].hand) <= 21:
-                        if checkValue(gs.players[1].hand) > checkValue(gs.players[0].hand):
-                            num_wins = num_wins + 1
-                            print("Num Wins: " + str(num_wins))
-                    else:
-                        print("Num Wins did not change.") # not printing
+                    t2 = time.time()
+                    total_time = (t2 - t1)
+                    # check value of gameMode
+                    print("gameMode is: " + str(gs.gameMode))
 
                     # game end states (testing); none of these are printing
                     if gs.gameMode == "Winning Amount":
-                        if gs.players[1].wallet == gs.userInput:
+                        if gs.players[1].wallet >= gs.userInput:
                             done_game = True
                             print("Winning Amount Game Over")
-                    elif str(gs.gameMode) == "Number of Wins":
+                    elif gs.gameMode == "Number of Wins":
                         print("entered num wins statement")
                         if num_wins == gs.userInput:
                             done_game = True
@@ -153,17 +159,13 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                         if rounds == gs.userInput:
                             done_game = True
                             print("Total Games Game Over")
+                    elif gs.gameMode == "Duration":
+                        if total_time >= gs.userInput:
+                            done_game = True
+                            print("Duration Game Over")
                     else:
                         print("nothing worked")        
 
-                    """
-                    # temporary: check player 1's wallet to userInput (winningAmount)
-                    if gs.players[1].wallet >= gs.userInput:
-                        done_game = True
-                    
-                    if rounds == 3:
-                        done_game = True
-                    """
                 else:
                     msg1 = Message("player_cards", gs.players[1].hand)
                     bj_to_gui_queue.put(msg1)
@@ -195,11 +197,19 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
                 done_round = True
                 rounds = rounds + 1
+                t2 = time.time()
+                total_time = (t2 - t1)
+                # check value of gameMode
+                print("gameMode is: " + str(gs.gameMode))
 
                 if checkValue(gs.players[1].hand) <= 21:
                     if checkValue(gs.players[1].hand) > checkValue(gs.players[0].hand):
                         num_wins = num_wins + 1
-                        print("Num Wins: " + str(num_wins))
+                        #print("Num Wins: " + str(num_wins))
+                    elif checkValue(gs.players[0].hand) > 21:
+                        num_wins = num_wins + 1
+                    else:
+                        pass
                 else:
                     print("Num Wins did not change.") # not printing
 
@@ -216,41 +226,47 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     if rounds == gs.userInput:
                         done_game = True
                         print("Total Games Game Over")
+                elif gs.gameMode == "Duration":
+                    if total_time >= gs.userInput:
+                        done_game = True
+                        print("Duration Game Over")
                 else:
                     print("nothing worked")    
-
-                """
-                # temporary: check player 1's wallet to userInput (winningAmount)
-                if gs.players[1].wallet >= gs.userInput:
-                    done_game = True
-                
-                if rounds == 3: # FIX THIS
-                    done_game = True
-                """
-            # here, want to set round to be done and deal out new cards(?)
-            elif msg.id == "round_ends":
-                pass
             else:
                 pass
 
         print("move done") #debug
+        print("Number of Rounds:" + str(rounds))
+        print("Number of Wins:" + str(num_wins))
+        print("Duration of Time (sec):" + str(total_time))
+        print("User Input:" + str(gs.userInput))
 
         # reset hand, deal 2 cards per player, tell GUI round ended
         if start_var and done_round:
             #done_round = False
             print("done_round now false") #debug
-
-            #gs.resetHands()
-            #gs.dealCards(2)
-
-            #msg0 = Message("done_round", gs.players[1].wallet)
-            #msg0 = Message("done_round", None)
-            msg0 = Message("done_round", [gs.players[0].hand,gs.players[1].hand, round_score, gs.getWallets()])
+            
+            if checkValue(gs.players[1].hand) > 21:
+                bust = True
+            
+            if checkValue(gs.players[1].hand) == 21:
+                bj = True
+            msg0 = Message("done_round", [gs.players[0].hand,gs.players[1].hand, round_score, gs.getWallets(), bust, bj])
             bj_to_gui_queue.put(msg0)
 
             if done_game:
-                msg0 = Message("GAME OVER!", None)
+                # change True to (True/False) depending on which player wins
+                msg0 = Message("GAME OVER!", [num_wins, True])
                 bj_to_gui_queue.put(msg0)
+            # check if the deck is empty
+            elif not gs.deck.cards:
+                print("New set of Deck!")
+                gs.deck = Deck()
+            elif len(gs.deck.cards) <= 10:
+                print("Shuffling deck with 10 cards left!")
+                gs.deck = Deck()
+            else:
+                pass
 
             gs.resetHands()#test
             gs.dealCards(2)
@@ -271,23 +287,6 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     print("game loop end") #debug
     #msg0 = Message("GAME OVER!", None)
     #bj_to_gui_queue.put(msg0)
-    
-
-# check game mode; ex. if game mode = # games, keep playing until number of games met
-
-    """
-    # play_again = input("Play again (y/n)?\n").lower()
-    play_again = blackjack_globals.readBjQueue
-    if play_again == "y":
-        playerWallets = gs.getWallets()
-        #GUI input for numPlayers, bet
-        start_game(numPlayers, playerWallets, bet)
-    elif play_again == "n":
-        quit() #temporary, should go back to menu
-    else:
-        print("\n Invalid answer, quitting.")
-        quit() #same as above
-    """
 
 # initializing the start of a game
 def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
@@ -304,6 +303,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
     # temporary for one player; need to change for multiple players
     gs.players[1].addBet(bet)
     gs.userInput = userInput
+    gs.gameMode = gameMode
 
     msg0 = Message("dealer_cards", gs.players[0].hand)
     msg1 = Message("player_cards", gs.players[1].hand)
