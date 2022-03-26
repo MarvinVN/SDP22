@@ -14,13 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
 import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
-import blackjack_buttons as bjb
+from RPi import GPIO
 
 
-hit_button = bjb.HWButton(17)
-stand_button = bjb.HWButton(27)
-double_button = bjb.HWButton(22)
-exit_button = bjb.HWButton(23)
+GPIO.setmode(GPIO.BCM)
+hit_button = HWButton(17)
+stand_button = HWButton(27)
+double_button = HWButton(22)
+exit_button = HWButton(23)
 
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480
@@ -54,6 +55,27 @@ bj_to_gui_queue = mp.Queue()    # blackjack write, gui read
 
 # GAME PROCESS IS CREATED, CHILD PROCESS TO BLACKJACK ALGORITHM IS FORKED
 game_process = mp.Process(target=blackjack.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
+
+
+class HWButton(QtCore.QObject):
+
+    button_press = QtCore.pyqtSignal()
+
+    def __init__(self, pin):
+        super().__init__()
+        self.pin = pin
+        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        self.pressed = GPIO.input(self.pin) == GPIO.LOW
+
+        self.timer = QtCore.QTimer(interval=50, timeout=self.check)
+        self.timer.start()
+
+    def check(self):
+        pressed = GPIO.input(self.pin) == GPIO.LOW
+        if pressed != self.pressed:
+            if pressed:
+                self.button_press.emit()
+            self.pressed = pressed
 
 
 ###################################################################
