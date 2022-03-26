@@ -1149,7 +1149,7 @@ class Ui_GameWindow(QtCore.QObject):
 if __name__ == "__main__":
     import sys
     #initGPIO()
-    GPIO.setmode(GPIO.BCM)
+    #GPIO.setmode(GPIO.BCM)
 
 
     timer = QtCore.QTimer(interval=50, timeout=self.check())
