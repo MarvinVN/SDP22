@@ -790,17 +790,13 @@ class Ui_GameWindow(QtCore.QObject):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
-        #timer = QtCore.QTimer(self)
-        #timer.timeout.connect(check())
-        #imer = QtCore.QTimer(interval=50, timeout=check())
-        #timer.start(50)
 
 
         # testing the hw_buttons here
         hb.button_press.connect(self.hit_it)
-        sb.button.button_press.connect(self.stand_it)
-        db.button.button_press.connect(self.double_it)
-        eb.button.button_press.connect(self.exit_it)        
+        sb.button_press.connect(self.stand_it)
+        db.button_press.connect(self.double_it)
+        eb.button_press.connect(self.exit_it)        
 
     
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
