@@ -56,6 +56,7 @@ number_of_players = "0"
 initial_amount = 0
 game_mode = ""
 user_input = ""
+increment_value = 100
 
 # GLOBAL QUEUES USED FOR MULTIPROCESSING INTERACTION
 gui_to_bj_queue = mp.Queue()    # gui write, blackjack read
@@ -205,8 +206,29 @@ class Ui_SettingsWindow(QtCore.QObject):
 
 
     # adding functions to buttons for initial amount
+    def initialAmountSetting(self):
+        # testing the hw_buttons here
+        hb.button_press.connect(self.decrementAmount)
+        sb.button_press.connect(self.continueAmount)
+        db.button_press.connect(self.incrementAmount) 
 
+    def incrementAmount(self):
+        amount = self.startingAmountSpinBox.value()
+        #amount = amount + initial_amount
+        self.startingAmountSpinBox.setValue(amount+initial_amount)
 
+    def decrementAmount(self):
+        amount = self.startingAmountSpinBox.value()
+        self.startingAmountSpinBox.setValue(amount-initial_amount)
+
+    def continueAmount(self):
+        global button_counter
+        #self.timer.stop() # TESTING STOP TIMER
+        button_counter += 1 # changing state
+        hb.button_press.disconnect() # TESTING DISCONNECTION
+        sb.button_press.disconnect()
+        db.button_press.disconnect()
+        gameModeSetting()        
 
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
