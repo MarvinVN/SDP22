@@ -43,7 +43,7 @@ class MainWindow(qtw.QMainWindow):
         p.setColor(qtg.QPalette.ButtonText, qtg.QColor('cyan'))
         self.setPalette(p)
 
-        butts = qtw.QMessageBox.setText("Random Display for Buttons!")
+        butts = qtw.QMessageBox.about(self, "Testing", "Random Display for Buttons!")
         widget.layout().addRow('butts', butts)
                         
         self.hwbutton = HWButton(8)
