@@ -1152,7 +1152,7 @@ if __name__ == "__main__":
     #GPIO.setmode(GPIO.BCM)
 
 
-    timer = QtCore.QTimer(interval=50, timeout=self.check())
+    timer = QtCore.QTimer(interval=50, timeout=check())
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
