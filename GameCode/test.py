@@ -71,7 +71,6 @@ def RFID():
     print("Waiting for card...")
     while True:
         uid = pn532.read_passive_target(timeout=0.5)
-        print(",", end="")
         if uid is None:
             continue
         card = [hex(i) for i in uid]

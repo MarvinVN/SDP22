@@ -15,9 +15,11 @@ player_buttons = {
 
 #categorize pins for setup
 input_pins = [x for pins in player_buttons.values() for x in pins.values()]
-output_pins = [5,16,20,21]
+output_pins = [5,13,16,20,21]
+#5 for RFID, 13 for confirm, [16,20,21] for ATmega comm.
 
 # RPi GPIO setup
+GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(input_pins, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -37,7 +39,8 @@ def main():
         totals = [] #list of hand totals
 
         #set up gamestate
-        gs.setPlayers((int)(input("How many people are playing?\n")))
+        players = (int)(input("How many people are playing?\n"))
+        gs.setPlayers(players)
         gs.resetHands()
         gs.deck.build() #TODO: put outside of gameloop when implementing forced shuffle (no more cards)
 
@@ -49,8 +52,18 @@ def main():
 
         #TODO: sync timing of dealing/RFID loop
         print("Dealing...")
-        dealer.init_deal() #need to be adjusted for 1-3 players
-        gs.dealCards(2) #arg = num of cards
+        if players == 4:
+            dealer.init_deal() #need to be adjusted for 1-3 players
+            gs.dealCards(2) #arg = num of cards
+        if players == 1:
+            dealer.p1()
+            gs.players[0].draw(gs.deck, 1)
+            dealer.p2()
+            gs.players[1].draw(gs.deck, 1)
+            dealer.p1()
+            gs.players[0].draw(gs.deck, 1)
+            dealer.p2()
+            gs.players[1].draw(gs.deck, 1)
         
         totals.append(0) #temp dealer score; needs to be calculated after players
 
@@ -108,8 +121,8 @@ def playerTurn(player, deck):
             print("Do you want to hit or stand (h/s)?")
             move = button_move(player.pos)
             if move == 'h':
-                player.draw(deck, 1)
                 playerDraw(player.pos)
+                player.draw(deck, 1)
 
     return total
 
@@ -123,9 +136,8 @@ def dealerTurn(player, deck):
         if total >= 17:
             break
         else:
-            player.draw(deck, 1)
-            sleep(3)
             playerDraw(0)
+            player.draw(deck, 1)
         sleep(1)
     return total
 
@@ -154,10 +166,11 @@ def button_move(pos):
 #takes a player's hand; returns value
 def checkValue(hand):
     val = 0
+    hand.sort(key=lambda x: x.rank, reverse=True)
     for x in hand:
         if x.rank in [13, 12, 11]: #K, Q, J
             val += 10
-        elif x == 1: #Ace
+        elif x.rank == 1: #Ace
             if val >= 11:
                 val += 1
             else:

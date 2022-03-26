@@ -6,9 +6,10 @@ import dealer
 
 class Card:
     #initialize card with suit and rank
-    def __init__(self, rank, suit):
+    def __init__(self, rank, suit, Str):
         self.rank = rank
         self.suit = suit
+        self.Str = Str
 
     #functions to help print out card
     def __unicode__(self):
@@ -43,22 +44,18 @@ class Deck:
     #build deck in order
     def build(self):
         self.cards = []
-        """
+        switch = {
+            1: 'A',
+            11: 'J',
+            12: 'Q',
+            13: 'K'
+        }
+
         for suit in ['S', 'H', 'D', 'C']:
             for rank in range(1,14):
-                if rank == 1:
-                    rank = "A"
-                elif rank == 11:
-                    rank = "J"
-                elif rank == 12:
-                    rank = "Q"
-                elif rank == 13:
-                    rank = "K"
-                self.cards.append("{}{}".format(rank,suit))
-        """
-        for suit in ['S', 'H', 'D', 'C']:
-            for rank in range(1,14):
-                self.cards.append(Card(rank,suit))
+                if rank in switch.keys():
+                    rank = switch[rank]
+                self.cards.append(Card(rank,suit, str(rank)+suit))
 
     #currently just shuffles digital deck, can think about importing/using dealer.py here
     def shuffle(self):
@@ -75,6 +72,17 @@ class Deck:
         """
         random.shuffle(self.cards)
 
+    def removeCard(self, card):
+        if any(x.Str == card.Str for x in self.cardsused):
+            print("CHEATING DETECTED, CARD ALREADY USED")
+            while True:
+                time.sleep(1)
+        elif any(x.Str == card.Str for x in self.cards):
+            print("worked")
+            self.cardsused.append(card)
+        else:
+            print("BAD READ")
+
     #deals digital deck; same as above
     def deal(self):
         #make global
@@ -87,12 +95,15 @@ class Deck:
 
         card = test.RFID()
         print(card)
-        rank, suit = card[0], card[1]
+        rank, suit = card[:-1], card[-1]
         if rank in switch.keys():
             rank = switch[rank]
-        res = Card(int(rank), suit)
+        res = Card(int(rank), suit, card)
+
+        self.removeCard(res)
+
         res.show()
-        dealer.p2() #signal that card has been scanned
+        dealer.scanConfirm() #signal that card has been scanned
         #return self.cards.pop()
         return res
 
