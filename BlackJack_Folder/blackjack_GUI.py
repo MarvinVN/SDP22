@@ -759,6 +759,8 @@ class Ui_GameWindow(object):
 
     # INITIALIZING GAME SETTINGS FROM PRIOR WINDOW
     def __init__(self, numPlayers, startingAmount, gameMode, userInput, bet, playerCards):
+        super().__init__()
+        
         self.numPlayers = numPlayers
         self.currentAmount = startingAmount
         self.gameMode = gameMode
@@ -1095,7 +1097,6 @@ class Ui_GameWindow(object):
 
 
 if __name__ == "__main__":
-    import sys
     #initGPIO()
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
