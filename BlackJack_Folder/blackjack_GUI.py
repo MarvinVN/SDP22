@@ -164,6 +164,49 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
+#########################################
+        # testing button functionality for multiple function calls
+        self.timer = QtCore.QTimer(interval=50)
+
+        self.timer.timeout.connect(hb.check)
+        self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(db.check)
+        #self.timer.timeout.connect(eb.check)
+
+        # just start one timer??
+        self.timer.start()
+
+        # testing the hw_buttons here
+        hb.button_press.connect(lambda: self.decrementNumPlayer)
+        sb.button_press.connect(lambda: self.incrementNumPlayer)
+        db.button_press.connect(lambda: self.continueNumPlayer)
+        #eb.button_press.connect(lambda: self.mainToSettings(MainWindow))
+##########################################
+
+    # adding increment, decrement, continue NumPlayer functions
+    def incrementNumPlayer(self):
+        index = self.numberOfPlayersComboBox.currentIndex()
+        if index < 3:
+            self.numberOfPlayersComboBox.setCurrentIndex(index+1)
+
+    def decrementNumPlayer(self):
+        index = self.numberOfPlayersComboBox.currentIndex()
+        if index > 0:
+            self.numberOfPlayersComboBox.setCurrentIndex(index-1)
+
+    def continueNumPlayer(self):
+        global button_counter
+        #self.timer.stop() # TESTING STOP TIMER
+        button_counter += 1 # changing state
+        hb.button_press.disconnect() # TESTING DISCONNECTION
+        sb.button_press.disconnect()
+        db.button_press.disconnect()
+        initialAmountSetting()
+
+
+    # adding functions to buttons for initial amount
+
+
 
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
