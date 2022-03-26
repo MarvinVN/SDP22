@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
 import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
-import blackjack_buttons
+import blackjack_buttons as bjb
 
 
-hit_button = HWButton(17)
-stand_button = HWButton(27)
-double_button = HWButton(22)
-exit_button = HWButton(23)
+hit_button = bjb.HWButton(17)
+stand_button = bjb.HWButton(27)
+double_button = bjb.HWButton(22)
+exit_button = bjb.HWButton(23)
 
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480
