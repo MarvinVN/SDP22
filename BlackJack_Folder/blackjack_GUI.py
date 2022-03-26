@@ -16,7 +16,7 @@ from blackjack_globals import Message
 import multiprocessing as mp
 import blackjack_buttons
 
-GPIO.setmode(GPIO.BCM)
+blackjack_buttons.GPIO.setmode(GPIO.BCM)
 
 hit_button = HWButton(17)
 stand_button = HWButton(27)

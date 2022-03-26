@@ -26,7 +26,7 @@ class HWButton(qtc.QObject):
                 self.button_press.emit()
             self.pressed = pressed
 
-
+"""
 # this main window class can be removed for final
 # just need this for testing purposes right now
 # move button calls into gui file
@@ -73,3 +73,4 @@ if __name__ == '__main__':
     app = qtw.QApplication(sys.argv)
     mw = MainWindow()
     sys.exit(app.exec())
+"""
