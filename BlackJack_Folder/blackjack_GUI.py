@@ -791,7 +791,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.player_cards = playerCards
         self.double_button_clicked = False
         #self.timer = qtc.QTimer(interval=50, timeout=self.check)
-        self.timer = qtc.QTimer(interval=50)
+        self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
         self.timer.timeout.connect(sb.check)
