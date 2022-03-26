@@ -489,8 +489,8 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         confirm_dialogbox.setObjectName("confirm_dialogbox")
         confirm_dialogbox.resize(WIDTH, HEIGHT)
 
-        hb.button_press.connect(self.confirm_connection(SettingsWindow))
-        sb.button_press.connect(self.reject_connection)
+        #hb.button_press.connect(self.confirm_connection(SettingsWindow))
+        #sb.button_press.connect(self.reject_connection)
 
         # button styles/configurations
         self.buttonBox = QtWidgets.QDialogButtonBox(confirm_dialogbox)
