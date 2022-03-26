@@ -4,6 +4,8 @@ from PyQt5 import QtGui as qtg
 from PyQt5 import QtCore as qtc
 from RPi import GPIO
 
+GPIO.setmode(GPIO.BCM)
+
 class HWButton(qtc.QObject):
 
     button_press = qtc.pyqtSignal()
