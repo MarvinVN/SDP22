@@ -284,11 +284,13 @@ class Ui_SettingsWindow(QtCore.QObject):
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
         db.button_press.disconnect()
-        self.openWindow(SettingsWindow)                  
+        #self.openWindow(SettingsWindow)  
+        self.pushButton.setEnabled(True) # turning push button on               
 
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
         # storing input values for the settings
+        self.pushButton.setEnabled(False)
         number_of_players = self.numberOfPlayersComboBox.currentText()
         initial_amount = self.startingAmountSpinBox.value()
         game_mode = self.gameModeSelect1ComboBox.currentText()
