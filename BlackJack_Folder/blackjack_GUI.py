@@ -213,15 +213,15 @@ class Ui_SettingsWindow(QtCore.QObject):
         db.button_press.connect(self.incrementAmount) 
 
     def incrementAmount(self):
-        global initial_amount
+        global increment_value
         amount = self.startingAmountSpinBox.value()
         #amount = amount + initial_amount
-        self.startingAmountSpinBox.setValue(amount+initial_amount)
+        self.startingAmountSpinBox.setValue(amount+increment_value)
 
     def decrementAmount(self):
-        global initial_amount
+        global increment_value
         amount = self.startingAmountSpinBox.value()
-        self.startingAmountSpinBox.setValue(amount-initial_amount)
+        self.startingAmountSpinBox.setValue(amount-increment_value)
 
     def continueAmount(self):
         global button_counter
