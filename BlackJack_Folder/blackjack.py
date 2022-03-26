@@ -282,8 +282,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             bj_to_gui_queue.put(msg2)
 
         print("----------------------------------------------------") #debug
-        print(f"done_round:{done_round} start_var:{start_var} done_game:{done_game}")
-    
+        #print(f"done_round:{done_round} start_var:{start_var} done_game:{done_game}")
+
     print("game loop end") #debug
     #msg0 = Message("GAME OVER!", None)
     #bj_to_gui_queue.put(msg0)
