@@ -47,7 +47,7 @@ class MainWindow(qtw.QMainWindow):
 
     def testingButton(self):
         readbutton = qtw.QPushButton('Read Now')
-        widget.layout().addRow(readbutton)
+        self.widget.layout().addRow(readbutton)
 
 
 if __name__ == '__main__':
