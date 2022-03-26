@@ -37,7 +37,11 @@ void main(void) {
     DDRC = 0xFF; // makes port C output
     
     PORTB = 0b00000000;
-
+    
+    while(1){
+        p2();
+    }
+    
     while(1){
         if(!(PIND&(1<<2)) && (!(PIND&(1<<1))) && (PIND&(1<<0))){
             shuffler();
