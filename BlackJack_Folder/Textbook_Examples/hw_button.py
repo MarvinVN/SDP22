@@ -36,25 +36,10 @@ class MainWindow(qtw.QMainWindow):
         widget = qtw.QWidget()
         widget.setLayout(qtw.QFormLayout())
         self.setCentralWidget(widget)
-
-        p = widget.palette()
-        p.setColor(qtg.QPalette.WindowText, qtg.QColor('cyan'))
-        p.setColor(qtg.QPalette.Window, qtg.QColor('navy'))
-        p.setColor(qtg.QPalette.Button, qtg.QColor('#335'))
-        p.setColor(qtg.QPalette.ButtonText, qtg.QColor('cyan'))
-        self.setPalette(p)
-
-        """
-        butts = qtw.QMessageBox.about(self, "Testing", "Random Display for Buttons!")
-        widget.layout().addRow('butts', butts)
-        """
                         
         self.hwbutton = HWButton(8)
-        self.hwbutton_thread = qtc.QThread()
-        self.hwbutton.moveToThread(self.hwbutton_thread)
-        self.hwbutton_thread.start()
-
         self.hwbutton.button_press.connect(self.testingButton)
+        self.hwbutton.pressed.connect(self.testingButton)
 
         # End main UI code
         self.show()
