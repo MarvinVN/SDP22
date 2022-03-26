@@ -468,7 +468,8 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.initial_amount = initial_amount
         self.game_mode = game_mode
         self.user_input = user_input
-        hb.button_press.connect(self.confirm_connection(set_w))
+        self.set_w = set_w
+        hb.button_press.connect(self.confirm_connection(self.set_w))
         sb.button_press.connect(self.reject_connection)
     
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
