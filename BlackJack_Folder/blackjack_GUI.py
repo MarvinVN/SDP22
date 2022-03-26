@@ -16,13 +16,6 @@ from blackjack_globals import Message
 import multiprocessing as mp
 from RPi import GPIO
 
-
-GPIO.setmode(GPIO.BCM)
-hit_button = HWButton(17)
-stand_button = HWButton(27)
-double_button = HWButton(22)
-exit_button = HWButton(23)
-
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480
 WIDTH = 800
@@ -1121,6 +1114,11 @@ class Ui_GameWindow(object):
 if __name__ == "__main__":
     import sys
     #initGPIO()
+    GPIO.setmode(GPIO.BCM)
+    hit_button = HWButton(17)
+    stand_button = HWButton(27)
+    double_button = HWButton(22)
+    exit_button = HWButton(23)
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
