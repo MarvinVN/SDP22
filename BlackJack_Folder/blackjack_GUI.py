@@ -48,6 +48,9 @@ sb = bjb.HWButton(s1)
 db = bjb.HWButton(d1)
 eb = bjb.HWButton(e1)
 
+# BUTTON COUNTER TO KEEP TRACK OF STATE MACHINE
+button_counter = 0
+
 # INITIAL SETTINGS
 number_of_players = "0"
 initial_amount = 0
@@ -84,23 +87,26 @@ class Ui_MainWindow(QtCore.QObject):
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
-        self.timer.timeout.connect(sb.check)
-        self.timer.timeout.connect(db.check)
-        self.timer.timeout.connect(eb.check)
+        #self.timer.timeout.connect(sb.check)
+        #self.timer.timeout.connect(db.check)
+        #self.timer.timeout.connect(eb.check)
 
         # just start one timer??
         self.timer.start()
 
         # testing the hw_buttons here
         hb.button_press.connect(lambda: self.mainToSettings(MainWindow))
-        sb.button_press.connect(lambda: self.mainToSettings(MainWindow))
-        db.button_press.connect(lambda: self.mainToSettings(MainWindow))
-        eb.button_press.connect(lambda: self.mainToSettings(MainWindow))
+        #sb.button_press.connect(lambda: self.mainToSettings(MainWindow))
+        #db.button_press.connect(lambda: self.mainToSettings(MainWindow))
+        #eb.button_press.connect(lambda: self.mainToSettings(MainWindow))
 ##########################################
 
     # SWITCH FROM MAIN WINDOW TO SETTINGS WINDOW
     def mainToSettings(self, current_w):
         self.timer.stop() # TESTING STOP TIMER
+        button_counter += 1 # changing state
+        hb.button_press.disconnect() # TESTING DISCONNECTION
+        
         temp_w = current_w
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SettingsWindow()
