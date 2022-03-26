@@ -33,8 +33,8 @@ class MainWindow(qtw.QMainWindow):
         """MainWindow constructor"""
         super().__init__()
         # Main UI code goes here
-        widget = qtw.QWidget()
-        widget.setLayout(qtw.QFormLayout())
+        self.widget = qtw.QWidget()
+        self.widget.setLayout(qtw.QFormLayout())
         self.setCentralWidget(widget)
                         
         self.hwbutton = HWButton(14)
