@@ -92,10 +92,10 @@ class Ui_MainWindow(QtCore.QObject):
         self.timer.start()
 
         # testing the hw_buttons here
-        hb.button_press.connect(self.mainToSettings(MainWindow))
-        sb.button_press.connect(self.mainToSettings(MainWindow))
-        db.button_press.connect(self.mainToSettings(MainWindow))
-        eb.button_press.connect(self.mainToSettings(MainWindow))
+        hb.button_press.connect(lambda: self.mainToSettings(MainWindow))
+        sb.button_press.connect(lambda: self.mainToSettings(MainWindow))
+        db.button_press.connect(lambda: self.mainToSettings(MainWindow))
+        eb.button_press.connect(lambda: self.mainToSettings(MainWindow))
 ##########################################
 
     # SWITCH FROM MAIN WINDOW TO SETTINGS WINDOW
