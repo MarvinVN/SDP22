@@ -2,7 +2,7 @@ import sys
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtGui as qtg
 from PyQt5 import QtCore as qtc
-from Rpi import GPIO
+from RPi import GPIO
 
 class HWButton(qtc.QObject):
 
@@ -13,7 +13,7 @@ class HWButton(qtc.QObject):
         self.pin = pin
         GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         self.pressed = GPIO.input(self.pin) == GPIO.LOW
-        
+
         self.timer = qtc.QTimer(interval=50, timeout=self.check)
         self.timer.start()
 
