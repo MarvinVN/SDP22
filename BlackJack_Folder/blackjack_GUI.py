@@ -301,8 +301,8 @@ class Ui_SettingsWindow(QtCore.QObject):
 
         # opening up the confirmation box with user-selected settings
         self.window = QtWidgets.QDialog()
-        self.ui = Ui_confirm_dialogbox(number_of_players, initial_amount, game_mode, user_input, settings_w)
-        self.ui.setupUi(self.window)
+        self.ui = Ui_confirm_dialogbox(number_of_players, initial_amount, game_mode, user_input)
+        self.ui.setupUi(self.window, settings_w)
 
         # displaying the values onto confirmation box
         self.ui.confirm_list_widget.addItems(["Number of Players: " + number_of_players,
@@ -461,21 +461,20 @@ class Ui_SettingsWindow(QtCore.QObject):
 class Ui_confirm_dialogbox(QtCore.QObject):
 
     # INITIALIZING THE GAME SETTINGS FROM PREVIOUS GUI
-    def __init__(self, number_of_players, initial_amount, game_mode, user_input, set_w):
+    def __init__(self, number_of_players, initial_amount, game_mode, user_input):
         super().__init__()
 
         self.number_of_players = number_of_players
         self.initial_amount = initial_amount
         self.game_mode = game_mode
         self.user_input = user_input
-        self.set_w = set_w
-        hb.button_press.connect(self.confirm_connection)
-        db.button_press.connect(self.reject_connection)
+        hb.button_press.connect(self.confirm_connection(self.SettingsWindow))
+        sb.button_press.connect(self.reject_connection)
     
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
-    def confirm_connection(self):
+    def confirm_connection(self, set_w):
         # need to open new window and hide settings window
-        self.set_w.hide()
+        set_w.hide()
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input)
         self.ui.setupUi(self.window)
@@ -483,11 +482,11 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
-        pass
+        self.buttonBox.rejected.setEnabled(True)
 
 
     # STYLES/SETUP OF CONFIRM BOX GUI
-    def setupUi(self, confirm_dialogbox):
+    def setupUi(self, confirm_dialogbox, SettingsWindow):
         confirm_dialogbox.setObjectName("confirm_dialogbox")
         confirm_dialogbox.resize(WIDTH, HEIGHT)
 
@@ -497,7 +496,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.buttonBox.accepted.connect(lambda: self.confirm_connection())
+        self.buttonBox.accepted.connect(lambda: self.confirm_connection(SettingsWindow))
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
 
         # confirm box geometry/layout
