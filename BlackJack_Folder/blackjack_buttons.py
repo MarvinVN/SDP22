@@ -17,7 +17,6 @@ class HWButton(qtc.QObject):
         self.pressed = GPIO.input(self.pin) == GPIO.LOW
 
         self.timer = qtc.QTimer(interval=50, timeout=self.check)
-        self.timer.start()
 
     def check(self):
         pressed = GPIO.input(self.pin) == GPIO.LOW

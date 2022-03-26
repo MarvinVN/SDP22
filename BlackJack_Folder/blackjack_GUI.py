@@ -790,6 +790,10 @@ class Ui_GameWindow(QtCore.QObject):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
+        hb.timer.start()
+        sb.timer.start()
+        db.timer.start()
+        eb.timer.start()
 
 
         # testing the hw_buttons here
@@ -1122,7 +1126,7 @@ if __name__ == "__main__":
     import sys
     #initGPIO()
     #GPIO.setmode(GPIO.BCM)
-
+    #timer.start()
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
