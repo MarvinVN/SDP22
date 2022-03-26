@@ -1,6 +1,6 @@
 from gpiozero import Button
 import time
-button = Button(8,None,True)
+button = Button(2)
 while True:
     if button.is_pressed:
         print("Button is pressed")
