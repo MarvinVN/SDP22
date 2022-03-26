@@ -26,7 +26,7 @@ class WinForm(QWidget):
         layout.addWidget(self.endBtn,1,1)
 
         # testing gpio
-        self.gpioTest()
+        #self.gpioTest()
         # if the .connect does not work, put this into the timer function to manually check if statement every 10 ms
         self.p1_hit_button.is_pressed.connect(self.eventDetected)
 
