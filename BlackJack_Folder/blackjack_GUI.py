@@ -463,8 +463,8 @@ class Ui_confirm_dialogbox(QtCore.QObject):
     # INITIALIZING THE GAME SETTINGS FROM PREVIOUS GUI
     def __init__(self, number_of_players, initial_amount, game_mode, user_input):
         super().__init__()
-        hb.button_press.connect(self.okButton)
-        sb.button_press.connect(self.cancelButton)
+        hb.button_press.connect(self.confirm_connection(self.SettingsWindow))
+        sb.button_press.connect(self.reject_connection)
 
         self.number_of_players = number_of_players
         self.initial_amount = initial_amount
@@ -484,17 +484,10 @@ class Ui_confirm_dialogbox(QtCore.QObject):
     def reject_connection(self):
         pass
 
-    def okButton(self):
-        #self.buttonBox.clicked(self.buttonBox.accepted)
-        self.buttonBox.accepted.setEnabled(True)
-
-    def cancelButton(self):
-        #self.buttonBox.clicked(self.buttonBox.rejected)
-        self.buttonBox.rejected.setEnabled(True)
-
 
     # STYLES/SETUP OF CONFIRM BOX GUI
     def setupUi(self, confirm_dialogbox, SettingsWindow):
+        self.SettingsWindow = SettingsWindow
         confirm_dialogbox.setObjectName("confirm_dialogbox")
         confirm_dialogbox.resize(WIDTH, HEIGHT)
 
@@ -504,7 +497,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.buttonBox.accepted.connect(lambda: self.confirm_connection(SettingsWindow))
+        self.buttonBox.accepted.connect(lambda: self.confirm_connection(self.SettingsWindow))
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
 
         # confirm box geometry/layout
