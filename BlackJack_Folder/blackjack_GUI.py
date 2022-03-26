@@ -243,12 +243,12 @@ class Ui_SettingsWindow(QtCore.QObject):
     def incrementGameMode(self):
         index = self.gameModeSelect1ComboBox.currentIndex()
         if index < 4:
-            self.numberOfPlayersComboBox.setCurrentIndex(index+1)        
+            self.gameModeSelect1ComboBox.setCurrentIndex(index+1)        
 
     def decrementGameMode(self):
         index = self.gameModeSelect1ComboBox.currentIndex()
         if index > 0:
-            self.numberOfPlayersComboBox.setCurrentIndex(index-1)
+            self.gameModeSelect1ComboBox.setCurrentIndex(index-1)
 
     def continueGameMode(self):
         global button_counter
