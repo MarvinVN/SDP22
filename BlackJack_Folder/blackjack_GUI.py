@@ -468,9 +468,13 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.initial_amount = initial_amount
         self.game_mode = game_mode
         self.user_input = user_input
-        hb.button_press.connect(self.confirm_connection(self.SettingsWindow))
+        hb.button_press.connect(self.okButton)
         sb.button_press.connect(self.reject_connection)
     
+
+    def okButton(self):
+        confirm_connection(self.SettingsWindow)
+
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, set_w):
         # need to open new window and hide settings window
