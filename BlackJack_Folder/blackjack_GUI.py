@@ -817,6 +817,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
+        timer = QtCore.QTimer(interval=50, timeout=check())
         timer.start()
 
 
@@ -1151,8 +1152,6 @@ if __name__ == "__main__":
     #initGPIO()
     #GPIO.setmode(GPIO.BCM)
 
-
-    timer = QtCore.QTimer(interval=50, timeout=check())
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
