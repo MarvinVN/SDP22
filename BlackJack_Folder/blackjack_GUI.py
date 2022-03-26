@@ -470,7 +470,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.user_input = user_input
         self.set_w = set_w
         hb.button_press.connect(self.confirm_connection)
-        sb.button_press.connect(self.reject_connection)
+        db.button_press.connect(self.reject_connection)
     
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self):
@@ -483,7 +483,6 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
-        self.buttonBox.rejected.setEnabled()
 
 
     # STYLES/SETUP OF CONFIRM BOX GUI
