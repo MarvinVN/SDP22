@@ -16,3 +16,12 @@ class HWButton(qtc.QObject):
         GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         self.pressed = GPIO.input(self.pin) == GPIO.LOW
 
+        self.timer = qtc.QTimer(interval=50, timeout=self.check)
+        self.timer.start()
+
+    def check(self):
+        pressed = GPIO.input(self.pin) == GPIO.LOW
+        if pressed != self.pressed:
+            if pressed:
+                self.button_press.emit()
+            self.pressed = pressed

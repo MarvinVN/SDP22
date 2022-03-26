@@ -62,33 +62,6 @@ bj_to_gui_queue = mp.Queue()    # blackjack write, gui read
 game_process = mp.Process(target=blackjack.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
 
 
-def check():
-    # checking P1 buttons
-    pressed1 = GPIO.input(h1) == GPIO.LOW
-    pressed2 = GPIO.input(s1) == GPIO.LOW
-    pressed3 = GPIO.input(d1) == GPIO.LOW
-    pressed4 = GPIO.input(e1) == GPIO.LOW
-
-    if pressed1 != hb.pressed:
-        if pressed1:
-            hb.button_press.emit()
-        hb.pressed = pressed1
-
-    elif pressed2 != sb.pressed:
-        if pressed2:
-            sb.button_press.emit()
-        sb.pressed = pressed2
-    if pressed3 != db.pressed:
-        if pressed3:
-            db.button_press.emit()
-        db.pressed = pressed3
-    if pressed4 != eb.pressed:
-        if pressed4:
-            eb.button_press.emit()
-        eb.pressed = pressed4
-
-
-
 ###################################################################
 ###################################################################
 ########                                                 ##########
@@ -817,17 +790,17 @@ class Ui_GameWindow(QtCore.QObject):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
-        timer = QtCore.QTimer(self)
-        timer.timeout.connect(check())
+        #timer = QtCore.QTimer(self)
+        #timer.timeout.connect(check())
         #imer = QtCore.QTimer(interval=50, timeout=check())
-        timer.start(50)
+        #timer.start(50)
 
 
         # testing the hw_buttons here
-        hit_button.button_press.connect(self.hit_it)
-        stand_button.button_press.connect(self.stand_it)
-        double_button.button_press.connect(self.double_it)
-        exit_button.button_press.connect(self.exit_it)        
+        hb.button_press.connect(self.hit_it)
+        sb.button.button_press.connect(self.stand_it)
+        db.button.button_press.connect(self.double_it)
+        eb.button.button_press.connect(self.exit_it)        
 
     
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
@@ -1153,7 +1126,6 @@ if __name__ == "__main__":
     import sys
     #initGPIO()
     #GPIO.setmode(GPIO.BCM)
-
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
