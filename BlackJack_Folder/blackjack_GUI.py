@@ -469,13 +469,13 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.game_mode = game_mode
         self.user_input = user_input
         self.set_w = set_w
-        hb.button_press.connect(self.confirm_connection(self.set_w))
+        hb.button_press.connect(self.confirm_connection)
         sb.button_press.connect(self.reject_connection)
     
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
-    def confirm_connection(self, set_w):
+    def confirm_connection(self):
         # need to open new window and hide settings window
-        set_w.hide()
+        self.set_w.hide()
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input)
         self.ui.setupUi(self.window)
