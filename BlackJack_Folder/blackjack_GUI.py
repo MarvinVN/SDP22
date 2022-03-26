@@ -232,6 +232,33 @@ class Ui_SettingsWindow(QtCore.QObject):
         db.button_press.disconnect()
         self.gameModeSetting()        
 
+
+    def gameModeSetting(self):
+        # testing the hw_buttons here
+        hb.button_press.connect(self.decrementGameMode)
+        sb.button_press.connect(self.continueGameMode)
+        db.button_press.connect(self.incrementGameMode)    
+
+    # adding functions to buttons for Game Mode
+    def incrementGameMode(self):
+        index = self.gameModeSelect1ComboBox.currentIndex()
+        if index < 4:
+            self.numberOfPlayersComboBox.setCurrentIndex(index+1)        
+
+    def decrementGameMode(self):
+        index = self.gameModeSelect1ComboBox.currentIndex()
+        if index > 0:
+            self.numberOfPlayersComboBox.setCurrentIndex(index-1)
+
+    def continueGameMode(self):
+        global button_counter
+        #self.timer.stop() # TESTING STOP TIMER
+        button_counter += 1 # changing state
+        hb.button_press.disconnect() # TESTING DISCONNECTION
+        sb.button_press.disconnect()
+        db.button_press.disconnect()
+        self.UserInputSetting()         
+
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
         # storing input values for the settings
