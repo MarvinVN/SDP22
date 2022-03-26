@@ -290,7 +290,8 @@ class Ui_SettingsWindow(QtCore.QObject):
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
         # storing input values for the settings
-        #self.pushButton.setEnabled(False)
+        # testing the hw_buttons here
+
         number_of_players = self.numberOfPlayersComboBox.currentText()
         initial_amount = self.startingAmountSpinBox.value()
         game_mode = self.gameModeSelect1ComboBox.currentText()
@@ -462,6 +463,8 @@ class Ui_confirm_dialogbox(QtCore.QObject):
     # INITIALIZING THE GAME SETTINGS FROM PREVIOUS GUI
     def __init__(self, number_of_players, initial_amount, game_mode, user_input):
         super().__init__()
+        hb.button_press.connect(self.okButton)
+        sb.button_press.connect(self.cancelButton)
 
         self.number_of_players = number_of_players
         self.initial_amount = initial_amount
@@ -480,6 +483,13 @@ class Ui_confirm_dialogbox(QtCore.QObject):
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
         pass
+
+    def okButton(self):
+        self.buttonBox.clicked(self.buttonBox.accepted)
+
+    def cancelButton(self):
+        self.buttonBox.clicked(self.buttonBox.rejected)
+
 
     # STYLES/SETUP OF CONFIRM BOX GUI
     def setupUi(self, confirm_dialogbox, SettingsWindow):
