@@ -26,7 +26,7 @@ class HWButton(qtc.QObject):
             self.pressed = pressed
 
 
-class MainWindow(qtw.QWidget):
+class MainWindow(qtw.QMainWindow):
 
     def __init__(self):
         """MainWindow constructor"""
