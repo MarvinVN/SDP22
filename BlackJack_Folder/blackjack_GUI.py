@@ -178,8 +178,8 @@ class Ui_SettingsWindow(QtCore.QObject):
 
         # testing the hw_buttons here
         hb.button_press.connect(self.decrementNumPlayer)
-        sb.button_press.connect(self.incrementNumPlayer)
-        db.button_press.connect(self.continueNumPlayer)
+        sb.button_press.connect(self.continueNumPlayer)
+        db.button_press.connect(self.incrementNumPlayer)
         #eb.button_press.connect(lambda: self.mainToSettings(MainWindow))
 ##########################################
 
