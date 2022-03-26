@@ -14,7 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
 import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
-#import blackjack_GPIO as GPIO
+import blackjack_buttons
+
+GPIO.setmode(GPIO.BCM)
+
+hit_button = HWButton(17)
+stand_button = HWButton(27)
+double_button = HWButton(22)
+exit_button = HWButton(23)
 
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480
@@ -760,6 +767,14 @@ class Ui_GameWindow(object):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
+
+
+        # testing the hw_buttons here
+        hit_button.button_press.connect(self.hit_it)
+        stand_button.button_press.connect(self.stand_it)
+        double_button.button_press.connect(self.double_it)
+        exit_button.button_press.connect(self.exit_it)        
+
     
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
         # opening up the next round screen
