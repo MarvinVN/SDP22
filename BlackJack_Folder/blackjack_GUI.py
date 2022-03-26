@@ -341,6 +341,7 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     # STYLES/SETUP OF SETTINGS GUI
     def setupUi(self, SettingsWindow):
+        self.SettingsWindow = SettingsWindow
         self.SettingsWindow.setObjectName("SettingsWindow")
         self.SettingsWindow.resize(WIDTH, HEIGHT)
         self.SettingsWindow.setFont(font12)
