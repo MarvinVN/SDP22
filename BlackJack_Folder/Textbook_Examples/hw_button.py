@@ -35,7 +35,7 @@ class MainWindow(qtw.QMainWindow):
         # Main UI code goes here
         self.widget = qtw.QWidget()
         self.widget.setLayout(qtw.QFormLayout())
-        self.setCentralWidget(widget)
+        self.setCentralWidget(self.widget)
                         
         self.hwbutton = HWButton(14)
         self.hwbutton.button_press.connect(self.testingButton)
