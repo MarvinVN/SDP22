@@ -39,8 +39,8 @@ font48 = QtGui.QFont('Helvetica',48)
 
 # BUTTONS
 h1 = 17
-s1 = 27
-d1 = 22
+d1 = 27
+s1 = 22
 e1 = 23
 
 hb = bjb.HWButton(h1)
