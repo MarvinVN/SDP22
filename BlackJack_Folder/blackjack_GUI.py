@@ -79,8 +79,28 @@ class Ui_MainWindow(QtCore.QObject):
     def __init__(self):
         super().__init__()
 
+#########################################
+        # testing button functionality for multiple function calls
+        self.timer = QtCore.QTimer(interval=50)
+
+        self.timer.timeout.connect(hb.check)
+        self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(db.check)
+        self.timer.timeout.connect(eb.check)
+
+        # just start one timer??
+        self.timer.start()
+
+        # testing the hw_buttons here
+        hb.button_press.connect(self.mainToSettings(MainWindow))
+        sb.button_press.connect(self.mainToSettings(MainWindow))
+        db.button_press.connect(self.mainToSettings(MainWindow))
+        eb.button_press.connect(self.mainToSettings(MainWindow))
+##########################################
+
     # SWITCH FROM MAIN WINDOW TO SETTINGS WINDOW
     def mainToSettings(self, current_w):
+        self.timer.stop() # TESTING STOP TIMER
         temp_w = current_w
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SettingsWindow()
@@ -800,10 +820,6 @@ class Ui_GameWindow(QtCore.QObject):
 
         # just start one timer??
         self.timer.start()
-        #hb.timer.start()
-        #sb.timer.start()
-        #db.timer.start()
-        #eb.timer.start()
 
 
         # testing the hw_buttons here
