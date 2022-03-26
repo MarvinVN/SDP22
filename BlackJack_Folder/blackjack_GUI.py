@@ -62,7 +62,7 @@ bj_to_gui_queue = mp.Queue()    # blackjack write, gui read
 game_process = mp.Process(target=blackjack.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
 
 
-def check(self):
+def check():
     # checking P1 buttons
     pressed1 = GPIO.input(h1) == GPIO.LOW
     pressed2 = GPIO.input(s1) == GPIO.LOW
@@ -1152,7 +1152,7 @@ if __name__ == "__main__":
     #GPIO.setmode(GPIO.BCM)
 
 
-    timer = QtCore.QTimer(interval=50, timeout=check(self))
+    timer = QtCore.QTimer(interval=50, timeout=check())
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
