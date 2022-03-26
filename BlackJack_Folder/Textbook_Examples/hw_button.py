@@ -39,7 +39,6 @@ class MainWindow(qtw.QMainWindow):
                         
         self.hwbutton = HWButton(8)
         self.hwbutton.button_press.connect(self.testingButton)
-        self.hwbutton.pressed.connect(self.testingButton)
 
         # End main UI code
         self.show()
