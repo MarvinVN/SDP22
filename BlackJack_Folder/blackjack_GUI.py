@@ -185,17 +185,17 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     # adding increment, decrement, continue NumPlayer functions
     def incrementNumPlayer(self):
-        index = int(self.numberOfPlayersComboBox.currentText())
-        if index < 3:
-            self.numberOfPlayersComboBox.setCurrentText(str(index+1))
-            #self.numberOfPlayersComboBox.SelectedIndex(index)
+        index = self.numberOfPlayersComboBox.currentIndex()
+        if index < 4:
+            #self.numberOfPlayersComboBox.setCurrentText(str(index+1))
+            self.numberOfPlayersComboBox.SelectedIndex(index)
 
 
     def decrementNumPlayer(self):
         index = self.numberOfPlayersComboBox.currentIndex()
         if index > 0:
-            self.numberOfPlayersComboBox.setCurrentIndex(index-1)
-            #self.numberOfPlayersComboBox.SelectedIndex(index)
+            #self.numberOfPlayersComboBox.setCurrentIndex(index-1)
+            self.numberOfPlayersComboBox.SelectedIndex(index)
 
     def continueNumPlayer(self):
         global button_counter
