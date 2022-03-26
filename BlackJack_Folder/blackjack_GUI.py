@@ -36,6 +36,17 @@ font20 = QtGui.QFont('Helvetica',20)
 font30 = QtGui.QFont('Helvetica',30, QtGui.QFont.Bold)
 font48 = QtGui.QFont('Helvetica',48)
 
+# BUTTONS
+h1 = 17
+s1 = 27
+d1 = 22
+e1 = 23
+
+hb = HWButton(h1)
+sb = HWButton(s1)
+db = HWButton(d1)
+eb = HWButton(e1)
+
 # INITIAL SETTINGS
 number_of_players = "0"
 initial_amount = 0
@@ -50,6 +61,31 @@ bj_to_gui_queue = mp.Queue()    # blackjack write, gui read
 game_process = mp.Process(target=blackjack.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
 
 
+def check(self):
+    # checking P1 buttons
+    pressed1 = GPIO.input(h1) == GPIO.LOW
+    pressed2 = GPIO.input(s1) == GPIO.LOW
+    pressed3 = GPIO.input(d1) == GPIO.LOW
+    pressed4 = GPIO.input(e1) == GPIO.LOW
+
+    if pressed1 != hb.pressed:
+        if pressed1:
+            hb.button_press.emit()
+        hb.pressed = pressed1
+
+    elif pressed2 != sb.pressed:
+        if pressed2:
+            sb.button_press.emit()
+        sb.pressed = pressed2
+    if pressed3 != db.pressed:
+        if pressed3:
+            db.button_press.emit()
+        db.pressed = pressed3
+    if pressed4 != eb.pressed:
+        if pressed4:
+            eb.button_press.emit()
+        eb.pressed = pressed4
+
 class HWButton(QtCore.QObject):
 
     button_press = QtCore.pyqtSignal()
@@ -60,15 +96,6 @@ class HWButton(QtCore.QObject):
         GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         self.pressed = GPIO.input(self.pin) == GPIO.LOW
 
-        self.timer = QtCore.QTimer(interval=50, timeout=self.check)
-        self.timer.start()
-
-    def check(self):
-        pressed = GPIO.input(self.pin) == GPIO.LOW
-        if pressed != self.pressed:
-            if pressed:
-                self.button_press.emit()
-            self.pressed = pressed
 
 
 ###################################################################
@@ -799,6 +826,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
+        timer.start()
 
 
         # testing the hw_buttons here
@@ -1131,10 +1159,10 @@ if __name__ == "__main__":
     import sys
     #initGPIO()
     GPIO.setmode(GPIO.BCM)
-    hit_button = HWButton(17)
-    stand_button = HWButton(27)
-    double_button = HWButton(22)
-    exit_button = HWButton(23)
+
+
+    timer = QtCore.QTimer(interval=50, timeout=self.check())
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
