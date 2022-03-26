@@ -486,11 +486,11 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
     def okButton(self):
         #self.buttonBox.clicked(self.buttonBox.accepted)
-        self.buttonBox.accepted.clicked()
+        self.buttonBox.accepted.setEnabled(True)
 
     def cancelButton(self):
         #self.buttonBox.clicked(self.buttonBox.rejected)
-        self.buttonBox.rejected.clicked()
+        self.buttonBox.rejected.setEnabled(True)
 
 
     # STYLES/SETUP OF CONFIRM BOX GUI
