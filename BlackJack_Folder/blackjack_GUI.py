@@ -485,11 +485,11 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
     # STYLES/SETUP OF CONFIRM BOX GUI
     def setupUi(self, confirm_dialogbox, SettingsWindow):
-        self.SettingsWindow = SettingsWindow
+        #self.SettingsWindow = SettingsWindow
         confirm_dialogbox.setObjectName("confirm_dialogbox")
         confirm_dialogbox.resize(WIDTH, HEIGHT)
-        
-        hb.button_press.connect(self.confirm_connection(self.SettingsWindow))
+
+        hb.button_press.connect(self.confirm_connection(SettingsWindow))
         sb.button_press.connect(self.reject_connection)
 
         # button styles/configurations
@@ -498,7 +498,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.buttonBox.accepted.connect(lambda: self.confirm_connection(self.SettingsWindow))
+        self.buttonBox.accepted.connect(lambda: self.confirm_connection(SettingsWindow))
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
 
         # confirm box geometry/layout
