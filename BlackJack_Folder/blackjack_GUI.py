@@ -83,7 +83,7 @@ class HWButton(QtCore.QObject):
 ###################################################################
 ###################################################################
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QtCore.QObject):
 
     # SWITCH FROM MAIN WINDOW TO SETTINGS WINDOW
     def mainToSettings(self, current_w):
@@ -139,7 +139,7 @@ class Ui_MainWindow(object):
 ###################################################################
 ###################################################################
 
-class Ui_SettingsWindow(object):
+class Ui_SettingsWindow(QtCore.QObject):
 
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
@@ -309,7 +309,7 @@ class Ui_SettingsWindow(object):
 ###################################################################
 ###################################################################
 
-class Ui_confirm_dialogbox(object):
+class Ui_confirm_dialogbox(QtCore.QObject):
 
     # INITIALIZING THE GAME SETTINGS FROM PREVIOUS GUI
     def __init__(self, number_of_players, initial_amount, game_mode, user_input):
@@ -391,7 +391,7 @@ class Ui_confirm_dialogbox(object):
 ###################################################################
 ###################################################################
 
-class Ui_Player_ReadyWindow(object):
+class Ui_Player_ReadyWindow(QtCore.QObject):
 
     # INITIALIZES GAMEPLAY SETTINGS FROM PRIOR GUI
     def __init__(self, numPlayers, startingAmount, gameMode, userInput):
@@ -613,7 +613,7 @@ class Ui_Player_ReadyWindow(object):
 ###################################################################
 
 
-class Ui_confirm_round(object):
+class Ui_confirm_round(QtCore.QObject):
     
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self):
@@ -681,7 +681,7 @@ class Ui_confirm_round(object):
 ###################################################################
 
 
-class Ui_end_game(object):
+class Ui_end_game(QtCore.QObject):
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def play_again_connection(self, game_w):
         game_w.hide()
@@ -770,7 +770,7 @@ class Ui_end_game(object):
 ###################################################################
 ###################################################################
 
-class Ui_GameWindow(object):
+class Ui_GameWindow(QtCore.QObject):
 
     # INITIALIZING GAME SETTINGS FROM PRIOR WINDOW
     def __init__(self, numPlayers, startingAmount, gameMode, userInput, bet, playerCards):
