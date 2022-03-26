@@ -202,7 +202,7 @@ class Ui_SettingsWindow(QtCore.QObject):
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
         db.button_press.disconnect()
-        initialAmountSetting()
+        self.initialAmountSetting()
 
 
     # adding functions to buttons for initial amount
@@ -228,7 +228,7 @@ class Ui_SettingsWindow(QtCore.QObject):
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
         db.button_press.disconnect()
-        gameModeSetting()        
+        self.gameModeSetting()        
 
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
