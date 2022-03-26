@@ -257,7 +257,34 @@ class Ui_SettingsWindow(QtCore.QObject):
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
         db.button_press.disconnect()
-        self.UserInputSetting()         
+        self.userInputSetting()
+
+    def userInputSetting(self):
+        # testing the hw_buttons here
+        hb.button_press.connect(self.decrementUI)
+        sb.button_press.connect(self.continueUI)
+        db.button_press.connect(self.incrementUI)    
+
+    def incrementUI(self):
+        global increment_value
+        amount = self.insert.value()
+        #amount = amount + initial_amount
+        self.insert.setValue(amount+increment_value)
+
+    def decrementUI(self):
+        global increment_value
+        amount = self.insert.value()
+        #amount = amount + initial_amount
+        self.insert.setValue(amount-increment_value)
+
+    def continueUI(self):
+        global button_counter
+        #self.timer.stop() # TESTING STOP TIMER
+        button_counter += 1 # changing state
+        hb.button_press.disconnect() # TESTING DISCONNECTION
+        sb.button_press.disconnect()
+        db.button_press.disconnect()
+        self.openWindow(SettingsWindow)                  
 
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
