@@ -302,7 +302,7 @@ class Ui_SettingsWindow(QtCore.QObject):
         # opening up the confirmation box with user-selected settings
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_dialogbox(number_of_players, initial_amount, game_mode, user_input, settings_w)
-        self.ui.setupUi(self.window, settings_w)
+        self.ui.setupUi(self.window)
 
         # displaying the values onto confirmation box
         self.ui.confirm_list_widget.addItems(["Number of Players: " + number_of_players,
@@ -487,7 +487,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
 
     # STYLES/SETUP OF CONFIRM BOX GUI
-    def setupUi(self, confirm_dialogbox, SettingsWindow):
+    def setupUi(self, confirm_dialogbox):
         confirm_dialogbox.setObjectName("confirm_dialogbox")
         confirm_dialogbox.resize(WIDTH, HEIGHT)
 
@@ -497,7 +497,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.buttonBox.accepted.connect(lambda: self.confirm_connection(SettingsWindow))
+        self.buttonBox.accepted.connect(lambda: self.confirm_connection())
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
 
         # confirm box geometry/layout
