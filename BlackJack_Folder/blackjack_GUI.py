@@ -903,10 +903,10 @@ class Ui_GameWindow(QtCore.QObject):
 
                     # self.bet = bet (reset?)
                     # adding time delay before going to next screen
-                    QtTest.QTest.qWait(DELAYED)
+                    #QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
                     self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
-                    QtTest.QTest.qWait(DELAYED)
+                    #QtTest.QTest.qWait(DELAYED)
                     self.done_round()
                     break
                 else:
@@ -944,10 +944,10 @@ class Ui_GameWindow(QtCore.QObject):
 
                 # self.bet = bet (reset?)
                 # adding time delay before going to next screen?
-                QtTest.QTest.qWait(DELAYED)
+                #QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
-                QtTest.QTest.qWait(DELAYED)
+                #QtTest.QTest.qWait(DELAYED)
                 self.done_round()
                 break
             else:
@@ -980,16 +980,16 @@ class Ui_GameWindow(QtCore.QObject):
                 bj = msg.content[5]
 
                 if bust:
-                    QtTest.QTest.qWait(DELAYED)
+                    #QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
                     self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
-                    QtTest.QTest.qWait(DELAYED)
+                    #QtTest.QTest.qWait(DELAYED)
                     self.done_round()
                 elif bj:
-                    QtTest.QTest.qWait(DELAYED)
+                    #QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
                     self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
-                    QtTest.QTest.qWait(DELAYED)
+                    #QtTest.QTest.qWait(DELAYED)
                     self.done_round()
                 else:
                     self.done_round()
