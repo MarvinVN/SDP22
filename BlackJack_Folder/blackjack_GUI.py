@@ -463,8 +463,6 @@ class Ui_confirm_dialogbox(QtCore.QObject):
     # INITIALIZING THE GAME SETTINGS FROM PREVIOUS GUI
     def __init__(self, number_of_players, initial_amount, game_mode, user_input):
         super().__init__()
-        hb.button_press.connect(self.confirm_connection(self.SettingsWindow))
-        sb.button_press.connect(self.reject_connection)
 
         self.number_of_players = number_of_players
         self.initial_amount = initial_amount
@@ -490,6 +488,9 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.SettingsWindow = SettingsWindow
         confirm_dialogbox.setObjectName("confirm_dialogbox")
         confirm_dialogbox.resize(WIDTH, HEIGHT)
+        
+        hb.button_press.connect(self.confirm_connection(self.SettingsWindow))
+        sb.button_press.connect(self.reject_connection)
 
         # button styles/configurations
         self.buttonBox = QtWidgets.QDialogButtonBox(confirm_dialogbox)
