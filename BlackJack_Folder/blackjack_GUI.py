@@ -817,8 +817,10 @@ class Ui_GameWindow(QtCore.QObject):
         self.bet = bet
         self.player_cards = playerCards
         self.double_button_clicked = False
-        timer = QtCore.QTimer(interval=50, timeout=check())
-        timer.start()
+        timer = QtCore.QTimer(self)
+        timer.timeout.connect(check())
+        #imer = QtCore.QTimer(interval=50, timeout=check())
+        timer.start(50)
 
 
         # testing the hw_buttons here
