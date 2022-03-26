@@ -43,9 +43,9 @@ s1 = 27
 d1 = 22
 e1 = 23
 
-hb = HWButton(h1)
-sb = HWButton(s1)
-db = HWButton(d1)
+hb = bjb.HWButton(h1)
+sb = bjb.HWButton(s1)
+db = bjb.HWButton(d1)
 eb = HWButton(e1)
 
 # INITIAL SETTINGS
