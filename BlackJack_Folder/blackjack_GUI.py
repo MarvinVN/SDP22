@@ -85,6 +85,9 @@ class HWButton(QtCore.QObject):
 
 class Ui_MainWindow(QtCore.QObject):
 
+    def __init__(self):
+        super().__init__()
+
     # SWITCH FROM MAIN WINDOW TO SETTINGS WINDOW
     def mainToSettings(self, current_w):
         temp_w = current_w
@@ -140,6 +143,9 @@ class Ui_MainWindow(QtCore.QObject):
 ###################################################################
 
 class Ui_SettingsWindow(QtCore.QObject):
+
+    def __init__(self):
+        super().__init__()
 
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
@@ -313,6 +319,8 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
     # INITIALIZING THE GAME SETTINGS FROM PREVIOUS GUI
     def __init__(self, number_of_players, initial_amount, game_mode, user_input):
+        super().__init__()
+
         self.number_of_players = number_of_players
         self.initial_amount = initial_amount
         self.game_mode = game_mode
@@ -395,6 +403,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
     # INITIALIZES GAMEPLAY SETTINGS FROM PRIOR GUI
     def __init__(self, numPlayers, startingAmount, gameMode, userInput):
+        super().__init__()
+
         self.numPlayers = numPlayers
         self.startingAmount = startingAmount
         self.gameMode = gameMode
@@ -614,6 +624,9 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
 
 class Ui_confirm_round(QtCore.QObject):
+
+    def __init__(self):
+        super().__init__()
     
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self):
@@ -682,6 +695,9 @@ class Ui_confirm_round(QtCore.QObject):
 
 
 class Ui_end_game(QtCore.QObject):
+    def __init__(self):
+        super().__init__()
+
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def play_again_connection(self, game_w):
         game_w.hide()
