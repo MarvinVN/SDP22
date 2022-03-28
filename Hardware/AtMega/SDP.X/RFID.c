@@ -38,9 +38,7 @@ void main(void) {
     
     PORTB = 0b00000000;
     
-    while(1){
-        p2();
-    }
+
     
     while(1){
         if(!(PIND&(1<<2)) && (!(PIND&(1<<1))) && (PIND&(1<<0))){
@@ -293,6 +291,9 @@ void fulldeal(void){
         _delay_ms(1000);
         dispensor();
         _delay_ms(1000);
+        while(!(PIND&(1<<2))){
+            _delay_ms(1);
+        }
     }
     for(int i = 0; i<(2048/4 - 2048/20); i++){
             PORTC = 0b00001001;
