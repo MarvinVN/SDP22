@@ -490,7 +490,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
     # UPON CANCEL BUTTON PRESS: RESET BUTTON CONNECTIONS
     def reject_connection(self, prev_w):
         hb.button_press.disconnect() # TESTING DISCONNECTION
-        sb.button_press.disconnect()
+        db.button_press.disconnect()
 
         # testing the hw_buttons here
         hb.button_press.connect(prev_w.decrementNumPlayer)
