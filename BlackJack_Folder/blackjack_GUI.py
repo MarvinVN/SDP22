@@ -481,7 +481,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         # need to open new window and hide settings window
         set_w.hide()
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input, set_w)
+        self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input, self.window)
         self.ui.setupUi(self.window)
         self.window.show()
 
