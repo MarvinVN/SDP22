@@ -633,8 +633,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         sb.button_press.connect(lambda: self.openWindow(self.p1_mw))
 
-        self.ready_pushButton.setFont(font16)
-        self.ready_pushButton.setObjectName("ok_pushButton")
+        #self.ready_pushButton.setFont(font16)
+        #self.ready_pushButton.setObjectName("ok_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
 
     def bettingButtons(self):
