@@ -984,11 +984,6 @@ class Ui_GameWindow(QtCore.QObject):
 
     
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
-        hb.button_press.disconnect()
-        sb.button_press.disconnect()
-        db.button_press.disconnect()
-        eb.button_press.disconnect()
-
         # opening up the next round screen
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
