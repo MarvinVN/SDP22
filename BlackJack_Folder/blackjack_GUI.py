@@ -588,6 +588,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
     def bet_it(self, p1_mw):
+        # TESTING THIS CODE
+        self.p1_mw = p1_mw
         global button_counter
         button_counter += 1 # changing state
         #hb.button_press.disconnect()
@@ -625,12 +627,12 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.scroll_bet)
              
         # ok button styles/layout
-        self.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow(p1_mw))
+        self.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow(self.p1_mw))
         self.ok_pushButton.setText("OK")
         self.ok_pushButton.setGeometry(180, 170, 500, 200)
 
         # TESTING THIS ERROR
-        #sb.button_press.connect(self.openWindow(p1_mw))
+        sb.button_press.connect(self.openWindow(self.p1_mw))
 
         self.ready_pushButton.setFont(font16)
         self.ready_pushButton.setObjectName("ok_pushButton")
