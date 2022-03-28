@@ -584,6 +584,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.userInput = userInput
         self.player_cards = []
         self.bet = 0
+        self.Player_ReadyWindow = Player_ReadyWindow
         hb.button_press.connect(self.bet_it(self.Player_ReadyWindow))
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
