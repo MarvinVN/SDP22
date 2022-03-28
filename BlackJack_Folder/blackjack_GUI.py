@@ -498,7 +498,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.buttonBox.accepted.connect(lambda: self.confirm_connection(SettingsWindow))
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
         hb.button_press.connect(self.buttonBox.accepted)
-        sb.button_press.connect(self.buttonBox.rejected)
+        db.button_press.connect(self.buttonBox.rejected)
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(confirm_dialogbox)
