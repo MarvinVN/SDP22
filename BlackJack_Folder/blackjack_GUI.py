@@ -632,7 +632,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.ok_pushButton.setGeometry(180, 170, 500, 200)
 
         # TESTING THIS ERROR
-        sb.button_press.connect(self.openWindow(self.p1_mw))
+        sb.button_press.connect(lambda: self.openWindow(self.p1_mw))
 
         self.ready_pushButton.setFont(font16)
         self.ready_pushButton.setObjectName("ok_pushButton")
