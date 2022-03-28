@@ -80,3 +80,14 @@
         #self.ready_pushButton.hb_signal.connect(lambda: self.bet_it(Player_ReadyWindow))
 
 """
+
+
+        # ready_push button styling/layout
+        self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it(Player_ReadyWindow))
+        self.ready_pushButton.setGeometry(100, 160, 250, 61)
+        self.ready_pushButton.setFont(font12)
+        self.ready_pushButton.setObjectName("ready_pushButton")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ready_pushButton)        
+        #hb.button_press.connect(lambda: self.bet_it(Player_ReadyWindow))
+        #hb_signal = hb.button_press
+        #self.ready_pushButton.hb_signal.connect(lambda: self.bet_it(Player_ReadyWindow))

@@ -581,8 +581,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.userInput = userInput
         self.player_cards = []
         self.bet = 0
-        self.Player_ReadyWindow = Player_ReadyWindow
-        hb.button_press.connect(self.bet_it(self.Player_ReadyWindow))
+        #hb.button_press.connect(self.bet_it(Player_ReadyWindow))
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
     def bet_it(self, p1_mw):
@@ -595,7 +594,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         # clearing all widgets (necessary to avoid errors)
         for i in reversed(range(self.formLayout.count())): 
-            self.p1_mw.formLayout.itemAt(i).widget().setParent(None)
+            self.formLayout.itemAt(i).widget().setParent(None)
 
         # TODO: need to change this to be similar to below formatting (get rid of centralwidget, need formLayout)
         # set vertical box layout
@@ -603,37 +602,37 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         #self.betting_label = QtWidgets.QLabel("Betting for this round?")
 
         # bet label styles/layout
-        self.p1_mw.betting_label = QtWidgets.QLabel(self.centralwidget)
-        self.p1_mw.betting_label.setText("Betting for this round?")
-        self.p1_mw.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.betting_label)
-        self.p1_mw.betting_label.setGeometry(180, 100, 500, 200)
-        self.p1_mw.betting_label.setFont(font16)
-        self.p1_mw.betting_label.setAcceptDrops(False)
-        self.p1_mw.betting_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.p1_mw.betting_label.setObjectName("betting_label")
+        self.betting_label = QtWidgets.QLabel(self.centralwidget)
+        self.betting_label.setText("Betting for this round?")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.betting_label)
+        self.betting_label.setGeometry(180, 100, 500, 200)
+        self.betting_label.setFont(font16)
+        self.betting_label.setAcceptDrops(False)
+        self.betting_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.betting_label.setObjectName("betting_label")
 
         
         # betting amount scroll bar
-        self.p1_mw.scroll_bet = QtWidgets.QSpinBox(self.centralwidget,
+        self.scroll_bet = QtWidgets.QSpinBox(self.centralwidget,
             maximum=500,
             minimum=10,
             value=10,
             singleStep=10)
-        self.p1_mw.scroll_bet.setGeometry(400, 100, 500, 200)
-        self.p1_mw.scroll_bet.setFont(font16)
-        self.p1_mw.scroll_bet.setObjectName("scroll_bet")
-        self.p1_mw.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.scroll_bet)
+        self.scroll_bet.setGeometry(400, 100, 500, 200)
+        self.scroll_bet.setFont(font16)
+        self.scroll_bet.setObjectName("scroll_bet")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.scroll_bet)
              
         # ok button styles/layout
-        self.p1_mw.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow(self.p1_mw))
-        self.p1_mw.ok_pushButton.setText("OK")
-        self.p1_mw.ok_pushButton.setGeometry(180, 170, 500, 200)
+        self.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow(self.p1_mw))
+        self.ok_pushButton.setText("OK")
+        self.ok_pushButton.setGeometry(180, 170, 500, 200)
 
         sb.button_press.connect(lambda: self.openWindow(self.p1_mw))
 
-        self.p1_mw.ready_pushButton.setFont(font16)
-        self.p1_mw.ready_pushButton.setObjectName("ok_pushButton")
-        self.p1_mw.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
+        self.ready_pushButton.setFont(font16)
+        self.ready_pushButton.setObjectName("ok_pushButton")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
 
     def bettingButtons(self):
         hb.button_press.disconnect()
@@ -740,16 +739,22 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.player_label.setAlignment(QtCore.Qt.AlignCenter)
         self.player_label.setObjectName("player_label")
 
-        # ready_push button styling/layout
-        self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it(Player_ReadyWindow))
-        self.ready_pushButton.setGeometry(100, 160, 250, 61)
-        self.ready_pushButton.setFont(font12)
-        self.ready_pushButton.setObjectName("ready_pushButton")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ready_pushButton)        
-        #hb.button_press.connect(lambda: self.bet_it(Player_ReadyWindow))
-        #hb_signal = hb.button_press
-        #self.ready_pushButton.hb_signal.connect(lambda: self.bet_it(Player_ReadyWindow))
+###########################
+        # button styles/configurations
+        self.buttonBox = QtWidgets.QDialogButtonBox(self.centralwidget)
+        self.buttonBox.setGeometry(100, 160, 250, 61)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.buttonBox)        
+        self.buttonBox.accepted.connect(lambda: self.bet_it(Player_ReadyWindow))
+        hb.button_press.connect(self.buttonBox.accepted) # hb = hit button
 
+        # autogenerated styling
+        self.buttonBox.accepted.connect(self.centralwidget.accept)
+        QtCore.QMetaObject.connectSlotsByName(self.centralwidget)
+
+###########################
 
         # autogenerated styling (might be able to remove?)
         Player_ReadyWindow.setCentralWidget(self.centralwidget)
