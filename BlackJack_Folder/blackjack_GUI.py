@@ -821,19 +821,25 @@ class Ui_confirm_round(QtCore.QObject):
         self.timer.start()
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
-    def confirm_connection(self):
+    def confirm_connection(self, prev_w):
         global button_counter
         self.timer.stop() # TESTING STOP TIMER
         hb.button_press.disconnect()
         db.button_press.disconnect()
         button_counter += 1 # changing state
 
+        hb.button_press.connect(prev_w.hit_it)
+        sb.button_press.connect(prev_w.stand_it)
+        db.button_press.connect(prev_w.double_it)
+        eb.button_press.connect(prev_w.exit_it)
+
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
         pass
 
     # STYLES/SETUP OF CONFIRM BOX GUI
-    def setupUi(self, confirm_round):
+    def setupUi(self, prev_w, confirm_round):
+        prev_w_settings = prev_w
         confirm_round.setObjectName("confirm_round")
         confirm_round.resize(WIDTH, HEIGHT)
 
@@ -843,7 +849,7 @@ class Ui_confirm_round(QtCore.QObject):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.buttonBox.accepted.connect(lambda: self.confirm_connection())
+        self.buttonBox.accepted.connect(lambda: self.confirm_connection(prev_w_settings))
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
         hb.button_press.connect(self.buttonBox.accepted)
         db.button_press.connect(self.buttonBox.rejected)
@@ -1024,8 +1030,6 @@ class Ui_GameWindow(QtCore.QObject):
 
         # just start one timer??
         self.timer.start()
-
-
         # testing the hw_buttons here
         hb.button_press.connect(self.hit_it)
         sb.button_press.connect(self.stand_it)
@@ -1043,7 +1047,7 @@ class Ui_GameWindow(QtCore.QObject):
 
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
-        self.ui.setupUi(self.window)
+        self.ui.setupUi(self, self.window)
         self.window.show()
 
         if bust:
@@ -1072,13 +1076,6 @@ class Ui_GameWindow(QtCore.QObject):
 
         # just start one timer??
         self.timer.start()
-
-
-        # testing the hw_buttons here
-        hb.button_press.connect(self.hit_it)
-        sb.button_press.connect(self.stand_it)
-        db.button_press.connect(self.double_it)
-        eb.button_press.connect(self.exit_it)
 
         while(1):
             msg0 = bj_to_gui_queue.get()
