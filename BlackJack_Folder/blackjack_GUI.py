@@ -481,8 +481,8 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         # need to open new window and hide settings window
         set_w.hide()
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input)
-        self.ui.setupUi(self.window)
+        self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input, set_w)
+        self.ui.setupUi(self.window, set_w)
         self.window.show()
 
         self.continueConfirmation()
@@ -575,7 +575,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 class Ui_Player_ReadyWindow(QtCore.QObject):
 
     # INITIALIZES GAMEPLAY SETTINGS FROM PRIOR GUI
-    def __init__(self, numPlayers, startingAmount, gameMode, userInput):
+    def __init__(self, numPlayers, startingAmount, gameMode, userInput, Player_ReadyWindow):
         super().__init__()
 
         self.numPlayers = numPlayers
@@ -584,7 +584,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.userInput = userInput
         self.player_cards = []
         self.bet = 0
-        hb.button_press.connect(lambda Player_ReadyWindow: self.bet_it)
+        hb.button_press.connect(self.bet_it(Player_ReadyWindow))
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
     def bet_it(self, p1_mw):
