@@ -776,7 +776,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         _translate = QtCore.QCoreApplication.translate
         Player_ReadyWindow.setWindowTitle(_translate("Player_ReadyWindow", "Player 1"))
         self.player_label.setText(_translate("Player_ReadyWindow", "Player 1"))
-        self.ready_pushButton.setText(_translate("Player_ReadyWindow", "PRESS HERE WHEN READY!"))
+        #self.ready_pushButton.setText(_translate("Player_ReadyWindow", "PRESS HERE WHEN READY!"))
 
 
 ###################################################################
