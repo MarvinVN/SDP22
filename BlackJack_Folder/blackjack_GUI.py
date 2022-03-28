@@ -585,14 +585,13 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.player_cards = []
         self.bet = 0
         self.playReadyWin = Player_ReadyWindow
-        self.setReadyButton()
         #hb.button_press.connect(self.bet_it)
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
     def bet_it(self):
         global button_counter
         button_counter += 1 # changing state
-        hb.button_press.disconnect()
+        #hb.button_press.disconnect()
         self.bettingButtons()
 
         # clearing all widgets (necessary to avoid errors)
@@ -637,9 +636,6 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.ready_pushButton.setFont(font16)
         self.ready_pushButton.setObjectName("ok_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
-
-    def setReadyButton(self):
-        hb.button_press.connect(self.ready_pushButton.accepted)
 
     def bettingButtons(self):
         hb.button_press.connect(self.decrementBet)
