@@ -495,7 +495,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         # testing the hw_buttons here
         hb.button_press.connect(prev_w.decrementNumPlayer)
         sb.button_press.connect(prev_w.continueNumPlayer)
-        db.button_press.connect(prev_W.incrementNumPlayer)
+        db.button_press.connect(prev_w.incrementNumPlayer)
 
 
 
