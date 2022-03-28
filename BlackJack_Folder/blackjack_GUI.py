@@ -595,6 +595,9 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         #hb.button_press.disconnect()
         self.bettingButtons()
 
+        self.centralwidget = QtWidgets.QWidget(self.p1_mw)
+        self.centralwidget.setObjectName("centralwidget")
+
         # bet label styles/layout
         self.betting_label = QtWidgets.QLabel(self.centralwidget)
         self.betting_label.setText("Betting for this round?")
