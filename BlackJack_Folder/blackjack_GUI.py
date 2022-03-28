@@ -587,7 +587,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
-        #self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(sb.check)
         self.timer.timeout.connect(db.check)
         #self.timer.timeout.connect(eb.check)
 
