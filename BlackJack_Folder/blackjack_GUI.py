@@ -594,10 +594,16 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         button_counter += 1 # changing state
         #hb.button_press.disconnect()
         self.bettingButtons()
-
+#################
         self.centralwidget = QtWidgets.QWidget(self.p1_mw)
         self.centralwidget.setObjectName("centralwidget")
-
+        self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.formLayoutWidget.setGeometry(150, 130, 500, 200)
+        self.formLayoutWidget.setObjectName("formLayoutWidget")
+        self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
+        self.formLayout.setContentsMargins(0, 0, 0, 0)
+        self.formLayout.setObjectName("formLayout")
+#################
         # bet label styles/layout
         self.betting_label = QtWidgets.QLabel(self.centralwidget)
         self.betting_label.setText("Betting for this round?")
