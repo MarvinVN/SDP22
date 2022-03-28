@@ -824,6 +824,8 @@ class Ui_confirm_round(QtCore.QObject):
     def confirm_connection(self):
         global button_counter
         self.timer.stop() # TESTING STOP TIMER
+        hb.button_press.disconnect()
+        db.button_press.disconnect()
         button_counter += 1 # changing state
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
@@ -893,6 +895,16 @@ class Ui_confirm_round(QtCore.QObject):
 class Ui_end_game(QtCore.QObject):
     def __init__(self):
         super().__init__()
+        # testing button functionality for multiple function calls
+        self.timer = QtCore.QTimer(interval=50)
+
+        self.timer.timeout.connect(hb.check)
+        #self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(db.check)
+        #self.timer.timeout.connect(eb.check)
+
+        # just start one timer
+        self.timer.start()
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def play_again_connection(self, game_w):
@@ -905,6 +917,11 @@ class Ui_end_game(QtCore.QObject):
 
         else:
             pass
+
+        self.timer.stop()
+        self.hb.button_press.disconnect()
+        self.db.button_press.disconnect()
+
         # testing this
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SettingsWindow()
@@ -935,6 +952,8 @@ class Ui_end_game(QtCore.QObject):
         self.buttonBox.setObjectName("buttonBox")
         self.buttonBox.accepted.connect(lambda: self.play_again_connection(Ui_GameWindow))
         self.buttonBox.rejected.connect(lambda: self.end_game_connection())
+        hb.button_press.connect(self.buttonBox.accepted)
+        db.button_press.connect(self.buttonBox.rejected)
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(end_game)
@@ -1017,6 +1036,11 @@ class Ui_GameWindow(QtCore.QObject):
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
         # opening up the next round screen
         self.timer.stop()
+        hb.button_press.disconnect()
+        sb.button_press.disconnect()
+        db.button_press.disconnect()
+        eb.button_press.disconnect()
+
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
         self.ui.setupUi(self.window)
@@ -1039,6 +1063,22 @@ class Ui_GameWindow(QtCore.QObject):
             "Round Score: " + str(scoring), "Current Wallets: " + str(wallets)])
     
     def done_round(self):
+        self.timer = QtCore.QTimer(interval=50)
+
+        self.timer.timeout.connect(hb.check)
+        self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(db.check)
+        self.timer.timeout.connect(eb.check)
+
+        # just start one timer??
+        self.timer.start()
+
+
+        # testing the hw_buttons here
+        hb.button_press.connect(self.hit_it)
+        sb.button_press.connect(self.stand_it)
+        db.button_press.connect(self.double_it)
+        eb.button_press.connect(self.exit_it)
 
         while(1):
             msg0 = bj_to_gui_queue.get()
@@ -1058,6 +1098,11 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg0.id == "GAME OVER!":
                 # end the game
                 #self.exit_it() # TESTING (THIS WORKED!!)
+                self.timer.stop()
+                hb.button_press.disconnect()
+                sb.button_press.disconnect()
+                db.button_press.disconnect()
+                eb.button_press.disconnect()
                 # instead of exiting, have a screen pop up with "WINNER!" or "YOU LOST!"
                 wins = msg0.content[0]
                 game_result = msg0.content[1]
