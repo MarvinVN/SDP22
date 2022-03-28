@@ -814,6 +814,12 @@ class Ui_confirm_round(QtCore.QObject):
         self.buttonBox.setObjectName("buttonBox")
         self.buttonBox.accepted.connect(lambda: self.confirm_connection())
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
+        # testing the hw_buttons here
+        hb.button_press.disconnect()
+        sb.button_press.disconnect()
+        db.button_press.disconnect()
+        eb.button_press.disconnect()
+        
         hb.button_press.connect(self.buttonBox.accepted)
         db.button_press.connect(self.buttonBox.rejected)
 
@@ -986,11 +992,6 @@ class Ui_GameWindow(QtCore.QObject):
 
     
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
-        hb.button_press.disconnect()
-        sb.button_press.disconnect()
-        db.button_press.disconnect()
-        eb.button_press.disconnect()
-
         # opening up the next round screen
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
