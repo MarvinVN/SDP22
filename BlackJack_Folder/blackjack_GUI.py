@@ -581,6 +581,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.userInput = userInput
         self.player_cards = []
         self.bet = 0
+        self.bettingButtons()
         #hb.button_press.connect(self.bet_it(Player_ReadyWindow))
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
@@ -590,7 +591,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         global button_counter
         button_counter += 1 # changing state
         #hb.button_press.disconnect()
-        self.bettingButtons()
+        #self.bettingButtons()
 
         # clearing all widgets (necessary to avoid errors)
         for i in reversed(range(self.formLayout.count())): 
