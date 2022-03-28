@@ -631,8 +631,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.ok_pushButton.setText("OK")
         self.ok_pushButton.setGeometry(180, 170, 500, 200)
 
-        hb.button_press.connect(self.decrementBet)
-        db.button_press.connect(self.incrementBet)
+        hb.button_press.connect(lambda: self.decrementBet)
+        db.button_press.connect(lambda: self.incrementBet)
         sb.button_press.connect(lambda: self.openWindow(self.p1_mw))
 
         self.ready_pushButton.setFont(font16)
