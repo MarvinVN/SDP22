@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 pin_list = [16,20,21] #GPIO pins to be used;
+confirm_pin = 13 #for scan confirmation
 
 states = {
     "idle": [0,0,0],
@@ -19,6 +20,11 @@ states = {
 
 #already done in blackjack.py; initalize all pins in list as output and LOW
 #GPIO.setup(pin_list, GPIO.OUT, initial=GPIO.LOW)
+
+def scanConfirm():
+    GPIO.output(confirm_pin, GPIO.HIGH)
+    sleep(1)
+    GPIO.output(confirm_pin, GPIO.LOW)
 
 def signal(state):
     if state[0]:
