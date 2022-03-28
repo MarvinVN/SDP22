@@ -741,7 +741,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.player_label.setObjectName("player_label")
 
         # ready_push button styling/layout
-        self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it(Player_ReadyWindow))
+        self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it())
         self.ready_pushButton.setGeometry(100, 160, 250, 61)
         self.ready_pushButton.setFont(font12)
         self.ready_pushButton.setObjectName("ready_pushButton")
