@@ -505,7 +505,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         #self.timer.stop() # TESTING STOP TIMER
         button_counter += 1 # changing state
         hb.button_press.disconnect() # TESTING DISCONNECTION
-        sb.button_press.disconnect()
+        db.button_press.disconnect()
 
 
     # STYLES/SETUP OF CONFIRM BOX GUI
