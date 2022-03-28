@@ -30,11 +30,12 @@ LOCKBITS = 0xFF; // {LB=NO_LOCK, BLB0=NO_LOCK, BLB1=NO_LOCK}
 
 
 void main(void) {
+    DDRC = 0xFF; // makes port C output
     DDRD &= ~(1 << PIND0);
     DDRD &= ~(1 << PIND1);
     DDRD &= ~(1 << PIND2);
+    DDRC &= ~(1 << PINC5);
     DDRB = 0xFF; // makes port b output
-    DDRC = 0xFF; // makes port C output
     
     PORTB = 0b00000000;
     
@@ -83,6 +84,9 @@ void dispensor(void){
 void p1(void){
     _delay_ms(1000);
     dispensor();
+    while(!(PINC&(1<<5))){
+            _delay_ms(1);
+        }
     _delay_ms(1000);
 }
 void p2(void){
@@ -106,6 +110,9 @@ void p2(void){
         }
         _delay_ms(500);
         dispensor();
+        while(!(PINC&(1<<5))){
+            _delay_ms(1);
+        }
         _delay_ms(500);
         for(int i = 0; i<408/4; i++){
             PORTC = 0b00001001;
@@ -269,6 +276,9 @@ void fulldeal(void){
     _delay_ms(1000);
     dispensor();
     _delay_ms(1000);
+    while(!(PINC&(1<<5))){
+        _delay_ms(1);
+    }
     for(int j = 0; j<4; j++){
         for(int i = 0; i<2048/20; i++){
             PORTC = 0b00000001;
@@ -291,7 +301,7 @@ void fulldeal(void){
         _delay_ms(1000);
         dispensor();
         _delay_ms(1000);
-        while(!(PIND&(1<<2))){
+        while(!(PINC&(1<<5))){
             _delay_ms(1);
         }
     }
