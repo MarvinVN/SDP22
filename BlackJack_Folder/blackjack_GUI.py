@@ -986,6 +986,11 @@ class Ui_GameWindow(QtCore.QObject):
 
     
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
+        hb.button_press.disconnect()
+        sb.button_press.disconnect()
+        db.button_press.disconnect()
+        eb.button_press.disconnect()
+
         # opening up the next round screen
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
@@ -1009,6 +1014,12 @@ class Ui_GameWindow(QtCore.QObject):
             "Round Score: " + str(scoring), "Current Wallets: " + str(wallets)])
     
     def done_round(self):
+        # testing the hw_buttons here
+        hb.button_press.connect(self.hit_it)
+        sb.button_press.connect(self.stand_it)
+        db.button_press.connect(self.double_it)
+        eb.button_press.connect(self.exit_it)
+        
         while(1):
             msg0 = bj_to_gui_queue.get()
 
