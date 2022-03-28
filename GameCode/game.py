@@ -1,6 +1,8 @@
 import random
 import serial
 import time
+import test
+import dealer
 
 class Card:
     #initialize card with suit and rank
@@ -54,7 +56,7 @@ class Deck:
                     rank = "K"
                 self.cards.append("{}{}".format(rank,suit))
         """
-        for suit in ['s', 'h', 'd', 'c']:
+        for suit in ['S', 'H', 'D', 'C']:
             for rank in range(1,14):
                 self.cards.append(Card(rank,suit))
 
@@ -75,14 +77,24 @@ class Deck:
 
     #deals digital deck; same as above
     def deal(self):
-        """data = self.RFID()
-        if data != '':
-            data = data.split('\r')
-            self.cardsused.append(data[0])
-            self.cards.remove(data[0])
-            return data[0]
-        """
-        return self.cards.pop()
+        #make global
+        switch = {
+            'A': 1,
+            'J': 11,
+            'Q': 12,
+            'K': 13
+        }
+
+        card = test.RFID()
+        print(card)
+        rank, suit = card[0], card[1]
+        if rank in switch.keys():
+            rank = switch[rank]
+        res = Card(int(rank), suit)
+        res.show()
+        dealer.p2() #signal that card has been scanned
+        #return self.cards.pop()
+        return res
 
     #TODO: integrate libnfc with this function or with deal function
     def RFID(self):
