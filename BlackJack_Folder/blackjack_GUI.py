@@ -650,7 +650,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
     def decrementBet(self):
         global increment_value
-        amount = self.scroll.value()
+        amount = self.scroll_bet.value()
         self.scroll_bet.setValue(amount-increment_value)
 
     def continueBet(self):
