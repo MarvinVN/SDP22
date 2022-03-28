@@ -174,7 +174,7 @@ class Ui_SettingsWindow(QtCore.QObject):
         self.timer.timeout.connect(db.check)
         #self.timer.timeout.connect(eb.check)
 
-        # just start one timer??
+        # just start one timer
         self.timer.start()
 
         # testing the hw_buttons here
@@ -479,9 +479,19 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.ui.setupUi(self.window)
         self.window.show()
 
+        self.continueConfirmation()
+
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
         pass
+
+    def continueConfirmation(self):
+        global button_counter
+        #self.timer.stop() # TESTING STOP TIMER
+        button_counter += 1 # changing state
+        hb.button_press.disconnect() # TESTING DISCONNECTION
+        sb.button_press.disconnect()
+
 
     # STYLES/SETUP OF CONFIRM BOX GUI
     def setupUi(self, confirm_dialogbox, SettingsWindow):
@@ -497,8 +507,8 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.buttonBox.setObjectName("buttonBox")
         self.buttonBox.accepted.connect(lambda: self.confirm_connection(SettingsWindow))
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
-        hb.button_press.connect(self.buttonBox.accepted)
-        db.button_press.connect(self.buttonBox.rejected)
+        hb.button_press.connect(self.buttonBox.accepted) # hb = hit button
+        db.button_press.connect(self.buttonBox.rejected) # db = double button
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(confirm_dialogbox)
@@ -558,26 +568,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.userInput = userInput
         self.player_cards = []
         self.bet = 0
-
-    """
-    def button_loop(self):
-        not_ready = True
-        
-        while(not_ready):
-            if GPIO.input(p1_hit):
-                # increment betting
-                current_bet = int(self.user_bet.text())
-                self.user_bet.setText(str(current_bet+10))
-            elif GPIO.input(p1_stand):
-                # done betting, move onto next window
-                not_ready = False
-            elif GPIO.input(p1_double):
-                # decrement betting
-                current_bet = int(self.user_bet.text())
-                self.user_bet.setText(str(current_bet-10))
-            else:
-                pass
-    """
+        # testing the hw_buttons here
+        #hb.button_press.connect(self.decrementNumPlayer)
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
     def bet_it(self, p1_mw):
