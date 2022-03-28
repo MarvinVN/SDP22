@@ -796,7 +796,6 @@ class Ui_confirm_round(QtCore.QObject):
         button_counter += 1 # changing state
         hb.button_press.disconnect() # TESTING DISCONNECTION
         db.button_press.disconnect()
-        self.resetButtons()
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
