@@ -788,8 +788,8 @@ class Ui_confirm_round(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
-        hb.button_press.connect(self.buttonBox.accepted)
-        db.button_press.connect(self.buttonBox.rejected)
+        hb.button_press.connect(self.ui.buttonBox.accepted)
+        db.button_press.connect(self.ui.buttonBox.rejected)
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self):
