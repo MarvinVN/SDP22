@@ -469,12 +469,13 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.game_mode = game_mode
         self.user_input = user_input
     
-
+"""
     def previousButtonSettings(self):
         # testing the hw_buttons here
         hb.button_press.connect(self.decrementUI)
         sb.button_press.connect(self.continueUI)
         db.button_press.connect(self.incrementUI)         
+"""
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, set_w):
@@ -485,8 +486,6 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input, self.window)
         self.ui.setupUi(self.window)
         self.window.show()
-
-        
 
     # UPON CANCEL BUTTON PRESS: RESET BUTTON CONNECTIONS
     def reject_connection(self, prev_w):
@@ -797,10 +796,15 @@ class Ui_confirm_round(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
-    
+
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self):
-        pass
+        global button_counter
+        #self.timer.stop() # TESTING STOP TIMER
+        button_counter += 1 # changing state
+        hb.button_press.disconnect() # TESTING DISCONNECTION
+        db.button_press.disconnect()
+        self.resetButtons()
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
@@ -819,6 +823,8 @@ class Ui_confirm_round(QtCore.QObject):
         self.buttonBox.setObjectName("buttonBox")
         self.buttonBox.accepted.connect(lambda: self.confirm_connection())
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
+        hb.button_press.connect(self.buttonBox.accepted)
+        db.button_press.connect(self.buttonBox.rejected)
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(confirm_round)
