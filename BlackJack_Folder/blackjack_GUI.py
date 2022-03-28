@@ -585,7 +585,11 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.player_cards = []
         self.bet = 0
         # testing the hw_buttons here
-        #hb.button_press.connect(self.readyForGame)
+        hb.button_press.connect(self.readyForGame)
+
+    def readyForGame(self):
+        # connect to ready button gui
+        self.ready_pushButton.setCheckable(True)
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
     def bet_it(self, p1_mw):
