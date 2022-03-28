@@ -12,14 +12,6 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/default/production/RFID.o
  .data          0x0000000000000000        0x0 build/default/production/RFID.o
  .bss           0x0000000000000000        0x0 build/default/production/RFID.o
- .text.shuffler
-                0x0000000000000000       0x1a build/default/production/RFID.o
- .text.p1       0x0000000000000000       0x2a build/default/production/RFID.o
- .text.p3       0x0000000000000000      0x154 build/default/production/RFID.o
- .text.p4       0x0000000000000000      0x154 build/default/production/RFID.o
- .text.p5       0x0000000000000000      0x154 build/default/production/RFID.o
- .text.fulldeal
-                0x0000000000000000      0x1aa build/default/production/RFID.o
  .text          0x0000000000000000        0x0 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
  .data          0x0000000000000000        0x0 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
  .bss           0x0000000000000000        0x0 /Applications/microchip/xc8/v2.32/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const/libgcc.a(_exit.o)
@@ -361,20 +353,20 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x218e
+.debug_info     0x0000000000000000     0x22af
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_info    0x00000000000005f4     0x1b9a build/default/production/RFID.o
+ .debug_info    0x00000000000005f4     0x1cbb build/default/production/RFID.o
 
-.debug_abbrev   0x0000000000000000      0x722
+.debug_abbrev   0x0000000000000000      0x73d
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_abbrev  0x00000000000005a2      0x180 build/default/production/RFID.o
+ .debug_abbrev  0x00000000000005a2      0x19b build/default/production/RFID.o
 
-.debug_line     0x0000000000000000      0xe59
+.debug_line     0x0000000000000000      0xfb3
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x137 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_line    0x0000000000000137      0xd22 build/default/production/RFID.o
+ .debug_line    0x0000000000000137      0xe7c build/default/production/RFID.o
 
 .debug_frame    0x0000000000000000       0xd4
  *(.debug_frame)
@@ -385,9 +377,9 @@ END GROUP
  .debug_str     0x0000000000000000      0x208 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
  .debug_str     0x0000000000000208        0x0 build/default/production/RFID.o
 
-.debug_loc      0x0000000000000000     0x1e6c
+.debug_loc      0x0000000000000000     0x1fab
  *(.debug_loc)
- .debug_loc     0x0000000000000000     0x1e6c build/default/production/RFID.o
+ .debug_loc     0x0000000000000000     0x1fab build/default/production/RFID.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -407,9 +399,9 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x0000000000000000       0x80
+.debug_ranges   0x0000000000000000       0x90
  *(.debug_ranges)
- .debug_ranges  0x0000000000000000       0x80 build/default/production/RFID.o
+ .debug_ranges  0x0000000000000000       0x90 build/default/production/RFID.o
 
 .debug_macro
  *(.debug_macro)
@@ -422,45 +414,71 @@ LOAD data_init
  .note.gnu.avr.deviceinfo
                 0x0000000000000000       0x40 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
 
-.text.p2        0x00000000000000bc      0x14c
- .text.p2       0x00000000000000bc      0x14c build/default/production/RFID.o
-                0x00000000000000bc                p2
+.text.fulldeal  0x00000000000000bc      0x1d6
+ .text.fulldeal
+                0x00000000000000bc      0x1d6 build/default/production/RFID.o
+                0x00000000000000bc                fulldeal
+
+.text.p2        0x0000000000000292      0x160
+ .text.p2       0x0000000000000292      0x160 build/default/production/RFID.o
+                0x0000000000000292                p2
+
+.text.p3        0x00000000000003f2      0x154
+ .text.p3       0x00000000000003f2      0x154 build/default/production/RFID.o
+                0x00000000000003f2                p3
+
+.text.p4        0x0000000000000546      0x154
+ .text.p4       0x0000000000000546      0x154 build/default/production/RFID.o
+                0x0000000000000546                p4
+
+.text.p5        0x000000000000069a      0x154
+ .text.p5       0x000000000000069a      0x154 build/default/production/RFID.o
+                0x000000000000069a                p5
+
+.text.main      0x00000000000007ee       0x76
+ .text.main     0x00000000000007ee       0x76 build/default/production/RFID.o
+                0x00000000000007ee                main
+
+.text.p1        0x0000000000000864       0x3e
+ .text.p1       0x0000000000000864       0x3e build/default/production/RFID.o
+                0x0000000000000864                p1
+
+.text.shuffler  0x00000000000008a2       0x1a
+ .text.shuffler
+                0x00000000000008a2       0x1a build/default/production/RFID.o
+                0x00000000000008a2                shuffler
 
 .text.dispensor
-                0x0000000000000208       0x1a
+                0x00000000000008bc       0x1a
  .text.dispensor
-                0x0000000000000208       0x1a build/default/production/RFID.o
-                0x0000000000000208                dispensor
+                0x00000000000008bc       0x1a build/default/production/RFID.o
+                0x00000000000008bc                dispensor
 
-.text.main      0x0000000000000222       0x14
- .text.main     0x0000000000000222       0x14 build/default/production/RFID.o
-                0x0000000000000222                main
-
-.text           0x0000000000000236        0x4
- .text          0x0000000000000236        0x4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
-                0x0000000000000236                __vector_20
-                0x0000000000000236                __vector_1
-                0x0000000000000236                __vector_24
-                0x0000000000000236                __vector_12
-                0x0000000000000236                __bad_interrupt
-                0x0000000000000236                __vector_6
-                0x0000000000000236                __vector_3
-                0x0000000000000236                __vector_23
-                0x0000000000000236                __vector_25
-                0x0000000000000236                __vector_11
-                0x0000000000000236                __vector_13
-                0x0000000000000236                __vector_17
-                0x0000000000000236                __vector_19
-                0x0000000000000236                __vector_7
-                0x0000000000000236                __vector_5
-                0x0000000000000236                __vector_4
-                0x0000000000000236                __vector_9
-                0x0000000000000236                __vector_2
-                0x0000000000000236                __vector_21
-                0x0000000000000236                __vector_15
-                0x0000000000000236                __vector_8
-                0x0000000000000236                __vector_14
-                0x0000000000000236                __vector_10
-                0x0000000000000236                __vector_16
-                0x0000000000000236                __vector_18
-                0x0000000000000236                __vector_22
+.text           0x00000000000008d6        0x4
+ .text          0x00000000000008d6        0x4 /Users/ray/.mchp_packs/Microchip/ATmega_DFP/2.3.126/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
+                0x00000000000008d6                __vector_20
+                0x00000000000008d6                __vector_1
+                0x00000000000008d6                __vector_24
+                0x00000000000008d6                __vector_12
+                0x00000000000008d6                __bad_interrupt
+                0x00000000000008d6                __vector_6
+                0x00000000000008d6                __vector_3
+                0x00000000000008d6                __vector_23
+                0x00000000000008d6                __vector_25
+                0x00000000000008d6                __vector_11
+                0x00000000000008d6                __vector_13
+                0x00000000000008d6                __vector_17
+                0x00000000000008d6                __vector_19
+                0x00000000000008d6                __vector_7
+                0x00000000000008d6                __vector_5
+                0x00000000000008d6                __vector_4
+                0x00000000000008d6                __vector_9
+                0x00000000000008d6                __vector_2
+                0x00000000000008d6                __vector_21
+                0x00000000000008d6                __vector_15
+                0x00000000000008d6                __vector_8
+                0x00000000000008d6                __vector_14
+                0x00000000000008d6                __vector_10
+                0x00000000000008d6                __vector_16
+                0x00000000000008d6                __vector_18
+                0x00000000000008d6                __vector_22
