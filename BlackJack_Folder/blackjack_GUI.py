@@ -925,8 +925,8 @@ class Ui_end_game(QtCore.QObject):
             pass
 
         self.timer.stop()
-        self.hb.button_press.disconnect()
-        self.db.button_press.disconnect()
+        hb.button_press.disconnect()
+        db.button_press.disconnect()
 
         # testing this
         self.window = QtWidgets.QMainWindow()
