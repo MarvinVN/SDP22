@@ -639,7 +639,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
 
     def setReadyButton(self):
-        hb.button_press.connect(lambda: self.bet_it)
+        hb.button_press.connect(lambda: self.bet_it())
 
     def bettingButtons(self):
         hb.button_press.connect(self.decrementBet)
