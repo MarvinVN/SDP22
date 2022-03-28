@@ -635,7 +635,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
 
     def bettingButtons(self):
-        hb.button_press.disconnect()
+        #hb.button_press.disconnect()
         hb.button_press.connect(self.decrementBet)
         db.button_press.connect(self.incrementBet)
         #sb.button_press.connect(self.continueBet)
