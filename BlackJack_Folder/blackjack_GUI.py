@@ -630,8 +630,9 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.ok_pushButton.setText("OK")
         self.ok_pushButton.setGeometry(180, 170, 500, 200)
 
-        sb.button_press.connect(self.openWindow(p1_mw))
-        
+        # TESTING THIS ERROR
+        #sb.button_press.connect(self.openWindow(p1_mw))
+
         self.ready_pushButton.setFont(font16)
         self.ready_pushButton.setObjectName("ok_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
