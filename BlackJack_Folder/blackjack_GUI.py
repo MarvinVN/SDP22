@@ -584,7 +584,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.userInput = userInput
         self.player_cards = []
         self.bet = 0
-        #hb.button_press.connect(self.bet_it(Player_ReadyWindow))
+        hb.button_press.connect(self.bet_it(Player_ReadyWindow))
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
     def bet_it(self, p1_mw):
@@ -594,7 +594,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         button_counter += 1 # changing state
         #hb.button_press.disconnect()
         self.bettingButtons()
-        
+
         # bet label styles/layout
         self.betting_label = QtWidgets.QLabel(self.centralwidget)
         self.betting_label.setText("Betting for this round?")
