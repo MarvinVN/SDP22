@@ -478,6 +478,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, set_w):
+        self.continueConfirmation()
         # need to open new window and hide settings window
         set_w.hide()
         self.window = QtWidgets.QMainWindow()
@@ -485,7 +486,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.ui.setupUi(self.window)
         self.window.show()
 
-        self.continueConfirmation()
+        
 
     # UPON CANCEL BUTTON PRESS: RESET BUTTON CONNECTIONS
     def reject_connection(self, prev_w):
