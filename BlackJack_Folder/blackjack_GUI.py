@@ -641,7 +641,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
     def bettingButtons(self):
         hb.button_press.connect(self.decrementBet)
         db.button_press.connect(self.incrementBet)
-        sb.button_press.connect(self.continueBet)
+        #sb.button_press.connect(self.continueBet)
 
 ############################
     def incrementBet(self):
