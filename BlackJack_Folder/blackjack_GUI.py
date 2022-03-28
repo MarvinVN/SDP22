@@ -594,19 +594,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         button_counter += 1 # changing state
         #hb.button_press.disconnect()
         self.bettingButtons()
-
-"""
-        # clearing all widgets (necessary to avoid errors)
-        for i in reversed(range(self.formLayout.count())): 
-            self.formLayout.itemAt(i).widget().setParent(None)
-"""
-
-
-        # TODO: need to change this to be similar to below formatting (get rid of centralwidget, need formLayout)
-        # set vertical box layout
-        #self.centralwidget.setLayout(QtWidgets.QVBoxLayout())
-        #self.betting_label = QtWidgets.QLabel("Betting for this round?")
-
+        
         # bet label styles/layout
         self.betting_label = QtWidgets.QLabel(self.centralwidget)
         self.betting_label.setText("Betting for this round?")
