@@ -482,7 +482,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         set_w.hide()
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input, set_w)
-        self.ui.setupUi(self, self.window, set_w)
+        self.ui.setupUi(self.window)
         self.window.show()
 
         self.continueConfirmation()
