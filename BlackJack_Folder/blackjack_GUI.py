@@ -788,16 +788,12 @@ class Ui_confirm_round(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
-        hb.button_press.connect(self.ui.buttonBox.accepted)
-        db.button_press.connect(self.ui.buttonBox.rejected)
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self):
         global button_counter
         #self.timer.stop() # TESTING STOP TIMER
         button_counter += 1 # changing state
-        hb.button_press.disconnect() # TESTING DISCONNECTION
-        db.button_press.disconnect()
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
