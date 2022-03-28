@@ -279,7 +279,7 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def continueUI(self):
         global button_counter
-        #self.timer.stop() # TESTING STOP TIMER
+        self.timer.stop() # TESTING STOP TIMER
         button_counter += 1 # changing state
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
@@ -468,6 +468,16 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.initial_amount = initial_amount
         self.game_mode = game_mode
         self.user_input = user_input
+        # testing button functionality for multiple function calls
+        self.timer = QtCore.QTimer(interval=50)
+
+        self.timer.timeout.connect(hb.check)
+        #self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(db.check)
+        #self.timer.timeout.connect(eb.check)
+
+        # just start one timer
+        self.timer.start()
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, set_w):
@@ -491,7 +501,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
     def continueConfirmation(self):
         global button_counter
-        #self.timer.stop() # TESTING STOP TIMER
+        self.timer.stop() # TESTING STOP TIMER
         button_counter += 1 # changing state
         hb.button_press.disconnect() # TESTING DISCONNECTION
         db.button_press.disconnect()
@@ -573,6 +583,16 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.userInput = userInput
         self.player_cards = []
         self.bet = 0
+        # testing button functionality for multiple function calls
+        self.timer = QtCore.QTimer(interval=50)
+
+        self.timer.timeout.connect(hb.check)
+        #self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(db.check)
+        #self.timer.timeout.connect(eb.check)
+
+        # just start one timer
+        self.timer.start()
         #self.bettingButtons()
         hb.button_press.connect(self.decrementBet)
         db.button_press.connect(self.incrementBet)
@@ -652,6 +672,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
     def continueBet(self):
         global button_counter
         button_counter += 1 # changing state
+        self.timer.stop()
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
         db.button_press.disconnect()
@@ -788,11 +809,21 @@ class Ui_confirm_round(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
+        # testing button functionality for multiple function calls
+        self.timer = QtCore.QTimer(interval=50)
+
+        self.timer.timeout.connect(hb.check)
+        #self.timer.timeout.connect(sb.check)
+        self.timer.timeout.connect(db.check)
+        #self.timer.timeout.connect(eb.check)
+
+        # just start one timer
+        self.timer.start()
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self):
         global button_counter
-        #self.timer.stop() # TESTING STOP TIMER
+        self.timer.stop() # TESTING STOP TIMER
         button_counter += 1 # changing state
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
@@ -812,8 +843,8 @@ class Ui_confirm_round(QtCore.QObject):
         self.buttonBox.setObjectName("buttonBox")
         self.buttonBox.accepted.connect(lambda: self.confirm_connection())
         self.buttonBox.rejected.connect(lambda: self.reject_connection())
-        #hb.button_press.connect(self.buttonBox.accepted)
-        #db.button_press.connect(self.buttonBox.rejected)
+        hb.button_press.connect(self.buttonBox.accepted)
+        db.button_press.connect(self.buttonBox.rejected)
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(confirm_round)
@@ -985,6 +1016,7 @@ class Ui_GameWindow(QtCore.QObject):
     
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
         # opening up the next round screen
+        self.timer.stop()
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
         self.ui.setupUi(self.window)
