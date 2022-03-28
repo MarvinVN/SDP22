@@ -1066,6 +1066,7 @@ class Ui_GameWindow(QtCore.QObject):
             "Player Cards: " + str(p_cards),
             "Round Score: " + str(scoring), "Current Wallets: " + str(wallets)])
     
+    # everything works for now
     def done_round(self):
         self.timer = QtCore.QTimer(interval=50)
 
