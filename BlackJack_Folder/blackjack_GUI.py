@@ -15,7 +15,7 @@ import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
 import blackjack_buttons as bjb
-from RPi import GPIO
+#from RPi import GPIO
 
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480
