@@ -50,10 +50,10 @@ db = bjb.HWButton(d1)
 eb = bjb.HWButton(e1)
 
 # PLAYER 2
-h2 = 0
-d2 = 0
-s2 = 0
-e2 = 0
+h2 = 5
+d2 = 6
+s2 = 13
+e2 = 19
 
 hb2 = bjb.HWButton(h2)
 db2 = bjb.HWButton(d2)
@@ -61,10 +61,10 @@ sb2 = bjb.HWButton(s2)
 eb2 = bjb.HWButton(e2)
 
 # PLAYER 3
-h3 = 0
-d3 = 0
-s3 = 0
-e3 = 0
+h3 = 26
+d3 = 16
+s3 = 20
+e3 = 21
 
 hb3 = bjb.HWButton(h3)
 db3 = bjb.HWButton(d3)
@@ -72,10 +72,10 @@ sb3 = bjb.HWButton(s3)
 eb3 = bjb.HWButton(e3)
 
 # PLAYER 4
-h4 = 0
-d4 = 0
-s4 = 0
-e4 = 0
+h4 = 4
+d4 = 18
+s4 = 24
+e4 = 25
 
 hb4 = bjb.HWButton(h4)
 db4 = bjb.HWButton(d4)
@@ -1281,6 +1281,7 @@ class Ui_GameWindow(QtCore.QObject):
             pass
 
     # setting up main window and components (for one player)
+    # CHANGE THIS FUNCTION DEPENDING ON THE NUMPLAYERS
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(WIDTH, HEIGHT)
