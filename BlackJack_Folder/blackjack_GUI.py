@@ -57,6 +57,7 @@ initial_amount = 0
 game_mode = ""
 user_input = ""
 increment_value = 100
+bet_increment = 10
 
 # GLOBAL QUEUES USED FOR MULTIPROCESSING INTERACTION
 gui_to_bj_queue = mp.Queue()    # gui write, blackjack read
@@ -659,15 +660,15 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
 ############################
     def incrementBet(self):
-        global increment_value
+        global bet_increment
         amount = self.scroll_bet.value()
         #amount = amount + initial_amount
-        self.scroll_bet.setValue(amount+increment_value)
+        self.scroll_bet.setValue(amount+bet_increment)
 
     def decrementBet(self):
-        global increment_value
+        global bet_increment
         amount = self.scroll_bet.value()
-        self.scroll_bet.setValue(amount-increment_value)
+        self.scroll_bet.setValue(amount-bet_increment)
 
     def continueBet(self):
         global button_counter
