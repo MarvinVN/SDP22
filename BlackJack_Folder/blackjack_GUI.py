@@ -37,7 +37,8 @@ font20 = QtGui.QFont('Helvetica',20)
 font30 = QtGui.QFont('Helvetica',30, QtGui.QFont.Bold)
 font48 = QtGui.QFont('Helvetica',48)
 
-# BUTTONS
+######### BUTTONS ###########
+# PLAYER 1
 h1 = 17
 d1 = 27
 s1 = 22
@@ -47,6 +48,40 @@ hb = bjb.HWButton(h1)
 sb = bjb.HWButton(s1)
 db = bjb.HWButton(d1)
 eb = bjb.HWButton(e1)
+
+# PLAYER 2
+h2 = 0
+d2 = 0
+s2 = 0
+e2 = 0
+
+hb2 = bjb.HWButton(h2)
+db2 = bjb.HWButton(d2)
+sb2 = bjb.HWButton(s2)
+eb2 = bjb.HWButton(e2)
+
+# PLAYER 3
+h3 = 0
+d3 = 0
+s3 = 0
+e3 = 0
+
+hb3 = bjb.HWButton(h3)
+db3 = bjb.HWButton(d3)
+sb3 = bjb.HWButton(s3)
+eb3 = bjb.HWButton(e3)
+
+# PLAYER 4
+h4 = 0
+d4 = 0
+s4 = 0
+e4 = 0
+
+hb4 = bjb.HWButton(h4)
+db4 = bjb.HWButton(d4)
+sb4 = bjb.HWButton(s4)
+eb4 = bjb.HWButton(e4)
+
 
 # BUTTON COUNTER TO KEEP TRACK OF STATE MACHINE
 button_counter = 0
@@ -84,24 +119,16 @@ class Ui_MainWindow(QtCore.QObject):
     def __init__(self):
         super().__init__()
 
-#########################################
         # testing button functionality for multiple function calls
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
-        #self.timer.timeout.connect(sb.check)
-        #self.timer.timeout.connect(db.check)
-        #self.timer.timeout.connect(eb.check)
 
-        # just start one timer??
+        # just start one timer
         self.timer.start()
 
         # testing the hw_buttons here
         hb.button_press.connect(lambda: self.mainToSettings(MainWindow))
-        #sb.button_press.connect(lambda: self.mainToSettings(MainWindow))
-        #db.button_press.connect(lambda: self.mainToSettings(MainWindow))
-        #eb.button_press.connect(lambda: self.mainToSettings(MainWindow))
-##########################################
 
     # SWITCH FROM MAIN WINDOW TO SETTINGS WINDOW
     def mainToSettings(self, current_w):
@@ -166,24 +193,21 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
-#########################################
+
         # testing button functionality for multiple function calls
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
         self.timer.timeout.connect(sb.check)
         self.timer.timeout.connect(db.check)
-        #self.timer.timeout.connect(eb.check)
 
         # just start one timer
         self.timer.start()
 
         # testing the hw_buttons here
-        hb.button_press.connect(self.decrementNumPlayer)
-        sb.button_press.connect(self.continueNumPlayer)
-        db.button_press.connect(self.incrementNumPlayer)
-        #eb.button_press.connect(lambda: self.mainToSettings(MainWindow))
-##########################################
+        db.button_press.connect(self.decrementNumPlayer)
+        hb.button_press.connect(self.continueNumPlayer)
+        sb.button_press.connect(self.incrementNumPlayer)
 
     # adding increment, decrement, continue NumPlayer functions
     def incrementNumPlayer(self):
@@ -205,18 +229,16 @@ class Ui_SettingsWindow(QtCore.QObject):
         db.button_press.disconnect()
         self.initialAmountSetting()
 
-
     # adding functions to buttons for initial amount
     def initialAmountSetting(self):
         # testing the hw_buttons here
-        hb.button_press.connect(self.decrementAmount)
-        sb.button_press.connect(self.continueAmount)
-        db.button_press.connect(self.incrementAmount) 
+        db.button_press.connect(self.decrementAmount)
+        hb.button_press.connect(self.continueAmount)
+        sb.button_press.connect(self.incrementAmount) 
 
     def incrementAmount(self):
         global increment_value
         amount = self.startingAmountSpinBox.value()
-        #amount = amount + initial_amount
         self.startingAmountSpinBox.setValue(amount+increment_value)
 
     def decrementAmount(self):
@@ -226,7 +248,6 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def continueAmount(self):
         global button_counter
-        #self.timer.stop() # TESTING STOP TIMER
         button_counter += 1 # changing state
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
@@ -236,9 +257,9 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def gameModeSetting(self):
         # testing the hw_buttons here
-        hb.button_press.connect(self.decrementGameMode)
-        sb.button_press.connect(self.continueGameMode)
-        db.button_press.connect(self.incrementGameMode)    
+        db.button_press.connect(self.decrementGameMode)
+        hb.button_press.connect(self.continueGameMode)
+        sb.button_press.connect(self.incrementGameMode)    
 
     # adding functions to buttons for Game Mode
     def incrementGameMode(self):
@@ -253,7 +274,6 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def continueGameMode(self):
         global button_counter
-        #self.timer.stop() # TESTING STOP TIMER
         button_counter += 1 # changing state
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
@@ -262,20 +282,18 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def userInputSetting(self):
         # testing the hw_buttons here
-        hb.button_press.connect(self.decrementUI)
-        sb.button_press.connect(self.continueUI)
-        db.button_press.connect(self.incrementUI)    
+        db.button_press.connect(self.decrementUI)
+        hb.button_press.connect(self.continueUI)
+        sb.button_press.connect(self.incrementUI)    
 
     def incrementUI(self):
         global increment_value
         amount = self.insert.value()
-        #amount = amount + initial_amount
         self.insert.setValue(amount+increment_value)
 
     def decrementUI(self):
         global increment_value
         amount = self.insert.value()
-        #amount = amount + initial_amount
         self.insert.setValue(amount-increment_value)
 
     def continueUI(self):
@@ -286,7 +304,6 @@ class Ui_SettingsWindow(QtCore.QObject):
         sb.button_press.disconnect()
         db.button_press.disconnect()
         self.openWindow(self.SettingsWindow)  
-        #self.pushButton.setEnabled(True) # turning push button on               
 
     # SETTINGS OPTIONS/OPEN CONFIRM BOX
     def openWindow(self, settings_w):
@@ -297,8 +314,6 @@ class Ui_SettingsWindow(QtCore.QObject):
         initial_amount = self.startingAmountSpinBox.value()
         game_mode = self.gameModeSelect1ComboBox.currentText()
         user_input = self.insert.value()
-
-        #user_input = self.insert.value()
 
         # opening up the confirmation box with user-selected settings
         self.window = QtWidgets.QDialog()
@@ -473,9 +488,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
-        #self.timer.timeout.connect(sb.check)
         self.timer.timeout.connect(db.check)
-        #self.timer.timeout.connect(eb.check)
 
         # just start one timer
         self.timer.start()
@@ -496,9 +509,9 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         db.button_press.disconnect()
 
         # testing the hw_buttons here
-        hb.button_press.connect(prev_w.decrementNumPlayer)
-        sb.button_press.connect(prev_w.continueNumPlayer)
-        db.button_press.connect(prev_w.incrementNumPlayer)
+        db.button_press.connect(prev_w.decrementNumPlayer)
+        hb.button_press.connect(prev_w.continueNumPlayer)
+        sb.button_press.connect(prev_w.incrementNumPlayer)
 
     def continueConfirmation(self):
         global button_counter
@@ -595,8 +608,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # just start one timer
         self.timer.start()
         #self.bettingButtons()
-        hb.button_press.connect(self.decrementBet)
-        db.button_press.connect(self.incrementBet)
+        db.button_press.connect(self.decrementBet)
+        sb.button_press.connect(self.incrementBet)
         #hb.button_press.connect(self.bet_it(Player_ReadyWindow))
 
     # UPON BET_IT BUTTON PRESS: CLEAR ALL WIDGETS ON THE SCREEN, STORE DESIRED BET FOR GAME
@@ -646,7 +659,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         #hb.button_press.connect(lambda: self.decrementBet)
         #db.button_press.connect(lambda: self.incrementBet)
-        sb.button_press.connect(lambda: self.openWindow(self.p1_mw))
+        hb.button_press.connect(lambda: self.openWindow(self.p1_mw))
 
         self.ready_pushButton.setFont(font16)
         self.ready_pushButton.setObjectName("ok_pushButton")
@@ -654,8 +667,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
     def bettingButtons(self):
         #hb.button_press.disconnect()
-        hb.button_press.connect(self.decrementBet)
-        db.button_press.connect(self.incrementBet)
+        db.button_press.connect(self.decrementBet)
+        sb.button_press.connect(self.incrementBet)
         #sb.button_press.connect(self.continueBet)
 
 ############################
@@ -814,9 +827,7 @@ class Ui_confirm_round(QtCore.QObject):
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
-        #self.timer.timeout.connect(sb.check)
         self.timer.timeout.connect(db.check)
-        #self.timer.timeout.connect(eb.check)
 
         # just start one timer
         self.timer.start()
@@ -906,9 +917,7 @@ class Ui_end_game(QtCore.QObject):
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
-        #self.timer.timeout.connect(sb.check)
         self.timer.timeout.connect(db.check)
-        #self.timer.timeout.connect(eb.check)
 
         # just start one timer
         self.timer.start()
@@ -1079,7 +1088,6 @@ class Ui_GameWindow(QtCore.QObject):
         # just start one timer??
         self.timer.start()
 
-        # TESTING THIS
         hb.button_press.connect(self.hit_it)
         sb.button_press.connect(self.stand_it)
         db.button_press.connect(self.double_it)
@@ -1272,7 +1280,7 @@ class Ui_GameWindow(QtCore.QObject):
         else:
             pass
 
-    # setting up main window and components
+    # setting up main window and components (for one player)
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(WIDTH, HEIGHT)
@@ -1281,6 +1289,9 @@ class Ui_GameWindow(QtCore.QObject):
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+
+        # FOR ONE PLAYER
+        ######################################################################
         self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
         self.your_cards_layout.setObjectName("your_cards_layout")
@@ -1359,6 +1370,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.label.setFont(font10)
         self.label_2.setFont(font10)
         self.label_3.setFont(font10)
+        #########################################################################
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
