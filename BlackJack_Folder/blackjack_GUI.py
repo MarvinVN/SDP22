@@ -1079,6 +1079,12 @@ class Ui_GameWindow(QtCore.QObject):
         # just start one timer??
         self.timer.start()
 
+        # TESTING THIS
+        hb.button_press.connect(self.hit_it)
+        sb.button_press.connect(self.stand_it)
+        db.button_press.connect(self.double_it)
+        eb.button_press.connect(self.exit_it)
+
         while(1):
             msg0 = bj_to_gui_queue.get()
 
