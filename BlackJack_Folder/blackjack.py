@@ -58,9 +58,6 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
             sleep(2)
 
-            bj_to_gui_queue.put(msg0)
-            bj_to_gui_queue.put(msg1)
-
             #gs.dealCards(2)
             # dealing cards to dealer and player 1
             dealer.p1()
@@ -71,6 +68,9 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             gs.players[0].draw(gs.deck, 1)
             dealer.p2()
             gs.players[1].draw(gs.deck, 1)
+
+            bj_to_gui_queue.put(msg0)
+            bj_to_gui_queue.put(msg1)
             #playerTurn(gs.players[1], gs.deck)
         done_round = False
 
