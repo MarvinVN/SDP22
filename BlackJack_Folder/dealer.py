@@ -52,6 +52,7 @@ def shuffle():
     sleep(1)  """
 
     signal(states["shuffler"])  #TODO: test this method with pi
+    print("Dealer is shuffling")
 
 def init_deal():
     """
