@@ -15,6 +15,12 @@ import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
 import blackjack_buttons as bjb
+from adafruit_pn532.spi import PN532_SPI
+from RPi import GPIO
+import board
+import busio
+from digitalio import DigitalInOut
+from time import sleep
 #from RPi import GPIO
 
 # DIMENSIONS OF TOUCH DISPLAY
@@ -82,6 +88,14 @@ db4 = bjb.HWButton(d4)
 sb4 = bjb.HWButton(s4)
 eb4 = bjb.HWButton(e4)
 
+output_pins = [5, 13, 16, 20, 21]
+GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
+
+spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
+cs_pin = DigitalInOut(board.D5)
+pn532 = PN532_SPI(spi, cs_pin, debug=False)
+
+pn532.SAM_configuration()
 
 # BUTTON COUNTER TO KEEP TRACK OF STATE MACHINE
 button_counter = 0
