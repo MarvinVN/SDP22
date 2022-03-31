@@ -88,6 +88,8 @@ def p2():
     GPIO.output(21, GPIO.HIGH)
     sleep(1)
 
+    print("player two card")
+
     #GPIO.output(16, GPIO.LOW)
     #GPIO.output(20, GPIO.LOW)
     GPIO.output(21, GPIO.LOW)
