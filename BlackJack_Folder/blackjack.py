@@ -4,6 +4,7 @@ import dealer
 import multiprocessing as mp
 import blackjack_globals
 import time
+from time import sleep
 
 from blackjack_globals import Message
 

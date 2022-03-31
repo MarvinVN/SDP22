@@ -20,7 +20,7 @@ from RPi import GPIO
 import board
 import busio
 from digitalio import DigitalInOut
-from time import sleep
+#from time import sleep
 #from RPi import GPIO
 
 # DIMENSIONS OF TOUCH DISPLAY
