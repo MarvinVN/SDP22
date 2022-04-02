@@ -1448,7 +1448,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
             self.current_bet_field.setFont(font20)
-            self.current_bet_field.setGeometry(100, 80, 110, 110)
+            self.current_bet_field.setGeometry(100, 30, 110, 110)
             self.current_bet_field.setObjectName("current_bet_field")
 
             # PLAYER 2
@@ -1462,7 +1462,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.amount_left_label.setFont(font10)
-            self.amount_left_label.setGeometry(600, 10, 300, 50)
+            self.amount_left_label.setGeometry(600, 20, 300, 50)
             self.amount_left_label.setObjectName("amount_left_label")
 
             # PLAYER 2
