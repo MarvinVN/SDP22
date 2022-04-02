@@ -1448,7 +1448,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
             self.current_bet_field.setFont(font20)
-            self.current_bet_field.setGeometry(100, 100, 110, 110)
+            self.current_bet_field.setGeometry(100, 80, 110, 110)
             self.current_bet_field.setObjectName("current_bet_field")
 
             # PLAYER 2
@@ -1468,15 +1468,22 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 2
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_amount_left_label.setFont(font10)
-            self.p2_amount_left_label.setGeometry(600, 210, 300, 50)
+            self.p2_amount_left_label.setGeometry(600, 230, 300, 50)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
 
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(600, 280, 100, 150)
+            self.verticalLayoutWidget.setGeometry(600, 80, 100, 150)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout.setObjectName("verticalLayout")
+
+            self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p2_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
+            self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
+            self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.p2_verticalLayout.setObjectName("p2_verticalLayout")
 
             # PLAYER 1 HIT
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -1484,9 +1491,9 @@ class Ui_GameWindow(QtCore.QObject):
             self.verticalLayout.addWidget(self.hit_button)
 
             # PLAYER 2 HIT
-            self.p2_hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
+            self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.p2_hit_button.setObjectName("p2_hit_button")
-            self.verticalLayout.addWidget(self.p2_hit_button)
+            self.p2_verticalLayout.addWidget(self.p2_hit_button)
 
             # PLAYER 1 DOUBLE
             self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
@@ -1494,9 +1501,9 @@ class Ui_GameWindow(QtCore.QObject):
             self.verticalLayout.addWidget(self.double_button)
 
             # PLAYER 2 DOUBLE
-            self.p2_double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
+            self.p2_double_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.double_it())
             self.p2_double_button.setObjectName("p2_double_button")
-            self.verticalLayout.addWidget(self.p2_double_button)
+            self.p2_verticalLayout.addWidget(self.p2_double_button)
 
             # PLAYER 1 STAND
             self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
@@ -1504,9 +1511,9 @@ class Ui_GameWindow(QtCore.QObject):
             self.verticalLayout.addWidget(self.stand_button)
 
             # PLAYER 2 STAND
-            self.p2_stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
+            self.p2_stand_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.p2_stand_button.setObjectName("p2_stand_button")
-            self.verticalLayout.addWidget(self.p2_stand_button)
+            self.p2_verticalLayout.addWidget(self.p2_stand_button)
 
             # PLAYER 1
             self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
@@ -1514,27 +1521,27 @@ class Ui_GameWindow(QtCore.QObject):
             self.verticalLayout.addWidget(self.exit_button)
 
             # PLAYER 2
-            self.p2_exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
+            self.p2_exit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.p2_exit_button.setObjectName("p2_exit_button")
-            self.verticalLayout.addWidget(self.p2_exit_button)
+            self.p2_verticalLayout.addWidget(self.p2_exit_button)
 
 
             self.label = QtWidgets.QLabel(self.centralwidget)
-            self.label.setGeometry(355, 200, 110, 110)
+            self.label.setGeometry(355, 10, 110, 110)
             self.label.setObjectName("label")
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
-            self.label_3.setGeometry(110, 30, 110, 110)
+            self.label_3.setGeometry(110, 15, 110, 110)
             self.label_3.setObjectName("label_3")
             self.label.setFont(font10)
             self.label_3.setFont(font10)
 
             # PLAYER 2 LABELS
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_label.setGeometry(355, 140, 110, 110)
-            self.p2_label.setObjectName("label")
+            self.p2_label.setGeometry(355, 200, 110, 110)
+            self.p2_label.setObjectName("p2_label")
             self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
-            self.p2_label_2.setGeometry(355, 230, 140, 110)
-            self.p2_label_2.setObjectName("label_2")
+            self.p2_label_2.setGeometry(110, 230, 140, 110)
+            self.p2_label_2.setObjectName("p2_label_2")
             self.p2_label.setFont(font10)
             self.p2_label_2.setFont(font10)
             self.p2_label.setText("Your Cards:")
