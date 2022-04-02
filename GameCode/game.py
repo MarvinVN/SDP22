@@ -1,7 +1,7 @@
 import random
 import serial
 import time
-import test
+import RFID
 import dealer
 
 class Card:
@@ -72,7 +72,7 @@ class Deck:
         """
         random.shuffle(self.cards)
 
-    def removeCard(self, card):
+    def scan(self, card):
         if any(x.Str == card.Str for x in self.cardsused):
             print("CHEATING DETECTED, CARD ALREADY USED")
             while True:
@@ -93,44 +93,19 @@ class Deck:
             'K': 13
         }
 
-        card = test.RFID()
+        card = RFID.read()
         print(card)
         rank, suit = card[:-1], card[-1]
         if rank in switch.keys():
             rank = switch[rank]
         res = Card(int(rank), suit, card)
 
-        self.removeCard(res)
+        self.scan(res)
 
         res.show()
         dealer.scanConfirm() #signal that card has been scanned
         #return self.cards.pop()
         return res
-
-    #TODO: integrate libnfc with this function or with deal function
-    def RFID(self):
-        port = '/dev/cu.usbserial-1410'
-        baudrate = 115200
-        ser = serial.Serial(port,baudrate,timeout=1)
-        x = '1'
-        data = ''
-        print("waiting for Card")
-        while len(data) < 1 or data in self.cardsused:
-            try:
-                time.sleep(2)
-                ser.write(bytes(x, 'utf-8'))
-                time.sleep(2)
-                data = ser.readline().decode()
-            except:
-                print("Error")
-        if len(data) > 2:
-            print(data)
-            print("CHEATING DECTECTED")
-            while True:
-                time.sleep(1)
-        else:
-            print(data)
-        return data
 
     #calls show() on each card to print out current deck
     def show(self):
