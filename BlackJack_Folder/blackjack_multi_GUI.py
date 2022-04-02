@@ -1303,7 +1303,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         
-        if self.numPlayers == 1:
+        if str(self.numPlayers) == "1":
             # FOR ONE PLAYER
             ######################################################################
             #
@@ -1397,7 +1397,7 @@ class Ui_GameWindow(QtCore.QObject):
         ######################################################################
         #
         #
-        elif self.numPlayers == 2:
+        elif str(self.numPlayers) == "2":
             # LAYOUTS FOR EACH PLAYER
             self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             self.horizontalLayoutWidget.setGeometry(250, 30, 300, 150)
