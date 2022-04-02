@@ -1411,7 +1411,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.your_cards_layout.setObjectName("your_cards_layout")
 
-            self.p2_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_p2)
+            self.p2_cards_layout = QtWidgets.QHBoxLayout(self.p2_horizontalLayoutWidget)
             self.p2_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.p2_cards_layout.setObjectName("p2_cards_layout")
 
