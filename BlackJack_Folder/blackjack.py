@@ -53,6 +53,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             gs.deck.build() #testing
             gs.deck.shuffle() #testing
 
+            """
             # adding dealer shuffle
             dealer.shuffle()
 
@@ -68,6 +69,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             gs.players[0].draw(gs.deck, 1)
             dealer.p2()
             gs.players[1].draw(gs.deck, 1)
+
+            """
 
             bj_to_gui_queue.put(msg0)
             bj_to_gui_queue.put(msg1)
@@ -146,7 +149,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
             elif msg.id == "hit":
                 gs.players[1].draw(gs.deck, 1)
-                dealer.p2()
+                #dealer.p2()
 
                 if checkValue(gs.players[1].hand) > 21:
                     
@@ -195,7 +198,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             elif msg.id == "double":
                 # only adding original bet, since original bet was already included
                 gs.players[1].draw(gs.deck, 1)
-                dealer.p2()
+                #dealer.p2()
 
                 msg1 = Message("player_cards", gs.players[1].hand)
                 bj_to_gui_queue.put(msg1)
@@ -291,7 +294,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 pass
 
             gs.resetHands()#test
-            #gs.dealCards(2)
+            gs.dealCards(2)
+            """
             dealer.p1()
             gs.players[0].draw(gs.deck, 1)
             dealer.p2()
@@ -300,6 +304,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             gs.players[0].draw(gs.deck, 1)
             dealer.p2()
             gs.players[1].draw(gs.deck, 1)
+            """
 
 
             # temporary for one player:
