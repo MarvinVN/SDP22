@@ -1400,7 +1400,7 @@ class Ui_GameWindow(QtCore.QObject):
         elif str(self.numPlayers) == "2":
             # LAYOUTS FOR EACH PLAYER
             self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.horizontalLayoutWidget.setGeometry(250, 30, 300, 150)
+            self.horizontalLayoutWidget.setGeometry(250, 5, 300, 150)
             self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
 
             self.p2_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
@@ -1472,7 +1472,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
 
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(600, 80, 100, 150)
+            self.verticalLayoutWidget.setGeometry(600, 20, 100, 150)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
