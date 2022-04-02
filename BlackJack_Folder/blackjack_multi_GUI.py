@@ -737,8 +737,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.bet = self.scroll_bet.value()
         #self.bet = int(self.user_bet.text())
         self.ui.current_bet_field.setPlainText(str(self.bet))
-        self.ui.your_cards_left_field.setPlainText(str(self.player_cards[0]))
-        self.ui.your_cards_right_field.setPlainText(str(self.player_cards[1]))
+        self.ui.your_cards_left_field.setPlainText(str(self.player_cards))
+        #self.ui.your_cards_right_field.setPlainText(str(self.player_cards[1]))
         #self.ui.dealer_left_field.setPlainText(str(self.dealer_cards[0]))
         #self.ui.dealer_right_field.setPlainText(str(self.dealer_cards[1]))
 
