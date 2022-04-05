@@ -59,17 +59,6 @@ class Deck:
 
     #currently just shuffles digital deck, can think about importing/using dealer.py here
     def shuffle(self):
-        """
-        print("Shuffling")
-        port = '/dev/cu.usbserial-1410'
-        baudrate = 115200
-        x = '0'
-        ser = serial.Serial(port, baudrate, timeout=1)
-        time.sleep(2)
-        ser.write(bytes(x, 'utf-8'))
-        time.sleep(6)     
-        #shuffle the deck
-        """
         random.shuffle(self.cards)
 
     def scan(self, card):
@@ -96,15 +85,15 @@ class Deck:
         card = RFID.read()
         print(card)
         rank, suit = card[:-1], card[-1]
+
         if rank in switch.keys():
             rank = switch[rank]
+
         res = Card(int(rank), suit, card)
-
         self.scan(res)
-
         res.show()
         dealer.scanConfirm() #signal that card has been scanned
-        #return self.cards.pop()
+        
         return res
 
     #calls show() on each card to print out current deck

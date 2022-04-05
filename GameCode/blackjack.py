@@ -18,27 +18,24 @@ input_pins = [x for pins in player_buttons.values() for x in pins.values()]
 output_pins = [5,13,16,20,21]
 #5 for RFID, 13 for confirm, [16,20,21] for ATmega comm.
 
-# RPi GPIO setup
+# Hardware setup (RPi GPIO and RFID)
 GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(input_pins, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
 
-
 spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
 cs_pin = DigitalInOut(board.D5)
 pn532 = PN532_SPI(spi, cs_pin, debug=False)
-
 pn532.SAM_configuration()
 
-
 def main():
-    gs = gameState(1) #initialize gamestate
-    while(1):   #main game loop
-        totals = [] #list of hand totals
+    gs = gameState(1)
 
-        #set up gamestate
+    #main game loop
+    while(1):
+        totals = []
         players = (int)(input("How many people are playing?\n"))
         gs.setPlayers(players)
         gs.resetHands()
@@ -56,27 +53,25 @@ def main():
             dealer.init_deal() #need to be adjusted for 1-3 players
             gs.dealCards(2) #arg = num of cards
         if players == 1:
-            dealer.p1()
+            dealer.p0()
             gs.players[0].draw(gs.deck, 1)
-            dealer.p2()
+            dealer.p1()
             gs.players[1].draw(gs.deck, 1)
-            dealer.p1()
+            dealer.p0()
             gs.players[0].draw(gs.deck, 1)
-            dealer.p2()
+            dealer.p1()
             gs.players[1].draw(gs.deck, 1)
         
-        totals.append(0) #temp dealer score; needs to be calculated after players
+        totals.append(0) #temp dealer score; will be calculated after players' turn
 
-        #loop through players turns
         for x in range(1, gs.numPlay):
             totals.append(playerTurn(gs.players[x], gs.deck))
 
-        #dealer turn
         totals[0] = dealerTurn(gs.players[0], gs.deck)
 
         score(gs.players, totals)
 
-        gs.showWallets() #debugging purposes
+        gs.showWallets()
         
         print("Play again? (hit for yes, stand for no)\n")
         play_again = button_move(1) #player 1 decides to continue the game
@@ -89,15 +84,15 @@ def main():
 #takes in player.pos to physically deal a card to the appropriate player
 def playerDraw(pos):
     if pos == 0:
-        dealer.p1()
+        dealer.p0()
     elif pos == 1:
-        dealer.p2()
+        dealer.p1()
     elif pos == 2:
-        dealer.p3()
+        dealer.p2()
     elif pos == 3:
-        dealer.p4()
+        dealer.p3()
     elif pos == 4:
-        dealer.p5()
+        dealer.p4()
 
 #takes in the player and deck as args, returns the value of player's hand    
 def playerTurn(player, deck):
@@ -106,7 +101,7 @@ def playerTurn(player, deck):
     player.addBet(bet) 
     while move != 's':  #player move loop
         total = checkValue(player.hand)
-        player.showHand()   #display cards in GUI
+        player.showHand()
         print("Total value: {}".format(total))
 
         sleep(.5)
@@ -166,6 +161,7 @@ def button_move(pos):
 #takes a player's hand; returns value
 def checkValue(hand):
     val = 0
+    #sort and add Aces last so choose between 1/11 values
     hand.sort(key=lambda x: x.rank, reverse=True)
     for x in hand:
         if x.rank in [13, 12, 11]: #K, Q, J
@@ -179,10 +175,9 @@ def checkValue(hand):
             val += x.rank
     return val
 
-#takes in players and totals; handles resulting win/losses --> will need to clean up later
 def score(players, totals):
     dealer_score = totals[0]
-    print("Totals: {}".format(totals)) #debug
+    print("Totals: {}".format(totals))
     if dealer_score > 21:
         for x in range(1, len(players)):
             if totals[x] > 21:

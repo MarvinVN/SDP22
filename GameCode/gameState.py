@@ -10,7 +10,6 @@ class gameState:
 
     #set amount of players for current game
     def setPlayers(self, numPlay):
-        #will probably be unneeded; use the 4 buttons to choose 1-4 players
         if numPlay not in [1, 2, 3, 4]:
             return False 
 

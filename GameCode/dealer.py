@@ -8,18 +8,12 @@ states = {
     "idle": [0,0,0],
     "shuffler": [0,0,1],
     "init_deal": [0,1,0],
-    "p1": [0,1,1],
-    "p2": [1,0,0],
-    "p3": [1,0,1],
-    "p4": [1,1,0],
-    "p5": [1,1,1]
+    "p0": [0,1,1],
+    "p1": [1,0,0],
+    "p2": [1,0,1],
+    "p3": [1,1,0],
+    "p4": [1,1,1]
 }
-
-#already called in blackjack.py; sets up GPIO
-#GPIO.setmode(GPIO.BCM)
-
-#already done in blackjack.py; initalize all pins in list as output and LOW
-#GPIO.setup(pin_list, GPIO.OUT, initial=GPIO.LOW)
 
 def scanConfirm():
     GPIO.output(confirm_pin, GPIO.HIGH)
@@ -53,7 +47,7 @@ def shuffle():
     #GPIO.output(21, GPIO.LOW)
     sleep(1)  """
 
-    signal(states["shuffler"])  #TODO: test this method with pi
+    signal(states["shuffler"])
 
 def init_deal():
     """
@@ -71,20 +65,23 @@ def init_deal():
     signal(states["init_deal"])    
 
 
-def p1():
+def p0():
+    """"
     GPIO.output(16, GPIO.HIGH)
     GPIO.output(20, GPIO.HIGH)
     #GPIO.output(21, GPIO.HIGH)
     sleep(2)
 
-    print("player one card")
-
     GPIO.output(16, GPIO.LOW)
     GPIO.output(20, GPIO.LOW)
     #GPIO.output(21, GPIO.LOW)
-    sleep(1)    
+    sleep(1)"""
 
-def p2():
+    print("dealer card")
+    signal(states["p0"])
+
+def p1():
+    """
     #GPIO.output(16, GPIO.HIGH)
     #GPIO.output(20, GPIO.HIGH)
     GPIO.output(21, GPIO.HIGH)
@@ -93,9 +90,13 @@ def p2():
     #GPIO.output(16, GPIO.LOW)
     #GPIO.output(20, GPIO.LOW)
     GPIO.output(21, GPIO.LOW)
-    sleep(1)    
+    sleep(1)"""
 
-def p3():
+    print("player one card")
+    signal(states["p1"])  
+
+def p2():
+    """
     GPIO.output(16, GPIO.HIGH)
     #GPIO.output(20, GPIO.HIGH)
     GPIO.output(21, GPIO.HIGH)
@@ -106,9 +107,13 @@ def p3():
     GPIO.output(16, GPIO.LOW)
     #GPIO.output(20, GPIO.LOW)
     GPIO.output(21, GPIO.LOW)
-    sleep(1)    
+    sleep(1)"""
 
-def p4():
+    print("player two card")
+    signal(states["p2"]) 
+
+def p3():
+    """
     #GPIO.output(16, GPIO.HIGH)
     GPIO.output(20, GPIO.HIGH)
     GPIO.output(21, GPIO.HIGH)
@@ -119,10 +124,14 @@ def p4():
     #GPIO.output(16, GPIO.LOW)
     GPIO.output(20, GPIO.LOW)
     GPIO.output(21, GPIO.LOW)
-    sleep(1)    
+    sleep(1)"""
+
+    print("player three card")
+    signal(states["p3"])
 
 
-def p5():
+def p4():
+    """
     GPIO.output(16, GPIO.HIGH)
     GPIO.output(20, GPIO.HIGH)
     GPIO.output(21, GPIO.HIGH)
@@ -133,19 +142,7 @@ def p5():
     GPIO.output(16, GPIO.LOW)
     GPIO.output(20, GPIO.LOW)
     GPIO.output(21, GPIO.LOW)
-    sleep(1)    
+    sleep(1) """
 
-"""""
-#GPIO.cleanup() #reset pins
-#TEST-----
-
-#already called in blackjack.py; sets up GPIO
-GPIO.setmode(GPIO.BCM)
-
-#already done in blackjack.py; initalize all pins in list as output and LOW
-GPIO.setup(pin_list, GPIO.OUT, initial=GPIO.LOW)
-
-init_deal()
-
-GPIO.cleanup()
-"""
+    print("player two card")
+    signal(states["p2"]) 
