@@ -2128,7 +2128,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
         self.p2_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
         self.p3_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
-        #self.p4_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
+        self.p4_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
                 
         self.hit_button.setText(_translate("MainWindow", "HIT"))
         self.p2_hit_button.setText(_translate("MainWindow", "HIT"))
