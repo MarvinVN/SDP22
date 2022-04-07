@@ -1544,11 +1544,572 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_label_2.setObjectName("p2_label_2")
             self.p2_label.setFont(font10)
             self.p2_label_2.setFont(font10)
-            self.p2_label.setText("Your Cards:")
-            self.p2_label_2.setText("Current Bet:")
+            self.p2_label.setText("P2 Cards:")
+            self.p2_label_2.setText("P2 Bet:")
         #
         #
         #########################################################################
+        #
+        #
+        #########################################################################
+
+        # FOR THREE PLAYERS
+        ######################################################################
+        #
+        #
+        elif str(self.numPlayers) == "3":
+            # LAYOUTS FOR EACH PLAYER
+            # PLAYER 1
+            self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.horizontalLayoutWidget.setGeometry(250, 5, 300, 150)
+            self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+
+            # PLAYER 2
+            self.p2_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p2_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            self.p2_horizontalLayoutWidget.setObjectName("p2_horizontalLayoutWidget")
+
+            # PLAYER 3
+            self.p3_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p3_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            self.p3_horizontalLayoutWidget.setObjectName("p3_horizontalLayoutWidget")
+
+            # PLAYER 1
+            self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
+            self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
+            self.your_cards_layout.setObjectName("your_cards_layout")
+
+            # PLAYER 2
+            self.p2_cards_layout = QtWidgets.QHBoxLayout(self.p2_horizontalLayoutWidget)
+            self.p2_cards_layout.setContentsMargins(0, 0, 0, 0)
+            self.p2_cards_layout.setObjectName("p2_cards_layout")
+
+            # PLAYER 3
+            self.p3_cards_layout = QtWidgets.QHBoxLayout(self.p3_horizontalLayoutWidget)
+            self.p3_cards_layout.setContentsMargins(0, 0, 0, 0)
+            self.p3_cards_layout.setObjectName("p3_cards_layout")
+
+            # PLAYING CARD FIELDS
+
+            # PLAYER 1
+            self.your_cards_left_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget,
+                readOnly=True)
+            self.your_cards_left_field.setObjectName("your_cards_left_field")
+            self.your_cards_left_field.setFont(font20)
+            self.your_cards_layout.addWidget(self.your_cards_left_field)
+
+            self.your_cards_right_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget,
+                readOnly=True)
+            self.your_cards_right_field.setObjectName("your_cards_right_field")
+            self.your_cards_right_field.setFont(font20)
+            self.your_cards_layout.addWidget(self.your_cards_right_field)
+
+            # PLAYER 2
+            self.p2_left_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget,
+                readOnly=True)
+            self.p2_left_field.setObjectName("p2_left_field")
+            self.p2_left_field.setFont(font20)
+            self.p2_cards_layout.addWidget(self.p2_left_field)
+
+            self.p2_right_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget,
+                readOnly=True)
+            self.p2_right_field.setObjectName("p2_right_field")
+            self.p2_right_field.setFont(font20)
+            self.p2_cards_layout.addWidget(self.p2_right_field)
+
+            # PLAYER 3
+            self.p3_left_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget,
+                readOnly=True)
+            self.p3_left_field.setObjectName("p3_left_field")
+            self.p3_left_field.setFont(font20)
+            self.p3_cards_layout.addWidget(self.p3_left_field)
+
+            self.p3_right_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget,
+                readOnly=True)
+            self.p3_right_field.setObjectName("p3_right_field")
+            self.p3_right_field.setFont(font20)
+            self.p3_cards_layout.addWidget(self.p3_right_field)
+
+
+            # CURRENT BET FIELDS
+            # PLAYER 1
+            self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.current_bet_field.setFont(font20)
+            self.current_bet_field.setGeometry(100, 30, 110, 110)
+            self.current_bet_field.setObjectName("current_bet_field")
+
+            # PLAYER 2
+            self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.p2_current_bet_field.setFont(font20)
+            self.p2_current_bet_field.setGeometry(100, 310, 110, 110)
+            self.p2_current_bet_field.setObjectName("p2_current_bet_field")
+
+            # PLAYER 3
+            self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.p3_current_bet_field.setFont(font20)
+            self.p3_current_bet_field.setGeometry(100, 310, 110, 110)
+            self.p3_current_bet_field.setObjectName("p3_current_bet_field")            
+
+            # AMOUNT LEFT LABELS
+            # PLAYER 1
+            self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
+            self.amount_left_label.setFont(font10)
+            self.amount_left_label.setGeometry(600, 20, 300, 50)
+            self.amount_left_label.setObjectName("amount_left_label")
+
+            # PLAYER 2
+            self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
+            self.p2_amount_left_label.setFont(font10)
+            self.p2_amount_left_label.setGeometry(600, 230, 300, 50)
+            self.p2_amount_left_label.setObjectName("p2_amount_left_label")
+
+            # PLAYER 3
+            self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
+            self.p3_amount_left_label.setFont(font10)
+            self.p3_amount_left_label.setGeometry(600, 230, 300, 50)
+            self.p3_amount_left_label.setObjectName("p3_amount_left_label")
+
+            # PLAYER 1 LAYOUT
+            self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.verticalLayoutWidget.setGeometry(600, 20, 100, 150)
+            self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+            self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.verticalLayout.setObjectName("verticalLayout")
+
+            # PLAYER 2 LAYOUT
+            self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p2_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
+            self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
+            self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.p2_verticalLayout.setObjectName("p2_verticalLayout")
+
+            # PLAYER 3 LAYOUT
+            self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p3_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
+            self.p3_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.p3_verticalLayout = QtWidgets.QVBoxLayout(self.p3_verticalLayoutWidget)
+            self.p3_verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.p3_verticalLayout.setObjectName("p3_verticalLayout")
+
+            # PLAYER 1 HIT
+            self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
+            self.hit_button.setObjectName("hit_button")
+            self.verticalLayout.addWidget(self.hit_button)
+
+            # PLAYER 2 HIT
+            self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
+            self.p2_hit_button.setObjectName("p2_hit_button")
+            self.p2_verticalLayout.addWidget(self.p2_hit_button)
+
+            # PLAYER 3 HIT
+            self.p3_hit_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.hit_it())
+            self.p3_hit_button.setObjectName("p3_hit_button")
+            self.p3_verticalLayout.addWidget(self.p3_hit_button)
+
+            # PLAYER 1 DOUBLE
+            self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
+            self.double_button.setObjectName("double_button")
+            self.verticalLayout.addWidget(self.double_button)
+
+            # PLAYER 2 DOUBLE
+            self.p2_double_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.double_it())
+            self.p2_double_button.setObjectName("p2_double_button")
+            self.p2_verticalLayout.addWidget(self.p2_double_button)
+
+            # PLAYER 3 DOUBLE
+            self.p3_double_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.double_it())
+            self.p3_double_button.setObjectName("p3_double_button")
+            self.p3_verticalLayout.addWidget(self.p3_double_button)
+
+            # PLAYER 1 STAND
+            self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
+            self.stand_button.setObjectName("stand_button")
+            self.verticalLayout.addWidget(self.stand_button)
+
+            # PLAYER 2 STAND
+            self.p2_stand_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.stand_it())
+            self.p2_stand_button.setObjectName("p2_stand_button")
+            self.p2_verticalLayout.addWidget(self.p2_stand_button)
+
+            # PLAYER 3 STAND
+            self.p3_stand_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.stand_it())
+            self.p3_stand_button.setObjectName("p3_stand_button")
+            self.p3_verticalLayout.addWidget(self.p3_stand_button)
+
+            # PLAYER 1
+            self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
+            self.exit_button.setObjectName("exit_button")
+            self.verticalLayout.addWidget(self.exit_button)
+
+            # PLAYER 2
+            self.p2_exit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.exit_it())
+            self.p2_exit_button.setObjectName("p2_exit_button")
+            self.p2_verticalLayout.addWidget(self.p2_exit_button)
+
+            # PLAYER 3
+            self.p3_exit_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.exit_it())
+            self.p3_exit_button.setObjectName("p3_exit_button")
+            self.p3_verticalLayout.addWidget(self.p3_exit_button)
+
+            # PLAYER 1
+            self.label = QtWidgets.QLabel(self.centralwidget)
+            self.label.setGeometry(355, 10, 110, 110)
+            self.label.setObjectName("label")
+            self.label_3 = QtWidgets.QLabel(self.centralwidget)
+            self.label_3.setGeometry(110, 15, 110, 110)
+            self.label_3.setObjectName("label_3")
+            self.label.setFont(font10)
+            self.label_3.setFont(font10)
+
+            # PLAYER 2 LABELS
+            self.p2_label = QtWidgets.QLabel(self.centralwidget)
+            self.p2_label.setGeometry(355, 200, 110, 110)
+            self.p2_label.setObjectName("p2_label")
+            self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
+            self.p2_label_2.setGeometry(110, 230, 140, 110)
+            self.p2_label_2.setObjectName("p2_label_2")
+            self.p2_label.setFont(font10)
+            self.p2_label_2.setFont(font10)
+            self.p2_label.setText("Your Cards:")
+            self.p2_label_2.setText("Current Bet:")
+
+            # PLAYER 3 LABELS
+            self.p3_label = QtWidgets.QLabel(self.centralwidget)
+            self.p3_label.setGeometry(355, 200, 110, 110)
+            self.p3_label.setObjectName("p3_label")
+            self.p3_label_2 = QtWidgets.QLabel(self.centralwidget)
+            self.p3_label_2.setGeometry(110, 230, 140, 110)
+            self.p3_label_2.setObjectName("p3_label_2")
+            self.p3_label.setFont(font10)
+            self.p3_label_2.setFont(font10)
+            self.p3_label.setText("Your Cards:")
+            self.p3_label_2.setText("Current Bet:")
+        #
+        #
+        #########################################################################
+
+        # FOR FOUR PLAYERS
+        ######################################################################
+        #
+        #
+        elif str(self.numPlayers) == "4":
+            # LAYOUTS FOR EACH PLAYER
+            # PLAYER 1
+            self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.horizontalLayoutWidget.setGeometry(250, 5, 300, 150)
+            self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+
+            # PLAYER 2
+            self.p2_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p2_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            self.p2_horizontalLayoutWidget.setObjectName("p2_horizontalLayoutWidget")
+
+            # PLAYER 3
+            self.p3_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p3_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            self.p3_horizontalLayoutWidget.setObjectName("p3_horizontalLayoutWidget")
+
+            # PLAYER 4
+            self.p4_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p4_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            self.p4_horizontalLayoutWidget.setObjectName("p4_horizontalLayoutWidget")
+
+            # PLAYER 1
+            self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
+            self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
+            self.your_cards_layout.setObjectName("your_cards_layout")
+
+            # PLAYER 2
+            self.p2_cards_layout = QtWidgets.QHBoxLayout(self.p2_horizontalLayoutWidget)
+            self.p2_cards_layout.setContentsMargins(0, 0, 0, 0)
+            self.p2_cards_layout.setObjectName("p2_cards_layout")
+
+            # PLAYER 3
+            self.p3_cards_layout = QtWidgets.QHBoxLayout(self.p3_horizontalLayoutWidget)
+            self.p3_cards_layout.setContentsMargins(0, 0, 0, 0)
+            self.p3_cards_layout.setObjectName("p3_cards_layout")
+
+            # PLAYER 4
+            self.p4_cards_layout = QtWidgets.QHBoxLayout(self.p4_horizontalLayoutWidget)
+            self.p4_cards_layout.setContentsMargins(0, 0, 0, 0)
+            self.p4_cards_layout.setObjectName("p4_cards_layout")
+
+            # PLAYING CARD FIELDS
+
+            # PLAYER 1
+            self.your_cards_left_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget,
+                readOnly=True)
+            self.your_cards_left_field.setObjectName("your_cards_left_field")
+            self.your_cards_left_field.setFont(font20)
+            self.your_cards_layout.addWidget(self.your_cards_left_field)
+
+            self.your_cards_right_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget,
+                readOnly=True)
+            self.your_cards_right_field.setObjectName("your_cards_right_field")
+            self.your_cards_right_field.setFont(font20)
+            self.your_cards_layout.addWidget(self.your_cards_right_field)
+
+            # PLAYER 2
+            self.p2_left_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget,
+                readOnly=True)
+            self.p2_left_field.setObjectName("p2_left_field")
+            self.p2_left_field.setFont(font20)
+            self.p2_cards_layout.addWidget(self.p2_left_field)
+
+            self.p2_right_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget,
+                readOnly=True)
+            self.p2_right_field.setObjectName("p2_right_field")
+            self.p2_right_field.setFont(font20)
+            self.p2_cards_layout.addWidget(self.p2_right_field)
+
+            # PLAYER 3
+            self.p3_left_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget,
+                readOnly=True)
+            self.p3_left_field.setObjectName("p3_left_field")
+            self.p3_left_field.setFont(font20)
+            self.p3_cards_layout.addWidget(self.p3_left_field)
+
+            self.p3_right_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget,
+                readOnly=True)
+            self.p3_right_field.setObjectName("p3_right_field")
+            self.p3_right_field.setFont(font20)
+            self.p3_cards_layout.addWidget(self.p3_right_field)
+
+            # PLAYER 4
+            self.p4_left_field = QtWidgets.QPlainTextEdit(self.p4_horizontalLayoutWidget,
+                readOnly=True)
+            self.p4_left_field.setObjectName("p4_left_field")
+            self.p4_left_field.setFont(font20)
+            self.p4_cards_layout.addWidget(self.p4_left_field)
+
+            self.p4_right_field = QtWidgets.QPlainTextEdit(self.p4_horizontalLayoutWidget,
+                readOnly=True)
+            self.p4_right_field.setObjectName("p4_right_field")
+            self.p4_right_field.setFont(font20)
+            self.p4_cards_layout.addWidget(self.p4_right_field)
+
+
+            # CURRENT BET FIELDS
+            # PLAYER 1
+            self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.current_bet_field.setFont(font20)
+            self.current_bet_field.setGeometry(100, 30, 110, 110)
+            self.current_bet_field.setObjectName("current_bet_field")
+
+            # PLAYER 2
+            self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.p2_current_bet_field.setFont(font20)
+            self.p2_current_bet_field.setGeometry(100, 310, 110, 110)
+            self.p2_current_bet_field.setObjectName("p2_current_bet_field")
+
+            # PLAYER 3
+            self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.p3_current_bet_field.setFont(font20)
+            self.p3_current_bet_field.setGeometry(100, 310, 110, 110)
+            self.p3_current_bet_field.setObjectName("p3_current_bet_field")
+
+            # PLAYER 4
+            self.p4_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.p4_current_bet_field.setFont(font20)
+            self.p4_current_bet_field.setGeometry(100, 310, 110, 110)
+            self.p4_current_bet_field.setObjectName("p4_current_bet_field")            
+
+            # AMOUNT LEFT LABELS
+            # PLAYER 1
+            self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
+            self.amount_left_label.setFont(font10)
+            self.amount_left_label.setGeometry(600, 20, 300, 50)
+            self.amount_left_label.setObjectName("amount_left_label")
+
+            # PLAYER 2
+            self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
+            self.p2_amount_left_label.setFont(font10)
+            self.p2_amount_left_label.setGeometry(600, 230, 300, 50)
+            self.p2_amount_left_label.setObjectName("p2_amount_left_label")
+
+            # PLAYER 3
+            self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
+            self.p3_amount_left_label.setFont(font10)
+            self.p3_amount_left_label.setGeometry(600, 230, 300, 50)
+            self.p3_amount_left_label.setObjectName("p3_amount_left_label")
+
+            # PLAYER 4
+            self.p4_amount_left_label = QtWidgets.QLabel(self.centralwidget)
+            self.p4_amount_left_label.setFont(font10)
+            self.p4_amount_left_label.setGeometry(600, 230, 300, 50)
+            self.p4_amount_left_label.setObjectName("p4_amount_left_label")
+
+            # PLAYER 1 LAYOUT
+            self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.verticalLayoutWidget.setGeometry(600, 20, 100, 150)
+            self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+            self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.verticalLayout.setObjectName("verticalLayout")
+
+            # PLAYER 2 LAYOUT
+            self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p2_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
+            self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
+            self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.p2_verticalLayout.setObjectName("p2_verticalLayout")
+
+            # PLAYER 3 LAYOUT
+            self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p3_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
+            self.p3_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.p3_verticalLayout = QtWidgets.QVBoxLayout(self.p3_verticalLayoutWidget)
+            self.p3_verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.p3_verticalLayout.setObjectName("p3_verticalLayout")
+
+            # PLAYER 4 LAYOUT
+            self.p4_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p4_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
+            self.p4_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.p4_verticalLayout = QtWidgets.QVBoxLayout(self.p4_verticalLayoutWidget)
+            self.p4_verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.p4_verticalLayout.setObjectName("p4_verticalLayout")
+
+            # PLAYER 1 HIT
+            self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
+            self.hit_button.setObjectName("hit_button")
+            self.verticalLayout.addWidget(self.hit_button)
+
+            # PLAYER 2 HIT
+            self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
+            self.p2_hit_button.setObjectName("p2_hit_button")
+            self.p2_verticalLayout.addWidget(self.p2_hit_button)
+
+            # PLAYER 3 HIT
+            self.p3_hit_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.hit_it())
+            self.p3_hit_button.setObjectName("p3_hit_button")
+            self.p3_verticalLayout.addWidget(self.p3_hit_button)
+
+            # PLAYER 4 HIT
+            self.p4_hit_button = QtWidgets.QPushButton(self.p4_verticalLayoutWidget, clicked=lambda: self.hit_it())
+            self.p4_hit_button.setObjectName("p4_hit_button")
+            self.p4_verticalLayout.addWidget(self.p4_hit_button)
+
+            # PLAYER 1 DOUBLE
+            self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
+            self.double_button.setObjectName("double_button")
+            self.verticalLayout.addWidget(self.double_button)
+
+            # PLAYER 2 DOUBLE
+            self.p2_double_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.double_it())
+            self.p2_double_button.setObjectName("p2_double_button")
+            self.p2_verticalLayout.addWidget(self.p2_double_button)
+
+            # PLAYER 3 DOUBLE
+            self.p3_double_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.double_it())
+            self.p3_double_button.setObjectName("p3_double_button")
+            self.p3_verticalLayout.addWidget(self.p3_double_button)
+
+            # PLAYER 4 DOUBLE
+            self.p4_double_button = QtWidgets.QPushButton(self.p4_verticalLayoutWidget, clicked=lambda: self.double_it())
+            self.p4_double_button.setObjectName("p4_double_button")
+            self.p4_verticalLayout.addWidget(self.p4_double_button)
+
+            # PLAYER 1 STAND
+            self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
+            self.stand_button.setObjectName("stand_button")
+            self.verticalLayout.addWidget(self.stand_button)
+
+            # PLAYER 2 STAND
+            self.p2_stand_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.stand_it())
+            self.p2_stand_button.setObjectName("p2_stand_button")
+            self.p2_verticalLayout.addWidget(self.p2_stand_button)
+
+            # PLAYER 3 STAND
+            self.p3_stand_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.stand_it())
+            self.p3_stand_button.setObjectName("p3_stand_button")
+            self.p3_verticalLayout.addWidget(self.p3_stand_button)
+
+            # PLAYER 4 STAND
+            self.p4_stand_button = QtWidgets.QPushButton(self.p4_verticalLayoutWidget, clicked=lambda: self.stand_it())
+            self.p4_stand_button.setObjectName("p4_stand_button")
+            self.p4_verticalLayout.addWidget(self.p4_stand_button)
+
+            # PLAYER 1
+            self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
+            self.exit_button.setObjectName("exit_button")
+            self.verticalLayout.addWidget(self.exit_button)
+
+            # PLAYER 2
+            self.p2_exit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.exit_it())
+            self.p2_exit_button.setObjectName("p2_exit_button")
+            self.p2_verticalLayout.addWidget(self.p2_exit_button)
+
+            # PLAYER 3
+            self.p3_exit_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.exit_it())
+            self.p3_exit_button.setObjectName("p3_exit_button")
+            self.p3_verticalLayout.addWidget(self.p3_exit_button)
+
+            # PLAYER 4
+            self.p4_exit_button = QtWidgets.QPushButton(self.p4_verticalLayoutWidget, clicked=lambda: self.exit_it())
+            self.p4_exit_button.setObjectName("p4_exit_button")
+            self.p4_verticalLayout.addWidget(self.p4_exit_button)
+
+            # PLAYER 1
+            self.label = QtWidgets.QLabel(self.centralwidget)
+            self.label.setGeometry(355, 10, 110, 110)
+            self.label.setObjectName("label")
+            self.label_3 = QtWidgets.QLabel(self.centralwidget)
+            self.label_3.setGeometry(110, 15, 110, 110)
+            self.label_3.setObjectName("label_3")
+            self.label.setFont(font10)
+            self.label_3.setFont(font10)
+
+            # PLAYER 2 LABELS
+            self.p2_label = QtWidgets.QLabel(self.centralwidget)
+            self.p2_label.setGeometry(355, 200, 110, 110)
+            self.p2_label.setObjectName("p2_label")
+            self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
+            self.p2_label_2.setGeometry(110, 230, 140, 110)
+            self.p2_label_2.setObjectName("p2_label_2")
+            self.p2_label.setFont(font10)
+            self.p2_label_2.setFont(font10)
+            self.p2_label.setText("Your Cards:")
+            self.p2_label_2.setText("Current Bet:")
+
+            # PLAYER 3 LABELS
+            self.p3_label = QtWidgets.QLabel(self.centralwidget)
+            self.p3_label.setGeometry(355, 200, 110, 110)
+            self.p3_label.setObjectName("p3_label")
+            self.p3_label_2 = QtWidgets.QLabel(self.centralwidget)
+            self.p3_label_2.setGeometry(110, 230, 140, 110)
+            self.p3_label_2.setObjectName("p3_label_2")
+            self.p3_label.setFont(font10)
+            self.p3_label_2.setFont(font10)
+            self.p3_label.setText("Your Cards:")
+            self.p3_label_2.setText("Current Bet:")
+
+            # PLAYER 4 LABELS
+            self.p4_label = QtWidgets.QLabel(self.centralwidget)
+            self.p4_label.setGeometry(355, 200, 110, 110)
+            self.p4_label.setObjectName("p4_label")
+            self.p4_label_2 = QtWidgets.QLabel(self.centralwidget)
+            self.p4_label_2.setGeometry(110, 230, 140, 110)
+            self.p4_label_2.setObjectName("p4_label_2")
+            self.p4_label.setFont(font10)
+            self.p4_label_2.setFont(font10)
+            self.p4_label.setText("Your Cards:")
+            self.p4_label_2.setText("Current Bet:")            
+        #
+        #
+        #########################################################################
+
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 480, 22))
@@ -1566,22 +2127,32 @@ class Ui_GameWindow(QtCore.QObject):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
         self.p2_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
-        
+        self.p3_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
+        self.p4_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
+                
         self.hit_button.setText(_translate("MainWindow", "HIT"))
         self.p2_hit_button.setText(_translate("MainWindow", "HIT"))
+        self.p3_hit_button.setText(_translate("MainWindow", "HIT"))
+        self.p4_hit_button.setText(_translate("MainWindow", "HIT"))
 
         self.double_button.setText(_translate("MainWindow", "DOUBLE"))
         self.p2_double_button.setText(_translate("MainWindow", "DOUBLE"))
+        self.p3_double_button.setText(_translate("MainWindow", "DOUBLE"))
+        self.p4_double_button.setText(_translate("MainWindow", "DOUBLE"))
 
         self.stand_button.setText(_translate("MainWindow", "STAND"))
         self.p2_stand_button.setText(_translate("MainWindow", "STAND"))
+        self.p3_stand_button.setText(_translate("MainWindow", "STAND"))
+        self.p4_stand_button.setText(_translate("MainWindow", "STAND"))
 
         self.exit_button.setText(_translate("MainWindow", "EXIT GAME"))
         self.p2_exit_button.setText(_translate("MainWindow", "EXIT GAME"))
+        self.p3_exit_button.setText(_translate("MainWindow", "EXIT GAME"))
+        self.p4_exit_button.setText(_translate("MainWindow", "EXIT GAME"))
 
-        self.label.setText(_translate("MainWindow", "Your Cards:"))
+        self.label.setText(_translate("MainWindow", "P1 Cards:"))
         #self.label_2.setText(_translate("MainWindow", "Dealer\'s Cards:"))
-        self.label_3.setText(_translate("MainWindow", "Current Bet:"))
+        self.label_3.setText(_translate("MainWindow", "P1 Bet:"))
 
 
 if __name__ == "__main__":
