@@ -1820,8 +1820,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_label_2.setObjectName("p2_label_2")
             self.p2_label.setFont(font10)
             self.p2_label_2.setFont(font10)
-            self.p2_label.setText("Your Cards:")
-            self.p2_label_2.setText("Current Bet:")
+            self.p2_label.setText("P2 Cards:")
+            self.p2_label_2.setText("P2 Bet:")
 
             # PLAYER 3 LABELS
             self.p3_label = QtWidgets.QLabel(self.centralwidget)
@@ -1832,8 +1832,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_label_2.setObjectName("p3_label_2")
             self.p3_label.setFont(font10)
             self.p3_label_2.setFont(font10)
-            self.p3_label.setText("Your Cards:")
-            self.p3_label_2.setText("Current Bet:")
+            self.p3_label.setText("P3 Cards:")
+            self.p3_label_2.setText("P3 Bet:")
         #
         #
         #########################################################################
@@ -2146,8 +2146,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_label_2.setObjectName("p2_label_2")
             self.p2_label.setFont(font10)
             self.p2_label_2.setFont(font10)
-            self.p2_label.setText("Your Cards:")
-            self.p2_label_2.setText("Current Bet:")
+            self.p2_label.setText("P2 Cards:")
+            self.p2_label_2.setText("P2 Bet:")
 
             # PLAYER 3 LABELS
             self.p3_label = QtWidgets.QLabel(self.centralwidget)
@@ -2158,8 +2158,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_label_2.setObjectName("p3_label_2")
             self.p3_label.setFont(font10)
             self.p3_label_2.setFont(font10)
-            self.p3_label.setText("Your Cards:")
-            self.p3_label_2.setText("Current Bet:")
+            self.p3_label.setText("P3 Cards:")
+            self.p3_label_2.setText("P3 Bet:")
 
             # PLAYER 4 LABELS
             self.p4_label = QtWidgets.QLabel(self.centralwidget)
@@ -2170,8 +2170,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_label_2.setObjectName("p4_label_2")
             self.p4_label.setFont(font10)
             self.p4_label_2.setFont(font10)
-            self.p4_label.setText("Your Cards:")
-            self.p4_label_2.setText("Current Bet:")            
+            self.p4_label.setText("P4 Cards:")
+            self.p4_label_2.setText("P4 Bet:")            
         #
         #
         #########################################################################
@@ -2193,36 +2193,6 @@ class Ui_GameWindow(QtCore.QObject):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
-        
-        """
-        self.p2_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
-        self.p3_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
-        self.p4_amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
-                
-        self.hit_button.setText(_translate("MainWindow", "HIT"))
-        self.p2_hit_button.setText(_translate("MainWindow", "HIT"))
-        self.p3_hit_button.setText(_translate("MainWindow", "HIT"))
-        self.p4_hit_button.setText(_translate("MainWindow", "HIT"))
-
-        self.double_button.setText(_translate("MainWindow", "DOUBLE"))
-        self.p2_double_button.setText(_translate("MainWindow", "DOUBLE"))
-        self.p3_double_button.setText(_translate("MainWindow", "DOUBLE"))
-        self.p4_double_button.setText(_translate("MainWindow", "DOUBLE"))
-
-        self.stand_button.setText(_translate("MainWindow", "STAND"))
-        self.p2_stand_button.setText(_translate("MainWindow", "STAND"))
-        self.p3_stand_button.setText(_translate("MainWindow", "STAND"))
-        self.p4_stand_button.setText(_translate("MainWindow", "STAND"))
-
-        self.exit_button.setText(_translate("MainWindow", "EXIT GAME"))
-        self.p2_exit_button.setText(_translate("MainWindow", "EXIT GAME"))
-        self.p3_exit_button.setText(_translate("MainWindow", "EXIT GAME"))
-        self.p4_exit_button.setText(_translate("MainWindow", "EXIT GAME"))
-
-        self.label.setText(_translate("MainWindow", "P1 Cards:"))
-        #self.label_2.setText(_translate("MainWindow", "Dealer\'s Cards:"))
-        self.label_3.setText(_translate("MainWindow", "P1 Bet:"))
-        """
 
 
 if __name__ == "__main__":
