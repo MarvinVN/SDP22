@@ -44,6 +44,7 @@ class Deck:
     #build deck in order
     def build(self):
         self.cards = []
+        self.cardsused = []
         switch = {
             1: 'A',
             11: 'J',
@@ -73,7 +74,7 @@ class Deck:
             print("BAD READ")
 
     #deals digital deck; same as above
-    def deal(self):
+    def deal(self, pos):
         #make global
         switch = {
             'A': 1,
@@ -81,6 +82,17 @@ class Deck:
             'Q': 12,
             'K': 13
         }
+
+        if pos == 0:
+            dealer.p0()
+        elif pos == 1:
+            dealer.p1()
+        elif pos == 2:
+            dealer.p2()
+        elif pos == 3:
+            dealer.p3()
+        elif pos == 4:
+            dealer.p4()
 
         card = RFID.read()
         print(card)
@@ -110,15 +122,10 @@ class Player:
         self.wallet = 1000
         self.totalBet = 0
 
-    #draw from deck using deal()
-    def draw(self, deck, num):
-        for x in range(num):
-            card = deck.deal()
-            if card:
-                self.hand.append(card)
-            else:
-                return False
-        return True
+    #draw one card from deck using deal()
+    def draw(self, deck):
+        card = deck.deal(self.pos)
+        self.hand.append(card)
 
     #get money from wallet to bet
     def addBet(self, num):

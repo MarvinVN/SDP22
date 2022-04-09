@@ -10,7 +10,8 @@ import dealer
 
 #input pins and their corresponding roles/players
 player_buttons = {
-    1: {"hit": 19, "stand": 26}
+    1: {"hit": 17, "stand": 27},
+    2: {"hit": 22, "stand": 23}
 }
 
 #categorize pins for setup
@@ -32,6 +33,11 @@ pn532.SAM_configuration()
 
 def main():
     gs = gameState(1)
+    gs.deck.build()
+
+    gs.deck.shuffle()
+    print("Shuffling...")
+    dealer.shuffle()
 
     #main game loop
     while(1):
@@ -39,28 +45,26 @@ def main():
         players = (int)(input("How many people are playing?\n"))
         gs.setPlayers(players)
         gs.resetHands()
-        gs.deck.build() #TODO: put outside of gameloop when implementing forced shuffle (no more cards)
 
-        gs.deck.shuffle()
-        print("Shuffling...")
-        dealer.shuffle()
-
-        sleep(2)
+        if gs.checkCardCount():
+            tmp = 's'
+            print("Not enough cards, please load cards into shuffler and press (hit) button")
+            while(not tmp == 'h'):
+                tmp = button_move(1)
 
         #TODO: sync timing of dealing/RFID loop
         print("Dealing...")
-        if players == 4:
+        """if players == 4:
             dealer.init_deal() #need to be adjusted for 1-3 players
-            gs.dealCards(2) #arg = num of cards
+            gs.dealCards(2) #deals 2 cards for all players
         if players == 1:
-            dealer.p0()
-            gs.players[0].draw(gs.deck, 1)
-            dealer.p1()
-            gs.players[1].draw(gs.deck, 1)
-            dealer.p0()
-            gs.players[0].draw(gs.deck, 1)
-            dealer.p1()
-            gs.players[1].draw(gs.deck, 1)
+            gs.players[0].draw(gs.deck)
+            gs.players[1].draw(gs.deck)
+            gs.players[0].draw(gs.deck)
+            gs.players[1].draw(gs.deck)
+        """
+        gs.dealCards()
+        
         
         totals.append(0) #temp dealer score; will be calculated after players' turn
 
@@ -80,19 +84,6 @@ def main():
         elif play_again == "s":
             GPIO.cleanup()
             quit() #should go to menu screen once GUI implemented
-
-#takes in player.pos to physically deal a card to the appropriate player
-def playerDraw(pos):
-    if pos == 0:
-        dealer.p0()
-    elif pos == 1:
-        dealer.p1()
-    elif pos == 2:
-        dealer.p2()
-    elif pos == 3:
-        dealer.p3()
-    elif pos == 4:
-        dealer.p4()
 
 #takes in the player and deck as args, returns the value of player's hand    
 def playerTurn(player, deck):
@@ -116,8 +107,7 @@ def playerTurn(player, deck):
             print("Do you want to hit or stand (h/s)?")
             move = button_move(player.pos)
             if move == 'h':
-                playerDraw(player.pos)
-                player.draw(deck, 1)
+                player.draw(deck)
 
     return total
 
@@ -131,8 +121,7 @@ def dealerTurn(player, deck):
         if total >= 17:
             break
         else:
-            playerDraw(0)
-            player.draw(deck, 1)
+            player.draw(deck)
         sleep(1)
     return total
 

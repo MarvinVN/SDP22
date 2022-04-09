@@ -57,7 +57,14 @@ class gameState:
             wallets.append(x.wallet)
         print(wallets)
 
-    #deal cards to all players
-    def dealCards(self, num):
-        for x in range(self.numPlay):
-            self.players[x].draw(self.deck, num)
+    #deal 2 cards to all players
+    def dealCards(self):
+        for _ in range(2):
+            for x in range(self.numPlay):
+                self.players[x].draw(self.deck)
+
+    def checkCardCount(self):
+        target = 52 - (self.numPlay * 3)
+        if len(self.deck.cardsused) > target:
+            return True
+        return False

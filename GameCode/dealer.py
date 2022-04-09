@@ -32,8 +32,6 @@ def signal(state):
 
     GPIO.output(pin_list, GPIO.LOW)
 
-    sleep(1)
-
 def shuffle():
     """GPIO.output(16, GPIO.HIGH)
     #GPIO.output(20, GPIO.HIGH)
@@ -48,6 +46,7 @@ def shuffle():
     sleep(1)  """
 
     signal(states["shuffler"])
+    sleep(1)
 
 def init_deal():
     """
