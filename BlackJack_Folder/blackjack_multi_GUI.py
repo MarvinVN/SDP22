@@ -1971,7 +1971,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             #self.verticalLayoutWidget.setGeometry(600, 20, 100, 150)
-            self.verticalLayoutWidget.setGeometry(260, 70, 65, 82)
+            self.verticalLayoutWidget.setGeometry(260, 70, 70, 100)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1980,7 +1980,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 2 BUTTON LAYOUT
             self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             #self.p2_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
-            self.p2_verticalLayoutWidget.setGeometry(680, 70, 65, 82)
+            self.p2_verticalLayoutWidget.setGeometry(680, 70, 70, 100)
             self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
             self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1989,7 +1989,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 3 BUTTON LAYOUT
             self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             #self.p3_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
-            self.p3_verticalLayoutWidget.setGeometry(260, 330, 65, 82)
+            self.p3_verticalLayoutWidget.setGeometry(260, 330, 70, 100)
             self.p3_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p3_verticalLayout = QtWidgets.QVBoxLayout(self.p3_verticalLayoutWidget)
             self.p3_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1998,7 +1998,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 4 BUTTON LAYOUT
             self.p4_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             #self.p4_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
-            self.p4_verticalLayoutWidget.setGeometry(680, 330, 65, 82)
+            self.p4_verticalLayoutWidget.setGeometry(680, 330, 70, 100)
             self.p4_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p4_verticalLayout = QtWidgets.QVBoxLayout(self.p4_verticalLayoutWidget)
             self.p4_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -2082,7 +2082,7 @@ class Ui_GameWindow(QtCore.QObject):
                 readOnly=True)
             self.p3_current_bet_field.setFont(font20)
             #self.p3_current_bet_field.setGeometry(100, 310, 110, 110)
-            self.p3_current_bet_field.setGeometry(80, 250, 70, 70)
+            self.p3_current_bet_field.setGeometry(80, 330, 70, 70)
             self.p3_current_bet_field.setObjectName("p3_current_bet_field")
 
             # PLAYER 4
@@ -2090,7 +2090,7 @@ class Ui_GameWindow(QtCore.QObject):
                 readOnly=True)
             self.p4_current_bet_field.setFont(font20)
             #self.p4_current_bet_field.setGeometry(100, 310, 110, 110)
-            self.p4_current_bet_field.setGeometry(440, 250, 70, 70)
+            self.p4_current_bet_field.setGeometry(440, 330, 70, 70)
             self.p4_current_bet_field.setObjectName("p4_current_bet_field")            
 
             # AMOUNT LEFT LABELS
