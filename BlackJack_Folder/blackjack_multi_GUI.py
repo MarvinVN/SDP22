@@ -1937,7 +1937,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p1_layout.setObjectName("p1_layout")
             # PLAYER 1 CARDS LAYOUT
             self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            #self.horizontalLayoutWidget.setGeometry(100, 70, 300, 150)
+            self.horizontalLayoutWidget.setGeometry(100, 70, 300, 150)
             self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
             self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
             self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
@@ -2042,7 +2042,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field.setFont(font20)
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
-            self.p1_layout.addWidget(self.betLayoutWidget)
+            #self.p1_layout.addWidget(self.betLayoutWidget)
 
             # PLAYER 2
             self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
@@ -2095,7 +2095,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_right_field.setFont(font20)
             self.your_cards_layout.addWidget(self.your_cards_right_field)
             self.labelLayout.addWidget(self.horizontalLayoutWidget)
-            self.p1_layout.addWidget(self.labelLayoutWidget)
+            #self.p1_layout.addWidget(self.labelLayoutWidget)
 
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
@@ -2174,7 +2174,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.exit_button.setObjectName("exit_button")
             self.exit_button.setText("EXIT")
             self.verticalLayout.addWidget(self.exit_button)
-            self.p1_layout.addWidget(self.verticalLayoutWidget)
+            #self.p1_layout.addWidget(self.verticalLayoutWidget)
 
 
             # PLAYER 2 AMOUNT LEFT
