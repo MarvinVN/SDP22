@@ -2094,7 +2094,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_right_field.setObjectName("your_cards_right_field")
             self.your_cards_right_field.setFont(font20)
             self.your_cards_layout.addWidget(self.your_cards_right_field)
-            self.labelLayout.addWidget(self.your_cards_layout)
+            self.labelLayout.addWidget(self.horizontalLayoutWidget)
             self.p1_layout.addWidget(self.labelLayoutWidget)
 
             # PLAYER 2
