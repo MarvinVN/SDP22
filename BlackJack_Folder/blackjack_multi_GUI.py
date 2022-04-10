@@ -1944,7 +1944,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setObjectName("your_cards_layout")
             # PLAYER 1 LABEL CARDS LAYOUT
             self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.labelLayoutWidget.setGeometry(100, 70, 300, 150)
+            self.labelLayoutWidget.setGeometry(160, 70, 150, 170)
             self.labelLayoutWidget.setObjectName("labelLayoutWidget")
             self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
             self.labelLayout.setContentsMargins(0, 0, 0, 0)
@@ -1958,7 +1958,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.verticalLayout.setObjectName("verticalLayout")
             # PLAYER 1 BET LAYOUT
             self.betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            #self.betLayoutWidget.setGeometry(80, 90, 70, 70)
+            self.betLayoutWidget.setGeometry(80, 90, 70, 70)
             self.betLayoutWidget.setObjectName("betLayoutWidget")
             self.betLayout = QtWidgets.QVBoxLayout(self.betLayoutWidget)
             self.betLayout.setContentsMargins(0, 0, 0, 0)
@@ -1973,7 +1973,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_cards_layout.setObjectName("p2_cards_layout")
             # PLAYER 2 LABEL CARDS LAYOUT
             self.p2_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_labelLayoutWidget.setGeometry(520, 90, 100, 150)
+            self.p2_labelLayoutWidget.setGeometry(520, 70, 150, 170)
             self.p2_labelLayoutWidget.setObjectName("p2_labelLayoutWidget")
             self.p2_labelLayout = QtWidgets.QVBoxLayout(self.p2_labelLayoutWidget)
             self.p2_labelLayout.setContentsMargins(0, 0, 0, 0)
@@ -2002,7 +2002,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_cards_layout.setObjectName("p3_cards_layout")
             # PLAYER 3 LABEL CARDS LAYOUT
             self.p3_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_labelLayoutWidget.setGeometry(100, 330, 100, 150)
+            self.p3_labelLayoutWidget.setGeometry(160, 310, 150, 170)
             self.p3_labelLayoutWidget.setObjectName("p3_labelLayoutWidget")
             self.p3_labelLayout = QtWidgets.QVBoxLayout(self.p3_labelLayoutWidget)
             self.p3_labelLayout.setContentsMargins(0, 0, 0, 0)
@@ -2031,7 +2031,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_cards_layout.setObjectName("p4_cards_layout")
             # PLAYER 4 LABEL CARDS LAYOUT
             self.p4_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p4_labelLayoutWidget.setGeometry(450, 330, 100, 150)
+            self.p4_labelLayoutWidget.setGeometry(520, 310, 150, 170)
             self.p4_labelLayoutWidget.setObjectName("p4_labelLayoutWidget")
             self.p4_labelLayout = QtWidgets.QVBoxLayout(self.p4_labelLayoutWidget)
             self.p4_labelLayout.setContentsMargins(0, 0, 0, 0)
