@@ -1971,6 +1971,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_cards_layout = QtWidgets.QHBoxLayout(self.p2_horizontalLayoutWidget)
             self.p2_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.p2_cards_layout.setObjectName("p2_cards_layout")
+            # PLAYER 2 LABEL CARDS LAYOUT
+            self.p2_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p2_labelLayoutWidget.setGeometry(520, 90, 100, 150)
+            self.p2_labelLayoutWidget.setObjectName("p2_labelLayoutWidget")
+            self.p2_labelLayout = QtWidgets.QVBoxLayout(self.p2_labelLayoutWidget)
+            self.p2_labelLayout.setContentsMargins(0, 0, 0, 0)
+            self.p2_labelLayout.setObjectName("p2_labelLayout")
             # PLAYER 2 BUTTON LAYOUT
             self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             self.p2_verticalLayoutWidget.setGeometry(680, 70, 70, 100)
@@ -1993,6 +2000,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_cards_layout = QtWidgets.QHBoxLayout(self.p3_horizontalLayoutWidget)
             self.p3_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.p3_cards_layout.setObjectName("p3_cards_layout")
+            # PLAYER 3 LABEL CARDS LAYOUT
+            self.p3_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p3_labelLayoutWidget.setGeometry(100, 330, 100, 150)
+            self.p3_labelLayoutWidget.setObjectName("p3_labelLayoutWidget")
+            self.p3_labelLayout = QtWidgets.QVBoxLayout(self.p3_labelLayoutWidget)
+            self.p3_labelLayout.setContentsMargins(0, 0, 0, 0)
+            self.p3_labelLayout.setObjectName("p3_labelLayout")
             # PLAYER 3 BUTTON LAYOUT
             self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             self.p3_verticalLayoutWidget.setGeometry(260, 330, 70, 100)
@@ -2015,6 +2029,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_cards_layout = QtWidgets.QHBoxLayout(self.p4_horizontalLayoutWidget)
             self.p4_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.p4_cards_layout.setObjectName("p4_cards_layout")
+            # PLAYER 4 LABEL CARDS LAYOUT
+            self.p4_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p4_labelLayoutWidget.setGeometry(450, 330, 100, 150)
+            self.p4_labelLayoutWidget.setObjectName("p4_labelLayoutWidget")
+            self.p4_labelLayout = QtWidgets.QVBoxLayout(self.p4_labelLayoutWidget)
+            self.p4_labelLayout.setContentsMargins(0, 0, 0, 0)
+            self.p4_labelLayout.setObjectName("p4_labelLayout")
             # PLAYER 4 BUTTON LAYOUT
             self.p4_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             self.p4_verticalLayoutWidget.setGeometry(680, 330, 70, 100)
@@ -2103,7 +2124,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_label.setObjectName("p2_label")
             self.p2_label.setFont(font10)
             self.p2_label.setText("P2 Cards:")
-
+            self.p2_labelLayout.addWidget(self.p2_label)
             self.p2_left_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget, readOnly=True)
             self.p2_left_field.setObjectName("p2_left_field")
             self.p2_left_field.setFont(font20)
@@ -2112,13 +2133,14 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_right_field.setObjectName("p2_right_field")
             self.p2_right_field.setFont(font20)
             self.p2_cards_layout.addWidget(self.p2_right_field)
+            self.p2_labelLayout.addWidget(self.p2_horizontalLayoutWidget)
 
             # PLAYER 3
             self.p3_label = QtWidgets.QLabel(self.centralwidget)
             self.p3_label.setObjectName("p3_label")
             self.p3_label.setFont(font10)
             self.p3_label.setText("P3 Cards:")
-
+            self.p3_labelLayout.addWidget(self.p3_label)
             self.p3_left_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget, readOnly=True)
             self.p3_left_field.setObjectName("p3_left_field")
             self.p3_left_field.setFont(font20)
@@ -2127,13 +2149,14 @@ class Ui_GameWindow(QtCore.QObject):
             self .p3_right_field.setObjectName("p3_right_field")
             self.p3_right_field.setFont(font20)
             self.p3_cards_layout.addWidget(self.p3_right_field)
+            self.p3_labelLayout.addWidget(self.p3_horizontalLayoutWidget)
 
             # PLAYER 4
             self.p4_label = QtWidgets.QLabel(self.centralwidget)
             self.p4_label.setObjectName("p4_label")
             self.p4_label.setFont(font10)
             self.p4_label.setText("P4 Cards:")
-
+            self.p4_labelLayout.addWidget(self.p4_label)
             self.p4_left_field = QtWidgets.QPlainTextEdit(self.p4_horizontalLayoutWidget, readOnly=True)
             self.p4_left_field.setObjectName("p4_left_field")
             self.p4_left_field.setFont(font20)
@@ -2142,9 +2165,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_right_field.setObjectName("p4_right_field")
             self.p4_right_field.setFont(font20)
             self.p4_cards_layout.addWidget(self.p4_right_field)
-
-
-        
+            self.p4_labelLayout.addWidget(self.p4_horizontalLayoutWidget)
 
 
             ############### PLAYER VERTICAL BUTTONS ################
