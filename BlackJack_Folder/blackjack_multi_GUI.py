@@ -1415,6 +1415,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.horizontalLayoutWidget_2.setGeometry(250, 30, 300, 150)
             self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
 
+            # need to remove dealer aspect?
             self.dealer_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
             self.dealer_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.dealer_cards_layout.setObjectName("dealer_cards_layout")
@@ -1462,6 +1463,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.exit_button.setObjectName("exit_button")
             self.verticalLayout.addWidget(self.exit_button)
+            self.exit_button.setText("EXIT")
 
             # change font size to be a lot bigger; maybe size 10?
             self.label = QtWidgets.QLabel(self.centralwidget)
