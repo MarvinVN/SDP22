@@ -88,6 +88,11 @@ db4 = bjb.HWButton(d4)
 sb4 = bjb.HWButton(s4)
 eb4 = bjb.HWButton(e4)
 
+button_hit_status = [hb.button_press, hb2.button_press, hb3.button_press, hb4.button_press]
+button_double_status = [db.button_press, db2.button_press, db3.button_press, db4.button_press]
+button_stand_status = [sb.button_press, sb2.button_press, sb3.button_press, sb4.button_press]
+button_exit_status = [eb.button_press, eb2.button_press, eb3.button_press, eb4.button_press]
+
 """
 output_pins = [5, 13, 16, 20, 21]
 GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
@@ -716,6 +721,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         # checking IDs in message queue/grabbing message contents (player cards)
         # this needs to account for multiple rounds
+
+        # need to change this and move into game starting class
         while(1):
             msg = bj_to_gui_queue.get()
             if msg.id == "player_cards":
@@ -1044,24 +1051,99 @@ class Ui_GameWindow(QtCore.QObject):
         self.gameMode = gameMode
         self.userInput = userInput
         self.bet = bet
+
+        self.p1_bet = self.bet
+        self.p2_bet = self.bet
+        self.p3_bet = self.bet
+        self.p4_bet = self.bet
+
+        self.player_bets = [bet, self.p1_bet, self.p2_bet, self.p3_bet, self.p4_bet] # initializing each player bets, added index 0 for dealer
         self.player_cards = playerCards
         self.double_button_clicked = False
         #self.timer = qtc.QTimer(interval=50, timeout=self.check)
         self.timer = QtCore.QTimer(interval=50)
 
+        # P1
         self.timer.timeout.connect(hb.check)
         self.timer.timeout.connect(sb.check)
         self.timer.timeout.connect(db.check)
         self.timer.timeout.connect(eb.check)
-
-        # just start one timer??
-        self.timer.start()
-        # testing the hw_buttons here
         hb.button_press.connect(self.hit_it)
         sb.button_press.connect(self.stand_it)
         db.button_press.connect(self.double_it)
-        eb.button_press.connect(self.exit_it)        
+        eb.button_press.connect(self.exit_it) 
 
+        if str(self.numPlayers) == "2":
+            # P2
+            self.p2_cards = []
+            self.timer.timeout.connect(hb2.check)
+            self.timer.timeout.connect(sb2.check)
+            self.timer.timeout.connect(db2.check)
+            self.timer.timeout.connect(eb2.check)
+            hb2.button_press.connect(self.hit_it)
+            sb2.button_press.connect(self.stand_it)
+            db2.button_press.connect(self.double_it)
+            eb2.button_press.connect(self.exit_it)
+
+        elif str(self.numPlayers) == "3":
+            # P2
+            self.p2_cards = []
+            self.timer.timeout.connect(hb2.check)
+            self.timer.timeout.connect(sb2.check)
+            self.timer.timeout.connect(db2.check)
+            self.timer.timeout.connect(eb2.check)
+            hb2.button_press.connect(self.hit_it)
+            sb2.button_press.connect(self.stand_it)
+            db2.button_press.connect(self.double_it)
+            eb2.button_press.connect(self.exit_it)
+
+            # P3
+            self.p3_cards = []
+            self.timer.timeout.connect(hb3.check)
+            self.timer.timeout.connect(sb3.check)
+            self.timer.timeout.connect(db3.check)
+            self.timer.timeout.connect(eb3.check)
+            hb3.button_press.connect(self.hit_it)
+            sb3.button_press.connect(self.stand_it)
+            db3.button_press.connect(self.double_it)
+            eb3.button_press.connect(self.exit_it)
+
+        elif str(self.numPlayers) == "4":
+            # P2
+            self.p2_cards = []
+            self.timer.timeout.connect(hb2.check)
+            self.timer.timeout.connect(sb2.check)
+            self.timer.timeout.connect(db2.check)
+            self.timer.timeout.connect(eb2.check)
+            hb2.button_press.connect(self.hit_it)
+            sb2.button_press.connect(self.stand_it)
+            db2.button_press.connect(self.double_it)
+            eb2.button_press.connect(self.exit_it)
+            
+            # P3
+            self.p3_cards = []
+            self.timer.timeout.connect(hb3.check)
+            self.timer.timeout.connect(sb3.check)
+            self.timer.timeout.connect(db3.check)
+            self.timer.timeout.connect(eb3.check)
+            hb3.button_press.connect(self.hit_it)
+            sb3.button_press.connect(self.stand_it)
+            db3.button_press.connect(self.double_it)
+            eb3.button_press.connect(self.exit_it)
+
+            # P4
+            self.p4_cards = []
+            self.timer.timeout.connect(hb4.check)
+            self.timer.timeout.connect(sb4.check)
+            self.timer.timeout.connect(db4.check)
+            self.timer.timeout.connect(eb4.check)
+            hb4.button_press.connect(self.hit_it)
+            sb4.button_press.connect(self.stand_it)
+            db4.button_press.connect(self.double_it)
+            eb4.button_press.connect(self.exit_it)       
+
+        # just start one timer??
+        self.timer.start()
     
     def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
         # opening up the next round screen
@@ -1158,8 +1240,8 @@ class Ui_GameWindow(QtCore.QObject):
     def double_it(self):
         self.double_button_clicked = True
 
-        if self.double_button_clicked:
-            msg = Message("double", self.bet)
+        if self.double_button_clicked: # need to make self.bet into a list of bets
+            msg = Message("double", self.bet, button_double_status)
             gui_to_bj_queue.put(msg)
 
             while(1):
@@ -1207,7 +1289,7 @@ class Ui_GameWindow(QtCore.QObject):
     # when "STAND" button is pressed, do nothing to current bet, do nothing to cards, reveal dealer cards
     def stand_it(self):
         # not being incremented properly for the total amount here
-        msg = Message("stand", None)
+        msg = Message("stand", button_stand_status)
         gui_to_bj_queue.put(msg)
         self.dealer_cards = []
 
@@ -1244,7 +1326,8 @@ class Ui_GameWindow(QtCore.QObject):
     # TODO
     # when "HIT" button is pressed, do nothing to current bet, add another card to player
     def hit_it(self):
-        msg = Message("hit", None)
+        # need to change so that the value of button press is sent over; if value is TRUE, update that player's stats
+        msg = Message("hit", button_hit_status) # take in button hit status, traverse through to find which button was pressed, update player stats
         gui_to_bj_queue.put(msg)
 
         while(1):
