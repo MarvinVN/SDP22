@@ -1971,7 +1971,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             #self.verticalLayoutWidget.setGeometry(600, 20, 100, 150)
-            self.verticalLayoutWidget.setGeometry(260, 70, 58, 82)
+            self.verticalLayoutWidget.setGeometry(260, 70, 65, 82)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1980,7 +1980,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 2 BUTTON LAYOUT
             self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             #self.p2_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
-            self.p2_verticalLayoutWidget.setGeometry(680, 70, 58, 82)
+            self.p2_verticalLayoutWidget.setGeometry(680, 70, 65, 82)
             self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
             self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1989,7 +1989,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 3 BUTTON LAYOUT
             self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             #self.p3_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
-            self.p3_verticalLayoutWidget.setGeometry(260, 330, 58, 82)
+            self.p3_verticalLayoutWidget.setGeometry(260, 330, 65, 82)
             self.p3_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p3_verticalLayout = QtWidgets.QVBoxLayout(self.p3_verticalLayoutWidget)
             self.p3_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1998,7 +1998,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 4 BUTTON LAYOUT
             self.p4_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             #self.p4_verticalLayoutWidget.setGeometry(600, 280, 100, 150)
-            self.p4_verticalLayoutWidget.setGeometry(680, 330, 58, 82)
+            self.p4_verticalLayoutWidget.setGeometry(680, 330, 65, 82)
             self.p4_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p4_verticalLayout = QtWidgets.QVBoxLayout(self.p4_verticalLayoutWidget)
             self.p4_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -2066,7 +2066,7 @@ class Ui_GameWindow(QtCore.QObject):
                 readOnly=True)
             self.current_bet_field.setFont(font20)
             #self.current_bet_field.setGeometry(100, 30, 110, 110)
-            self.current_bet_field.setGeometry(110, 90, 70, 70)
+            self.current_bet_field.setGeometry(80, 90, 70, 70)
             self.current_bet_field.setObjectName("current_bet_field")
 
             # PLAYER 2
@@ -2074,7 +2074,7 @@ class Ui_GameWindow(QtCore.QObject):
                 readOnly=True)
             self.p2_current_bet_field.setFont(font20)
             #self.p2_current_bet_field.setGeometry(100, 310, 110, 110)
-            self.p2_current_bet_field.setGeometry(340, 90, 70, 70)
+            self.p2_current_bet_field.setGeometry(440, 90, 70, 70)
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
 
             # PLAYER 3
@@ -2082,7 +2082,7 @@ class Ui_GameWindow(QtCore.QObject):
                 readOnly=True)
             self.p3_current_bet_field.setFont(font20)
             #self.p3_current_bet_field.setGeometry(100, 310, 110, 110)
-            self.p3_current_bet_field.setGeometry(110, 250, 70, 70)
+            self.p3_current_bet_field.setGeometry(80, 250, 70, 70)
             self.p3_current_bet_field.setObjectName("p3_current_bet_field")
 
             # PLAYER 4
@@ -2090,38 +2090,38 @@ class Ui_GameWindow(QtCore.QObject):
                 readOnly=True)
             self.p4_current_bet_field.setFont(font20)
             #self.p4_current_bet_field.setGeometry(100, 310, 110, 110)
-            self.p4_current_bet_field.setGeometry(340, 250, 70, 70)
+            self.p4_current_bet_field.setGeometry(440, 250, 70, 70)
             self.p4_current_bet_field.setObjectName("p4_current_bet_field")            
 
             # AMOUNT LEFT LABELS
             # PLAYER 1
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font10)
-            self.amount_left_label.setGeometry(600, 20, 300, 50)
+            #self.amount_left_label.setFont(font10)
+            #self.amount_left_label.setGeometry(600, 20, 300, 50)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
             self.verticalLayout.addWidget(self.amount_left_label)
 
             # PLAYER 2
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_amount_left_label.setFont(font10)
-            self.p2_amount_left_label.setGeometry(600, 230, 300, 50)
+            #self.p2_amount_left_label.setFont(font10)
+            #self.p2_amount_left_label.setGeometry(600, 230, 300, 50)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
             self.p2_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
 
             # PLAYER 3
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p3_amount_left_label.setFont(font10)
-            self.p3_amount_left_label.setGeometry(600, 230, 300, 50)
+            #self.p3_amount_left_label.setFont(font10)
+            #self.p3_amount_left_label.setGeometry(600, 230, 300, 50)
             self.p3_amount_left_label.setObjectName("p3_amount_left_label")
             self.p3_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
             self.p3_verticalLayout.addWidget(self.p3_amount_left_label)
 
             # PLAYER 4
             self.p4_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p4_amount_left_label.setFont(font10)
-            self.p4_amount_left_label.setGeometry(600, 230, 300, 50)
+            #self.p4_amount_left_label.setFont(font10)
+            #self.p4_amount_left_label.setGeometry(600, 230, 300, 50)
             self.p4_amount_left_label.setObjectName("p4_amount_left_label")
             self.p4_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
             self.p4_verticalLayout.addWidget(self.p4_amount_left_label)
