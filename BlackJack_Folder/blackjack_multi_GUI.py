@@ -2042,7 +2042,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field.setFont(font20)
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
-            self.p1_layout.addWidget(self.betLayout)
+            self.p1_layout.addWidget(self.betLayoutWidget)
 
             # PLAYER 2
             self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
@@ -2095,7 +2095,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_right_field.setFont(font20)
             self.your_cards_layout.addWidget(self.your_cards_right_field)
             self.labelLayout.addWidget(self.your_cards_layout)
-            self.p1_layout.addWidget(self.labelLayout)
+            self.p1_layout.addWidget(self.labelLayoutWidget)
 
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
@@ -2174,7 +2174,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.exit_button.setObjectName("exit_button")
             self.exit_button.setText("EXIT")
             self.verticalLayout.addWidget(self.exit_button)
-            self.p1_layout.addWidget(self.verticalLayout)
+            self.p1_layout.addWidget(self.verticalLayoutWidget)
 
 
             # PLAYER 2 AMOUNT LEFT
