@@ -1944,7 +1944,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(300, 90, 70, 100)
+            self.verticalLayoutWidget.setGeometry(300, 70, 70, 100)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1973,7 +1973,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_labelLayout.setObjectName("p2_labelLayout")
             # PLAYER 2 BUTTON LAYOUT
             self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_verticalLayoutWidget.setGeometry(680, 90, 70, 100)
+            self.p2_verticalLayoutWidget.setGeometry(680, 70, 70, 100)
             self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
             self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -2002,7 +2002,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_labelLayout.setObjectName("p3_labelLayout")
             # PLAYER 3 BUTTON LAYOUT
             self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_verticalLayoutWidget.setGeometry(300, 310, 70, 100)
+            self.p3_verticalLayoutWidget.setGeometry(300, 290, 70, 100)
             self.p3_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p3_verticalLayout = QtWidgets.QVBoxLayout(self.p3_verticalLayoutWidget)
             self.p3_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -2031,7 +2031,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_labelLayout.setObjectName("p4_labelLayout")
             # PLAYER 4 BUTTON LAYOUT
             self.p4_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p4_verticalLayoutWidget.setGeometry(680, 310, 70, 100)
+            self.p4_verticalLayoutWidget.setGeometry(680, 290, 70, 100)
             self.p4_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p4_verticalLayout = QtWidgets.QVBoxLayout(self.p4_verticalLayoutWidget)
             self.p4_verticalLayout.setContentsMargins(0, 0, 0, 0)
