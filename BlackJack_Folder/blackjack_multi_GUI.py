@@ -1928,23 +1928,36 @@ class Ui_GameWindow(QtCore.QObject):
         #
         elif str(self.numPlayers) == "4":
             ############# LAYOUTS FOR EACH PLAYER ###########
+            # PLAYER 1 OVERALL LAYOUT
+            self.p1LayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.p1LayoutWidget.setGeometry(40, 90, 500, 400)
+            self.p1LayoutWidget.setObjectName("p1LayoutWidget")
+            self.p1_layout = QtWidgets.QHBoxLayout(self.p1LayoutWidget)
+            self.p1_layout.setContentsMargins(0, 0, 0, 0)
+            self.p1_layout.setObjectName("p1_layout")
             # PLAYER 1 CARDS LAYOUT
             self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.horizontalLayoutWidget.setGeometry(100, 70, 300, 150)
+            #self.horizontalLayoutWidget.setGeometry(100, 70, 300, 150)
             self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
             self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
             self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.your_cards_layout.setObjectName("your_cards_layout")
+            # PLAYER 1 LABEL CARDS LAYOUT
+            self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.labelLayoutWidget.setObjectName("labelLayoutWidget")
+            self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
+            self.labelLayout.setContentsMargins(0, 0, 0, 0)
+            self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(260, 70, 70, 100)
+            #self.verticalLayoutWidget.setGeometry(260, 70, 70, 100)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout.setObjectName("verticalLayout")
             # PLAYER 1 BET LAYOUT
             self.betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.betLayoutWidget.setGeometry(80, 90, 70, 70)
+            #self.betLayoutWidget.setGeometry(80, 90, 70, 70)
             self.betLayoutWidget.setObjectName("betLayoutWidget")
             self.betLayout = QtWidgets.QVBoxLayout(self.betLayoutWidget)
             self.betLayout.setContentsMargins(0, 0, 0, 0)
@@ -1952,7 +1965,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 2 CARDS LAYOUT
             self.p2_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            #self.p2_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
             self.p2_horizontalLayoutWidget.setObjectName("p2_horizontalLayoutWidget")
             self.p2_cards_layout = QtWidgets.QHBoxLayout(self.p2_horizontalLayoutWidget)
             self.p2_cards_layout.setContentsMargins(0, 0, 0, 0)
@@ -1974,7 +1987,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 3 CARDS LAYOUT
             self.p3_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            #self.p3_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
             self.p3_horizontalLayoutWidget.setObjectName("p3_horizontalLayoutWidget")
             self.p3_cards_layout = QtWidgets.QHBoxLayout(self.p3_horizontalLayoutWidget)
             self.p3_cards_layout.setContentsMargins(0, 0, 0, 0)
@@ -1996,7 +2009,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 4 CARDS LAYOUT
             self.p4_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p4_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            #self.p4_horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
             self.p4_horizontalLayoutWidget.setObjectName("p4_horizontalLayoutWidget")
             self.p4_cards_layout = QtWidgets.QHBoxLayout(self.p4_horizontalLayoutWidget)
             self.p4_cards_layout.setContentsMargins(0, 0, 0, 0)
@@ -2017,6 +2030,54 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_betLayout.setObjectName("p4_betLayout")
 
 
+            ########### CURRENT BET LAYOUT ##########
+            # PLAYER 1
+            self.label_3 = QtWidgets.QLabel(self.centralwidget)
+            #self.label_3.setGeometry(110, 15, 110, 110)
+            self.label_3.setObjectName("label_3")
+            self.label_3.setFont(font10)
+            self.label_3.setText("P1 Bet:")
+            self.betLayout.addWidget(self.label_3)
+            self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
+            self.current_bet_field.setFont(font20)
+            self.current_bet_field.setObjectName("current_bet_field")
+            self.betLayout.addWidget(self.current_bet_field)
+            self.p1_layout.addWidget(self.betLayout)
+
+            # PLAYER 2
+            self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
+            self.p2_label_2.setObjectName("p2_label_2")
+            self.p2_label_2.setFont(font10)
+            self.p2_label_2.setText("P2 Bet:")
+            self.p2_betLayout.addWidget(self.p2_label_2)
+            self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
+            self.p2_current_bet_field.setFont(font20)
+            self.p2_current_bet_field.setObjectName("p2_current_bet_field")
+            self.p2_betLayout.addWidget(self.p2_current_bet_field)
+
+            # PLAYER 3
+            self.p3_label_2 = QtWidgets.QLabel(self.centralwidget)
+            self.p3_label_2.setObjectName("p3_label_2")
+            self.p3_label_2.setFont(font10)
+            self.p3_label_2.setText("P3 Bet:")
+            self.p3_betLayout.addWidget(self.p3_label_2)
+            self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
+            self.p3_current_bet_field.setFont(font20)
+            self.p3_current_bet_field.setObjectName("p3_current_bet_field")
+            self.p3_betLayout.addWidget(self.p3_current_bet_field)
+
+            # PLAYER 4
+            self.p4_label_2 = QtWidgets.QLabel(self.centralwidget)
+            self.p4_label_2.setObjectName("p4_label_2")
+            self.p4_label_2.setFont(font10)
+            self.p4_label_2.setText("P4 Bet:") 
+            self.p4_betLayout.addWidget(self.p4_label_2)
+            self.p4_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
+            self.p4_current_bet_field.setFont(font20)
+            self.p4_current_bet_field.setObjectName("p4_current_bet_field")  
+            self.p4_betLayout.addWidget(self.p4_current_bet_field)  
+
+
             ########### PLAYING CARD FIELDS ###########
 
             # PLAYER 1
@@ -2024,7 +2085,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.label.setObjectName("label")
             self.label.setFont(font10)
             self.label.setText("P1 Cards:")
-
+            self.labelLayout.addWidget(self.label)
             self.your_cards_left_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget, readOnly=True)
             self.your_cards_left_field.setObjectName("your_cards_left_field")
             self.your_cards_left_field.setFont(font20)
@@ -2033,6 +2094,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_right_field.setObjectName("your_cards_right_field")
             self.your_cards_right_field.setFont(font20)
             self.your_cards_layout.addWidget(self.your_cards_right_field)
+            self.labelLayout.addWidget(self.your_cards_layout)
+            self.p1_layout.addWidget(self.labelLayout)
 
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
@@ -2069,7 +2132,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_label.setObjectName("p4_label")
             self.p4_label.setFont(font10)
             self.p4_label.setText("P4 Cards:")
-            
+
             self.p4_left_field = QtWidgets.QPlainTextEdit(self.p4_horizontalLayoutWidget, readOnly=True)
             self.p4_left_field.setObjectName("p4_left_field")
             self.p4_left_field.setFont(font20)
@@ -2080,51 +2143,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_cards_layout.addWidget(self.p4_right_field)
 
 
-            # CURRENT BET LAYOUT
-            # PLAYER 1
-            self.label_3 = QtWidgets.QLabel(self.centralwidget)
-            #self.label_3.setGeometry(110, 15, 110, 110)
-            self.label_3.setObjectName("label_3")
-            self.label_3.setFont(font10)
-            self.label_3.setText("P1 Bet:")
-            self.betLayout.addWidget(self.label_3)
-            self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.current_bet_field.setFont(font20)
-            self.current_bet_field.setObjectName("current_bet_field")
-            self.betLayout.addWidget(self.current_bet_field)
-
-            # PLAYER 2
-            self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
-            self.p2_label_2.setObjectName("p2_label_2")
-            self.p2_label_2.setFont(font10)
-            self.p2_label_2.setText("P2 Bet:")
-            self.p2_betLayout.addWidget(self.p2_label_2)
-            self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p2_current_bet_field.setFont(font20)
-            self.p2_current_bet_field.setObjectName("p2_current_bet_field")
-            self.p2_betLayout.addWidget(self.p2_current_bet_field)
-
-            # PLAYER 3
-            self.p3_label_2 = QtWidgets.QLabel(self.centralwidget)
-            self.p3_label_2.setObjectName("p3_label_2")
-            self.p3_label_2.setFont(font10)
-            self.p3_label_2.setText("P3 Bet:")
-            self.p3_betLayout.addWidget(self.p3_label_2)
-            self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p3_current_bet_field.setFont(font20)
-            self.p3_current_bet_field.setObjectName("p3_current_bet_field")
-            self.p3_betLayout.addWidget(self.p3_current_bet_field)
-
-            # PLAYER 4
-            self.p4_label_2 = QtWidgets.QLabel(self.centralwidget)
-            self.p4_label_2.setObjectName("p4_label_2")
-            self.p4_label_2.setFont(font10)
-            self.p4_label_2.setText("P4 Bet:") 
-            self.p4_betLayout.addWidget(self.p4_label_2)
-            self.p4_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p4_current_bet_field.setFont(font20)
-            self.p4_current_bet_field.setObjectName("p4_current_bet_field")  
-            self.p4_betLayout.addWidget(self.p4_current_bet_field)          
+        
 
 
             ############### PLAYER VERTICAL BUTTONS ################
@@ -2155,6 +2174,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.exit_button.setObjectName("exit_button")
             self.exit_button.setText("EXIT")
             self.verticalLayout.addWidget(self.exit_button)
+            self.p1_layout.addWidget(self.verticalLayout)
 
 
             # PLAYER 2 AMOUNT LEFT
