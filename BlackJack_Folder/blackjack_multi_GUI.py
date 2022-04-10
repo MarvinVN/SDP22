@@ -1937,13 +1937,14 @@ class Ui_GameWindow(QtCore.QObject):
             self.p1_layout.setObjectName("p1_layout")
             # PLAYER 1 CARDS LAYOUT
             self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.horizontalLayoutWidget.setGeometry(100, 70, 300, 150)
+            #self.horizontalLayoutWidget.setGeometry(100, 70, 300, 150)
             self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
             self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
             self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.your_cards_layout.setObjectName("your_cards_layout")
             # PLAYER 1 LABEL CARDS LAYOUT
             self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.labelLayoutWidget.setGeometry(100, 70, 300, 150)
             self.labelLayoutWidget.setObjectName("labelLayoutWidget")
             self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
             self.labelLayout.setContentsMargins(0, 0, 0, 0)
