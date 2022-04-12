@@ -75,7 +75,7 @@ def read():
             continue
         card = [hex(i) for i in uid]
         break
-
+    #print(card)
     for i, x in enumerate(cards):
         cards_lower = []
         for y in x:

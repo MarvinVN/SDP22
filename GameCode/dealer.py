@@ -6,13 +6,12 @@ confirm_pin = 13 #for scan confirmation
 
 states = {
     "idle": [0,0,0],
-    "shuffler": [0,0,1],
-    "init_deal": [0,1,0],
-    "p0": [0,1,1],
-    "p1": [1,0,0],
-    "p2": [1,0,1],
-    "p3": [1,1,0],
-    "p4": [1,1,1]
+    "p0": [0,0,1],
+    "p1": [0,1,0],
+    "p2": [0,1,1],
+    "p3": [1,0,0],
+    "p4": [1,0,1],
+    "shuffler": [1,1,1]
 }
 
 def scanConfirm():
@@ -143,5 +142,5 @@ def p4():
     GPIO.output(21, GPIO.LOW)
     sleep(1) """
 
-    print("player two card")
-    signal(states["p2"]) 
+    print("player 4 card")
+    signal(states["p4"]) 

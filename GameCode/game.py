@@ -1,6 +1,5 @@
 import random
-import serial
-import time
+from time import sleep
 import RFID
 import dealer
 
@@ -66,7 +65,7 @@ class Deck:
         if any(x.Str == card.Str for x in self.cardsused):
             print("CHEATING DETECTED, CARD ALREADY USED")
             while True:
-                time.sleep(1)
+                sleep(1)
         elif any(x.Str == card.Str for x in self.cards):
             print("worked")
             self.cardsused.append(card)
@@ -82,7 +81,8 @@ class Deck:
             'Q': 12,
             'K': 13
         }
-
+        
+        print(pos)
         if pos == 0:
             dealer.p0()
         elif pos == 1:
@@ -104,6 +104,7 @@ class Deck:
         res = Card(int(rank), suit, card)
         self.scan(res)
         res.show()
+
         dealer.scanConfirm() #signal that card has been scanned
         
         return res

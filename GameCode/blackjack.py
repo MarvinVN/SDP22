@@ -32,6 +32,9 @@ pn532 = PN532_SPI(spi, cs_pin, debug=False)
 pn532.SAM_configuration()
 
 def main():
+
+    dealer.scanConfirm()
+
     gs = gameState(1)
     gs.deck.build()
 
@@ -54,27 +57,14 @@ def main():
 
         #TODO: sync timing of dealing/RFID loop
         print("Dealing...")
-        """if players == 4:
-            dealer.init_deal() #need to be adjusted for 1-3 players
-            gs.dealCards(2) #deals 2 cards for all players
-        if players == 1:
-            gs.players[0].draw(gs.deck)
-            gs.players[1].draw(gs.deck)
-            gs.players[0].draw(gs.deck)
-            gs.players[1].draw(gs.deck)
-        """
         gs.dealCards()
         
-        
         totals.append(0) #temp dealer score; will be calculated after players' turn
-
         for x in range(1, gs.numPlay):
             totals.append(playerTurn(gs.players[x], gs.deck))
-
         totals[0] = dealerTurn(gs.players[0], gs.deck)
 
         score(gs.players, totals)
-
         gs.showWallets()
         
         print("Play again? (hit for yes, stand for no)\n")
