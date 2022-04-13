@@ -786,6 +786,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         while(1):
             global cards
+            if str(counter) == self.numPlayers:
+                break
 
             msg = bj_to_gui_queue.get() # this should be messages for each player playing
             print("Entered while loop:")
@@ -804,9 +806,6 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
                 cards[4] == msg.content
             else:
                 pass
-                
-            if str(counter) == self.numPlayers:
-                break
             counter += 1
             print("Counter = " + str(counter))
         print("Left the player while loop")
