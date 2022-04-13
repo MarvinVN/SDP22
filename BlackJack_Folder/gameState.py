@@ -24,6 +24,7 @@ class gameState:
         elif prevNum > self.numPlay: #if less players than previous game, remove players. Currently removes players from 4 to 1, should be changed later
             for x in range(prevNum-self.numPlay):
                 self.players.pop() 
+        print(self.players)
 
     def getPlayerHand(self, player):
         return self.players[player].hand
