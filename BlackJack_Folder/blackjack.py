@@ -365,7 +365,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
     # making msg list for each player
     msg = []
-    gs.setPlayers(numPlayers)
+    gs.setPlayers(int(numPlayers))
     print("NumPlayers = " + str(numPlayers))
     gs.userInput = userInput
     gs.gameMode = gameMode
