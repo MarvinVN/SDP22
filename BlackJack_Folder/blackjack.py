@@ -430,7 +430,7 @@ def dealerTurn(player, deck):
             break
         else:
             player.draw(deck, 1)
-            dealer.p1()
+            #dealer.p1()
     return total
 
 def checkValue(hand):
