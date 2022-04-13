@@ -84,7 +84,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             print("start round loop") #debug
 
             #gs.dealCards(2)
-            for x in numPlayers:
+            for x in gs.numPlay:
                 playerTurn(gs.players[x+1], gs.deck)
                 msg = gui_to_bj_queue.get()
                 print("Message ID: " + msg.id)
@@ -372,10 +372,10 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
     gs.deck.shuffle()
     gs.dealCards(2)
 
-    for x in range(gs.numPlay):
+    for x in gs.players:
         x.wallet = playerAmount
-        gs.players[x].addBet(bet)
-        player_msg = Message("p" + str(x) + "_cards", gs.players[x].hand)
+        x.addBet(bet)
+        player_msg = Message("p" + str(x) + "_cards", x.hand)
 
     #gs.deck.build()
     #gs.deck.shuffle()
