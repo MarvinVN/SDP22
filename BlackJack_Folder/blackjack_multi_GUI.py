@@ -907,7 +907,12 @@ class Ui_GameWindow(QtCore.QObject):
         hb.button_press.connect(self.hit_it)
         sb.button_press.connect(self.stand_it)
         db.button_press.connect(self.double_it)
-        eb.button_press.connect(self.exit_it) 
+        eb.button_press.connect(self.exit_it)
+
+        self.your_cards_left_field.setPlainText(str(cards[1][0]))
+        self.your_cards_right_field.setPlainText(str(cards[1][1]))
+        self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+        self.current_bet_field.setPlainText(str(self.player_bets[1])) 
 
         if str(self.numPlayers) == "2":
             # P2
@@ -919,6 +924,16 @@ class Ui_GameWindow(QtCore.QObject):
             sb2.button_press.connect(self.stand_it)
             db2.button_press.connect(self.double_it)
             eb2.button_press.connect(self.exit_it)
+
+            self.your_cards_left_field.setPlainText(str(cards[1][0]))
+            self.your_cards_right_field.setPlainText(str(cards[1][1]))
+            self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.current_bet_field.setPlainText(str(self.player_bets[1]))
+
+            self.p2_cards_left_field.setPlainText(str(cards[2][0]))
+            self.p2_cards_right_field.setPlainText(str(cards[2][1]))
+            self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
         elif str(self.numPlayers) == "3":
             # P2
@@ -940,6 +955,21 @@ class Ui_GameWindow(QtCore.QObject):
             sb3.button_press.connect(self.stand_it)
             db3.button_press.connect(self.double_it)
             eb3.button_press.connect(self.exit_it)
+
+            self.your_cards_left_field.setPlainText(str(cards[1][0]))
+            self.your_cards_right_field.setPlainText(str(cards[1][1]))
+            self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.current_bet_field.setPlainText(str(self.player_bets[1]))
+
+            self.p2_cards_left_field.setPlainText(str(cards[2][0]))
+            self.p2_cards_right_field.setPlainText(str(cards[2][1]))
+            self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
+
+            self.p3_cards_left_field.setPlainText(str(cards[3][0]))
+            self.p3_cards_right_field.setPlainText(str(cards[3][1]))
+            self.p3_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
 
         elif str(self.numPlayers) == "4":
             # P2
@@ -977,16 +1007,21 @@ class Ui_GameWindow(QtCore.QObject):
             self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
-        for x in range(1, int(self.numPlayers)):
-            temp_cards_left = "p" + str(x) + "_cards_left_field"
-            temp_cards_right = "p" + str(x) + "_cards_right_field"
-            temp_amount_left_label = "p" + str(x) + "_amount_left_label"
-            temp_current_bet_field = "p" + str(x) + "_current_bet_field"
+            self.p2_cards_left_field.setPlainText(str(cards[2][0]))
+            self.p2_cards_right_field.setPlainText(str(cards[2][1]))
+            self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
-            self.temp_cards_left_field.setPlainText(str(cards[x][0]))
-            self.temp_cards_right_field.setPlainText(str(cards[x][1]))
-            self.temp_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
-            self.temp_current_bet_field.setPlainText(str(self.player_bets[x]))
+            self.p3_cards_left_field.setPlainText(str(cards[3][0]))
+            self.p3_cards_right_field.setPlainText(str(cards[3][1]))
+            self.p3_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
+
+            self.p4_cards_left_field.setPlainText(str(cards[4][0]))
+            self.p4_cards_right_field.setPlainText(str(cards[4][1]))
+            self.p4_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
+
 
         # just start one timer
         self.timer.start()
