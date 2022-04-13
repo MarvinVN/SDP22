@@ -75,6 +75,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
             """
             for x in player_msg:
+                print("before cards: ", x.id, x.content)
                 bj_to_gui_queue.put(x)
                 print("Put in player message: " + str(x.id))
                 print("Put in player cards: " + str(x.content))
