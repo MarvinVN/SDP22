@@ -1111,13 +1111,13 @@ class Ui_GameWindow(QtCore.QObject):
                     self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
                 elif msg1.id == "doubled":
                     value = msg1.content
-                    if current_player = "p1_cards":
+                    if current_player == "p1_cards":
                         self.current_bet_field.setPlainText(str(value))
-                    elif current_player = "p2_cards":
+                    elif current_player == "p2_cards":
                         self.p2_current_bet_field.setPlainText(str(value))
-                    elif current_player = "p3_cards":
+                    elif current_player == "p3_cards":
                         self.p3_current_bet_field.setPlainText(str(value))
-                    elif current_player = "p4_cards":
+                    elif current_player == "p4_cards":
                         self.p4_current_bet_field.setPlainText(str(value))
                     else:
                         pass
