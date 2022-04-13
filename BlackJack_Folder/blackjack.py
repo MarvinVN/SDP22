@@ -375,6 +375,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
     gs.deck.shuffle()
     gs.dealCards(2)
 
+    print("numPlay: " + str(gs.numPlay))
     for x in range(gs.numPlay):
         # this does not include dealer
         gs.players[x].wallet = playerAmount
