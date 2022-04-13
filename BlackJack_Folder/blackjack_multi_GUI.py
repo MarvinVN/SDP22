@@ -801,6 +801,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
                 cards[2] == msg.content
                 print("cards[2] = " + str(cards[2]))
                 print("cards[2]: " + str(msg.content))
+                cards[2] == msg.content
+                print(cards[2]) 
             elif msg.id == "p3_cards":
                 cards[3] == msg.content
             elif msg.id == "p4_cards":
