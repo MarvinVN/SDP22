@@ -755,7 +755,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         temp_w.hide()
 
         ###### START BLACKJACK PROCESS FORK ######
-        self.startBlackJack() 
+        #self.startBlackJack() 
 
         # displaying the betting amount
         #self.bet = self.scroll_bet.value()
