@@ -793,10 +793,13 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
             print("Entered while loop:")
             if msg.id == "p0_cards":
                 cards[0] = msg.content
+                print("cards[0] = " + str(cards[0]))
             elif msg.id == "p1_cards":
                 cards[1] = msg.content
+                print("cards[1] = " + str(cards[1]))
             elif msg.id == "p2_cards":
                 cards[2] == msg.content
+                print("cards[2] = " + str(cards[2]))
             elif msg.id == "p3_cards":
                 cards[3] == msg.content
             elif msg.id == "p4_cards":
