@@ -39,7 +39,6 @@ def main():
     gs.deck.build()
 
     gs.deck.shuffle()
-    print("Shuffling...")
     dealer.shuffle()
 
     #main game loop
@@ -54,6 +53,7 @@ def main():
             print("Not enough cards, please load cards into shuffler and press (hit) button")
             while(not tmp == 'h'):
                 tmp = button_move(1)
+            dealer.shuffle()    
 
         #TODO: sync timing of dealing/RFID loop
         print("Dealing...")
@@ -115,7 +115,6 @@ def dealerTurn(player, deck):
         sleep(1)
     return total
 
-#change for multi-players when buttons are set up
 def button_move(pos):
     move = ""
     hit, stand = player_buttons[pos]["hit"], player_buttons[pos]["stand"]

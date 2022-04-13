@@ -32,115 +32,32 @@ def signal(state):
     GPIO.output(pin_list, GPIO.LOW)
 
 def shuffle():
-    """GPIO.output(16, GPIO.HIGH)
-    #GPIO.output(20, GPIO.HIGH)
-    #GPIO.output(21, GPIO.HIGH)
-    sleep(1)
-
-    print("shuffle")
-
-    GPIO.output(16, GPIO.LOW)
-    #GPIO.output(20, GPIO.LOW)
-    #GPIO.output(21, GPIO.LOW)
-    sleep(1)  """
-
+    print("Shuffling...")
     signal(states["shuffler"])
     sleep(1)
 
 def init_deal():
-    """
-    #GPIO.output(16, GPIO.HIGH)
-    GPIO.output(20, GPIO.HIGH)
-    #GPIO.output(21, GPIO.HIGH)
-    sleep(4)
-
-    #GPIO.output(16, GPIO.LOW)
-    GPIO.output(20, GPIO.LOW)
-    #GPIO.output(21, GPIO.LOW)
-    sleep(1)"""
-
     print("initial deal")
     signal(states["init_deal"])    
 
 
 def p0():
-    """"
-    GPIO.output(16, GPIO.HIGH)
-    GPIO.output(20, GPIO.HIGH)
-    #GPIO.output(21, GPIO.HIGH)
-    sleep(2)
-
-    GPIO.output(16, GPIO.LOW)
-    GPIO.output(20, GPIO.LOW)
-    #GPIO.output(21, GPIO.LOW)
-    sleep(1)"""
-
     print("dealer card")
     signal(states["p0"])
 
 def p1():
-    """
-    #GPIO.output(16, GPIO.HIGH)
-    #GPIO.output(20, GPIO.HIGH)
-    GPIO.output(21, GPIO.HIGH)
-    sleep(1)
-
-    #GPIO.output(16, GPIO.LOW)
-    #GPIO.output(20, GPIO.LOW)
-    GPIO.output(21, GPIO.LOW)
-    sleep(1)"""
-
     print("player one card")
     signal(states["p1"])  
 
 def p2():
-    """
-    GPIO.output(16, GPIO.HIGH)
-    #GPIO.output(20, GPIO.HIGH)
-    GPIO.output(21, GPIO.HIGH)
-    sleep(4)
-
-    print("player three card")
-
-    GPIO.output(16, GPIO.LOW)
-    #GPIO.output(20, GPIO.LOW)
-    GPIO.output(21, GPIO.LOW)
-    sleep(1)"""
-
     print("player two card")
     signal(states["p2"]) 
 
 def p3():
-    """
-    #GPIO.output(16, GPIO.HIGH)
-    GPIO.output(20, GPIO.HIGH)
-    GPIO.output(21, GPIO.HIGH)
-    sleep(4)
-
-    print("player four card")
-
-    #GPIO.output(16, GPIO.LOW)
-    GPIO.output(20, GPIO.LOW)
-    GPIO.output(21, GPIO.LOW)
-    sleep(1)"""
-
     print("player three card")
     signal(states["p3"])
 
 
 def p4():
-    """
-    GPIO.output(16, GPIO.HIGH)
-    GPIO.output(20, GPIO.HIGH)
-    GPIO.output(21, GPIO.HIGH)
-    sleep(4)
-
-    print("player five card")
-
-    GPIO.output(16, GPIO.LOW)
-    GPIO.output(20, GPIO.LOW)
-    GPIO.output(21, GPIO.LOW)
-    sleep(1) """
-
     print("player 4 card")
     signal(states["p4"]) 
