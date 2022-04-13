@@ -366,6 +366,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
     # making msg list for each player
     msg = []
     gs.setPlayers(numPlayers)
+    print("NumPlayers = " + str(numPlayers))
     gs.userInput = userInput
     gs.gameMode = gameMode
 
