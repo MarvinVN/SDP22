@@ -86,6 +86,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             #gs.dealCards(2)
             for x in range(gs.numPlay):
                 playerTurn(gs.players[x+1], gs.deck)
+                # not receiving message?
                 msg = gui_to_bj_queue.get()
                 print("Message ID: " + msg.id)
 
