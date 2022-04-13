@@ -376,9 +376,10 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
     gs.dealCards(2)
 
     for x in range(len(gs.players)):
-        gs.players[x].wallet = playerAmount
-        gs.players[x].addBet(bet)
-        player_msg = Message("p" + str(x) + "_cards", gs.players[x].hand)
+        # this does not include dealer
+        gs.players[x+1].wallet = playerAmount
+        gs.players[x+1].addBet(bet)
+        player_msg = Message("p" + str(x+1) + "_cards", gs.players[x+1].hand)
         msg.append(player_msg)
 
     #gs.deck.build()
