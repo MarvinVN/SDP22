@@ -385,7 +385,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
    # msg0 = Message("dealer_cards", gs.players[0].hand)
    # msg1 = Message("player_cards", gs.players[1].hand)
 
-    return msg
+    return player_msg
 
 #takes in player.pos to physically deal a card to the appropriate player
 def playerDraw(pos):
