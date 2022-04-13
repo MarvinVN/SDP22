@@ -116,7 +116,7 @@ user_input = ""
 increment_value = 100
 bet_increment = 10
 
-cards = []
+cards = [[],[],[],[],[]]
 player_turn = "p1" # always start with p1
 
 # GLOBAL QUEUES USED FOR MULTIPROCESSING INTERACTION
