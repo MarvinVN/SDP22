@@ -110,7 +110,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                         num_wins = num_wins + 1
                     else:
                         pass
-                                    
+
                     if gs.gameMode == "Winning Amount":
                         if gs.players[x].wallet >= gs.userInput:
                             done_game = True
@@ -178,13 +178,12 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     #count += 1
                 elif msg.id == "double":
                     # only adding original bet, since original bet was already included
-                    bet = msg.content[0][0]
+                    bet = msg.content[x]
                     gs.players[x].draw(gs.deck, 1)
                     msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
                     bj_to_gui_queue.put(msg1)
 
                     playerTurn(gs.players[x], gs.deck)
-                    bet = msg.content[0][x]
                     gs.players[x].addBet(bet)
                     totals.append(playerTurn(gs.players[x], gs.deck))
                     

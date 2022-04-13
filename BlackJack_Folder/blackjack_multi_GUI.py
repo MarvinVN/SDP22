@@ -970,7 +970,23 @@ class Ui_GameWindow(QtCore.QObject):
             hb4.button_press.connect(self.hit_it)
             sb4.button_press.connect(self.stand_it)
             db4.button_press.connect(self.double_it)
-            eb4.button_press.connect(self.exit_it)       
+            eb4.button_press.connect(self.exit_it)  
+
+            self.your_cards_left_field.setPlainText(str(cards[1][0]))
+            self.your_cards_right_field.setPlainText(str(cards[1][1]))
+            self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.current_bet_field.setPlainText(str(self.player_bets[1]))
+
+        for x in range(1, int(self.numPlayers)):
+            temp_cards_left = "p" + str(x) + "_cards_left_field"
+            temp_cards_right = "p" + str(x) + "_cards_right_field"
+            temp_amount_left_label = "p" + str(x) + "_amount_left_label"
+            temp_current_bet_field = "p" = Str(x) + "_current_bet_field"
+
+            self.temp_cards_left_field.setPlainText(str(cards[x][0]))
+            self.temp_cards_right_field.setPlainText(str(cards[x][1]))
+            self.temp_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.temp_current_bet_field.setPlainText(str(self.player_bets[x]))
 
         # just start one timer
         self.timer.start()
