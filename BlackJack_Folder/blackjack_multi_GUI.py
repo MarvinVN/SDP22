@@ -983,6 +983,16 @@ class Ui_GameWindow(QtCore.QObject):
         db.button_press.disconnect()
         eb.button_press.disconnect()
 
+        for x in range(2, int(self.numPlayers)):
+            hb_temp = "hb" + str(x)
+            sb_temp = "sb" + str(x)
+            db_temp = "db" + str(x)
+            eb_temp = "eb" + str(x)
+            hb_temp.button_press.disconnect()
+            sb_temp.button_press.disconnect()
+            db_temp.button_press.disconnect()
+            eb_temp.button_press.disconnect()
+
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
         self.ui.setupUi(self, self.window)
@@ -1087,32 +1097,28 @@ class Ui_GameWindow(QtCore.QObject):
 
         if self.double_button_clicked: # need to make self.bet into a list of bets
         # maybe instead of checking button states, just manually make it go from p1 to p4
-            msg = Message("double", [self.player_bets, player_turn])
+            msg = Message("double", self.player_bets)
             gui_to_bj_queue.put(msg)
 
             while(1):
                 msg1 = bj_to_gui_queue.get()
+                current_player = msg1.id
                 if msg1.id == "p0_cards":
-                    current_player = msg1.id
                     # just store dealer cards
                     cards[0] = msg1.content
                 elif msg1.id == "p1_cards":
-                    current_player == msg1.id
                     cards[1] = msg1.content
                     self.your_cards_left_field.setPlainText(str(cards[1]))
                     self.your_cards_right_field.setPlainText(str(""))
                 elif msg1.id == "p2_cards":
-                    current_player = msg1.id
                     cards[2] = msg1.content
                     self.p2_cards_left_field.setPlainText(str(cards[2]))
                     self.p2_cards_right_field.setPlainText(str(""))
                 elif msg1.id == "p3_cards":
-                    current_player = msg1.id
                     cards[3] = msg1.content
                     self.p3_cards_left_field.setPlainText(str(cards[3]))
                     self.p3_cards_right_field.setPlainText(str(""))
                 elif msg1.id == "p4_cards":
-                    current_player = msg1.id
                     cards[4] = msg1.content
                     self.p4_cards_left_field.setPlainText(str(cards[4]))
                     self.p4_cards_right_field.setPlainText(str(""))
@@ -1144,14 +1150,14 @@ class Ui_GameWindow(QtCore.QObject):
                     bust = msg1.content[4]
                     bj = msg1.content[5]
                     
-
-                    # self.bet = bet (reset?)
+                    """                    
                     # adding time delay before going to next screen
                     QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
                     self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
                     QtTest.QTest.qWait(DELAYED)
                     self.done_round()
+                    """
                     break
                 else:
                     pass
