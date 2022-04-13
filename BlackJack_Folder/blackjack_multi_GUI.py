@@ -786,24 +786,31 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         while(1):
             global cards
-            if str(counter) == self.numPlayers:
-                break
-
             msg = bj_to_gui_queue.get() # this should be messages for each player playing
             print("Entered while loop:")
             if msg.id == "p0_cards":
                 cards[0] = msg.content
                 print("cards[0] = " + str(cards[0]))
+                if str(counter) == self.numPlayers:
+                    break
             elif msg.id == "p1_cards":
                 cards[1] = msg.content
                 print("cards[1] = " + str(cards[1]))
+                if str(counter) == self.numPlayers:
+                    break
             elif msg.id == "p2_cards":
                 cards[2] == msg.content
                 print("cards[2] = " + str(cards[2]))
+                if str(counter) == self.numPlayers:
+                    break
             elif msg.id == "p3_cards":
                 cards[3] == msg.content
+                if str(counter) == self.numPlayers:
+                    break
             elif msg.id == "p4_cards":
                 cards[4] == msg.content
+                if str(counter) == self.numPlayers:
+                    break
             else:
                 pass
             counter += 1
