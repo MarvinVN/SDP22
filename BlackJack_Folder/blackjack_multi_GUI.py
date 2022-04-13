@@ -115,7 +115,11 @@ game_mode = ""
 user_input = ""
 increment_value = 100
 bet_increment = 10
-p0_cards, p1_cards, p2_cards, p3_cards, p4_cards = []
+p0_cards = []
+p1_cards = []
+p2_cards = []
+p3_cards = []
+p4_cards = []
 cards = [p0_cards, p1_cards, p2_cards, p3_cards, p4_cards]
 player_turn = "p1" # always start with p1
 
