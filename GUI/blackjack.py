@@ -1,13 +1,16 @@
 from gameState import gameState
 from game import Deck
+import dealer
 import multiprocessing as mp
 import blackjack_globals
 import time
+from time import sleep
 
 from blackjack_globals import Message
 
 t1 = time.time()
 t2 = time.time()
+
 def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     gameMode = " "
     userInput = 0 # need to update this in the start_game
@@ -49,9 +52,25 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             msg0, msg1 = start_game(gs, numPlayers, playerWallets, bet, gameMode, gs.userInput)
             gs.deck.build() #testing
             gs.deck.shuffle() #testing
+
+            # adding dealer shuffle
+            dealer.shuffle()
+
+            sleep(2)
+
+            #gs.dealCards(2)
+            # dealing cards to dealer and player 1
+            dealer.p1()
+            gs.players[0].draw(gs.deck, 1)
+            dealer.p2()
+            gs.players[1].draw(gs.deck, 1)
+            dealer.p1()
+            gs.players[0].draw(gs.deck, 1)
+            dealer.p2()
+            gs.players[1].draw(gs.deck, 1)
+
             bj_to_gui_queue.put(msg0)
             bj_to_gui_queue.put(msg1)
-            gs.dealCards(2)
             #playerTurn(gs.players[1], gs.deck)
         done_round = False
 
@@ -127,6 +146,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
             elif msg.id == "hit":
                 gs.players[1].draw(gs.deck, 1)
+                dealer.p2()
 
                 if checkValue(gs.players[1].hand) > 21:
                     
@@ -175,6 +195,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             elif msg.id == "double":
                 # only adding original bet, since original bet was already included
                 gs.players[1].draw(gs.deck, 1)
+                dealer.p2()
+
                 msg1 = Message("player_cards", gs.players[1].hand)
                 bj_to_gui_queue.put(msg1)
                 playerTurn(gs.players[1], gs.deck)
@@ -269,7 +291,16 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 pass
 
             gs.resetHands()#test
-            gs.dealCards(2)
+            #gs.dealCards(2)
+            dealer.p1()
+            gs.players[0].draw(gs.deck, 1)
+            dealer.p2()
+            gs.players[1].draw(gs.deck, 1)
+            dealer.p1()
+            gs.players[0].draw(gs.deck, 1)
+            dealer.p2()
+            gs.players[1].draw(gs.deck, 1)
+
 
             # temporary for one player:
             gs.players[1].resetBet()
@@ -310,6 +341,19 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
 
     return msg0, msg1
 
+#takes in player.pos to physically deal a card to the appropriate player
+def playerDraw(pos):
+    if pos == 0:
+        dealer.p1()
+    elif pos == 1:
+        dealer.p2()
+    elif pos == 2:
+        dealer.p3()
+    elif pos == 3:
+        dealer.p4()
+    elif pos == 4:
+        dealer.p5()
+
 def playerTurn(player, deck):
     total = checkValue(player.hand)
     #player.showHand() this prints hand
@@ -333,6 +377,7 @@ def dealerTurn(player, deck):
             break
         else:
             player.draw(deck, 1)
+            dealer.p1()
     return total
 
 def checkValue(hand):
