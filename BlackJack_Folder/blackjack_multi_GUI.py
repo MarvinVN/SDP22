@@ -786,7 +786,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         while(1):
             global cards
-            if counter == self.numPlayers:
+            if str(counter) == self.numPlayers:
                 break
 
             msg = bj_to_gui_queue.get() # this should be messages for each player playing
