@@ -71,8 +71,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             gs.players[1].draw(gs.deck, 1)
 
             """
-            for x in range(len(player_msg)):
-                bj_to_gui_queue.put(player_msg[x])
+            for x in player_msg:
+                bj_to_gui_queue.put(x)
 
             #playerTurn(gs.players[1], gs.deck)
         done_round = False
@@ -377,6 +377,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
         gs.players[x].wallet = playerAmount
         gs.players[x].addBet(bet)
         player_msg = Message("p" + str(x) + "_cards", gs.players[x].hand)
+        msg.append(player_msg)
 
     #gs.deck.build()
     #gs.deck.shuffle()
@@ -385,7 +386,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
    # msg0 = Message("dealer_cards", gs.players[0].hand)
    # msg1 = Message("player_cards", gs.players[1].hand)
 
-    return player_msg
+    return msg
 
 #takes in player.pos to physically deal a card to the appropriate player
 def playerDraw(pos):
