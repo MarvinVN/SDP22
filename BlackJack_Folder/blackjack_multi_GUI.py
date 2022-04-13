@@ -1087,7 +1087,7 @@ class Ui_GameWindow(QtCore.QObject):
 
         if self.double_button_clicked: # need to make self.bet into a list of bets
         # maybe instead of checking button states, just manually make it go from p1 to p4
-            msg = Message("double", self.player_bets, player_turn)
+            msg = Message("double", [self.player_bets, player_turn])
             gui_to_bj_queue.put(msg)
 
             while(1):
