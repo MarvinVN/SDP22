@@ -739,6 +739,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
             else:
                 pass
         """
+        ###### START BLACKJACK PROCESS FORK ######
+        self.startBlackJack() 
         # open new game window
         temp_w = main_w
         self.window = QtWidgets.QMainWindow()
@@ -750,8 +752,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # close current betting window
         temp_w.hide()
 
-        ###### START BLACKJACK PROCESS FORK ######
-        self.startBlackJack() 
+
 
         # displaying the betting amount
         #self.bet = self.scroll_bet.value()
