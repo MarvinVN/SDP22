@@ -379,7 +379,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
         # this does not include dealer
         gs.players[x].wallet = playerAmount
         gs.players[x].addBet(bet)
-        player_msg = Message("p" + str(x+1) + "_cards", gs.players[x].hand)
+        player_msg = Message("p" + str(x) + "_cards", gs.players[x].hand)
         print(player_msg.id)
         msg.append(player_msg)
 
