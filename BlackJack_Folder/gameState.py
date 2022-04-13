@@ -6,7 +6,7 @@ class gameState:
         self.numPlay = 0
         self.players = []
         self.deck = Deck()
-        #self.setPlayers(numPlay)
+        self.setPlayers(numPlay)
         self.gameMode = gameMode
         self.userInput = userInput
 
