@@ -782,6 +782,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         game_process_pid = game_process.pid
         print("Game pid: ", game_process_pid)
 
+        counter = 0
+
         while(1):
             global cards
             msg = bj_to_gui_queue.get() # this should be messages for each player playing
@@ -797,7 +799,10 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
             elif msg.id == "p4_cards":
                 cards[4] == msg.content
             else:
+                pass
+            if counter == self.numPlayers:
                 break
+            counter += 1
 
     # STYLES/SETUP OF PLAYER_READY GUI
     def setupUi(self, Player_ReadyWindow):
