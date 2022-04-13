@@ -981,7 +981,7 @@ class Ui_GameWindow(QtCore.QObject):
             temp_cards_left = "p" + str(x) + "_cards_left_field"
             temp_cards_right = "p" + str(x) + "_cards_right_field"
             temp_amount_left_label = "p" + str(x) + "_amount_left_label"
-            temp_current_bet_field = "p" = Str(x) + "_current_bet_field"
+            temp_current_bet_field = "p" + str(x) + "_current_bet_field"
 
             self.temp_cards_left_field.setPlainText(str(cards[x][0]))
             self.temp_cards_right_field.setPlainText(str(cards[x][1]))
