@@ -375,11 +375,12 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
     gs.deck.shuffle()
     gs.dealCards(2)
 
-    for x in range(len(gs.players)):
+    for x in range(gs.numPlay):
         # this does not include dealer
-        gs.players[x+1].wallet = playerAmount
-        gs.players[x+1].addBet(bet)
-        player_msg = Message("p" + str(x+1) + "_cards", gs.players[x+1].hand)
+        gs.players[x].wallet = playerAmount
+        gs.players[x].addBet(bet)
+        player_msg = Message("p" + str(x+1) + "_cards", gs.players[x].hand)
+        print(player_msg.id)
         msg.append(player_msg)
 
     #gs.deck.build()
