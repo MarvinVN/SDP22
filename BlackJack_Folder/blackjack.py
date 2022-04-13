@@ -373,10 +373,10 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
     gs.deck.shuffle()
     gs.dealCards(2)
 
-    for x in gs.players:
-        x.wallet = playerAmount
-        x.addBet(bet)
-        player_msg = Message("p" + str(x) + "_cards", x.hand)
+    for x in range(len(gs.players)):
+        gs.players[x].wallet = playerAmount
+        gs.players[x].addBet(bet)
+        player_msg = Message("p" + str(x) + "_cards", gs.players[x].hand)
 
     #gs.deck.build()
     #gs.deck.shuffle()
