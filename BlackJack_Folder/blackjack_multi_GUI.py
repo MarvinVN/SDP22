@@ -782,10 +782,13 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         game_process_pid = game_process.pid
         print("Game pid: ", game_process_pid)
 
-        counter = -1
+        counter = 0
 
         while(1):
             global cards
+            if counter == self.numPlayers:
+                break
+            
             msg = bj_to_gui_queue.get() # this should be messages for each player playing
             print("Entered while loop:")
             if msg.id == "p0_cards":
@@ -800,8 +803,6 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
                 cards[4] == msg.content
             else:
                 pass
-            if counter == self.numPlayers:
-                break
             counter += 1
             print("Counter = " + str(counter))
 
