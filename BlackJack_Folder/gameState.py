@@ -11,9 +11,6 @@ class gameState:
         self.userInput = userInput
 
     def setPlayers(self, numPlay):
-        if numPlay not in [1, 2, 3, 4]:
-            return False #might need to change behavior... probably not; just make it 4 buttons
-
         prevNum = self.numPlay
         self.numPlay = numPlay + 1 #plus 1 needed for dealer
 
