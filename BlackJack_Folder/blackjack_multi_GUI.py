@@ -782,7 +782,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         game_process_pid = game_process.pid
         print("Game pid: ", game_process_pid)
 
-        counter = 0
+        counter = -1
 
         while(1):
             global cards
