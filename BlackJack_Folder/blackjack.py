@@ -71,8 +71,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             gs.players[1].draw(gs.deck, 1)
 
             """
-            for x in player_msg:
-                bj_to_gui_queue.put(x)
+            for x in range(len(player_msg)):
+                bj_to_gui_queue.put(player_msg[x])
 
             #playerTurn(gs.players[1], gs.deck)
         done_round = False
