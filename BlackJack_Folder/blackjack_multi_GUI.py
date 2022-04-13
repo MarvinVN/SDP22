@@ -115,12 +115,8 @@ game_mode = ""
 user_input = ""
 increment_value = 100
 bet_increment = 10
-p0_cards = []
-p1_cards = []
-p2_cards = []
-p3_cards = []
-p4_cards = []
-cards = [p0_cards, p1_cards, p2_cards, p3_cards, p4_cards]
+
+cards = []
 player_turn = "p1" # always start with p1
 
 # GLOBAL QUEUES USED FOR MULTIPROCESSING INTERACTION
@@ -792,13 +788,13 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
             msg = bj_to_gui_queue.get() # this should be messages for each player playing
             print("Entered while loop:")
             if msg.id == "p0_cards":
-                cards[0] = msg.content
+                cards.append(msg.content)
                 print("cards[0] = " + str(cards[0]))
             elif msg.id == "p1_cards":
-                cards[1] = msg.content
+                cards.append(msg.content)
                 print("cards[1] = " + str(cards[1]))
             elif msg.id == "p2_cards":
-                cards[2] == msg.content
+                cards.append(msg.content)
                 print("cards[2] = " + str(cards[2]))
                 print("cards[2]: " + str(msg.content))
                 cards[2] == msg.content
