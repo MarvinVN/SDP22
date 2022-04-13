@@ -1554,6 +1554,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_exit_button.setText("EXIT")
             self.p2_verticalLayout.addWidget(self.p2_exit_button)
 
+            print(cards)
             self.your_cards_left_field.setPlainText(str(cards[1]))
             #self.your_cards_right_field.setPlainText(str(cards[1][1]))
             self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
