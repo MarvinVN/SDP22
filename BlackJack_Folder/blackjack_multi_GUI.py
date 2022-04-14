@@ -1111,6 +1111,7 @@ class Ui_GameWindow(QtCore.QObject):
                     cards[0] = msg1.content
                 elif msg1.id == "p1_cards":
                     cards[1] = msg1.content
+                    print("Cards stored: ", cards[1])
                     self.your_cards_left_field.setPlainText(str(cards[1]))
                     self.your_cards_right_field.setPlainText(str(""))
                 elif msg1.id == "p2_cards":

@@ -195,7 +195,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     double = bet * 2
 
                     totals[0] = dealerTurn(gs.players[0], gs.deck)
-                    round_score = score(gs.players, totals)
+                    #round_score = score(gs.players, totals)
                     gs.showWallets()
 
                     msg2 = Message("wallet", gs.players[x].wallet)
