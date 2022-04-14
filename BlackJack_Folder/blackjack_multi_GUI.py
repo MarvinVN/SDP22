@@ -1059,20 +1059,20 @@ class Ui_GameWindow(QtCore.QObject):
                 self.current_bet_field.setPlainText(str(self.player_bets[1]))
             elif msg0.id == "p2_cards":
                 cards[2] == msg0.content
-                self.p2_cards_left_field.setPlainText(str(cards[2][0]))
-                self.p2_cards_right_field.setPlainText(str(cards[2][1]))
+                self.p2_left_field.setPlainText(str(cards[2][0]))
+                self.p2_right_field.setPlainText(str(cards[2][1]))
                 self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
                 self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))                
             elif msg0.id == "p3_cards":
                 cards[3] == msg0.content
-                self.p3_cards_left_field.setPlainText(str(cards[3][0]))
-                self.p3_cards_right_field.setPlainText(str(cards[3][1]))
+                self.p3_left_field.setPlainText(str(cards[3][0]))
+                self.p3_right_field.setPlainText(str(cards[3][1]))
                 self.p3_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
                 self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
             elif msg0.id == "p4_cards":
                 cards[4] == msg0.content
-                self.p4_cards_left_field.setPlainText(str(cards[4][0]))
-                self.p4_cards_right_field.setPlainText(str(cards[4][1]))
+                self.p4_left_field.setPlainText(str(cards[4][0]))
+                self.p4_right_field.setPlainText(str(cards[4][1]))
                 self.p4_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
                 self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
             elif msg0.id == "GAME OVER!":
@@ -1129,16 +1129,16 @@ class Ui_GameWindow(QtCore.QObject):
                     self.your_cards_right_field.setPlainText("")
                 elif msg1.id == "p2_cards":
                     cards[2] = msg1.content
-                    self.p2_cards_left_field.setPlainText(str(cards[2]))
-                    self.p2_cards_right_field.setPlainText(str(""))
+                    self.p2_left_field.setPlainText(str(cards[2]))
+                    self.p2_right_field.setPlainText(str(""))
                 elif msg1.id == "p3_cards":
                     cards[3] = msg1.content
-                    self.p3_cards_left_field.setPlainText(str(cards[3]))
-                    self.p3_cards_right_field.setPlainText(str(""))
+                    self.p3_left_field.setPlainText(str(cards[3]))
+                    self.p3_right_field.setPlainText(str(""))
                 elif msg1.id == "p4_cards":
                     cards[4] = msg1.content
-                    self.p4_cards_left_field.setPlainText(str(cards[4]))
-                    self.p4_cards_right_field.setPlainText(str(""))
+                    self.p4_left_field.setPlainText(str(cards[4]))
+                    self.p4_right_field.setPlainText(str(""))
                 elif msg1.id == "doubled":
                     value = msg1.content
                     if current_player == "p1_cards":
@@ -1847,7 +1847,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
             self.p2_left_field.setPlainText(str(cards[2][0]))
-            self.p2_cards_right_field.setPlainText(str(cards[2][1]))
+            self.p2_right_field.setPlainText(str(cards[2][1]))
             self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
@@ -2217,17 +2217,17 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
             self.p2_left_field.setPlainText(str(cards[2][0]))
-            self.p2_cards_right_field.setPlainText(str(cards[2][1]))
+            self.p2_right_field.setPlainText(str(cards[2][1]))
             self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
             self.p3_left_field.setPlainText(str(cards[3][0]))
-            self.p3_cards_right_field.setPlainText(str(cards[3][1]))
+            self.p3_right_field.setPlainText(str(cards[3][1]))
             self.p3_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
 
             self.p4_left_field.setPlainText(str(cards[4][0]))
-            self.p4_cards_right_field.setPlainText(str(cards[4][1]))
+            self.p4_right_field.setPlainText(str(cards[4][1]))
             self.p4_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))           
         #
