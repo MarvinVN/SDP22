@@ -48,7 +48,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             bet = msg.content[2]
             gameMode = msg.content[3]
             gs.userInput = msg.content[4]
-            for x in range(int(numPlayers)):
+            for x in range(gs.numPlay):
                 totals.append(0)
             print("Game Start User Input:" + str(gs.userInput))
         
