@@ -100,6 +100,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     if x != gs.numPlay:
                         msg2 = Message("continue", None)
                         bj_to_gui_queue.put(msg2)
+                        print("sending CONTINUE msg to GUI...")
 
                     done_player_round = True
                     rounds = rounds + 1
@@ -259,11 +260,13 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         bj_to_gui_queue.put(msg0)
         print("sending DONE_ROUND msg to GUI...")
 
+        """
         print("move done") #debug
         print("Number of Rounds:" + str(rounds))
         print("Number of Wins:" + str(num_wins))
         print("Duration of Time (sec):" + str(total_time))
         print("User Input:" + str(gs.userInput))
+        """
 
         # reset hand, deal 2 cards per player, tell GUI round ended
         if start_var and done_round:

@@ -1241,6 +1241,7 @@ class Ui_GameWindow(QtCore.QObject):
                 QtTest.QTest.qWait(DELAYED)
                 self.done_round()
             elif msg.id == "continue":
+                print("...received CONTINUE msg from BJ")
                 break
         
 
