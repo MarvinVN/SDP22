@@ -290,7 +290,7 @@ def score(players, totals):
                 settleBet(players[x], -1)
     else:
         for x in range(1, len(players)):
-            if totals[x] < dealer_score or totals[x] > 21:
+            if totals[x] < dealer_score or totals[x] > 21: # this isn't decrementing the wallet
                 settleBet(players[x], -1)
             elif totals[x] == dealer_score:
                 settleBet(players[x], 0)
@@ -304,3 +304,4 @@ def settleBet(player, res):
         player.wallet += player.totalBet * 2
     elif res == 0:
         player.wallet += player.totalBet
+

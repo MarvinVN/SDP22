@@ -117,6 +117,7 @@ increment_value = 100
 bet_increment = 10
 
 cards = [[],[],[],[],[]]
+amounts_list = [0,0,0,0,0]
 player_turn = "p1" # always start with p1
 
 # GLOBAL QUEUES USED FOR MULTIPROCESSING INTERACTION
@@ -751,16 +752,6 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # close current betting window
         temp_w.hide()
 
-
-
-        # displaying the betting amount
-        #self.bet = self.scroll_bet.value()
-        #self.ui.current_bet_field.setPlainText(str(self.bet))
-        #self.ui.your_cards_left_field.setPlainText(str(self.player_cards))
-        #self.ui.your_cards_right_field.setPlainText(str(self.player_cards[1]))
-        #self.ui.dealer_left_field.setPlainText(str(self.dealer_cards[0]))
-        #self.ui.dealer_right_field.setPlainText(str(self.dealer_cards[1]))
-
     # OFFICIALLY STARTS BLACKJACK GAME; GAME_PROCESS STARTED
     def startBlackJack(self):
         # game_process is started here
@@ -789,18 +780,22 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
             print("Entered while loop:")
             if msg.id == "p0_cards":
                 cards[0] = msg.content
+                amounts_list[0] = self.startingAmount
                 print("cards[0] = " + str(cards[0]))
             elif msg.id == "p1_cards":
                 cards[1] = msg.content
+                amounts_list[1] = self.startingAmount
                 print("cards[1] = " + str(cards[1]))
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
+                amounts_list[2] = self.startingAmount
                 print("cards[2] = " + str(cards[2]))
-                print("cards[2]: " + str(msg.content))
             elif msg.id == "p3_cards":
                 cards[3] = msg.content
+                amounts_list[3] = self.startingAmount
             elif msg.id == "p4_cards":
                 cards[4] = msg.content
+                amounts_list[4] = self.startingAmount
             else:
                 pass
             counter += 1
@@ -1075,6 +1070,7 @@ class Ui_GameWindow(QtCore.QObject):
         print("finished displaying end of round...")
 
     def done_round(self):
+        global amounts_list
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
@@ -1100,25 +1096,25 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[1] = msg0.content
                 self.your_cards_left_field.setPlainText(str(cards[1][0]))
                 self.your_cards_right_field.setPlainText(str(cards[1][1]))
-                self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+                self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
                 self.current_bet_field.setPlainText(str(self.player_bets[1]))
             elif msg0.id == "p2_cards":
                 cards[2] == msg0.content
                 self.p2_left_field.setPlainText(str(cards[2][0]))
                 self.p2_right_field.setPlainText(str(cards[2][1]))
-                self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+                self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
                 self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))                
             elif msg0.id == "p3_cards":
                 cards[3] == msg0.content
                 self.p3_left_field.setPlainText(str(cards[3][0]))
                 self.p3_right_field.setPlainText(str(cards[3][1]))
-                self.p3_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+                self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
                 self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
             elif msg0.id == "p4_cards":
                 cards[4] == msg0.content
                 self.p4_left_field.setPlainText(str(cards[4][0]))
                 self.p4_right_field.setPlainText(str(cards[4][1]))
-                self.p4_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+                self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
                 self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
             elif msg0.id == "GAME OVER!":
                 # end the game
@@ -1195,6 +1191,17 @@ class Ui_GameWindow(QtCore.QObject):
                     cards[0] = msg1.content[0]
                     scoring = msg1.content[1]
                     wallets = msg1.content[2]
+                    
+                    for x in range(int(numPlayers)+1):
+                        amounts_list[x] = wallets[x]
+                        if x == 1:
+                            self.amount_left_label.setText(str(amounts_list[x]))
+                        elif x == 2:
+                            self.p2_amount_left_label.setText(str(amounts_list[x]))
+                        elif x == 3:
+                            self.p3_amount_left_label.setText(str(amounts_list[x]))
+                        elif x == 4:
+                            self.p4_amount_left_label.setText(str(amounts_list[x]))
 
                     QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
@@ -1304,7 +1311,7 @@ class Ui_GameWindow(QtCore.QObject):
         MainWindow.resize(WIDTH, HEIGHT)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        global cards
+        global cards, amounts_list
         
         if str(self.numPlayers) == "1":
             # FOR ONE PLAYER
@@ -1402,7 +1409,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             self.your_cards_left_field.setPlainText(str(cards[1][0]))
             self.your_cards_right_field.setPlainText(str(cards[1][1]))
-            self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
         #
@@ -1539,7 +1546,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.amount_left_label.setFont(font6)
             self.amount_left_label.setObjectName("amount_left_label")
-            self.amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
             # PLAYER 1 HIT
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -1568,7 +1575,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_amount_left_label.setFont(font6)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
-            self.p2_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
             # PLAYER 2 HIT
             self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -1594,12 +1601,12 @@ class Ui_GameWindow(QtCore.QObject):
             print(cards)
             self.your_cards_left_field.setPlainText(str(cards[1][0]))
             self.your_cards_right_field.setPlainText(str(cards[1][1]))
-            self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
             self.p2_left_field.setPlainText(str(cards[2][0]))
             self.p2_right_field.setPlainText(str(cards[2][1]))
-            self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
         #
@@ -1791,7 +1798,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.amount_left_label.setFont(font6)
             self.amount_left_label.setObjectName("amount_left_label")
-            self.amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
             # PLAYER 1 HIT
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -1820,7 +1827,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_amount_left_label.setFont(font6)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
-            self.p2_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
             # PLAYER 2 HIT
             self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -1847,7 +1854,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.p3_amount_left_label.setFont(font6)
             self.p3_amount_left_label.setObjectName("p3_amount_left_label")
-            self.p3_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.p3_amount_left_label.setText(("Amount Left: ") + str(amounts_list[3]))
             self.p3_verticalLayout.addWidget(self.p3_amount_left_label)
             # PLAYER 3 HIT
             self.p3_hit_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -1872,17 +1879,17 @@ class Ui_GameWindow(QtCore.QObject):
 
             self.your_cards_left_field.setPlainText(str(cards[1][0]))
             self.your_cards_right_field.setPlainText(str(cards[1][1]))
-            self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
             self.p2_left_field.setPlainText(str(cards[2][0]))
             self.p2_right_field.setPlainText(str(cards[2][1]))
-            self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
             self.p3_left_field.setPlainText(str(cards[3][0]))
             self.p3_right_field.setPlainText(str(cards[3][1]))
-            self.p3_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
             self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
 
         #
@@ -2134,7 +2141,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.amount_left_label.setFont(font6)
             self.amount_left_label.setObjectName("amount_left_label")
-            self.amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
             # PLAYER 1 HIT
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -2163,7 +2170,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_amount_left_label.setFont(font6)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
-            self.p2_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
             # PLAYER 2 HIT
             self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -2190,7 +2197,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.p3_amount_left_label.setFont(font6)
             self.p3_amount_left_label.setObjectName("p3_amount_left_label")
-            self.p3_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.p3_amount_left_label.setText(("Amount Left: ") + str(amounts_list[3]))
             self.p3_verticalLayout.addWidget(self.p3_amount_left_label)
             # PLAYER 3 HIT
             self.p3_hit_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -2217,7 +2224,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.p4_amount_left_label.setFont(font6)
             self.p4_amount_left_label.setObjectName("p4_amount_left_label")
-            self.p4_amount_left_label.setText(("Amount Left: ") + str(self.currentAmount))
+            self.p4_amount_left_label.setText(("Amount Left: ") + str(amounts_list[4]))
             self.p4_verticalLayout.addWidget(self.p4_amount_left_label)
             # PLAYER 4 HIT
             self.p4_hit_button = QtWidgets.QPushButton(self.p4_verticalLayoutWidget, clicked=lambda: self.hit_it())
@@ -2242,22 +2249,22 @@ class Ui_GameWindow(QtCore.QObject):
 
             self.your_cards_left_field.setPlainText(str(cards[1][0]))
             self.your_cards_right_field.setPlainText(str(cards[1][1]))
-            self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
             self.p2_left_field.setPlainText(str(cards[2][0]))
             self.p2_right_field.setPlainText(str(cards[2][1]))
-            self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
             self.p3_left_field.setPlainText(str(cards[3][0]))
             self.p3_right_field.setPlainText(str(cards[3][1]))
-            self.p3_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
             self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
 
             self.p4_left_field.setPlainText(str(cards[4][0]))
             self.p4_right_field.setPlainText(str(cards[4][1]))
-            self.p4_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
+            self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
             self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))           
         #
         #
@@ -2279,7 +2286,7 @@ class Ui_GameWindow(QtCore.QObject):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(self.currentAmount))
+        #self.amount_left_label.setText(_translate("MainWindow", "Amount Left: ") + str(amounts_list[1]))
 
 
 ###################################################################
@@ -2494,8 +2501,6 @@ class Ui_end_game(QtCore.QObject):
         _translate = QtCore.QCoreApplication.translate
         end_game.setWindowTitle(_translate("end_game", "Confirmation"))
         self.confirm_label.setText(_translate("end_game", "GAME END"))
-
-
 
 if __name__ == "__main__":
     import sys
