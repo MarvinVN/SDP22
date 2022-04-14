@@ -2318,6 +2318,7 @@ class Ui_confirm_round(QtCore.QObject):
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, prev_w):
         global button_counter
+        print("entered confirmation button method...")
         self.timer.stop() # TESTING STOP TIMER
         hb.button_press.disconnect()
         db.button_press.disconnect()
@@ -2327,6 +2328,8 @@ class Ui_confirm_round(QtCore.QObject):
         sb.button_press.connect(prev_w.stand_it)
         db.button_press.connect(prev_w.double_it)
         eb.button_press.connect(prev_w.exit_it)
+
+        # need to add connections for other player buttons
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):

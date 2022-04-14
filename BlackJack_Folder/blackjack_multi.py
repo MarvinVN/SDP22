@@ -262,6 +262,12 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         bj_to_gui_queue.put(msg0)
         print("sending DONE_ROUND msg to GUI...")
 
+        # wait for a message to confirm round successfully over before starting new round
+        while(1):
+            complete_round = gui_to_bj_queue.get()
+            if complete_round.id == "complete_round":
+                break
+
         """
         print("move done") #debug
         print("Number of Rounds:" + str(rounds))
