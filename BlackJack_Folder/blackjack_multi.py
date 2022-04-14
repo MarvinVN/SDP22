@@ -22,6 +22,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     # want to do this loop again for each round; change "done" variable?
     done_game = False
     done_round = False
+    done_player_round = False
     rounds = 0
     num_wins = 0 # change this for list for each player
     game_duration = 0 # keep track of length of game
@@ -81,14 +82,14 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 print("Put in player cards: " + str(x.content))
 
             #playerTurn(gs.players[1], gs.deck)
-        #done_round = False
+        done_round = False # each ROUND is after all players haven taken their turn
 
         for x in range(1, gs.numPlay):            
             print("start player loop") #debug
-            done_round = False
+            done_player_round = False
 
             #gs.dealCards(2)
-            while not done_round and start_var:
+            while not done_player_round and start_var:
                 playerTurn(x, gs.players[x], gs.deck)
                 msg = gui_to_bj_queue.get()
                 print("Message ID: " + msg.id)
@@ -98,7 +99,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     msg2 = Message("wallet", gs.players[x].wallet)
                     bj_to_gui_queue.put(msg2)
 
-                    done_round = True
+                    done_player_round = True
                     rounds = rounds + 1
                     t2 = time.time()
                     total_time = (t2 - t1)
@@ -144,7 +145,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                         msg2 = Message("wallet", gs.players[x].wallet)
                         bj_to_gui_queue.put(msg2)
                     
-                        done_round = True
+                        done_player_round = True
                         rounds = rounds + 1
                         t2 = time.time()
                         total_time = (t2 - t1)
@@ -204,7 +205,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     msg3 = Message("doubled", double)
                     bj_to_gui_queue.put(msg3)
 
-                    done_round = True
+                    done_player_round = True
                     rounds = rounds + 1
                     t2 = time.time()
                     total_time = (t2 - t1)
@@ -245,8 +246,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                         print("nothing worked")    
                 else:
                     pass
-            
-
+        print("finished one full round of players...")
+        done_round = True # this happens after all players have gone
         # Dealer goes after all players go
         dealerTurn(gs.players[0], gs.deck)
         totals[0] = dealerTurn(gs.players[0], gs.deck)
@@ -254,6 +255,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         gs.showWallets()
         msg0 = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets()])
         bj_to_gui_queue.put(msg0)
+        print("sending DONE_ROUND msg to GUI...")
 
         print("move done") #debug
         print("Number of Rounds:" + str(rounds))
@@ -271,9 +273,10 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             
             if checkValue(gs.players[1].hand) == 21:
                 bj = True
+            """
             msg0 = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets()])
             bj_to_gui_queue.put(msg0)
-
+            """
             if done_game:
                 # change True to (True/False) depending on which player wins
                 msg0 = Message("GAME OVER!", [num_wins, True])
