@@ -1175,7 +1175,7 @@ class Ui_GameWindow(QtCore.QObject):
     # when "STAND" button is pressed, do nothing to current bet, do nothing to cards, reveal dealer cards
     def stand_it(self):
         # not being incremented properly for the total amount here
-        msg = Message("stand", button_stand_status)
+        msg = Message("stand")
         gui_to_bj_queue.put(msg)
 
         while(1):
@@ -1187,6 +1187,7 @@ class Ui_GameWindow(QtCore.QObject):
                 self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             elif msg.id == "done_round":
                 
+                # change these for multiplayer
                 p1_cards = msg.content[1]
                 d_cards = msg.content[0]
                 scoring = msg.content[2]
