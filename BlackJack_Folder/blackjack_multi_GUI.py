@@ -2317,6 +2317,9 @@ class Ui_confirm_round(QtCore.QObject):
         self.timer.start()
         """
         print("entered init confirm_round...")
+        msg = Message("complete_round", None)
+        gui_to_bj_queue.put(msg)
+        print("sending message to BJ...")
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, prev_w):
