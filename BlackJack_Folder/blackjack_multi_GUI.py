@@ -1112,7 +1112,7 @@ class Ui_GameWindow(QtCore.QObject):
                 elif msg1.id == "p1_cards":
                     cards[1] = msg1.content
                     print("Cards stored: ", cards[1])
-                    self.your_cards_left_field.setPlainText("")
+                    self.your_cards_left_field.setPlainText(str(cards[1]))
                     self.your_cards_right_field.setPlainText("")
                 elif msg1.id == "p2_cards":
                     cards[2] = msg1.content
@@ -1154,14 +1154,14 @@ class Ui_GameWindow(QtCore.QObject):
                     bust = msg1.content[4]
                     bj = msg1.content[5]
                     
-                    """                    
+                                      
                     # adding time delay before going to next screen
                     QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
                     self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
                     QtTest.QTest.qWait(DELAYED)
                     self.done_round()
-                    """
+                    
                     break
                 else:
                     pass
