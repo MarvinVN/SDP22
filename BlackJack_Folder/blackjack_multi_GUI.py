@@ -1118,6 +1118,7 @@ class Ui_GameWindow(QtCore.QObject):
                     cards[2] = msg1.content
                     self.p2_cards_left_field.setPlainText(str(cards[2]))
                     self.p2_cards_right_field.setPlainText(str(""))
+                    break
                 elif msg1.id == "p3_cards":
                     cards[3] = msg1.content
                     self.p3_cards_left_field.setPlainText(str(cards[3]))
