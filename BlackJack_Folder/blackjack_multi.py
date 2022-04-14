@@ -83,7 +83,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     if str(x) != numPlayers:
                         msg2 = Message("continue", None)
                         bj_to_gui_queue.put(msg2)
-                    elif str(x) == numPlayers and checkValue(gs.players[x].hand <= 21):
+                    elif str(x) == numPlayers and (checkValue(gs.players[x].hand) <= 21):
                         msg2 = Message("continue", None)
                         bj_to_gui_queue.put(msg2)
                     else:
