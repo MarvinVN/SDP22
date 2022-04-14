@@ -98,7 +98,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 if msg.id == "stand":
                     totals[x] = playerTurn(x, gs.players[x], gs.deck)
 
-                    if x != numPlayers:
+                    if str(x) != numPlayers:
                         print("x is: " + str(x) + ", numPlayers is: " + numPlayers)
                         msg2 = Message("continue", None)
                         bj_to_gui_queue.put(msg2)
