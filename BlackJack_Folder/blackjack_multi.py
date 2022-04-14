@@ -380,7 +380,7 @@ def playerTurn(x, player, deck):
     elif total == 21:
         print("21!")
     else:
-        print("Player " + str(x) + "{}".format(total))
+        print("Player " + str(x) + ": {}".format(total))
     return total
 
 def dealerTurn(player, deck):
