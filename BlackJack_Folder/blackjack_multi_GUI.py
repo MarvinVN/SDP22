@@ -2335,9 +2335,12 @@ class Ui_confirm_round(QtCore.QObject):
 
         # need to add connections for other player buttons
 
+    def accept_connection(self):
+        print("accepted the connection...")
+
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
-        pass
+        print("rejected the connection...")
 
     # STYLES/SETUP OF CONFIRM BOX GUI
     def setupUi(self, prev_w, confirm_round):
@@ -2351,10 +2354,12 @@ class Ui_confirm_round(QtCore.QObject):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.buttonBox.accepted.connect(lambda: self.confirm_connection(prev_w_settings))
-        self.buttonBox.rejected.connect(lambda: self.reject_connection())
+        #self.buttonBox.accepted.connect(lambda: self.confirm_connection(prev_w_settings))
+        #self.buttonBox.rejected.connect(lambda: self.reject_connection())
         #hb.button_press.connect(self.buttonBox.accepted)
         #db.button_press.connect(self.buttonBox.rejected)
+        self.buttonBox.accepted.connect(lambda: self.accept_connection())
+        self.buttonBox.rejected.connect(lambda: self.reject_connection())
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(confirm_round)
