@@ -1164,35 +1164,27 @@ class Ui_GameWindow(QtCore.QObject):
                 msg1 = bj_to_gui_queue.get()
                 print("GUI received msg: " + str(msg1.id) + ", Content: " + str(msg1.content))
                 current_player = msg1.id
-                
+
                 if msg1.id == "p1_cards":
-                    cards[1] = msg1.content
-                    print("Cards stored: ", cards[1])
+                    cards[1] = msg1.content[0]
                     self.your_cards_left_field.setPlainText(str(cards[1]))
                     self.your_cards_right_field.setPlainText("")
+                    self.current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p2_cards":
-                    cards[2] = msg1.content
+                    cards[2] = msg1.content[0]
                     self.p2_left_field.setPlainText(str(cards[2]))
                     self.p2_right_field.setPlainText(str(""))
+                    self.p2_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p3_cards":
-                    cards[3] = msg1.content
+                    cards[3] = msg1.content[0]
                     self.p3_left_field.setPlainText(str(cards[3]))
                     self.p3_right_field.setPlainText(str(""))
+                    self.p3_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p4_cards":
-                    cards[4] = msg1.content
+                    cards[4] = msg1.content[0]
                     self.p4_left_field.setPlainText(str(cards[4]))
                     self.p4_right_field.setPlainText(str(""))
-                elif msg1.id == "doubled":
-                    value = msg1.content
-                    if current_player == "p1_cards":
-                        self.current_bet_field.setPlainText(str(value))
-                    elif current_player == "p2_cards":
-                        self.p2_current_bet_field.setPlainText(str(value))
-                    elif current_player == "p3_cards":
-                        self.p3_current_bet_field.setPlainText(str(value))
-                    elif current_player == "p4_cards":
-                        self.p4_current_bet_field.setPlainText(str(value))
-                    #self.reset_buttons()
+                    self.p4_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "continue":
                     break
                 elif msg1.id == "done_round":

@@ -95,17 +95,14 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 elif msg.id == "double":
                     # only adding original bet, since original bet was already included
                     bet = msg.content[x]
+                    double = bet * 2
                     gs.players[x].draw(gs.deck, 1)
-                    msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
+                    msg1 = Message("p" + str(x) + "_cards", [gs.players[x].hand, double])
                     bj_to_gui_queue.put(msg1)
                     print("Msg double ID: " + str(msg1.id) + ", Contents: " + str(msg1.content))
 
                     gs.players[x].addBet(bet)
                     totals[x] = playerTurn(x, gs.players[x], gs.deck)
-                    double = bet * 2
-
-                    msg3 = Message("doubled", double)
-                    bj_to_gui_queue.put(msg3)
 
                     if str(x) != numPlayers:
                         msg2 = Message("continue", None)
