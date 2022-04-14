@@ -99,7 +99,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     bj_to_gui_queue.put(msg2)
 
                     done_round = True
-                    msg0 = Message("done_round", [gs.players[0].hand,gs.players[x].hand, round_score, gs.getWallets(), bust, bj])
+                    msg0 = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets()])
                     bj_to_gui_queue.put(msg0)
                     rounds = rounds + 1
                     t2 = time.time()
@@ -208,7 +208,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
                     done_round = True
 
-                    msg0 = Message("done_round", [gs.players[0].hand,gs.players[x].hand, round_score, gs.getWallets(), bust, bj])
+                    msg0 = Message("done_round", [gs.players[0].hand,round_score, gs.getWallets()])
                     bj_to_gui_queue.put(msg0)
                     rounds = rounds + 1
                     t2 = time.time()
@@ -276,7 +276,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             
             if checkValue(gs.players[1].hand) == 21:
                 bj = True
-            msg0 = Message("done_round", [gs.players[0].hand,gs.players[1].hand, round_score, gs.getWallets(), bust, bj])
+            msg0 = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets()])
             bj_to_gui_queue.put(msg0)
 
             if done_game:

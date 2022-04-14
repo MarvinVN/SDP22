@@ -976,7 +976,8 @@ class Ui_GameWindow(QtCore.QObject):
         # just start one timer
         self.timer.start()
     
-    def open_next_round(self, d_cards, p_cards, scoring, wallets, bust, bj):
+    def open_next_round(self, scoring, wallets):
+        global cards
         # opening up the next round screen
         self.timer.stop()
         hb.button_press.disconnect()
@@ -984,37 +985,48 @@ class Ui_GameWindow(QtCore.QObject):
         db.button_press.disconnect()
         eb.button_press.disconnect()
 
-        # change this
-        for x in range(2, int(self.numPlayers)):
-            hb_temp = "hb" + str(x)
-            sb_temp = "sb" + str(x)
-            db_temp = "db" + str(x)
-            eb_temp = "eb" + str(x)
-            hb_temp.button_press.disconnect()
-            sb_temp.button_press.disconnect()
-            db_temp.button_press.disconnect()
-            eb_temp.button_press.disconnect()
+        if str(numPlayers) == "2":
+            hb2.button_press.disconnect()
+            sb2.button_press.disconnect()
+            db2.button_press.disconnect()
+            eb2.button_press.disconnect()
+        elif str(numPlayers) == "3":
+            hb2.button_press.disconnect()
+            sb2.button_press.disconnect()
+            db2.button_press.disconnect()
+            eb2.button_press.disconnect()
+
+            hb3.button_press.disconnect()
+            sb3.button_press.disconnect()
+            db3.button_press.disconnect()
+            eb3.button_press.disconnect()
+
+        elif str(numPlayers) == "4":
+            hb2.button_press.disconnect()
+            sb2.button_press.disconnect()
+            db2.button_press.disconnect()
+            eb2.button_press.disconnect()
+
+            hb3.button_press.disconnect()
+            sb3.button_press.disconnect()
+            db3.button_press.disconnect()
+            eb3.button_press.disconnect()
+
+            hb4.button_press.disconnect()
+            sb4.button_press.disconnect()
+            db4.button_press.disconnect()
+            eb4.button_press.disconnect()
 
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
         self.ui.setupUi(self, self.window)
         self.window.show()
 
-        if bust:
-            self.ui.confirm_list_widget.addItems(["Dealer Cards: " + str(d_cards),
-            "Player Cards: " + str(p_cards),
-            "Round Score: " + str(scoring), "Current Wallets: " + str(wallets),
-            "PLAYER BUST!"])
-        elif bj:
-            self.ui.confirm_list_widget.addItems(["Dealer Cards: " + str(d_cards),
-            "Player Cards: " + str(p_cards),
-            "Round Score: " + str(scoring), "Current Wallets: " + str(wallets),
-            "PLAYER BLACKJACK!"])
-        else:
-            # displaying the values onto confirmation box
-            self.ui.confirm_list_widget.addItems(["Dealer Cards: " + str(d_cards),
-            "Player Cards: " + str(p_cards),
-            "Round Score: " + str(scoring), "Current Wallets: " + str(wallets)])
+        # displaying the values onto confirmation box
+        self.ui.confirm_list_widget.addItem("Dealer Cards: " + str(cards[0]))
+        for x in range(1, int(self.numPlayers)):
+            self.ui.confirm_list_widget.addItem("P" + str(x) + " Cards: " + str(cards[x]))
+        self.ui.confirm_list_widget.addItems(["Round Score: " + str(scoring), "Current Wallets: " + str(wallets)])
     
     def done_round(self):
         self.timer = QtCore.QTimer(interval=50)
@@ -1147,21 +1159,15 @@ class Ui_GameWindow(QtCore.QObject):
                     self.double_button_clicked == False
                     
                     # need to change this for multiplayer
-                    p1_cards = msg1.content[1]
-                    d_cards = msg1.content[0]
-                    scoring = msg1.content[2]
-                    wallets = msg1.content[3]
-                    bust = msg1.content[4]
-                    bj = msg1.content[5]
-                    
-                                      
-                    # adding time delay before going to next screen
+                    cards[0] = msg.content[0]
+                    scoring = msg.content[1]
+                    wallets = msg.content[2]
+
                     QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
-                    self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
+                    self.open_next_round(scoring, wallets)
                     QtTest.QTest.qWait(DELAYED)
                     self.done_round()
-                    
                     break
                 else:
                     pass
@@ -1188,19 +1194,13 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg.id == "done_round":
                 
                 # change these for multiplayer
-                p1_cards = msg.content[1]
-                d_cards = msg.content[0]
-                scoring = msg.content[2]
-                wallets = msg.content[3]
-                bust = msg.content[4]
-                bj = msg.content[5]
-                
+                cards[0] = msg.content[0]
+                scoring = msg.content[1]
+                wallets = msg.content[2]
 
-                # self.bet = bet (reset?)
-                # adding time delay before going to next screen?
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
-                self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
+                self.open_next_round(scoring, wallets)
                 QtTest.QTest.qWait(DELAYED)
                 self.done_round()
                 break
@@ -1238,31 +1238,19 @@ class Ui_GameWindow(QtCore.QObject):
                 self.p4_left_field.setPlainText(str(cards[4]))
                 self.p4_right_field.setPlainText(str(""))
                 break
-            elif msg.id == "wallet":
-                self.currentAmount = msg.content
-                self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             elif msg.id == "done_round":
-                p1_cards = msg.content[1]
-                d_cards = msg.content[0]
-                scoring = msg.content[2]
-                wallets = msg.content[3]
-                bust = msg.content[4]
-                bj = msg.content[5]
+                # after every player goes, display the contents of the round
+                #p1_cards = msg.content[1]
+                #d_cards = msg.content[0]
+                cards[0] = msg.content[0]
+                scoring = msg.content[1]
+                wallets = msg.content[2]
 
-                if bust:
-                    QtTest.QTest.qWait(DELAYED)
-                    # put in the player and dealer cards to display in next round screen
-                    self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
-                    QtTest.QTest.qWait(DELAYED)
-                    self.done_round()
-                elif bj:
-                    QtTest.QTest.qWait(DELAYED)
-                    # put in the player and dealer cards to display in next round screen
-                    self.open_next_round(d_cards, p1_cards, scoring, wallets, bust, bj)
-                    QtTest.QTest.qWait(DELAYED)
-                    self.done_round()
-                else:
-                    self.done_round()
+                QtTest.QTest.qWait(DELAYED)
+                # put in the player and dealer cards to display in next round screen
+                self.open_next_round(scoring, wallets)
+                QtTest.QTest.qWait(DELAYED)
+                self.done_round()
                 break
             else:
                 pass
