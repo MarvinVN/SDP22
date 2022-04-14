@@ -1164,10 +1164,8 @@ class Ui_GameWindow(QtCore.QObject):
                 msg1 = bj_to_gui_queue.get()
                 print("GUI received msg: " + str(msg1.id) + ", Content: " + str(msg1.content))
                 current_player = msg1.id
-                if msg1.id == "p0_cards":
-                    # just store dealer cards
-                    cards[0] = msg1.content
-                elif msg1.id == "p1_cards":
+                
+                if msg1.id == "p1_cards":
                     cards[1] = msg1.content
                     print("Cards stored: ", cards[1])
                     self.your_cards_left_field.setPlainText(str(cards[1]))
