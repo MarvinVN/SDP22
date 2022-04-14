@@ -184,10 +184,11 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     gs.players[x].draw(gs.deck, 1)
                     msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
                     bj_to_gui_queue.put(msg1)
+                    print("Msg double ID: " + str(msg1.id) + ", Contents: " + str(msg1.content))
 
                     playerTurn(gs.players[x], gs.deck)
                     gs.players[x].addBet(bet)
-                    totals.append(playerTurn(gs.players[x], gs.deck))
+                    totals[x] = playerTurn(gs.players[x], gs.deck)
                     
                     #dealer.p2()
                     
@@ -374,7 +375,7 @@ def playerTurn(player, deck):
     elif total == 21:
         print("21!")
     else:
-        print("Player: {}" .format(total))
+        print("Player: {}".format(total))
     return total
 
 def dealerTurn(player, deck):
