@@ -1191,8 +1191,8 @@ class Ui_GameWindow(QtCore.QObject):
                     cards[0] = msg1.content[0]
                     scoring = msg1.content[1]
                     wallets = msg1.content[2]
-                    
-                    for x in range(int(numPlayers)+1):
+
+                    for x in range(int(self.numPlayers)+1):
                         amounts_list[x] = wallets[x]
                         if x == 1:
                             self.amount_left_label.setText(str(amounts_list[x]))
@@ -1237,6 +1237,17 @@ class Ui_GameWindow(QtCore.QObject):
                 scoring = msg.content[1]
                 wallets = msg.content[2] # need to update everyone's amount left from wallet
 
+                for x in range(int(self.numPlayers)+1):
+                    amounts_list[x] = wallets[x]
+                    if x == 1:
+                        self.amount_left_label.setText(str(amounts_list[x]))
+                    elif x == 2:
+                        self.p2_amount_left_label.setText(str(amounts_list[x]))
+                    elif x == 3:
+                        self.p3_amount_left_label.setText(str(amounts_list[x]))
+                    elif x == 4:
+                        self.p4_amount_left_label.setText(str(amounts_list[x]))
+
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
                 #self.reset_buttons()
@@ -1280,6 +1291,17 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
                 wallets = msg.content[2]
+
+                for x in range(int(self.numPlayers)+1):
+                    amounts_list[x] = wallets[x]
+                    if x == 1:
+                        self.amount_left_label.setText(str(amounts_list[x]))
+                    elif x == 2:
+                        self.p2_amount_left_label.setText(str(amounts_list[x]))
+                    elif x == 3:
+                        self.p3_amount_left_label.setText(str(amounts_list[x]))
+                    elif x == 4:
+                        self.p4_amount_left_label.setText(str(amounts_list[x]))
 
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
