@@ -1019,6 +1019,8 @@ class Ui_GameWindow(QtCore.QObject):
     
     def open_next_round(self, scoring, wallets):
         global cards
+
+        """
         # opening up the next round screen
         self.timer.stop()
         hb.button_press.disconnect()
@@ -1058,6 +1060,8 @@ class Ui_GameWindow(QtCore.QObject):
             db4.button_press.disconnect()
             eb4.button_press.disconnect()
 
+        """
+
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
         self.ui.setupUi(self, self.window)
@@ -1068,7 +1072,8 @@ class Ui_GameWindow(QtCore.QObject):
         for x in range(1, int(self.numPlayers)+1): # why +1?
             self.ui.confirm_list_widget.addItem("P" + str(x) + " Cards: " + str(cards[x]))
         self.ui.confirm_list_widget.addItems(["Round Score: " + str(scoring), "Current Wallets: " + str(wallets)])
-    
+        print("finished displaying end of round...")
+
     def done_round(self):
         self.timer = QtCore.QTimer(interval=50)
 
@@ -1239,7 +1244,7 @@ class Ui_GameWindow(QtCore.QObject):
                 #self.reset_buttons()
                 self.open_next_round(scoring, wallets)
                 QtTest.QTest.qWait(DELAYED)
-                #self.done_round()
+                self.done_round()
             elif msg.id == "continue":
                 print("...received CONTINUE msg from BJ")
                 break
@@ -2317,9 +2322,7 @@ class Ui_confirm_round(QtCore.QObject):
         self.timer.start()
         """
         print("entered init confirm_round...")
-        msg = Message("complete_round", None)
-        gui_to_bj_queue.put(msg)
-        print("sending message to BJ...")
+
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, prev_w):
