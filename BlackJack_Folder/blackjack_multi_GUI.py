@@ -1183,14 +1183,10 @@ class Ui_GameWindow(QtCore.QObject):
         gui_to_bj_queue.put(msg)
         print("Player stand. Next Player go.")
 
-        """
+        # need to receive which player's turn it is
         while(1):
             msg = bj_to_gui_queue.get()
-            if msg.id == "p0_cards":
-                cards[0] = msg.content
-                #self.reset_buttons()
-                break
-            elif msg.id == "done_round":
+            if msg.id == "done_round":
                 
                 # change these for multiplayer
                 cards[0] = msg.content[0]
@@ -1205,8 +1201,8 @@ class Ui_GameWindow(QtCore.QObject):
                 self.done_round()
                 break
             else:
-                pass
-        """
+                break
+        
 
     # TODO
     # when "HIT" button is pressed, do nothing to current bet, add another card to player
