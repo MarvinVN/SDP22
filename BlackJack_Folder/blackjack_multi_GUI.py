@@ -1224,11 +1224,11 @@ class Ui_GameWindow(QtCore.QObject):
         print("Player stand. Next Player go.")
 
         # need to receive which player's turn it is
-        print("getting STAND msg...")
+        print("getting STAND msg from BJ...")
         while(1):
             msg = bj_to_gui_queue.get()
             if msg.id == "done_round":
-                print("...received done_round msg")
+                print("...received done_round msg from BJ")
                 # change these for multiplayer
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
