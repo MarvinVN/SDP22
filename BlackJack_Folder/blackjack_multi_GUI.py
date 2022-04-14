@@ -1225,20 +1225,23 @@ class Ui_GameWindow(QtCore.QObject):
 
         # need to receive which player's turn it is
         print("getting STAND msg...")
-        msg = bj_to_gui_queue.get()
-        if msg.id == "done_round":
-            print("...received done_round msg")
-            # change these for multiplayer
-            cards[0] = msg.content[0]
-            scoring = msg.content[1]
-            wallets = msg.content[2] # need to update everyone's amount left from wallet
+        while(1):
+            msg = bj_to_gui_queue.get()
+            if msg.id == "done_round":
+                print("...received done_round msg")
+                # change these for multiplayer
+                cards[0] = msg.content[0]
+                scoring = msg.content[1]
+                wallets = msg.content[2] # need to update everyone's amount left from wallet
 
-            QtTest.QTest.qWait(DELAYED)
-            # put in the player and dealer cards to display in next round screen
-            #self.reset_buttons()
-            self.open_next_round(scoring, wallets)
-            QtTest.QTest.qWait(DELAYED)
-            self.done_round()
+                QtTest.QTest.qWait(DELAYED)
+                # put in the player and dealer cards to display in next round screen
+                #self.reset_buttons()
+                self.open_next_round(scoring, wallets)
+                QtTest.QTest.qWait(DELAYED)
+                self.done_round()
+            elif msg.id == "continue":
+                break
         
 
     # TODO
