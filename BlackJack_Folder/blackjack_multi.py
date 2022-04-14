@@ -245,6 +245,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                         print("nothing worked")    
                 else:
                     pass
+            
 
         # Dealer goes after all players go
         dealerTurn(gs.players[0], gs.deck)

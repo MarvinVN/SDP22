@@ -1195,7 +1195,7 @@ class Ui_GameWindow(QtCore.QObject):
 
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
-                self.reset_buttons()
+                #self.reset_buttons()
                 self.open_next_round(scoring, wallets)
                 QtTest.QTest.qWait(DELAYED)
                 self.done_round()
