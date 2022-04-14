@@ -2318,8 +2318,10 @@ class Ui_confirm_round(QtCore.QObject):
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, prev_w):
-        global button_counter
+        #global button_counter
         print("entered confirmation button method...")
+
+        """
         self.timer.stop() # TESTING STOP TIMER
         hb.button_press.disconnect()
         db.button_press.disconnect()
@@ -2329,6 +2331,7 @@ class Ui_confirm_round(QtCore.QObject):
         sb.button_press.connect(prev_w.stand_it)
         db.button_press.connect(prev_w.double_it)
         eb.button_press.connect(prev_w.exit_it)
+        """
 
         # need to add connections for other player buttons
 
@@ -2348,10 +2351,10 @@ class Ui_confirm_round(QtCore.QObject):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.buttonBox.accepted.connect(lambda: self.confirm_connection(prev_w_settings))
-        self.buttonBox.rejected.connect(lambda: self.reject_connection())
-        hb.button_press.connect(self.buttonBox.accepted)
-        db.button_press.connect(self.buttonBox.rejected)
+        self.buttonBox.accepted.connect(self.confirm_connection(prev_w_settings))
+        self.buttonBox.rejected.connect(self.reject_connection())
+        #hb.button_press.connect(self.buttonBox.accepted)
+        #db.button_press.connect(self.buttonBox.rejected)
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(confirm_round)
