@@ -1561,8 +1561,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
-            self.p2_left_field.setPlainText(str(cards[2]))
-            #self.p2_cards_right_field.setPlainText(str(cards[2][1]))
+            self.p2_left_field.setPlainText(str(cards[2][0]))
+            self.p2_cards_right_field.setPlainText(str(cards[2][1]))
             self.p2_amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
