@@ -1195,6 +1195,7 @@ class Ui_GameWindow(QtCore.QObject):
                     elif current_player == "p4_cards":
                         self.p4_current_bet_field.setPlainText(str(value))
                     #self.reset_buttons()
+                elif msg1.id == "continue":
                     break
                 elif msg1.id == "done_round":
                     # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality

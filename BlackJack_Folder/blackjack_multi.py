@@ -105,6 +105,10 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
                     msg3 = Message("doubled", double)
                     bj_to_gui_queue.put(msg3)
+                    
+                    if str(x) != numPlayers:
+                        msg2 = Message("continue", None)
+                        bj_to_gui_queue.put(msg2)
                     done_player_round = True
 
                 else:
