@@ -1192,9 +1192,9 @@ class Ui_GameWindow(QtCore.QObject):
                     self.double_button_clicked == False
                     
                     # need to change this for multiplayer
-                    cards[0] = msg.content[0]
-                    scoring = msg.content[1]
-                    wallets = msg.content[2]
+                    cards[0] = msg1.content[0]
+                    scoring = msg1.content[1]
+                    wallets = msg1.content[2]
 
                     QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
