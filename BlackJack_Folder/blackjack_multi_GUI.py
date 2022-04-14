@@ -2306,6 +2306,7 @@ class Ui_confirm_round(QtCore.QObject):
 
     def __init__(self):
         super().__init__()
+        """
         # testing button functionality for multiple function calls
         self.timer = QtCore.QTimer(interval=50)
 
@@ -2314,6 +2315,7 @@ class Ui_confirm_round(QtCore.QObject):
 
         # just start one timer
         self.timer.start()
+        """
         print("entered init confirm_round...")
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
@@ -2337,6 +2339,9 @@ class Ui_confirm_round(QtCore.QObject):
 
     def accept_connection(self):
         print("accepted the connection...")
+        msg = Message("complete_round", None)
+        gui_to_bj_queue.put(msg)
+
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
