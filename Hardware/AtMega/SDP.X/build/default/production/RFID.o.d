@@ -15,10 +15,8 @@ build/default/production/RFID.o.d build/default/production/RFID.o: RFID.c \
  /Applications/microchip/xc8/v2.32/avr/avr/include/util/delay.h \
  /Applications/microchip/xc8/v2.32/avr/avr/include/util/delay_basic.h \
  /Applications/microchip/xc8/v2.32/avr/avr/include/math.h \
- /Applications/microchip/xc8/v2.32/avr/avr/include/stdio.h \
- /Applications/microchip/xc8/v2.32/avr/lib/gcc/avr/5.4.0/include/stdarg.h \
- /Applications/microchip/xc8/v2.32/avr/lib/gcc/avr/5.4.0/include/stddef.h \
- /Applications/microchip/xc8/v2.32/avr/avr/include/stdlib.h
+ /Applications/microchip/xc8/v2.32/avr/avr/include/stdlib.h \
+ /Applications/microchip/xc8/v2.32/avr/lib/gcc/avr/5.4.0/include/stddef.h
 
 /Applications/microchip/xc8/v2.32/avr/lib/gcc/avr/5.4.0/include/xc.h:
 
@@ -52,10 +50,6 @@ build/default/production/RFID.o.d build/default/production/RFID.o: RFID.c \
 
 /Applications/microchip/xc8/v2.32/avr/avr/include/math.h:
 
-/Applications/microchip/xc8/v2.32/avr/avr/include/stdio.h:
-
-/Applications/microchip/xc8/v2.32/avr/lib/gcc/avr/5.4.0/include/stdarg.h:
+/Applications/microchip/xc8/v2.32/avr/avr/include/stdlib.h:
 
 /Applications/microchip/xc8/v2.32/avr/lib/gcc/avr/5.4.0/include/stddef.h:
-
-/Applications/microchip/xc8/v2.32/avr/avr/include/stdlib.h:
