@@ -1149,7 +1149,7 @@ class Ui_GameWindow(QtCore.QObject):
                         self.p3_current_bet_field.setPlainText(str(value))
                     elif current_player == "p4_cards":
                         self.p4_current_bet_field.setPlainText(str(value))
-                    self.reset_buttons()
+                    #self.reset_buttons()
                     break
                 elif msg1.id == "done_round":
                     # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
@@ -1186,7 +1186,7 @@ class Ui_GameWindow(QtCore.QObject):
             msg = bj_to_gui_queue.get()
             if msg.id == "p0_cards":
                 cards[0] = msg.content
-                self.reset_buttons()
+                #self.reset_buttons()
                 break
             elif msg.id == "done_round":
                 
@@ -1253,7 +1253,7 @@ class Ui_GameWindow(QtCore.QObject):
                 break
             else:
                 pass
-            self.reset_buttons()
+            #self.reset_buttons()
         
 
     def exit_it(self):
