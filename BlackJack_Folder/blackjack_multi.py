@@ -251,6 +251,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         totals[0] = dealerTurn(gs.players[0], gs.deck)
         round_score = score(gs.players, totals)
         gs.showWallets()
+        msg0 = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets()])
+        bj_to_gui_queue.put(msg0)
 
         print("move done") #debug
         print("Number of Rounds:" + str(rounds))
