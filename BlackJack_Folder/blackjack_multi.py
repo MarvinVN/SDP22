@@ -102,10 +102,11 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
                     gs.players[x].addBet(bet)
                     totals[x] = playerTurn(x, gs.players[x], gs.deck)
+                    double = bet * 2
 
                     msg3 = Message("doubled", double)
                     bj_to_gui_queue.put(msg3)
-                    
+
                     if str(x) != numPlayers:
                         msg2 = Message("continue", None)
                         bj_to_gui_queue.put(msg2)
