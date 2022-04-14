@@ -98,6 +98,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     totals[x] = playerTurn(x, gs.players[x], gs.deck)
 
                     if x != gs.numPlay:
+                        print("x is: " + str(x) + ", numPlay is: " + str(gs.numPlay))
                         msg2 = Message("continue", None)
                         bj_to_gui_queue.put(msg2)
                         print("sending CONTINUE msg to GUI...")
