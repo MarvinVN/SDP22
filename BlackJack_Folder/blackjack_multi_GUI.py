@@ -1213,15 +1213,30 @@ class Ui_GameWindow(QtCore.QObject):
     # when "HIT" button is pressed, do nothing to current bet, add another card to player
     def hit_it(self):
         # need to change so that the value of button press is sent over; if value is TRUE, update that player's stats
-        msg = Message("hit", button_hit_status) # take in button hit status, traverse through to find which button was pressed, update player stats
+        msg = Message("hit", None) # take in button hit status, traverse through to find which button was pressed, update player stats
         gui_to_bj_queue.put(msg)
 
         while(1):
             msg = bj_to_gui_queue.get()
-            if msg.id == "player_cards":
-                self.player_cards = msg.content
-                self.your_cards_left_field.setPlainText(str(self.player_cards))
+            if msg.id == "p1_cards":
+                cards[1] = msg.content
+                self.your_cards_left_field.setPlainText(str(cards[1]))
                 self.your_cards_right_field.setPlainText(str(""))
+                break
+            elif msg.id == "p2_cards":
+                cards[2] = msg.content
+                self.p2_left_field.setPlainText(str(cards[2]))
+                self.p2_right_field.setPlainText(str(""))
+                break
+            elif msg.id == "p3_cards":
+                cards[3] = msg.content
+                self.p3_left_field.setPlainText(str(cards[3]))
+                self.p3_right_field.setPlainText(str(""))
+                break
+            elif msg.id == "p4_cards":
+                cards[4] = msg.content
+                self.p4_left_field.setPlainText(str(cards[4]))
+                self.p4_right_field.setPlainText(str(""))
                 break
             elif msg.id == "wallet":
                 self.currentAmount = msg.content
