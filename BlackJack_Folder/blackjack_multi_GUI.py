@@ -985,12 +985,12 @@ class Ui_GameWindow(QtCore.QObject):
         db.button_press.disconnect()
         eb.button_press.disconnect()
 
-        if str(numPlayers) == "2":
+        if str(self.numPlayers) == "2":
             hb2.button_press.disconnect()
             sb2.button_press.disconnect()
             db2.button_press.disconnect()
             eb2.button_press.disconnect()
-        elif str(numPlayers) == "3":
+        elif str(self.numPlayers) == "3":
             hb2.button_press.disconnect()
             sb2.button_press.disconnect()
             db2.button_press.disconnect()
@@ -1001,7 +1001,7 @@ class Ui_GameWindow(QtCore.QObject):
             db3.button_press.disconnect()
             eb3.button_press.disconnect()
 
-        elif str(numPlayers) == "4":
+        elif str(self.numPlayers) == "4":
             hb2.button_press.disconnect()
             sb2.button_press.disconnect()
             db2.button_press.disconnect()
