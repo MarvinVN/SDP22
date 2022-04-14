@@ -1065,7 +1065,7 @@ class Ui_GameWindow(QtCore.QObject):
 
         # displaying the values onto confirmation box
         self.ui.confirm_list_widget.addItem("Dealer Cards: " + str(cards[0]))
-        for x in range(1, int(self.numPlayers)+1):
+        for x in range(1, int(self.numPlayers)+1): # why +1?
             self.ui.confirm_list_widget.addItem("P" + str(x) + " Cards: " + str(cards[x]))
         self.ui.confirm_list_widget.addItems(["Round Score: " + str(scoring), "Current Wallets: " + str(wallets)])
     
@@ -2314,6 +2314,7 @@ class Ui_confirm_round(QtCore.QObject):
 
         # just start one timer
         self.timer.start()
+        print("entered init confirm_round...")
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, prev_w):
