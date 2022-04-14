@@ -1181,7 +1181,9 @@ class Ui_GameWindow(QtCore.QObject):
         # not being incremented properly for the total amount here
         msg = Message("stand", None)
         gui_to_bj_queue.put(msg)
+        print("Player stand. Next Player go.")
 
+        """
         while(1):
             msg = bj_to_gui_queue.get()
             if msg.id == "p0_cards":
@@ -1204,8 +1206,7 @@ class Ui_GameWindow(QtCore.QObject):
                 break
             else:
                 pass
-        #self.dealer_left_field.setPlainText(str(self.dealer_cards[0]))
-        #self.dealer_right_field.setPlainText(str(self.dealer_cards[1]))
+        """
 
     # TODO
     # when "HIT" button is pressed, do nothing to current bet, add another card to player
