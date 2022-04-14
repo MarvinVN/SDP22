@@ -1138,10 +1138,6 @@ class Ui_GameWindow(QtCore.QObject):
                     cards[4] = msg1.content
                     self.p4_cards_left_field.setPlainText(str(cards[4]))
                     self.p4_cards_right_field.setPlainText(str(""))
-                elif msg1.id == "wallet":
-                    # need to fix this for multiplayers
-                    self.currentAmount = msg1.content
-                    self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
                 elif msg1.id == "doubled":
                     value = msg1.content
                     if current_player == "p1_cards":
@@ -1152,8 +1148,7 @@ class Ui_GameWindow(QtCore.QObject):
                         self.p3_current_bet_field.setPlainText(str(value))
                     elif current_player == "p4_cards":
                         self.p4_current_bet_field.setPlainText(str(value))
-                    else:
-                        pass
+                    break
                 elif msg1.id == "done_round":
                     # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
                     self.double_button_clicked == False
@@ -1188,15 +1183,12 @@ class Ui_GameWindow(QtCore.QObject):
             msg = bj_to_gui_queue.get()
             if msg.id == "p0_cards":
                 cards[0] = msg.content
-            elif msg.id == "wallet":
-                self.currentAmount = msg.content
-                self.amount_left_label.setText("Amount Left: " + str(self.currentAmount))
             elif msg.id == "done_round":
                 
                 # change these for multiplayer
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
-                wallets = msg.content[2]
+                wallets = msg.content[2] # need to update everyone's amount left from wallet
 
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen

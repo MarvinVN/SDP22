@@ -99,8 +99,6 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     bj_to_gui_queue.put(msg2)
 
                     done_round = True
-                    msg0 = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets()])
-                    bj_to_gui_queue.put(msg0)
                     rounds = rounds + 1
                     t2 = time.time()
                     total_time = (t2 - t1)
@@ -207,9 +205,6 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     bj_to_gui_queue.put(msg3)
 
                     done_round = True
-
-                    msg0 = Message("done_round", [gs.players[0].hand,round_score, gs.getWallets()])
-                    bj_to_gui_queue.put(msg0)
                     rounds = rounds + 1
                     t2 = time.time()
                     total_time = (t2 - t1)
@@ -251,13 +246,10 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 else:
                     pass
 
-
         # Dealer goes after all players go
         dealerTurn(gs.players[0], gs.deck)
-        msg0 = Message("p0_cards", gs.players[0].hand)
-        bj_to_gui_queue.put(msg0)
         totals[0] = dealerTurn(gs.players[0], gs.deck)
-        score(gs.players, totals)
+        round_score = score(gs.players, totals)
         gs.showWallets()
 
         print("move done") #debug
