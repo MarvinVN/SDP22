@@ -28,9 +28,6 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     numPlayers = ""
     while not done_game:
         totals = []
-        bust = False
-        bj = False
-
         print("start game loop")
 
         if not start_var:
@@ -79,19 +76,21 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
                 elif msg.id == "hit":
                     gs.players[x].draw(gs.deck, 1)
+                    totals[x] = playerTurn(x, gs.players[x], gs.deck)
+                    msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
+                    bj_to_gui_queue.put(msg1)
 
-                    if checkValue(gs.players[x].hand) > 21:
-                        totals.append(playerTurn(x, gs.players[x], gs.deck))
-                        totals[0] = dealerTurn(gs.players[0], gs.deck)
-                        round_score = score(gs.players, totals)
-                        gs.showWallets()
-                        msg2 = Message("wallet", gs.players[x].wallet)
+                    if str(x) != numPlayers:
+                        msg2 = Message("continue", None)
                         bj_to_gui_queue.put(msg2)
-                        done_player_round = True
+                    elif str(X) == numPlayers and checkValue(gs.players[x].hand <= 21):
+                        msg2 = Message("continue", None)
+                        bj_to_gui_queue.put(msg2)
                     else:
-                        msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
-                        bj_to_gui_queue.put(msg1)
-                        playerTurn(x, gs.players[x], gs.deck)
+                        pass
+                        
+                    if checkValue(gs.players[x].hand) > 21:
+                        done_player_round = True
 
                 elif msg.id == "double":
                     # only adding original bet, since original bet was already included
@@ -101,18 +100,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     bj_to_gui_queue.put(msg1)
                     print("Msg double ID: " + str(msg1.id) + ", Contents: " + str(msg1.content))
 
-                    playerTurn(x, gs.players[x], gs.deck)
                     gs.players[x].addBet(bet)
                     totals[x] = playerTurn(x, gs.players[x], gs.deck)
-                                        
-                    double = bet * 2
-
-                    totals[0] = dealerTurn(gs.players[0], gs.deck)
-                    round_score = score(gs.players, totals)
-                    gs.showWallets()
-
-                    msg2 = Message("wallet", gs.players[x].wallet)
-                    bj_to_gui_queue.put(msg2)
 
                     msg3 = Message("doubled", double)
                     bj_to_gui_queue.put(msg3)

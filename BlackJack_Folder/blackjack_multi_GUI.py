@@ -1263,26 +1263,22 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[1] = msg.content
                 self.your_cards_left_field.setPlainText(str(cards[1]))
                 self.your_cards_right_field.setPlainText(str(""))
-                break
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
                 self.p2_left_field.setPlainText(str(cards[2]))
                 self.p2_right_field.setPlainText(str(""))
-                break
             elif msg.id == "p3_cards":
                 cards[3] = msg.content
                 self.p3_left_field.setPlainText(str(cards[3]))
                 self.p3_right_field.setPlainText(str(""))
-                break
             elif msg.id == "p4_cards":
                 cards[4] = msg.content
                 self.p4_left_field.setPlainText(str(cards[4]))
                 self.p4_right_field.setPlainText(str(""))
+            elif msg.id == "continue":
                 break
             elif msg.id == "done_round":
                 # after every player goes, display the contents of the round
-                #p1_cards = msg.content[1]
-                #d_cards = msg.content[0]
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
                 wallets = msg.content[2]
