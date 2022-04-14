@@ -23,7 +23,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     done_game = False
     done_round = False
     rounds = 0
-    num_wins = 0
+    num_wins = 0 # change this for list for each player
     game_duration = 0 # keep track of length of game
     start_var = False
     bust = False

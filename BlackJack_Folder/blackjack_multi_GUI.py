@@ -975,8 +975,8 @@ class Ui_GameWindow(QtCore.QObject):
 
         # just start one timer
         self.timer.start()
-    
-    def open_next_round(self, scoring, wallets):
+
+    def reset_buttons(self):
         global cards
         # opening up the next round screen
         self.timer.stop()
@@ -1016,7 +1016,8 @@ class Ui_GameWindow(QtCore.QObject):
             sb4.button_press.disconnect()
             db4.button_press.disconnect()
             eb4.button_press.disconnect()
-
+    
+    def open_next_round(self, scoring, wallets):
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
         self.ui.setupUi(self, self.window)
@@ -1148,6 +1149,7 @@ class Ui_GameWindow(QtCore.QObject):
                         self.p3_current_bet_field.setPlainText(str(value))
                     elif current_player == "p4_cards":
                         self.p4_current_bet_field.setPlainText(str(value))
+                    self.reset_buttons()
                     break
                 elif msg1.id == "done_round":
                     # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
@@ -1160,6 +1162,7 @@ class Ui_GameWindow(QtCore.QObject):
 
                     QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
+                    self.reset_buttons()
                     self.open_next_round(scoring, wallets)
                     QtTest.QTest.qWait(DELAYED)
                     self.done_round()
@@ -1183,6 +1186,8 @@ class Ui_GameWindow(QtCore.QObject):
             msg = bj_to_gui_queue.get()
             if msg.id == "p0_cards":
                 cards[0] = msg.content
+                self.reset_buttons()
+                break
             elif msg.id == "done_round":
                 
                 # change these for multiplayer
@@ -1192,6 +1197,7 @@ class Ui_GameWindow(QtCore.QObject):
 
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
+                self.reset_buttons()
                 self.open_next_round(scoring, wallets)
                 QtTest.QTest.qWait(DELAYED)
                 self.done_round()
@@ -1240,12 +1246,14 @@ class Ui_GameWindow(QtCore.QObject):
 
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
+                self.reset_buttons()
                 self.open_next_round(scoring, wallets)
                 QtTest.QTest.qWait(DELAYED)
                 self.done_round()
                 break
             else:
                 pass
+            self.reset_buttons()
         
 
     def exit_it(self):
