@@ -80,7 +80,9 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     done_player_round = True
 
                 elif msg.id == "hit":
+                    print("before draw:", gs.players[x].hand)
                     gs.players[x].draw(gs.deck, 1)
+                    print("after draw:", gs.players[x].hand)
                     totals[x] = playerTurn(x, gs.players[x], gs.deck)
                     msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
                     bj_to_gui_queue.put(msg1)
