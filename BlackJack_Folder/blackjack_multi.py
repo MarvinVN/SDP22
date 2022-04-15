@@ -192,6 +192,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             if not done_game:
                 msg = Message("continue", None)
                 bj_to_gui_queue.put(msg)
+                print("sending CONTINUE to next round to GUI...")
 
         print("----------------------------------------------------") #debug
         #print(f"done_round:{done_round} start_var:{start_var} done_game:{done_game}")
