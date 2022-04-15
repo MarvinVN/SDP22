@@ -2369,7 +2369,7 @@ class Ui_confirm_round(QtCore.QObject):
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, prev_w):
-        #global button_counter
+        global button_counter
         print("entered confirmation button method...")
 
         
