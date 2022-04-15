@@ -11,7 +11,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets, QtTest
-import blackjack_multi
+import blackjack_multi_HW
 from blackjack_globals import Message
 import multiprocessing as mp
 import blackjack_buttons as bjb
@@ -904,11 +904,22 @@ class Ui_GameWindow(QtCore.QObject):
         sb.button_press.connect(self.stand_it)
         db.button_press.connect(self.double_it)
         eb.button_press.connect(self.exit_it)
+        # just start one timer
+        self.timer.start()
 
-        """
-        # instead of this, need to turn on the connections per player turn
-        if str(self.numPlayers) == "2":
-            # P2
+    def reset_buttons(self, currentPlayer):
+        global cards
+        # opening up the next round screen
+        self.timer.stop()
+
+        self.timer = QtCore.QTimer(interval=50)
+
+        if str(currentPlayer) == "1":
+            hb.button_press.disconnect()
+            sb.button_press.disconnect()
+            db.button_press.disconnect()
+            eb.button_press.disconnect()
+
             self.timer.timeout.connect(hb2.check)
             self.timer.timeout.connect(sb2.check)
             self.timer.timeout.connect(db2.check)
@@ -918,19 +929,12 @@ class Ui_GameWindow(QtCore.QObject):
             db2.button_press.connect(self.double_it)
             eb2.button_press.connect(self.exit_it)
 
+        elif str(currentPlayer) == "2":
+            hb2.button_press.disconnect()
+            sb2.button_press.disconnect()
+            db2.button_press.disconnect()
+            eb2.button_press.disconnect()
 
-        elif str(self.numPlayers) == "3":
-            # P2
-            self.timer.timeout.connect(hb2.check)
-            self.timer.timeout.connect(sb2.check)
-            self.timer.timeout.connect(db2.check)
-            self.timer.timeout.connect(eb2.check)
-            hb2.button_press.connect(self.hit_it)
-            sb2.button_press.connect(self.stand_it)
-            db2.button_press.connect(self.double_it)
-            eb2.button_press.connect(self.exit_it)
-
-            # P3
             self.timer.timeout.connect(hb3.check)
             self.timer.timeout.connect(sb3.check)
             self.timer.timeout.connect(db3.check)
@@ -940,28 +944,12 @@ class Ui_GameWindow(QtCore.QObject):
             db3.button_press.connect(self.double_it)
             eb3.button_press.connect(self.exit_it)
 
-        elif str(self.numPlayers) == "4":
-            # P2
-            self.timer.timeout.connect(hb2.check)
-            self.timer.timeout.connect(sb2.check)
-            self.timer.timeout.connect(db2.check)
-            self.timer.timeout.connect(eb2.check)
-            hb2.button_press.connect(self.hit_it)
-            sb2.button_press.connect(self.stand_it)
-            db2.button_press.connect(self.double_it)
-            eb2.button_press.connect(self.exit_it)
-            
-            # P3
-            self.timer.timeout.connect(hb3.check)
-            self.timer.timeout.connect(sb3.check)
-            self.timer.timeout.connect(db3.check)
-            self.timer.timeout.connect(eb3.check)
-            hb3.button_press.connect(self.hit_it)
-            sb3.button_press.connect(self.stand_it)
-            db3.button_press.connect(self.double_it)
-            eb3.button_press.connect(self.exit_it)
+        elif str(currentPlayer) == "3":
+            hb3.button_press.disconnect()
+            sb3.button_press.disconnect()
+            db3.button_press.disconnect()
+            eb3.button_press.disconnect()
 
-            # P4
             self.timer.timeout.connect(hb4.check)
             self.timer.timeout.connect(sb4.check)
             self.timer.timeout.connect(db4.check)
@@ -969,97 +957,36 @@ class Ui_GameWindow(QtCore.QObject):
             hb4.button_press.connect(self.hit_it)
             sb4.button_press.connect(self.stand_it)
             db4.button_press.connect(self.double_it)
-            eb4.button_press.connect(self.exit_it)  
+            eb4.button_press.connect(self.exit_it)
 
-        """
-
-        # just start one timer
-        self.timer.start()
-
-    def reset_buttons(self):
-        global cards
-        # opening up the next round screen
-        self.timer.stop()
-        hb.button_press.disconnect()
-        sb.button_press.disconnect()
-        db.button_press.disconnect()
-        eb.button_press.disconnect()
-
-        if str(self.numPlayers) == "2":
-            hb2.button_press.disconnect()
-            sb2.button_press.disconnect()
-            db2.button_press.disconnect()
-            eb2.button_press.disconnect()
-        elif str(self.numPlayers) == "3":
-            hb2.button_press.disconnect()
-            sb2.button_press.disconnect()
-            db2.button_press.disconnect()
-            eb2.button_press.disconnect()
-
-            hb3.button_press.disconnect()
-            sb3.button_press.disconnect()
-            db3.button_press.disconnect()
-            eb3.button_press.disconnect()
-
-        elif str(self.numPlayers) == "4":
-            hb2.button_press.disconnect()
-            sb2.button_press.disconnect()
-            db2.button_press.disconnect()
-            eb2.button_press.disconnect()
-
-            hb3.button_press.disconnect()
-            sb3.button_press.disconnect()
-            db3.button_press.disconnect()
-            eb3.button_press.disconnect()
-
+        elif str(currentPlayer) == "4":
             hb4.button_press.disconnect()
             sb4.button_press.disconnect()
             db4.button_press.disconnect()
             eb4.button_press.disconnect()
+
+            self.timer.timeout.connect(hb.check)
+            self.timer.timeout.connect(sb.check)
+            self.timer.timeout.connect(db.check)
+            self.timer.timeout.connect(eb.check)
+            hb.button_press.connect(self.hit_it)
+            sb.button_press.connect(self.stand_it)
+            db.button_press.connect(self.double_it)
+            eb.button_press.connect(self.exit_it)
+
+        self.timer.start()
+
+
     
     def open_next_round(self, scoring, wallets):
         global cards
 
-        
         # opening up the next round screen
         self.timer.stop()
-        hb.button_press.disconnect()
-        sb.button_press.disconnect()
-        db.button_press.disconnect()
-        eb.button_press.disconnect()
-
-        if str(self.numPlayers) == "2":
-            hb2.button_press.disconnect()
-            sb2.button_press.disconnect()
-            db2.button_press.disconnect()
-            eb2.button_press.disconnect()
-        elif str(self.numPlayers) == "3":
-            hb2.button_press.disconnect()
-            sb2.button_press.disconnect()
-            db2.button_press.disconnect()
-            eb2.button_press.disconnect()
-
-            hb3.button_press.disconnect()
-            sb3.button_press.disconnect()
-            db3.button_press.disconnect()
-            eb3.button_press.disconnect()
-
-        elif str(self.numPlayers) == "4":
-            hb2.button_press.disconnect()
-            sb2.button_press.disconnect()
-            db2.button_press.disconnect()
-            eb2.button_press.disconnect()
-
-            hb3.button_press.disconnect()
-            sb3.button_press.disconnect()
-            db3.button_press.disconnect()
-            eb3.button_press.disconnect()
-
-            hb4.button_press.disconnect()
-            sb4.button_press.disconnect()
-            db4.button_press.disconnect()
-            eb4.button_press.disconnect()
-
+        hb4.button_press.disconnect()
+        sb4.button_press.disconnect()
+        db4.button_press.disconnect()
+        eb4.button_press.disconnect()
         
         #self.reset_buttons()
 
@@ -1198,6 +1125,7 @@ class Ui_GameWindow(QtCore.QObject):
                     self.p4_right_field.setPlainText(str(""))
                     self.p4_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "continue":
+                    self.reset_buttons(msg1.content)
                     break
                 elif msg1.id == "done_round":
                     # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
@@ -1272,6 +1200,7 @@ class Ui_GameWindow(QtCore.QObject):
                 self.done_round()
                 break
             elif msg.id == "continue":
+                self.reset_buttons(msg.content)
                 print("...received CONTINUE msg from BJ")
                 break
         
@@ -1305,6 +1234,8 @@ class Ui_GameWindow(QtCore.QObject):
                 print("p4: ", cards[4])
                 self.p4_left_field.setPlainText(str(cards[4]))
                 self.p4_right_field.setPlainText(str(""))
+            elif msg.id == "switch":
+                self.reset_buttons(msg.content)
             elif msg.id == "continue":
                 break
             elif msg.id == "done_round":

@@ -74,7 +74,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
                     if str(x) != numPlayers:
                         print("x is: " + str(x) + ", numPlayers is: " + numPlayers)
-                        msg2 = Message("continue", None)
+                        msg2 = Message("continue", x)
                         bj_to_gui_queue.put(msg2)
                         print("sending CONTINUE msg to GUI...")
                     done_player_round = True
@@ -88,6 +88,9 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     bj_to_gui_queue.put(msg1)
 
                     if str(x) != numPlayers:
+                        if checkValue(gs.players[x].hand) > 21:
+                            msg3 = Message("switch", x)
+                            bj_to_gui_queue.put(msg3)
                         msg2 = Message("continue", None)
                         bj_to_gui_queue.put(msg2)
                     elif str(x) == numPlayers and (checkValue(gs.players[x].hand) <= 21):
@@ -112,7 +115,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                     totals[x] = playerTurn(x, gs.players[x], gs.deck)
 
                     if str(x) != numPlayers:
-                        msg2 = Message("continue", None)
+                        msg2 = Message("continue", x)
                         bj_to_gui_queue.put(msg2)
                     done_player_round = True
 
