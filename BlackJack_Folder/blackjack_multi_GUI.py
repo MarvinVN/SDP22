@@ -1087,6 +1087,30 @@ class Ui_GameWindow(QtCore.QObject):
         db.button_press.connect(self.double_it)
         eb.button_press.connect(self.exit_it)
         """
+        if int(self.numPlayers) == 1:
+            self.your_cards_left_field.setPlainText("")
+            self.your_cards_right_field.setPlainText("")
+        elif int(self.numPlayers) == 2:
+            self.your_cards_left_field.setPlainText("")
+            self.your_cards_right_field.setPlainText("")
+            self.p2_left_field.setPlainText("")
+            self.p2_right_field.setPlainText("")
+        elif int(self.numPlayers) == 3:
+            self.your_cards_left_field.setPlainText("")
+            self.your_cards_right_field.setPlainText("")
+            self.p2_left_field.setPlainText("")
+            self.p2_right_field.setPlainText("")
+            self.p3_left_field.setPlainText("")
+            self.p3_right_field.setPlainText("")
+        elif int(self.numPlayers) == 4:
+            self.your_cards_left_field.setPlainText("")
+            self.your_cards_right_field.setPlainText("")
+            self.p2_left_field.setPlainText("")
+            self.p2_right_field.setPlainText("")
+            self.p3_left_field.setPlainText("")
+            self.p3_right_field.setPlainText("")
+            self.p4_left_field.setPlainText("")
+            self.p4_right_field.setPlainText("")
 
         while(1):
             msg0 = bj_to_gui_queue.get()
