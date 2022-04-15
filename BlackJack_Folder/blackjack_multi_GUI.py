@@ -1276,18 +1276,22 @@ class Ui_GameWindow(QtCore.QObject):
             msg = bj_to_gui_queue.get()
             if msg.id == "p1_cards":
                 cards[1] = msg.content
+                print("p1: ", cards[1])
                 self.your_cards_left_field.setPlainText(str(cards[1]))
                 self.your_cards_right_field.setPlainText(str(""))
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
+                print("p2: ", cards[2])
                 self.p2_left_field.setPlainText(str(cards[2]))
                 self.p2_right_field.setPlainText(str(""))
             elif msg.id == "p3_cards":
                 cards[3] = msg.content
+                print("p3: ", cards[3])
                 self.p3_left_field.setPlainText(str(cards[3]))
                 self.p3_right_field.setPlainText(str(""))
             elif msg.id == "p4_cards":
                 cards[4] = msg.content
+                print("p4: ", cards[4])
                 self.p4_left_field.setPlainText(str(cards[4]))
                 self.p4_right_field.setPlainText(str(""))
             elif msg.id == "continue":
