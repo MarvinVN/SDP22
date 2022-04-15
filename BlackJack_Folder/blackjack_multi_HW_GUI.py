@@ -1278,12 +1278,8 @@ class Ui_GameWindow(QtCore.QObject):
 
         game_process.start()
 
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_SettingsWindow()
-        self.ui.setupUi(self.window)
-        self.window.show()
         # this will close the application, but prints out an event loop running error
-        #sys.exit(app.exec_())
+        sys.exit(app.exec_())
 
     # setting up main window and components (for one player)
     # CHANGE THIS FUNCTION DEPENDING ON THE NUMPLAYERS
