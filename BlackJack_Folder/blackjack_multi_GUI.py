@@ -1071,6 +1071,7 @@ class Ui_GameWindow(QtCore.QObject):
 
     def done_round(self):
         global amounts_list
+        """
         self.timer = QtCore.QTimer(interval=50)
 
         self.timer.timeout.connect(hb.check)
@@ -1085,6 +1086,7 @@ class Ui_GameWindow(QtCore.QObject):
         sb.button_press.connect(self.stand_it)
         db.button_press.connect(self.double_it)
         eb.button_press.connect(self.exit_it)
+        """
 
         while(1):
             msg0 = bj_to_gui_queue.get()
@@ -1116,6 +1118,8 @@ class Ui_GameWindow(QtCore.QObject):
                 self.p4_right_field.setPlainText(str(cards[4][1]))
                 self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
                 self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
+            elif msg0.id == "continue":
+                break
             elif msg0.id == "GAME OVER!":
                 # end the game
                 #self.exit_it() # TESTING (THIS WORKED!!)
@@ -1143,7 +1147,7 @@ class Ui_GameWindow(QtCore.QObject):
 
                 break
             else:
-                break
+                pass
 
     # UPON DOUBLE BUTTON PRESSED; UPDATE BET VALUE
     # FIX END ROUND PART

@@ -26,8 +26,10 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     start_var = False
     round_score = []
     numPlayers = ""
+    totals = []
+
     while not done_game:
-        totals = []
+        #totals = []
         print("start game loop")
 
         if not start_var:
@@ -41,8 +43,10 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             bet = msg.content[2]
             gameMode = msg.content[3]
             gs.userInput = msg.content[4]
+            
             for x in range(int(numPlayers)+1):
                 totals.append(0)
+            
             print("Game Start User Input:" + str(gs.userInput))
         
             player_msg = start_game(gs, numPlayers, playerWallets, bet, gameMode, gs.userInput)
@@ -138,7 +142,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             total_time = (t2 - t1)
 
             rounds = rounds + 1
-
+            """
             for x in range(1, gs.numPlay):
                 if checkValue(gs.players[x].hand) > checkValue(gs.players[0].hand):
                     wins_list[x] = wins_list[x] + 1
@@ -158,12 +162,12 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 elif gs.gameMode == "Total Games":
                     if rounds == gs.userInput:
                         done_game = True
-                        winner = x
+                        #winner = x
                         print("Total Games Game Over")
                 elif gs.gameMode == "Duration":
                     if total_time >= gs.userInput:
                         done_game = True
-                        winner = x
+                        #winner = x
                         print("Duration Game Over")
                 else:
                     print("no one won yet...")
@@ -180,18 +184,22 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 gs.deck = Deck()
             else:
                 pass
-
+            """
             gs.resetHands()#test
             gs.dealCards(2)
 
             for x in range(gs.numPlay):
                 gs.players[x].resetBet()
                 gs.players[x].addBet(bet)
+                totals[x] = 0
 
                 msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
                 bj_to_gui_queue.put(msg1)
+                print("resetting new set of cards to GUI...")
                 #playerTurn(x, gs.players[x], gs.deck)
-
+            if not done_game:
+                msg = Message("continue", None)
+                bj_to_gui_queue.put(msg)
 
         print("----------------------------------------------------") #debug
         #print(f"done_round:{done_round} start_var:{start_var} done_game:{done_game}")
