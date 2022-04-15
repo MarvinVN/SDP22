@@ -1090,7 +1090,7 @@ class Ui_GameWindow(QtCore.QObject):
 
         while(1):
             msg0 = bj_to_gui_queue.get()
-            print("New game message: ", msg0.id, msg0_content)
+            print("New game message: ", msg0.id, msg0.content)
 
             if msg0.id == "p0_cards":
                 cards[0] = msg0.content
