@@ -1119,6 +1119,7 @@ class Ui_GameWindow(QtCore.QObject):
                 self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
                 self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
             elif msg0.id == "continue":
+                print("...GUI received CONTINUE to next round")
                 break
             elif msg0.id == "GAME OVER!":
                 # end the game
