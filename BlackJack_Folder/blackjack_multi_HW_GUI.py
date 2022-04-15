@@ -756,7 +756,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
     # OFFICIALLY STARTS BLACKJACK GAME; GAME_PROCESS STARTED
     def startBlackJack(self):
         # game_process is started here
-        game_process.start()
+        #game_process.start()
 
         # saving bet data from previous input
         self.bet = self.scroll_bet.value()
@@ -1269,14 +1269,12 @@ class Ui_GameWindow(QtCore.QObject):
 
     def exit_it(self):
         # TODO: fix this code for exit button
-        result = "game_process" in globals()
-        if result:
-            game_process.terminate()
-            game_process.join()
-            # this will close the application, but prints out an event loop running error
-            sys.exit(app.exec_())
-        else:
-            pass
+        global game_process
+
+        game_process.terminate()
+        game_process.join()
+        # this will close the application, but prints out an event loop running error
+        sys.exit(app.exec_())
 
     # setting up main window and components (for one player)
     # CHANGE THIS FUNCTION DEPENDING ON THE NUMPLAYERS
@@ -2406,20 +2404,15 @@ class Ui_end_game(QtCore.QObject):
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def play_again_connection(self, game_w):
+        global game_process
         game_w.hide()
-        result = "game_process" in globals()
-        if result:
-            game_process.terminate()
-            game_process.join()
-            #sys.exit(app.quit())
-
-        else:
-            pass
+        game_process.terminate()
 
         self.timer.stop()
         hb.button_press.disconnect()
         db.button_press.disconnect()
 
+        game_process.start()
         # testing this
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SettingsWindow()
@@ -2494,6 +2487,7 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
+    game_process.start()
     #self.startBlackJack()
     #  This line will close the app, but I have it above in exit_it() function
     sys.exit(app.exec_())
