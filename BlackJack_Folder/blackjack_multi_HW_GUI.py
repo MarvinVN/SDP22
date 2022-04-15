@@ -2404,13 +2404,14 @@ class Ui_end_game(QtCore.QObject):
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def play_again_connection(self, game_w):
-        global game_process
+        global game_process, gui_to_bj_queue, bj_to_gui_queue
         game_w.hide()
         game_process.terminate()
 
         self.timer.stop()
         hb.button_press.disconnect()
         db.button_press.disconnect()
+        game_process = mp.Process(target=blackjack_multi_HW.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
 
         game_process.start()
         # testing this
