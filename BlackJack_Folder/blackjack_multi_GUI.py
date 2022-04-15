@@ -2360,7 +2360,7 @@ class Ui_confirm_round(QtCore.QObject):
         # need to add connections for other player buttons
 
     def accept_connection(self):
-        print("accepted the connection...")
+        print("completing round to BJ...")
         msg = Message("complete_round", None)
         gui_to_bj_queue.put(msg)
 

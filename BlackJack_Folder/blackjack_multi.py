@@ -123,13 +123,13 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         bj_to_gui_queue.put(msg0)
         print("sending DONE_ROUND msg to GUI...")
 
-        """
+        
         # wait for a message to confirm round successfully over before starting new round
         while(1):
             complete_round = gui_to_bj_queue.get()
             if complete_round.id == "complete_round":
+                print("...BJ received completed round from GUI")
                 break
-        """
 
         # reset hand, deal 2 cards per player, tell GUI round ended
         if start_var and done_round:
