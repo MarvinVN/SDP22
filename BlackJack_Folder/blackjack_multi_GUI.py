@@ -1105,8 +1105,8 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg0.id == "p2_cards":
                 cards[2] == msg0.content
                 print("entered: ", msg0.id, msg0.content)
-                self.p2_left_field.setPlainText(str(cards[2][0]))
-                self.p2_right_field.setPlainText(str(cards[2][1]))
+                self.p2_left_field.setPlainText(str(msg0.content[2][0]))
+                self.p2_right_field.setPlainText(str(msg0.content[2][1]))
                 self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
                 self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))                
             elif msg0.id == "p3_cards":
