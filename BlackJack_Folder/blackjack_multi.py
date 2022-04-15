@@ -196,7 +196,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
                 msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
                 bj_to_gui_queue.put(msg1)
-                print("new cards reset: " + msg1.content)
+                print("new cards reset: " + str(msg1.content))
                 #playerTurn(x, gs.players[x], gs.deck)
             if not done_game:
                 msg = Message("continue", None)
