@@ -1269,12 +1269,16 @@ class Ui_GameWindow(QtCore.QObject):
 
     def exit_it(self):
         # TODO: fix this code for exit button
-        global game_process
+        global game_process, gui_to_bj_queue, bj_to_gui_queue
 
         game_process.terminate()
         game_process.join()
+
+        game_process = mp.Process(target=blackjack_multi_HW.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
+
+        game_process.start()
         # this will close the application, but prints out an event loop running error
-        sys.exit(app.exec_())
+        #sys.exit(app.exec_())
 
     # setting up main window and components (for one player)
     # CHANGE THIS FUNCTION DEPENDING ON THE NUMPLAYERS
@@ -2407,6 +2411,7 @@ class Ui_end_game(QtCore.QObject):
         global game_process, gui_to_bj_queue, bj_to_gui_queue
         game_w.hide()
         game_process.terminate()
+        game_process.join()
 
         self.timer.stop()
         hb.button_press.disconnect()
