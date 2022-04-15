@@ -171,8 +171,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             elif not gs.deck.cards:
                 print("New set of Deck!")
                 gs.deck = Deck()
-            elif len(gs.deck.cards) <= 10:
-                print("Shuffling deck with 10 cards left!")
+            elif len(gs.deck.cards) <= 20:
+                print("Shuffling deck with 20 cards left!")
                 gs.deck = Deck()
             else:
                 pass
