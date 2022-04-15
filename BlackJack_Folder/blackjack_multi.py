@@ -127,15 +127,6 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         bj_to_gui_queue.put(msg0)
         print("sending DONE_ROUND msg to GUI...")
 
-        """        
-        # wait for a message to confirm round successfully over before starting new round
-        while(1):
-            complete_round = gui_to_bj_queue.get()
-            if complete_round.id == "complete_round":
-                print("...BJ received completed round from GUI")
-                break
-        """
-
         # reset hand, deal 2 cards per player, tell GUI round ended
         if start_var and done_round:
             print("done round, checking game states...")
@@ -143,7 +134,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             total_time = (t2 - t1)
 
             rounds = rounds + 1
-            """
+            
             for x in range(1, gs.numPlay):
                 if checkValue(gs.players[x].hand) > checkValue(gs.players[0].hand):
                     wins_list[x] = wins_list[x] + 1
@@ -185,7 +176,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 gs.deck = Deck()
             else:
                 pass
-            """
+            
             gs.resetHands()#test
             gs.dealCards(2)
 
@@ -197,7 +188,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 msg1 = Message("p" + str(x) + "_cards", gs.players[x].hand)
                 bj_to_gui_queue.put(msg1)
                 print("new cards reset: " + str(msg1.content))
-                #playerTurn(x, gs.players[x], gs.deck)
+
             if not done_game:
                 msg = Message("continue", None)
                 bj_to_gui_queue.put(msg)
