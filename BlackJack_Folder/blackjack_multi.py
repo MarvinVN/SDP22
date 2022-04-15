@@ -55,6 +55,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
         done_round = False # each ROUND is after all players haven taken their turn
 
+        # for each player
         for x in range(1, gs.numPlay):            
             print("start player loop") #debug
             done_player_round = False
