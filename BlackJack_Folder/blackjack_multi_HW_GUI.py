@@ -126,7 +126,7 @@ gui_to_bj_queue = mp.Queue()    # gui write, blackjack read
 bj_to_gui_queue = mp.Queue()    # blackjack write, gui read
 
 # GAME PROCESS IS CREATED, CHILD PROCESS TO BLACKJACK ALGORITHM IS FORKED
-game_process = mp.Process(target=blackjack_multi.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
+game_process = mp.Process(target=blackjack_multi_HW.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
 
 
 ###################################################################
