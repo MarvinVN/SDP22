@@ -1212,7 +1212,7 @@ class Ui_GameWindow(QtCore.QObject):
                     #self.reset_buttons()
                     self.open_next_round(scoring, wallets)
                     QtTest.QTest.qWait(DELAYED)
-                    self.done_round()
+                    #self.done_round()
                     break
                 else:
                     pass
@@ -1257,7 +1257,7 @@ class Ui_GameWindow(QtCore.QObject):
                 #self.reset_buttons()
                 self.open_next_round(scoring, wallets)
                 QtTest.QTest.qWait(DELAYED)
-                self.done_round()
+                #self.done_round()
             elif msg.id == "continue":
                 print("...received CONTINUE msg from BJ")
                 break
@@ -1312,7 +1312,7 @@ class Ui_GameWindow(QtCore.QObject):
                 #self.reset_buttons()
                 self.open_next_round(scoring, wallets)
                 QtTest.QTest.qWait(DELAYED)
-                self.done_round()
+                #self.done_round()
                 break
             else:
                 pass
@@ -2367,6 +2367,7 @@ class Ui_confirm_round(QtCore.QObject):
         print("completing round to BJ...")
         msg = Message("complete_round", None)
         gui_to_bj_queue.put(msg)
+        self.done_round()
 
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
