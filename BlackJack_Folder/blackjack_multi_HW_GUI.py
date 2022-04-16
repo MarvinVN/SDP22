@@ -1134,7 +1134,7 @@ class Ui_GameWindow(QtCore.QObject):
                 if self.gameMode == "Winning Amount":
                     self.ui.confirm_list_widget.addItem("WINNING AMOUNT RESULTS:")
                     for x in range(1, int(self.numPlayers)+1):
-                        self.ui.confirm_list_widget.addItem("P" + str(x), + ": " + str(player_results[x]))
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(player_results[x]))
                     self.ui.confirm_list_widget.addItem("WINNERS:")
                     for x in wins:
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
@@ -1142,7 +1142,7 @@ class Ui_GameWindow(QtCore.QObject):
                 elif self.gameMode == "Number of Wins":
                     self.ui.confirm_list_widget.addItem("NUMBER OF WINS RESULTS:")
                     for x in range(1, int(self.numPlayers)+1):
-                        self.ui.confirm_list_widget.addItem("P" + str(x), + ": " + str(wins_list[x]))
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("WINNERS:")
                     for x in wins:
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
@@ -1150,7 +1150,7 @@ class Ui_GameWindow(QtCore.QObject):
                 elif self.gameMode == "Total Games":
                     self.ui.confirm_list_widget.addItem("TOTAL GAMES RESULTS:")
                     for x in range(1, int(self.numPlayers)+1):
-                        self.ui.confirm_list_widget.addItem("P" + str(x), + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("(TOTAL AMOUNT) WINNERS:")
                     for x in wins:
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
@@ -1161,7 +1161,7 @@ class Ui_GameWindow(QtCore.QObject):
                 elif self.gameMode == "Duration":
                     self.ui.confirm_list_widget.addItem("DURATION RESULTS:")
                     for x in range(1, int(self.numPlayers)+1):
-                        self.ui.confirm_list_widget.addItem("P" + str(x), + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("(TOTAL AMOUNT) WINNERS:")
                     for x in wins:
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
