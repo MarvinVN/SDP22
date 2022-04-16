@@ -1359,9 +1359,9 @@ class Ui_GameWindow(QtCore.QObject):
         game_process.terminate()
         game_process.join()
 
-        game_process = mp.Process(target=blackjack_multi_HW.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
+        #game_process = mp.Process(target=blackjack_multi_HW.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
 
-        game_process.start()
+        #game_process.start()
 
         # this will close the application, but prints out an event loop running error
         sys.exit(app.exec_())
