@@ -21,7 +21,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     done_player_round = False
     rounds = 0
     wins_list = [0,0,0,0,0]
-    winner = 0
+    winner = []
+    alt_winner = []
     game_duration = 0 # keep track of length of game
     start_var = False
     round_score = []
@@ -149,28 +150,34 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 if gs.gameMode == "Winning Amount":
                     if gs.players[x].wallet >= gs.userInput:
                         done_game = True
-                        winner = x
+                        winner.append(x)
                         print("Winning Amount Game Over")
                 elif gs.gameMode == "Number of Wins":
                     if wins_list[x] == gs.userInput:
                         done_game = True
-                        winner = x
+                        winner.append(x)
                         print("Number of Wins Game Over")
                 elif gs.gameMode == "Total Games":
                     if rounds == gs.userInput:
                         done_game = True
-                        #winner = x
+                        if gs.players[x].wallet == max(gs.getWallets()):
+                            winner.append(x) # winners for most money
+                        if wins_list[x] == max(wins_list):
+                            alt_winner.append(x)
                         print("Total Games Game Over")
                 elif gs.gameMode == "Duration":
                     if total_time >= gs.userInput:
                         done_game = True
-                        #winner = x
+                        if gs.players[x].wallet == max(gs.getWallets()):
+                            winner.append(x) # winners for most money
+                        if wins_list[x] == max(wins_list):
+                            alt_winner.append(x)
                         print("Duration Game Over")
                 else:
                     print("no one won yet...")
             
-            if done_game: # send over winner's winning information
-                msg0 = Message("GAME OVER!", [winner, True])
+            if done_game: # send over winner's winning information (two winner lists)
+                msg0 = Message("GAME OVER!", [winner, alt_winner, gs.getWallets(), wins_list])
                 bj_to_gui_queue.put(msg0)
             # check if the deck is empty
             elif not gs.deck.cards:

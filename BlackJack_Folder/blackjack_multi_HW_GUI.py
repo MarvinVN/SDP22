@@ -907,6 +907,64 @@ class Ui_GameWindow(QtCore.QObject):
         # just start one timer
         self.timer.start()
 
+    def disconnect_all_buttons(self):
+        self.timer.stop()
+
+        if self.numPlayers == "1":
+            hb.button_press.disconnect()
+            sb.button_press.disconnect()
+            db.button_press.disconnect()
+            eb.button_press.disconnect()
+
+        elif self.numPlayers == "2":
+            hb.button_press.disconnect()
+            sb.button_press.disconnect()
+            db.button_press.disconnect()
+            eb.button_press.disconnect()
+
+            hb2.button_press.disconnect()
+            sb2.button_press.disconnect()
+            db2.button_press.disconnect()
+            eb2.button_press.disconnect()
+
+        elif self.numPlayers == "3":
+            hb.button_press.disconnect()
+            sb.button_press.disconnect()
+            db.button_press.disconnect()
+            eb.button_press.disconnect()
+            
+            hb2.button_press.disconnect()
+            sb2.button_press.disconnect()
+            db2.button_press.disconnect()
+            eb2.button_press.disconnect()
+
+            hb3.button_press.disconnect()
+            sb3.button_press.disconnect()
+            db3.button_press.disconnect()
+            eb3.button_press.disconnect()
+
+        elif self.numPlayers == "4":
+            hb.button_press.disconnect()
+            sb.button_press.disconnect()
+            db.button_press.disconnect()
+            eb.button_press.disconnect()
+            
+            hb2.button_press.disconnect()
+            sb2.button_press.disconnect()
+            db2.button_press.disconnect()
+            eb2.button_press.disconnect()
+            
+            hb3.button_press.disconnect()
+            sb3.button_press.disconnect()
+            db3.button_press.disconnect()
+            eb3.button_press.disconnect()
+
+            hb4.button_press.disconnect()
+            sb4.button_press.disconnect()
+            db4.button_press.disconnect()
+            eb4.button_press.disconnect()
+
+
     def reset_buttons(self, currentPlayer):
         global cards
         # opening up the next round screen
@@ -959,6 +1017,7 @@ class Ui_GameWindow(QtCore.QObject):
             db4.button_press.connect(self.double_it)
             eb4.button_press.connect(self.exit_it)
 
+        # this should never happen (this method does not take the last player)
         elif str(currentPlayer) == "4":
             hb4.button_press.disconnect()
             sb4.button_press.disconnect()
@@ -976,17 +1035,34 @@ class Ui_GameWindow(QtCore.QObject):
 
         self.timer.start()
 
-
     
     def open_next_round(self, scoring, wallets):
         global cards
 
         # opening up the next round screen
         self.timer.stop()
-        hb4.button_press.disconnect()
-        sb4.button_press.disconnect()
-        db4.button_press.disconnect()
-        eb4.button_press.disconnect()
+
+        # disconnect the last player that ends each round
+        if int(self.numPlayers) == 1:
+            hb.button_press.disconnect()
+            sb.button_press.disconnect()
+            db.button_press.disconnect()
+            eb.button_press.disconnect()
+        elif int(self.numPlayers) == 2:
+            hb2.button_press.disconnect()
+            sb2.button_press.disconnect()
+            db2.button_press.disconnect()
+            eb2.button_press.disconnect()
+        elif int(self.numPlayers) == 3:
+            hb3.button_press.disconnect()
+            sb3.button_press.disconnect()
+            db3.button_press.disconnect()
+            eb3.button_press.disconnect()
+        elif int(self.numPlayers) == 4:
+            hb4.button_press.disconnect()
+            sb4.button_press.disconnect()
+            db4.button_press.disconnect()
+            eb4.button_press.disconnect()
         
         #self.reset_buttons()
 
@@ -1012,9 +1088,9 @@ class Ui_GameWindow(QtCore.QObject):
         self.timer.timeout.connect(db.check)
         self.timer.timeout.connect(eb.check)
 
-        # just start one timer??
         self.timer.start()
 
+        # always connect P1 (P1 starts every round)
         hb.button_press.connect(self.hit_it)
         sb.button_press.connect(self.stand_it)
         db.button_press.connect(self.double_it)
@@ -1061,28 +1137,55 @@ class Ui_GameWindow(QtCore.QObject):
                 break
             elif msg0.id == "GAME OVER!":
                 # end the game
-                #self.exit_it() # TESTING (THIS WORKED!!)
-                self.timer.stop()
-                hb.button_press.disconnect()
-                sb.button_press.disconnect()
-                db.button_press.disconnect()
-                eb.button_press.disconnect()
+                self.disconnect_all_buttons()
                 # instead of exiting, have a screen pop up with "WINNER!" or "YOU LOST!"
                 wins = msg0.content[0]
-                game_result = msg0.content[1]
+                alt_wins = msg0.content[1]
+                player_results = msg0.content[2] # player wallets
+                wins_list = msg0.content[3] # num wins per player
                 temp_w = self.window
                 self.window = QtWidgets.QDialog()
                 self.ui = Ui_end_game() # (player, num_wins, if player won)
                 self.ui.setupUi(self.window, temp_w)
                 self.window.show()
 
-                if game_result:
-                    winner = "YOU WON!"
-                else:
-                    winner = "YOU LOST!"
+                if self.gameMode == "Winning Amount":
+                    self.ui.confirm_list_widget.addItem("WINNING AMOUNT RESULTS:")
+                    for x in range(1, int(self.numPlayers)+1):
+                        self.ui.confirm_list_widget.addItem("P" + str(x), + ": " + str(player_results[x]))
+                    self.ui.confirm_list_widget.addItem("WINNERS:")
+                    for x in wins:
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
 
-                self.ui.confirm_list_widget.addItems(["Number of Wins: " + str(wins),
-                    "Results: " + winner])
+                elif self.gameMode == "Number of Wins":
+                    self.ui.confirm_list_widget.addItem("NUMBER OF WINS RESULTS:")
+                    for x in range(1, int(self.numPlayers)+1):
+                        self.ui.confirm_list_widget.addItem("P" + str(x), + ": " + str(wins_list[x]))
+                    self.ui.confirm_list_widget.addItem("WINNERS:")
+                    for x in wins:
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
+
+                elif self.gameMode == "Total Games":
+                    self.ui.confirm_list_widget.addItem("TOTAL GAMES RESULTS:")
+                    for x in range(1, int(self.numPlayers)+1):
+                        self.ui.confirm_list_widget.addItem("P" + str(x), + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
+                    self.ui.confirm_list_widget.addItem("(TOTAL AMOUNT) WINNERS:")
+                    for x in wins:
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
+                    self.ui.confirm_list_widget.addItem("(NUMBER OF WINS) WINNERS:")
+                    for x in alt_wins:
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(alt_wins[x]))
+
+                elif self.gameMode == "Duration":
+                    self.ui.confirm_list_widget.addItem("DURATION RESULTS:")
+                    for x in range(1, int(self.numPlayers)+1):
+                        self.ui.confirm_list_widget.addItem("P" + str(x), + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
+                    self.ui.confirm_list_widget.addItem("(TOTAL AMOUNT) WINNERS:")
+                    for x in wins:
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
+                    self.ui.confirm_list_widget.addItem("(NUMBER OF WINS) WINNERS:")
+                    for x in alt_wins:
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(alt_wins[x]))
 
                 break
             else:
@@ -2448,6 +2551,9 @@ class Ui_end_game(QtCore.QObject):
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
+        # testing this syntax
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Cancel).setText("QUIT GAME")
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Ok).setText("NEW GAME")
         self.buttonBox.accepted.connect(lambda: self.play_again_connection(Ui_GameWindow))
         self.buttonBox.rejected.connect(lambda: self.end_game_connection())
         hb.button_press.connect(self.buttonBox.accepted)
