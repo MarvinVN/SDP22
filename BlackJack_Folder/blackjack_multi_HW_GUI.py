@@ -1136,7 +1136,7 @@ class Ui_GameWindow(QtCore.QObject):
                     for x in range(1, int(self.numPlayers)+1):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(player_results[x]))
                     self.ui.confirm_list_widget.addItem("WINNERS:")
-                    for x in wins:
+                    for x in range(wins):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
 
                 elif self.gameMode == "Number of Wins":
@@ -1144,7 +1144,7 @@ class Ui_GameWindow(QtCore.QObject):
                     for x in range(1, int(self.numPlayers)+1):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("WINNERS:")
-                    for x in wins:
+                    for x in range(wins):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
 
                 elif self.gameMode == "Total Games":
@@ -1152,10 +1152,10 @@ class Ui_GameWindow(QtCore.QObject):
                     for x in range(1, int(self.numPlayers)+1):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("(TOTAL AMOUNT) WINNERS:")
-                    for x in wins:
+                    for x in range(wins):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
                     self.ui.confirm_list_widget.addItem("(NUMBER OF WINS) WINNERS:")
-                    for x in alt_wins:
+                    for x in range(alt_wins):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(alt_wins[x]))
 
                 elif self.gameMode == "Duration":
@@ -1163,10 +1163,10 @@ class Ui_GameWindow(QtCore.QObject):
                     for x in range(1, int(self.numPlayers)+1):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("(TOTAL AMOUNT) WINNERS:")
-                    for x in wins:
+                    for x in range(wins):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins[x]))
                     self.ui.confirm_list_widget.addItem("(NUMBER OF WINS) WINNERS:")
-                    for x in alt_wins:
+                    for x in range(alt_wins):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(alt_wins[x]))
 
                 break
