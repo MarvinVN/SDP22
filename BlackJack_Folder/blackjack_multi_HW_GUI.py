@@ -1119,7 +1119,7 @@ class Ui_GameWindow(QtCore.QObject):
                 break
             elif msg0.id == "GAME OVER!":
                 # end the game
-                self.disconnect_all_buttons()
+                #self.disconnect_all_buttons()
                 # instead of exiting, have a screen pop up with "WINNER!" or "YOU LOST!"
                 wins = msg0.content[0]
                 alt_wins = msg0.content[1]
