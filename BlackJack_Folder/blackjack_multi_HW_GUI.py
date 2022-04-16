@@ -907,25 +907,17 @@ class Ui_GameWindow(QtCore.QObject):
         # just start one timer
         self.timer.start()
 
-    def disconnect_all_buttons(self):
+    def disconnect_all_buttons(self): # disconnects all remaining buttons
         self.timer.stop()
 
         if self.numPlayers == "1":
-            hb.button_press.disconnect()
-            sb.button_press.disconnect()
-            db.button_press.disconnect()
-            eb.button_press.disconnect()
+            pass
 
         elif self.numPlayers == "2":
             hb.button_press.disconnect()
             sb.button_press.disconnect()
             db.button_press.disconnect()
             eb.button_press.disconnect()
-
-            hb2.button_press.disconnect()
-            sb2.button_press.disconnect()
-            db2.button_press.disconnect()
-            eb2.button_press.disconnect()
 
         elif self.numPlayers == "3":
             hb.button_press.disconnect()
@@ -937,11 +929,6 @@ class Ui_GameWindow(QtCore.QObject):
             sb2.button_press.disconnect()
             db2.button_press.disconnect()
             eb2.button_press.disconnect()
-
-            hb3.button_press.disconnect()
-            sb3.button_press.disconnect()
-            db3.button_press.disconnect()
-            eb3.button_press.disconnect()
 
         elif self.numPlayers == "4":
             hb.button_press.disconnect()
@@ -958,11 +945,6 @@ class Ui_GameWindow(QtCore.QObject):
             sb3.button_press.disconnect()
             db3.button_press.disconnect()
             eb3.button_press.disconnect()
-
-            hb4.button_press.disconnect()
-            sb4.button_press.disconnect()
-            db4.button_press.disconnect()
-            eb4.button_press.disconnect()
 
 
     def reset_buttons(self, currentPlayer):
