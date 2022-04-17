@@ -35,6 +35,7 @@ ENDED = False
 
 # FONT SIZES
 font6 = QtGui.QFont('Helvetica',6)
+font8 = QtGui.QFont('Helvetica',8)
 font10 = QtGui.QFont('Helvetica',10)
 font10Bold = QtGui.QFont('Helvetica',10, QtGui.QFont.Bold)
 font12 = QtGui.QFont('Helvetica',12)
@@ -1581,7 +1582,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font10)
+            self.amount_left_label.setFont(font8)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
