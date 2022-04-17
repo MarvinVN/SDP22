@@ -1178,7 +1178,7 @@ class Ui_GameWindow(QtCore.QObject):
                     self.ui.confirm_list_widget.addItem("(NUMBER OF WINS) WINNERS:")
                     for x in range(1, len(alt_wins)):
                         if alt_wins[x] == True:
-                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins_list[x]))
+                            self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins_list[x]))
 
                 elif self.gameMode == "Duration":
                     self.ui.confirm_list_widget.addItem("DURATION RESULTS:")
