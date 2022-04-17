@@ -190,7 +190,7 @@ class Ui_MainWindow(QtCore.QObject):
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
         self.button_actions_field.setFont(font10Bold)
-        self.button_actions_field.setGeometry(250, 380, 300, 45)
+        self.button_actions_field.setGeometry(200, 380, 375, 45)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
 
@@ -465,7 +465,7 @@ class Ui_SettingsWindow(QtCore.QObject):
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
         self.button_actions_field.setFont(font10Bold)
-        self.button_actions_field.setGeometry(250, 380, 275, 45)
+        self.button_actions_field.setGeometry(200, 380, 300, 45)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
 
@@ -700,7 +700,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
         self.button_actions_field.setFont(font10Bold)
-        self.button_actions_field.setGeometry(250, 380, 275, 45)
+        self.button_actions_field.setGeometry(200, 380, 300, 45)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
 
@@ -1701,7 +1701,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(250, 70, 100, 100)
+            self.verticalLayoutWidget.setGeometry(280, 70, 100, 100)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1730,7 +1730,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_labelLayout.setObjectName("p2_labelLayout")
             # PLAYER 2 BUTTON LAYOUT
             self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_verticalLayoutWidget.setGeometry(630, 70, 100, 100)
+            self.p2_verticalLayoutWidget.setGeometry(660, 70, 100, 100)
             self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
             self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1758,7 +1758,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_labelLayout.setObjectName("p3_labelLayout")
             # PLAYER 3 BUTTON LAYOUT
             self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_verticalLayoutWidget.setGeometry(435, 230, 100, 100)
+            self.p3_verticalLayoutWidget.setGeometry(465, 230, 100, 100)
             self.p3_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p3_verticalLayout = QtWidgets.QVBoxLayout(self.p3_verticalLayoutWidget)
             self.p3_verticalLayout.setContentsMargins(0, 0, 0, 0)
