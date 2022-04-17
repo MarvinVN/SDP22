@@ -2568,7 +2568,7 @@ class Ui_end_game(QtCore.QObject):
 
         # button styles/configurations
         self.buttonBox = QtWidgets.QDialogButtonBox(end_game)
-        self.buttonBox.setGeometry(180, 260, 500, 200)
+        self.buttonBox.setGeometry(180, 260, 500, 300)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
