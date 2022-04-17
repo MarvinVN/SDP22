@@ -1320,8 +1320,15 @@ class Ui_GameWindow(QtCore.QObject):
             if msg.id == "p1_cards":
                 cards[1] = msg.content
                 print("p1: ", cards[1])
-                self.your_cards_left_field.setPlainText(str(cards[1]))
-                self.your_cards_right_field.setPlainText(str(""))
+                l1 = ""
+                r1 = ""
+                mid = len(cards[1]) / 2
+                for x in range(0, mid):
+                    l1 = l1 + cards[1][x] 
+                self.your_cards_left_field.setPlainText(l1)
+                for x in range(mid+1, len(cards[1]))
+                    r1 = r1 + cards[1][x]
+                self.your_cards_right_field.setPlainText(r1)
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
                 print("p2: ", cards[2])
@@ -1544,10 +1551,6 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_betLayout = QtWidgets.QVBoxLayout(self.p2_betLayoutWidget)
             self.p2_betLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_betLayout.setObjectName("p2_betLayout")
-
-            self.frame = QtWidgets.QFrame(self.centralwidget)
-            self.frame.setGeometry(400,20,500,100)
-            self.frame.resize(300,300)
 
             # adding button manual (which button press for which actions)
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
