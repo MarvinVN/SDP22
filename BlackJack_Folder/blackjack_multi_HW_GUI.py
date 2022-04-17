@@ -304,6 +304,7 @@ class Ui_SettingsWindow(QtCore.QObject):
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
         db.button_press.disconnect()
+        self.gameModeChanged(self.gameModeSelect1ComboBox.currentText())
         self.userInputSetting()
 
     def userInputSetting(self):
@@ -353,35 +354,29 @@ class Ui_SettingsWindow(QtCore.QObject):
             "User Input: " + str(user_input)])
         self.window.show()
 
-    # This function may not have been implemented
     def gameModeChanged(self, game_mode):
         if game_mode == "Winning Amount":
-            self.insert = QtWidgets.QSpinBox(self.formLayoutWidget,
-            maximum=5000,
-            minimum=0,
-            value=1000,
-            singleStep=100)
+            self.insert.setValue(1000)
+            self.insert.setMinimum(0)
+            self.insert.setMaximum(5000)
+            self.insert.singleStep(100)
         elif game_mode == "Number of Wins":
-            self.insert = QtWidgets.QSpinBox(self.formLayoutWidget,
-            maximum=50,
-            minimum=0,
-            value=10,
-            singleStep=1)
+            self.insert.setValue(10)
+            self.insert.setMinimum(0)
+            self.insert.setMaximum(50)
+            self.insert.singleStep(1)
         elif game_mode == "Total Games":
-            self.insert = QtWidgets.QSpinBox(self.formLayoutWidget,
-            maximum=50,
-            minimum=0,
-            value=10,
-            singleStep=1)
+            self.insert.setValue(10)
+            self.insert.setMinimum(0)
+            self.insert.setMaximum(50)
+            self.insert.singleStep(1)
         elif game_mode == "Duration":
-            self.insert = QtWidgets.QSpinBox(self.formLayoutWidget,
-            maximum=300,
-            minimum=0,
-            value=60,
-            singleStep=5)
+            self.insert.setValue(60)
+            self.insert.setMinimum(0)
+            self.insert.setMaximum(300)
+            self.insert.singleStep(5)
         else:
             pass
-
 
     # STYLES/SETUP OF SETTINGS GUI
     def setupUi(self, SettingsWindow):
@@ -446,11 +441,7 @@ class Ui_SettingsWindow(QtCore.QObject):
 
         # change the user input field depending on game mode selection
         game_mode = self.gameModeSelect1ComboBox.currentText()
-        self.insert = QtWidgets.QSpinBox(self.formLayoutWidget,
-            maximum=5000,
-            minimum=0,
-            value=1000,
-            singleStep=100)
+        self.insert = QtWidgets.QSpinBox(self.formLayoutWidget)
         #self.insert = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.insert.setObjectName("insert")
         #self.gameModeSelect1ComboBox.currentTextChanged.connect(self.gameModeChanged)

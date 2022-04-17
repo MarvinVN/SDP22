@@ -137,7 +137,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         if start_var and done_round:
             print("done round, checking game states...")
             t2 = time.time()
-            total_time = (t2 - t1)
+            total_time = (t2 - t1) / 60 # convert seconds to minutes
 
             rounds = rounds + 1
             
