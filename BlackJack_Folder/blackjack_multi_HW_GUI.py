@@ -1102,7 +1102,6 @@ class Ui_GameWindow(QtCore.QObject):
         db.button_press.connect(self.double_it)
         eb.button_press.connect(self.exit_it)
         
-
         while(1):
             msg0 = bj_to_gui_queue.get()
             print("New game message: ", msg0.id, msg0.content)
@@ -1114,63 +1113,92 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[1] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
 
-                self.your_cards_left_field.hide()
-                self.your_cards_right_field.hide()
+                # clearing all widgets (necessary to avoid errors)
+                for i in reversed(range(self.your_cards_layout.count())): 
+                    self.your_cards_layout.itemAt(i).widget().setParent(None)
 
                 file1 = cards_to_img[str(cards[1][0])]
                 file2 = cards_to_img[str(cards[1][1])]
 
+                self.your_cards_left_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
+                self.your_cards_left_field.setObjectName("your_cards_left_field")
                 self.your_cards_left_field.load(file1)
-                self.your_cards_right_field.load(file2)
                 self.your_cards_left_field.show()
+                self.your_cards_layout.addWidget(self.your_cards_left_field)
+                self.your_cards_right_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
+                self.your_cards_right_field.setObjectName("your_cards_right_field")
+                self.your_cards_right_field.load(file2)
                 self.your_cards_right_field.show()
+                self.your_cards_layout.addWidget(self.your_cards_right_field)
+
                 self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
                 self.current_bet_field.setPlainText(str(self.player_bets[1]))
             elif msg0.id == "p2_cards":
                 cards[2] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
 
-                self.p2_left_field.hide()
-                self.p2_right_field.hide()
+                # clearing all widgets (necessary to avoid errors)
+                for i in reversed(range(self.p2_cards_layout.count())): 
+                    self.p2_cards_layout.itemAt(i).widget().setParent(None)
 
-                file1 = cards_to_img[str(cards[2][0])]
-                file2 = cards_to_img[str(cards[2][1])]
-
-                self.p2_left_field.load(file1)
-                self.p2_right_field.load(file2)
+                p2_file1 = cards_to_img[str(cards[2][0])]
+                p2_file2 = cards_to_img[str(cards[2][1])]
+                self.p2_left_field = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
+                self.p2_left_field.setObjectName("p2_left_field")
+                self.p2_left_field.load(p2_file1)
                 self.p2_left_field.show()
+                self.p2_cards_layout.addWidget(self.p2_left_field)
+                self.p2_right_field = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
+                self.p2_right_field.setObjectName("p2_right_field")
+                self.p2_right_field.load(p2_file2)
                 self.p2_right_field.show()
+                self.p2_cards_layout.addWidget(self.p2_right_field)
+
                 self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
                 self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))                
             elif msg0.id == "p3_cards":
                 cards[3] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
 
-                self.p3_left_field.hide()
-                self.p3_right_field.hide()
+                # clearing all widgets (necessary to avoid errors)
+                for i in reversed(range(self.p3_cards_layout.count())): 
+                    self.p3_cards_layout.itemAt(i).widget().setParent(None)
 
-                file1 = cards_to_img[str(cards[3][0])]
-                file2 = cards_to_img[str(cards[3][1])]
+                p3_file1 = cards_to_img[str(cards[3][0])]
+                p3_file2 = cards_to_img[str(cards[3][1])]
 
-                self.p3_left_field.load(file1)
-                self.p3_right_field.load(file2)
+                self.p3_left_field = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
+                self.p3_left_field.setObjectName("p3_left_field")
+                self.p3_left_field.load(p3_file1)
                 self.p3_left_field.show()
+                self.p3_cards_layout.addWidget(self.p3_left_field)
+                self.p3_right_field = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
+                self .p3_right_field.setObjectName("p3_right_field")
+                self.p3_right_field.load(p3_file2)
                 self.p3_right_field.show()
+                self.p3_cards_layout.addWidget(self.p3_right_field)
+
                 self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
                 self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
             elif msg0.id == "p4_cards":
                 cards[4] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
 
-                self.p4_left_field.hide()
-                self.p4_right_field.hide()
-                
-                file1 = cards_to_img[str(cards[4][0])]
-                file2 = cards_to_img[str(cards[4][1])]
-                self.p4_left_field.load(file1)
-                self.p4_right_field.load(file2)
+                # clearing all widgets (necessary to avoid errors)
+                for i in reversed(range(self.p4_horizontalLayoutWidget.count())): 
+                    self.p4_horizontalLayoutWidget.itemAt(i).widget().setParent(None)
+
+                self.p4_left_field = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
+                self.p4_left_field.setObjectName("p4_left_field")
+                self.p4_left_field.load(p4_file1)
                 self.p4_left_field.show()
+                self.p4_cards_layout.addWidget(self.p4_left_field)
+                self.p4_right_field = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
+                self.p4_right_field.setObjectName("p4_right_field")
+                self.p4_right_field.load(p4_file2)
                 self.p4_right_field.show()
+                self.p4_cards_layout.addWidget(self.p4_right_field)
+                
                 self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
                 self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
             elif msg0.id == "continue":
