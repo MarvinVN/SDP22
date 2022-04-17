@@ -1362,7 +1362,7 @@ class Ui_GameWindow(QtCore.QObject):
             #
             #
             self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.horizontalLayoutWidget.setGeometry(250, 280, 300, 150)
+            self.horizontalLayoutWidget.setGeometry(250, 180, 300, 150)
             self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
 
             self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
@@ -1380,14 +1380,10 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_right_field.setFont(font20)
             self.your_cards_layout.addWidget(self.your_cards_right_field)
 
-            self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-            self.horizontalLayoutWidget_2.setGeometry(250, 30, 300, 150)
-            self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
-
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
             self.current_bet_field.setFont(font20)
-            self.current_bet_field.setGeometry(100, 310, 110, 110)
+            self.current_bet_field.setGeometry(100, 210, 110, 110)
             self.current_bet_field.setObjectName("current_bet_field")
 
             # creating the amount left label
@@ -1397,7 +1393,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.amount_left_label.setObjectName("amount_left_label")
 
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(600, 280, 100, 150)
+            self.verticalLayoutWidget.setGeometry(600, 180, 100, 150)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1421,13 +1417,10 @@ class Ui_GameWindow(QtCore.QObject):
 
             # change font size to be a lot bigger; maybe size 10?
             self.label = QtWidgets.QLabel(self.centralwidget)
-            self.label.setGeometry(355, 200, 110, 110)
+            self.label.setGeometry(355, 100, 110, 110)
             self.label.setObjectName("label")
-            self.label_2 = QtWidgets.QLabel(self.centralwidget)
-            self.label_2.setGeometry(355, 140, 140, 110)
-            self.label_2.setObjectName("label_2")
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
-            self.label_3.setGeometry(110, 230, 110, 110)
+            self.label_3.setGeometry(110, 130, 110, 110)
             self.label_3.setObjectName("label_3")
             self.label.setFont(font10)
             self.label_2.setFont(font10)
