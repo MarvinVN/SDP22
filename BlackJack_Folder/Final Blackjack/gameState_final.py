@@ -10,10 +10,8 @@ class gameState:
 
     #set amount of players for current game
     def setPlayers(self, numPlay):
-        """
         if numPlay not in [1, 2, 3, 4]:
-            return False 
-        """
+            return False
         
         prevNum = self.numPlay
         self.numPlay = numPlay + 1 #plus 1 needed for dealer
