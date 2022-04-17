@@ -1460,21 +1460,21 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setObjectName("your_cards_layout")
             # PLAYER 1 LABEL CARDS LAYOUT
             self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.labelLayoutWidget.setGeometry(140, 130, 150, 100)
+            self.labelLayoutWidget.setGeometry(120, 130, 175, 125)
             self.labelLayoutWidget.setObjectName("labelLayoutWidget")
             self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
             self.labelLayout.setContentsMargins(0, 0, 0, 0)
             self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(300, 130, 70, 100)
+            self.verticalLayoutWidget.setGeometry(320, 130, 100, 100)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout.setObjectName("verticalLayout")
             # PLAYER 1 BET LAYOUT
             self.betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.betLayoutWidget.setGeometry(60, 150, 70, 70)
+            self.betLayoutWidget.setGeometry(20, 150, 70, 70)
             self.betLayoutWidget.setObjectName("betLayoutWidget")
             self.betLayout = QtWidgets.QVBoxLayout(self.betLayoutWidget)
             self.betLayout.setContentsMargins(0, 0, 0, 0)
@@ -1509,6 +1509,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_betLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_betLayout.setObjectName("p2_betLayout")
 
+            # adding button manual (which button press for which actions)
+            self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.button_actions_field.setFont(font10Bold)
+            self.button_actions_field.setGeometry(275, 380, 250, 45)
+            self.button_actions_field.setObjectName("button_actions_field")
+            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
 
             ########### CURRENT BET LAYOUT ##########
             # PLAYER 1
