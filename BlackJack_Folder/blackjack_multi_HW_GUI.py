@@ -359,22 +359,22 @@ class Ui_SettingsWindow(QtCore.QObject):
             self.insert.setValue(1000)
             self.insert.setMinimum(0)
             self.insert.setMaximum(5000)
-            self.insert.singleStep(100)
+            self.insert.setSingleStep(100)
         elif game_mode == "Number of Wins":
             self.insert.setValue(10)
             self.insert.setMinimum(0)
             self.insert.setMaximum(50)
-            self.insert.singleStep(1)
+            self.insert.setSingleStep(1)
         elif game_mode == "Total Games":
             self.insert.setValue(10)
             self.insert.setMinimum(0)
             self.insert.setMaximum(50)
-            self.insert.singleStep(1)
+            self.insert.setSingleStep(1)
         elif game_mode == "Duration":
             self.insert.setValue(60)
             self.insert.setMinimum(0)
             self.insert.setMaximum(300)
-            self.insert.singleStep(5)
+            self.insert.setSingleStep(5)
         else:
             pass
 
