@@ -45,6 +45,7 @@ font18 = QtGui.QFont('Helvetica',18)
 font20 = QtGui.QFont('Helvetica',20)
 font30 = QtGui.QFont('Helvetica',30, QtGui.QFont.Bold)
 font48 = QtGui.QFont('Helvetica',48)
+font50 = QtGui.QFont('Helvetica',30, QtGui.QFont.Bold)
 
 cards_to_img = {}
 
@@ -199,8 +200,8 @@ class Ui_MainWindow(QtCore.QObject):
 
         # JackBlack label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(220, 200, 360, 70)
-        self.label.setFont(font30)
+        self.label.setGeometry(200, 100, 500, 100)
+        self.label.setFont(font50)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -1198,7 +1199,7 @@ class Ui_GameWindow(QtCore.QObject):
                 self.p4_right_field.load(p4_file2)
                 self.p4_right_field.show()
                 self.p4_cards_layout.addWidget(self.p4_right_field)
-                
+
                 self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
                 self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
             elif msg0.id == "continue":
