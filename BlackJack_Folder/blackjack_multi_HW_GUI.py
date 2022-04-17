@@ -358,10 +358,10 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def gameModeChanged(self, game_mode):
         if game_mode == "Winning Amount":
-            self.insert.setValue(1000)
             self.insert.setMinimum(0)
             self.insert.setMaximum(5000)
             self.insert.setSingleStep(100)
+            self.insert.setValue(1000)
         elif game_mode == "Number of Wins":
             self.insert.setValue(10)
             self.insert.setMinimum(0)
