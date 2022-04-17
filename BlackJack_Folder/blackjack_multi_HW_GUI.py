@@ -1113,29 +1113,49 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg0.id == "p1_cards":
                 cards[1] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
-                self.your_cards_left_field.setPlainText(str(cards[1][0]))
-                self.your_cards_right_field.setPlainText(str(cards[1][1]))
+
+                file1 = cards_to_img[str(cards[1][0])]
+                file2 = cards_to_img[str(cards[1][1])]
+
+                self.your_cards_left_field.load(file1)
+                self.your_cards_right_field.load(file2)
+                self.your_cards_left_field.show()
+                self.your_cards_right_field.show()
                 self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
                 self.current_bet_field.setPlainText(str(self.player_bets[1]))
             elif msg0.id == "p2_cards":
                 cards[2] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
-                self.p2_left_field.setPlainText(str(cards[2][0]))
-                self.p2_right_field.setPlainText(str(cards[2][1]))
+                file1 = cards_to_img[str(cards[2][0])]
+                file2 = cards_to_img[str(cards[2][1])]
+
+                self.p2_left_field.load(file1)
+                self.p2_right_field.load(file2)
+                self.p2_left_field.show()
+                self.p2_right_field.show()
                 self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
                 self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))                
             elif msg0.id == "p3_cards":
                 cards[3] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
-                self.p3_left_field.setPlainText(str(cards[3][0]))
-                self.p3_right_field.setPlainText(str(cards[3][1]))
+                file1 = cards_to_img[str(cards[3][0])]
+                file2 = cards_to_img[str(cards[3][1])]
+
+                self.p3_left_field.load(file1)
+                self.p3_right_field.load(file2)
+                self.p3_left_field.show()
+                self.p3_right_field.show()
                 self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
                 self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
             elif msg0.id == "p4_cards":
                 cards[4] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
-                self.p4_left_field.setPlainText(str(cards[4][0]))
-                self.p4_right_field.setPlainText(str(cards[4][1]))
+                file1 = cards_to_img[str(cards[4][0])]
+                file2 = cards_to_img[str(cards[4][1])]
+                self.p4_left_field.load(file1)
+                self.p4_right_field.load(file2)
+                self.p4_left_field.show()
+                self.p4_right_field.show()
                 self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
                 self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
             elif msg0.id == "continue":
@@ -1226,28 +1246,40 @@ class Ui_GameWindow(QtCore.QObject):
 
                 if msg1.id == "p1_cards":
                     cards[1] = msg1.content[0]
-                    mid = int(len(cards[1]) / 2)
-                    self.your_cards_left_field.setPlainText(str(cards[1][0:mid]))
-                    self.your_cards_right_field.setPlainText(str(cards[1][mid:len(cards[1])]))
-                    self.current_bet_field.setPlainText(str(msg1.content[1]))
+                    last_card = cards[1][len(cards[1])-1]
+                    file1 = cards_to_img[str(last_card)]
+                    new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
+                    new_card.setObjectName("new_card")
+                    new_card.load(file1)
+                    new_card.show()
+                    self.your_cards_layout.addWidget(new_card)
                 elif msg1.id == "p2_cards":
                     cards[2] = msg1.content[0]
-                    mid = int(len(cards[2]) / 2)
-                    self.p2_left_field.setPlainText(str(cards[2][0:mid]))
-                    self.p2_right_field.setPlainText(str(cards[2][mid:len(cards[2])]))
-                    self.p2_current_bet_field.setPlainText(str(msg1.content[1]))
+                    last_card = cards[2][len(cards[2])-1]
+                    file1 = cards_to_img[str(last_card)]
+                    new_card = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
+                    new_card.setObjectName("new_card")
+                    new_card.load(file1)
+                    new_card.show()
+                    self.p2_cards_layout.addWidget(new_card)
                 elif msg1.id == "p3_cards":
                     cards[3] = msg1.content[0]
-                    mid = int(len(cards[3]) / 2)
-                    self.p3_left_field.setPlainText(str(cards[3][0:mid]))
-                    self.p3_right_field.setPlainText(str(cards[3][mid:len(cards[3])]))
-                    self.p3_current_bet_field.setPlainText(str(msg1.content[1]))
+                    last_card = cards[3][len(cards[3])-1]
+                    file1 = cards_to_img[str(last_card)]
+                    new_card = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
+                    new_card.setObjectName("new_card")
+                    new_card.load(file1)
+                    new_card.show()
+                    self.p3_cards_layout.addWidget(new_card)
                 elif msg1.id == "p4_cards":
                     cards[4] = msg1.content[0]
-                    mid = int(len(cards[4]) / 2)
-                    self.p4_left_field.setPlainText(str(cards[4][0:mid]))
-                    self.p4_right_field.setPlainText(str(cards[4][mid:len(cards[4])]))
-                    self.p4_current_bet_field.setPlainText(str(msg1.content[1]))
+                    last_card = cards[4][len(cards[4])-1]
+                    file1 = cards_to_img[str(last_card)]
+                    new_card = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
+                    new_card.setObjectName("new_card")
+                    new_card.load(file1)
+                    new_card.show()
+                    self.p4_cards_layout.addWidget(new_card)
                 elif msg1.id == "continue":
                     self.reset_buttons(msg1.content)
                     break
@@ -1349,26 +1381,36 @@ class Ui_GameWindow(QtCore.QObject):
                 file1 = cards_to_img[str(last_card)]
                 new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
                 new_card.setObjectName("new_card")
-                #self.your_cards_left_field.setFont(font20)
                 new_card.load(file1)
                 new_card.show()
                 self.your_cards_layout.addWidget(new_card)
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
-                mid = int(len(cards[2]) / 2)
-                self.p2_left_field.setPlainText(str(cards[2][0:mid]))
-                self.p2_right_field.setPlainText(str(cards[2][mid:len(cards[2])]))
+                last_card = cards[2][len(cards[2])-1]
+                file1 = cards_to_img[str(last_card)]
+                new_card = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
+                new_card.setObjectName("new_card")
+                new_card.load(file1)
+                new_card.show()
+                self.p2_cards_layout.addWidget(new_card)
             elif msg.id == "p3_cards":
                 cards[3] = msg.content
-                mid = int(len(cards[3]) / 2)
-                self.p3_left_field.setPlainText(str(cards[3][0:mid]))
-                self.p3_right_field.setPlainText(str(cards[3][mid:len(cards[3])]))
+                last_card = cards[3][len(cards[3])-1]
+                file1 = cards_to_img[str(last_card)]
+                new_card = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
+                new_card.setObjectName("new_card")
+                new_card.load(file1)
+                new_card.show()
+                self.p3_cards_layout.addWidget(new_card)
             elif msg.id == "p4_cards":
                 cards[4] = msg.content
-                print("p4: ", cards[4])
-                mid = int(len(cards[4]) / 2)
-                self.p4_left_field.setPlainText(str(cards[4][0:mid]))
-                self.p4_right_field.setPlainText(str(cards[4][mid:len(cards[4])]))
+                last_card = cards[4][len(cards[4])-1]
+                file1 = cards_to_img[str(last_card)]
+                new_card = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
+                new_card.setObjectName("new_card")
+                new_card.load(file1)
+                new_card.show()
+                self.p4_cards_layout.addWidget(new_card)
             elif msg.id == "switch":
                 self.reset_buttons(msg.content)
             elif msg.id == "continue":
