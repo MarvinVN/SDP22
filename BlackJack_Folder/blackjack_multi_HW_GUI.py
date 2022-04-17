@@ -36,6 +36,7 @@ ENDED = False
 # FONT SIZES
 font6 = QtGui.QFont('Helvetica',6)
 font10 = QtGui.QFont('Helvetica',10)
+font10Bold = QtGui.QFont('Helvetica',10, QtGui.QFont.Bold)
 font12 = QtGui.QFont('Helvetica',12)
 font14 = QtGui.QFont('Helvetica',14)
 font16 = QtGui.QFont('Helvetica',16)
@@ -1362,7 +1363,7 @@ class Ui_GameWindow(QtCore.QObject):
             #
             #
             self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.horizontalLayoutWidget.setGeometry(250, 180, 300, 150)
+            self.horizontalLayoutWidget.setGeometry(250, 130, 300, 150)
             self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
 
             self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
@@ -1383,25 +1384,25 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
             self.current_bet_field.setFont(font20)
-            self.current_bet_field.setGeometry(100, 210, 110, 110)
+            self.current_bet_field.setGeometry(100, 160, 110, 110)
             self.current_bet_field.setObjectName("current_bet_field")
 
             # adding button manual (which button press for which actions)
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
-            self.button_actions_field.setFont(font10)
+            self.button_actions_field.setFont(font10Bold)
             self.button_actions_field.setGeometry(275, 380, 250, 45)
             self.button_actions_field.setObjectName("button_actions_field")
-            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n         (HIT) (DOUBLE) (STAND) (EXIT)")
+            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
 
             # creating the amount left label
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font10)
+            self.amount_left_label.setFont(font16)
             self.amount_left_label.setGeometry(600, 10, 300, 50)
             self.amount_left_label.setObjectName("amount_left_label")
 
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(600, 180, 100, 150)
+            self.verticalLayoutWidget.setGeometry(600, 130, 100, 150)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
