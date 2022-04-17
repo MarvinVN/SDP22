@@ -599,7 +599,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.verticalLayout.addWidget(self.confirm_list_widget)
 
         # adding button manual (which button press for which actions)
-        self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+        self.button_actions_field = QtWidgets.QPlainTextEdit(self.widget,
             readOnly=True)
         self.button_actions_field.setFont(font10Bold)
         self.button_actions_field.setGeometry(250, 380, 275, 45)
