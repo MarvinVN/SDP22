@@ -201,7 +201,7 @@ class Ui_MainWindow(QtCore.QObject):
         # JackBlack label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(150, 100, 500, 100)
-        self.label.setFont(font50)
+        self.label.setFont(font100)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
