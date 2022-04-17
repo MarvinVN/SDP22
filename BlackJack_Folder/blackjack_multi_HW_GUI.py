@@ -186,6 +186,15 @@ class Ui_MainWindow(QtCore.QObject):
         self.pushButton.setFont(font18)
         self.pushButton.setObjectName("pushButton")
 
+        # adding button manual (which button press for which actions)
+        self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+            readOnly=True)
+        self.button_actions_field.setFont(font10Bold)
+        self.button_actions_field.setGeometry(275, 380, 250, 45)
+        self.button_actions_field.setObjectName("button_actions_field")
+        self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
+
+
         # JackBlack label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(220, 200, 360, 70)
@@ -452,6 +461,14 @@ class Ui_SettingsWindow(QtCore.QObject):
         #self.gameModeSelect1ComboBox.currentTextChanged.connect(self.gameModeChanged)
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.insert)
         
+        # adding button manual (which button press for which actions)
+        self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+            readOnly=True)
+        self.button_actions_field.setFont(font10Bold)
+        self.button_actions_field.setGeometry(275, 380, 250, 45)
+        self.button_actions_field.setObjectName("button_actions_field")
+        self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
+
         # push button styling
         self.pushButton = QtWidgets.QPushButton(self.formLayoutWidget, clicked=lambda: self.openWindow(self.SettingsWindow))
         self.pushButton.setObjectName("pushButton")
