@@ -315,11 +315,13 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def incrementUI(self):
         global increment_value
+        increment_value = self.insert.singleStep()
         amount = self.insert.value()
         self.insert.setValue(amount+increment_value)
 
     def decrementUI(self):
         global increment_value
+        increment_value = self.insert.singleStep()
         amount = self.insert.value()
         self.insert.setValue(amount-increment_value)
 
