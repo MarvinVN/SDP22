@@ -1206,13 +1206,13 @@ class Ui_GameWindow(QtCore.QObject):
                     for x in range(int(self.numPlayers)+1):
                         amounts_list[x] = wallets[x]
                         if x == 1:
-                            self.amount_left_label.setText(str(amounts_list[x]))
+                            self.amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
                         elif x == 2:
-                            self.p2_amount_left_label.setText(str(amounts_list[x]))
+                            self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
                         elif x == 3:
-                            self.p3_amount_left_label.setText(str(amounts_list[x]))
+                            self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
                         elif x == 4:
-                            self.p4_amount_left_label.setText(str(amounts_list[x]))
+                            self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
 
                     QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
