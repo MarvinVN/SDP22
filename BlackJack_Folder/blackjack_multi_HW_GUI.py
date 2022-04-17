@@ -1320,15 +1320,9 @@ class Ui_GameWindow(QtCore.QObject):
             if msg.id == "p1_cards":
                 cards[1] = msg.content
                 print("p1: ", cards[1])
-                l1 = str(cards[1][0])
-                r1 = ""
                 mid = int(len(cards[1]) / 2)
-                for x in range(1, mid):
-                    l1 = l1 + "," + str(cards[1][x])
-                self.your_cards_left_field.setPlainText(l1)
-                for x in range(mid+1, len(cards[1])):
-                    r1 = r1 + "," + str(cards[1][x])
-                self.your_cards_right_field.setPlainText(r1)
+                self.your_cards_left_field.setPlainText(str(cards[1][0:mid]))
+                self.your_cards_right_field.setPlainText(str(cards[1][mid+1:len(cards[1])]))
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
                 print("p2: ", cards[2])
