@@ -1320,8 +1320,8 @@ class Ui_GameWindow(QtCore.QObject):
             if msg.id == "p1_cards":
                 cards[1] = msg.content
                 print("p1: ", cards[1])
-                l1 = ""
-                r1 = ""
+                l1 = str(cards[1][0])
+                r1 = str(cards[1][1])
                 mid = int(len(cards[1]) / 2)
                 for x in range(0, mid):
                     l1 = l1 + str(cards[1][x])
