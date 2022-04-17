@@ -62,8 +62,8 @@ eb = bjb.HWButton(e1)
 
 # PLAYER 2
 h2 = 10
-d2 = 6
-s2 = 9
+d2 = 9
+s2 = 6
 e2 = 19
 
 hb2 = bjb.HWButton(h2)
@@ -74,8 +74,8 @@ eb2 = bjb.HWButton(e2)
 # PLAYER 3
 h3 = 26
 d3 = 12
-s3 = 8
-e3 = 7
+s3 = 7
+e3 = 8
 
 hb3 = bjb.HWButton(h3)
 db3 = bjb.HWButton(d3)
@@ -83,10 +83,10 @@ sb3 = bjb.HWButton(s3)
 eb3 = bjb.HWButton(e3)
 
 # PLAYER 4
-h4 = 4
-d4 = 18
-s4 = 24
-e4 = 25
+h4 = 25
+d4 = 24
+s4 = 18
+e4 = 4
 
 hb4 = bjb.HWButton(h4)
 db4 = bjb.HWButton(d4)
