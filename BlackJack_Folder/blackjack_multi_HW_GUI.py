@@ -1392,7 +1392,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.button_actions_field.setFont(font10)
             self.button_actions_field.setGeometry(275, 380, 250, 45)
             self.button_actions_field.setObjectName("button_actions_field")
-            self.button_actions_field.setPlainText("***BUTTON INSTRUCTIONS***\n (HIT) (DOUBLE) (STAND) (EXIT)")
+            self.button_actions_field.setPlainText("    ***BUTTON INSTRUCTIONS***\n  (HIT) (DOUBLE) (STAND) (EXIT)")
 
             # creating the amount left label
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
