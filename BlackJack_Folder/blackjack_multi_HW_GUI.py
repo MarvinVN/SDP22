@@ -204,7 +204,7 @@ class Ui_MainWindow(QtCore.QObject):
         MainWindow.setCentralWidget(self.centralwidget)
 
         
-        file = "/svg/c_K.svg"
+        file = "./svg/c_K.svg"
         self.svgWidget = QtSvg.QSvgWidget(MainWindow)
         self.svgWidget.load(file)
         self.svgWidget.show()
