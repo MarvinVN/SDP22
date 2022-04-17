@@ -1114,6 +1114,9 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[1] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
 
+                self.your_cards_left_field.hide()
+                self.your_cards_right_field.hide()
+
                 file1 = cards_to_img[str(cards[1][0])]
                 file2 = cards_to_img[str(cards[1][1])]
 
@@ -1126,6 +1129,10 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg0.id == "p2_cards":
                 cards[2] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
+
+                self.p2_left_field.hide()
+                self.p2_right_field.hide()
+
                 file1 = cards_to_img[str(cards[2][0])]
                 file2 = cards_to_img[str(cards[2][1])]
 
@@ -1138,6 +1145,10 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg0.id == "p3_cards":
                 cards[3] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
+
+                self.p3_left_field.hide()
+                self.p3_right_field.hide()
+
                 file1 = cards_to_img[str(cards[3][0])]
                 file2 = cards_to_img[str(cards[3][1])]
 
@@ -1150,6 +1161,10 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg0.id == "p4_cards":
                 cards[4] = msg0.content
                 print("entered: ", msg0.id, msg0.content)
+
+                self.p4_left_field.hide()
+                self.p4_right_field.hide()
+                
                 file1 = cards_to_img[str(cards[4][0])]
                 file2 = cards_to_img[str(cards[4][1])]
                 self.p4_left_field.load(file1)
