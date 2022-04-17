@@ -384,10 +384,10 @@ class Ui_SettingsWindow(QtCore.QObject):
             self.insert.setMaximum(50)
             self.insert.setSingleStep(1)
         elif game_mode == "Duration":
-            self.insert.setValue(60)
+            self.insert.setValue(10)
             self.insert.setMinimum(0)
             self.insert.setMaximum(300)
-            self.insert.setSingleStep(5)
+            self.insert.setSingleStep(1)
             self.insert.setSuffix(' mins')
         else:
             pass
