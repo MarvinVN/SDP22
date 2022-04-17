@@ -716,24 +716,6 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
     def openWindow(self, main_w):
         self.continueBet()
 
-        """
-        # start official Blackjack game
-        self.startBlackJack() 
-
-        # checking IDs in message queue/grabbing message contents (player cards)
-        # this needs to account for multiple rounds
-
-        # need to change this and move into game starting class
-        while(1):
-            msg = bj_to_gui_queue.get()
-            if msg.id == "player_cards":
-                self.player_cards = msg.content
-                break
-            elif msg.id == "dealer_cards":
-                self.dealer_cards = msg.content
-            else:
-                pass
-        """
         ###### START BLACKJACK PROCESS FORK ######
         self.startBlackJack() 
         # open new game window
@@ -1401,21 +1383,6 @@ class Ui_GameWindow(QtCore.QObject):
             self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
             self.horizontalLayoutWidget_2.setGeometry(250, 30, 300, 150)
             self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
-
-            # need to remove dealer aspect?
-            self.dealer_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
-            self.dealer_cards_layout.setContentsMargins(0, 0, 0, 0)
-            self.dealer_cards_layout.setObjectName("dealer_cards_layout")
-            self.dealer_left_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget_2,
-                readOnly=True)
-            self.dealer_left_field.setObjectName("dealer_left_field")
-            self.dealer_left_field.setFont(font20)
-            self.dealer_cards_layout.addWidget(self.dealer_left_field)
-            self.dealer_right_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget_2,
-                readOnly=True)
-            self.dealer_right_field.setObjectName("dealer_right_field")
-            self.dealer_right_field.setFont(font20)
-            self.dealer_cards_layout.addWidget(self.dealer_right_field)
 
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
