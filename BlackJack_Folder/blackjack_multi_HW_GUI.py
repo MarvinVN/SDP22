@@ -1345,7 +1345,7 @@ class Ui_GameWindow(QtCore.QObject):
                 self.your_cards_left_field.setPlainText(str(cards[1][0:mid]))
                 self.your_cards_right_field.setPlainText(str(cards[1][mid:len(cards[1])]))
                 """
-                last_card = cards[1][len(cards[1])]
+                last_card = cards[1][len(cards[1])-1]
                 file1 = cards_to_img[str(last_card)]
                 new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
                 new_card.setObjectName("new_card")
