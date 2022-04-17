@@ -207,11 +207,21 @@ class Ui_MainWindow(QtCore.QObject):
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
         """
+
+        # creating form layout of widgets
+        self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.formLayoutWidget.setGeometry(150, 100, 500, 400)
+        self.formLayoutWidget.setObjectName("formLayoutWidget")
+        self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
+        self.formLayout.setContentsMargins(0, 0, 0, 0)
+        self.formLayout.setObjectName("formLayout")
         
         file = "JACKBLACK.svg"
-        self.svgWidget = QtSvg.QSvgWidget(self.centralwidget)
+        self.svgWidget = QtSvg.QSvgWidget(self.formLayoutWidget)
         self.svgWidget.load(file)
         self.svgWidget.show()
+        self.formLayout.addWidget(self.svgWidget)
+        
         MainWindow.setCentralWidget(self.centralwidget)
         
 
