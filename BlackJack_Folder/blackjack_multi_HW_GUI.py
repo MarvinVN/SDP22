@@ -1326,18 +1326,21 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
                 print("p2: ", cards[2])
-                self.p2_left_field.setPlainText(str(cards[2]))
-                self.p2_right_field.setPlainText(str(""))
+                mid = int(len(cards[2]) / 2)
+                self.p2_left_field.setPlainText(str(cards[2][0:mid]))
+                self.p2_right_field.setPlainText(str(cards[2][mid:len(cards[2])]))
             elif msg.id == "p3_cards":
                 cards[3] = msg.content
                 print("p3: ", cards[3])
-                self.p3_left_field.setPlainText(str(cards[3]))
-                self.p3_right_field.setPlainText(str(""))
+                mid = int(len(cards[3]) / 2)
+                self.p3_left_field.setPlainText(str(cards[3][0:mid]))
+                self.p3_right_field.setPlainText(str(cards[3][mid:len(cards[3])]))
             elif msg.id == "p4_cards":
                 cards[4] = msg.content
                 print("p4: ", cards[4])
-                self.p4_left_field.setPlainText(str(cards[4]))
-                self.p4_right_field.setPlainText(str(""))
+                mid = int(len(cards[4]) / 2)
+                self.p4_left_field.setPlainText(str(cards[4][0:mid]))
+                self.p4_right_field.setPlainText(str(cards[4][mid:len(cards[4])]))
             elif msg.id == "switch":
                 self.reset_buttons(msg.content)
             elif msg.id == "continue":
