@@ -45,7 +45,7 @@ font18 = QtGui.QFont('Helvetica',18)
 font20 = QtGui.QFont('Helvetica',20)
 font30 = QtGui.QFont('Helvetica',30, QtGui.QFont.Bold)
 font48 = QtGui.QFont('Helvetica',48)
-font50 = QtGui.QFont('Helvetica',30, QtGui.QFont.Bold)
+font100 = QtGui.QFont('Helvetica',100, QtGui.QFont.Bold)
 
 cards_to_img = {}
 
@@ -200,7 +200,7 @@ class Ui_MainWindow(QtCore.QObject):
 
         # JackBlack label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(200, 100, 500, 100)
+        self.label.setGeometry(150, 100, 500, 100)
         self.label.setFont(font50)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
