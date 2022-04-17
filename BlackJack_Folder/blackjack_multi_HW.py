@@ -142,7 +142,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             rounds = rounds + 1
             
             for x in range(1, gs.numPlay):
-                if checkValue(gs.players[x].hand) > checkValue(gs.players[0].hand):
+                if checkValue(gs.players[x].hand) > checkValue(gs.players[0].hand) and checkValue(gs.players[x].hand) <= 21:
                     wins_list[x] = wins_list[x] + 1
                 elif checkValue(gs.players[0].hand) > 21:
                     wins_list[x] = wins_list[x] + 1
