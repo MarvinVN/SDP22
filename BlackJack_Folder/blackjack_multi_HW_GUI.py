@@ -423,8 +423,8 @@ class Ui_SettingsWindow(QtCore.QObject):
         self.startingAmountSpinBox = QtWidgets.QSpinBox(self.formLayoutWidget,
             maximum=5000,
             minimum=0,
-            value=1000,
             singleStep=100)
+        self.startingAmountSpinBox.setValue(1000)
         self.startingAmountSpinBox.setObjectName("startingAmountSpinBox")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.startingAmountSpinBox)
         
