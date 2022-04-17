@@ -1390,7 +1390,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
             self.button_actions_field.setFont(font10)
-            self.button_actions_field.setGeometry(275, 380, 250, 60)
+            self.button_actions_field.setGeometry(275, 380, 250, 40)
             self.button_actions_field.setObjectName("button_actions_field")
             self.button_actions_field.setPlainText("***BUTTON INSTRUCTIONS***\n (HIT) (DOUBLE) (STAND) (EXIT)")
 
