@@ -190,7 +190,7 @@ class Ui_MainWindow(QtCore.QObject):
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
         self.button_actions_field.setFont(font10Bold)
-        self.button_actions_field.setGeometry(275, 380, 250, 45)
+        self.button_actions_field.setGeometry(250, 380, 300, 45)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
 
@@ -465,7 +465,7 @@ class Ui_SettingsWindow(QtCore.QObject):
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
         self.button_actions_field.setFont(font10Bold)
-        self.button_actions_field.setGeometry(275, 380, 250, 45)
+        self.button_actions_field.setGeometry(250, 380, 275, 45)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
 
