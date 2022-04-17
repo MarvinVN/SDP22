@@ -1350,8 +1350,8 @@ class Ui_GameWindow(QtCore.QObject):
                 new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
                 new_card.setObjectName("new_card")
                 #self.your_cards_left_field.setFont(font20)
-                self.new_card.load(file1)
-                self.new_card.show()
+                new_card.load(file1)
+                new_card.show()
                 self.your_cards_layout.addWidget(new_card)
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
