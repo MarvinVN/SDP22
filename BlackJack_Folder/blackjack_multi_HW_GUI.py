@@ -1326,7 +1326,7 @@ class Ui_GameWindow(QtCore.QObject):
                 for x in range(0, mid):
                     l1 = l1 + cards[1][x] 
                 self.your_cards_left_field.setPlainText(l1)
-                for x in range(mid+1, len(cards[1]))
+                for x in range(mid+1, len(cards[1])):
                     r1 = r1 + cards[1][x]
                 self.your_cards_right_field.setPlainText(r1)
             elif msg.id == "p2_cards":
