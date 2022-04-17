@@ -1426,13 +1426,13 @@ class Ui_GameWindow(QtCore.QObject):
 
             # change font size to be a lot bigger; maybe size 10?
             self.label = QtWidgets.QLabel(self.centralwidget)
-            self.label.setGeometry(355, 100, 110, 110)
+            self.label.setGeometry(355, 50, 110, 110)
             self.label.setObjectName("label")
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
-            self.label_3.setGeometry(110, 130, 110, 110)
+            self.label_3.setGeometry(110, 80, 110, 110)
             self.label_3.setObjectName("label_3")
-            self.label.setFont(font10)
-            self.label_3.setFont(font10)
+            self.label.setFont(font14)
+            self.label_3.setFont(font14)
             self.label.setText("P1 Cards:")
             self.label_3.setText("P1 Bet:")
 
