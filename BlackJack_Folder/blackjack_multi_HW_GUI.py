@@ -375,6 +375,7 @@ class Ui_SettingsWindow(QtCore.QObject):
             self.insert.setMinimum(0)
             self.insert.setMaximum(300)
             self.insert.setSingleStep(5)
+            self.insert.setSuffix(' mins')
         else:
             pass
 
