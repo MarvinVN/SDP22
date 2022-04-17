@@ -1386,6 +1386,14 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field.setGeometry(100, 210, 110, 110)
             self.current_bet_field.setObjectName("current_bet_field")
 
+            # adding button manual (which button press for which actions)
+            self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.button_actions_field.setFont(font10)
+            self.button_actions_field.setGeometry(250, 400, 400, 100)
+            self.button_actions_field.setObjectName("button_actions_field")
+            self.button_actions_field.setText("*BUTTON INSTRUCTIONS:\n (HIT) (DOUBLE) (STAND) (EXIT)")
+
             # creating the amount left label
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.amount_left_label.setFont(font10)
