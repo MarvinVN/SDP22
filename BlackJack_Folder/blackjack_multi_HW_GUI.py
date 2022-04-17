@@ -276,11 +276,13 @@ class Ui_SettingsWindow(QtCore.QObject):
 
     def incrementAmount(self):
         global increment_value
+        increment_value = self.startingAmountSpinBox.singleStep()
         amount = self.startingAmountSpinBox.value()
         self.startingAmountSpinBox.setValue(amount+increment_value)
 
     def decrementAmount(self):
         global increment_value
+        increment_value = self.startingAmountSpinBox.singleStep()
         amount = self.startingAmountSpinBox.value()
         self.startingAmountSpinBox.setValue(amount-increment_value)
 
