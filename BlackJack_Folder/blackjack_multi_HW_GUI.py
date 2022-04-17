@@ -1460,14 +1460,14 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setObjectName("your_cards_layout")
             # PLAYER 1 LABEL CARDS LAYOUT
             self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.labelLayoutWidget.setGeometry(120, 130, 175, 125)
+            self.labelLayoutWidget.setGeometry(100, 130, 175, 125)
             self.labelLayoutWidget.setObjectName("labelLayoutWidget")
             self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
             self.labelLayout.setContentsMargins(0, 0, 0, 0)
             self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(320, 130, 100, 100)
+            self.verticalLayoutWidget.setGeometry(300, 130, 100, 100)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1581,7 +1581,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font6)
+            self.amount_left_label.setFont(font10)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
