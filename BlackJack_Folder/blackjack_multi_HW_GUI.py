@@ -1322,7 +1322,7 @@ class Ui_GameWindow(QtCore.QObject):
                 print("p1: ", cards[1])
                 l1 = ""
                 r1 = ""
-                mid = len(cards[1]) / 2
+                mid = int(len(cards[1]) / 2)
                 for x in range(0, mid):
                     l1 = l1 + cards[1][x] 
                 self.your_cards_left_field.setPlainText(l1)
