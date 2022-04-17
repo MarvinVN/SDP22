@@ -1322,7 +1322,7 @@ class Ui_GameWindow(QtCore.QObject):
                 print("p1: ", cards[1])
                 mid = int(len(cards[1]) / 2)
                 self.your_cards_left_field.setPlainText(str(cards[1][0:mid]))
-                self.your_cards_right_field.setPlainText(str(cards[1][mid+1:len(cards[1])]))
+                self.your_cards_right_field.setPlainText(str(cards[1][mid:len(cards[1])]))
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
                 print("p2: ", cards[2])
