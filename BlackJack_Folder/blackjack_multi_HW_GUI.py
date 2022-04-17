@@ -1545,7 +1545,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_betLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_betLayout.setObjectName("p2_betLayout")
 
-            self.frame = QtGui.QFrame(self.centralwidget)
+            self.frame = QtWidgets.QFrame(self.centralwidget)
             self.frame.setGeometry(400,20,500,100)
             self.frame.resize(300,300)
 
