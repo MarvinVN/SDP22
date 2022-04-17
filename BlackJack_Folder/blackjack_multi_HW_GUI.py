@@ -1423,7 +1423,6 @@ class Ui_GameWindow(QtCore.QObject):
             self.label_3.setGeometry(110, 130, 110, 110)
             self.label_3.setObjectName("label_3")
             self.label.setFont(font10)
-            self.label_2.setFont(font10)
             self.label_3.setFont(font10)
             self.label.setText("P1 Cards:")
             self.label_3.setText("P1 Bet:")
