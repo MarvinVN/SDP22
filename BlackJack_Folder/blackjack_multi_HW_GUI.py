@@ -2228,7 +2228,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_left_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_left_field.setObjectName("your_cards_left_field")
             #self.your_cards_left_field.setFont(font20)
-            self.your_cards_left_field.load(file)
+            self.your_cards_left_field.load(file1)
             self.your_cards_left_field.show()
             self.your_cards_layout.addWidget(self.your_cards_left_field)
             self.your_cards_right_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
