@@ -221,7 +221,7 @@ class Ui_MainWindow(QtCore.QObject):
         self.svgWidget.load(file)
         self.svgWidget.show()
         self.formLayout.addWidget(self.svgWidget)
-        
+
         MainWindow.setCentralWidget(self.centralwidget)
         
 
@@ -1198,8 +1198,8 @@ class Ui_GameWindow(QtCore.QObject):
                 print("entered: ", msg0.id, msg0.content)
 
                 # clearing all widgets (necessary to avoid errors)
-                for i in reversed(range(self.p4_horizontalLayoutWidget.count())): 
-                    self.p4_horizontalLayoutWidget.itemAt(i).widget().setParent(None)
+                for i in reversed(range(self.p4_cards_layout.count())): 
+                    self.p4_cards_layout.itemAt(i).widget().setParent(None)
 
                 self.p4_left_field = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
                 self.p4_left_field.setObjectName("p4_left_field")
