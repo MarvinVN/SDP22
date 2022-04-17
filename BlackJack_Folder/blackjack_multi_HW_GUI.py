@@ -1431,21 +1431,24 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.your_cards_layout.setObjectName("your_cards_layout")
 
-            file = cards_to_img[str(cards[1][0])]
+
             #self.svgWidget = QtSvg.QSvgWidget(MainWindow)
             #self.svgWidget.load(file)
             #self.svgWidget.show()
 
+            file1 = cards_to_img[str(cards[1][0])]
+            file2 = cards_to_img[str(cards[1][1])]
             self.your_cards_left_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_left_field.setObjectName("your_cards_left_field")
             #self.your_cards_left_field.setFont(font20)
             self.your_cards_left_field.load(file)
             self.your_cards_left_field.show()
             self.your_cards_layout.addWidget(self.your_cards_left_field)
-            self.your_cards_right_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget,
-                readOnly=True)
+            self.your_cards_right_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_right_field.setObjectName("your_cards_right_field")
-            self.your_cards_right_field.setFont(font20)
+            #self.your_cards_right_field.setFont(font20)
+            self.your_cards_right_field.load(file2)
+            self.your_cards_right_field.show()
             self.your_cards_layout.addWidget(self.your_cards_right_field)
 
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
@@ -1505,7 +1508,7 @@ class Ui_GameWindow(QtCore.QObject):
 
 
             #self.your_cards_left_field.setPlainText(str(cards[1][0]))
-            self.your_cards_right_field.setPlainText(str(cards[1][1]))
+            #self.your_cards_right_field.setPlainText(str(cards[1][1]))
             print("P1 first cards: ", cards[1])
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
@@ -1618,16 +1621,24 @@ class Ui_GameWindow(QtCore.QObject):
             self.label.setFont(font10)
             self.label.setText("P1 Cards:")
             self.labelLayout.addWidget(self.label)
-            self.your_cards_left_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget, readOnly=True)
+
+
+            file1 = cards_to_img[str(cards[1][0])]
+            file2 = cards_to_img[str(cards[1][1])]
+            self.your_cards_left_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_left_field.setObjectName("your_cards_left_field")
-            self.your_cards_left_field.setFont(font20)
+            #self.your_cards_left_field.setFont(font20)
+            self.your_cards_left_field.load(file)
+            self.your_cards_left_field.show()
             self.your_cards_layout.addWidget(self.your_cards_left_field)
-            self.your_cards_right_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget, readOnly=True)
+            self.your_cards_right_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_right_field.setObjectName("your_cards_right_field")
-            self.your_cards_right_field.setFont(font20)
+            #self.your_cards_right_field.setFont(font20)
+            self.your_cards_right_field.load(file2)
+            self.your_cards_right_field.show()
             self.your_cards_layout.addWidget(self.your_cards_right_field)
+
             self.labelLayout.addWidget(self.horizontalLayoutWidget)
-            #self.p1_layout.addWidget(self.labelLayoutWidget)
 
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
@@ -1635,14 +1646,20 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_label.setFont(font10)
             self.p2_label.setText("P2 Cards:")
             self.p2_labelLayout.addWidget(self.p2_label)
-            self.p2_left_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget, readOnly=True)
+
+            p2_file1 = cards_to_img[str(cards[2][0])]
+            p2_file2 = cards_to_img[str(cards[2][1])]
+            self.p2_left_field = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
             self.p2_left_field.setObjectName("p2_left_field")
-            self.p2_left_field.setFont(font20)
+            self.p2_left_field.load(p2_file1)
+            self.p2_left_field.show()
             self.p2_cards_layout.addWidget(self.p2_left_field)
-            self.p2_right_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget, readOnly=True)
+            self.p2_right_field = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
             self.p2_right_field.setObjectName("p2_right_field")
-            self.p2_right_field.setFont(font20)
+            self.p2_right_field.load(p2_file2)
+            self.p2_right_field.show()
             self.p2_cards_layout.addWidget(self.p2_right_field)
+
             self.p2_labelLayout.addWidget(self.p2_horizontalLayoutWidget)
 
             ############### PLAYER VERTICAL BUTTONS ################
@@ -1703,15 +1720,10 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_exit_button.setText("EXIT")
             self.p2_verticalLayout.addWidget(self.p2_exit_button)
 
-            #print(cards)
-            self.your_cards_left_field.setPlainText(str(cards[1][0]))
-            self.your_cards_right_field.setPlainText(str(cards[1][1]))
             print("P1 first cards: ", cards[1])
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
-            self.p2_left_field.setPlainText(str(cards[2][0]))
-            self.p2_right_field.setPlainText(str(cards[2][1]))
             print("P2 first cards: ", cards[2])
             self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
@@ -1864,16 +1876,23 @@ class Ui_GameWindow(QtCore.QObject):
             self.label.setFont(font10)
             self.label.setText("P1 Cards:")
             self.labelLayout.addWidget(self.label)
-            self.your_cards_left_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget, readOnly=True)
+
+            file1 = cards_to_img[str(cards[1][0])]
+            file2 = cards_to_img[str(cards[1][1])]
+            self.your_cards_left_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_left_field.setObjectName("your_cards_left_field")
-            self.your_cards_left_field.setFont(font20)
+            #self.your_cards_left_field.setFont(font20)
+            self.your_cards_left_field.load(file)
+            self.your_cards_left_field.show()
             self.your_cards_layout.addWidget(self.your_cards_left_field)
-            self.your_cards_right_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget, readOnly=True)
+            self.your_cards_right_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_right_field.setObjectName("your_cards_right_field")
-            self.your_cards_right_field.setFont(font20)
+            #self.your_cards_right_field.setFont(font20)
+            self.your_cards_right_field.load(file2)
+            self.your_cards_right_field.show()
             self.your_cards_layout.addWidget(self.your_cards_right_field)
+
             self.labelLayout.addWidget(self.horizontalLayoutWidget)
-            #self.p1_layout.addWidget(self.labelLayoutWidget)
 
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
@@ -1881,14 +1900,20 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_label.setFont(font10)
             self.p2_label.setText("P2 Cards:")
             self.p2_labelLayout.addWidget(self.p2_label)
-            self.p2_left_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget, readOnly=True)
+
+            p2_file1 = cards_to_img[str(cards[2][0])]
+            p2_file2 = cards_to_img[str(cards[2][1])]
+            self.p2_left_field = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
             self.p2_left_field.setObjectName("p2_left_field")
-            self.p2_left_field.setFont(font20)
+            self.p2_left_field.load(p2_file1)
+            self.p2_left_field.show()
             self.p2_cards_layout.addWidget(self.p2_left_field)
-            self.p2_right_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget, readOnly=True)
+            self.p2_right_field = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
             self.p2_right_field.setObjectName("p2_right_field")
-            self.p2_right_field.setFont(font20)
+            self.p2_right_field.load(p2_file2)
+            self.p2_right_field.show()
             self.p2_cards_layout.addWidget(self.p2_right_field)
+
             self.p2_labelLayout.addWidget(self.p2_horizontalLayoutWidget)
 
             # PLAYER 3
@@ -1897,13 +1922,19 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_label.setFont(font10)
             self.p3_label.setText("P3 Cards:")
             self.p3_labelLayout.addWidget(self.p3_label)
-            self.p3_left_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget, readOnly=True)
+
+            p3_file1 = cards_to_img[str(cards[3][0])]
+            p3_file2 = cards_to_img[str(cards[3][1])]
+
+            self.p3_left_field = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
             self.p3_left_field.setObjectName("p3_left_field")
-            self.p3_left_field.setFont(font20)
+            self.p3_left_field.load(p3_file1)
+            self.p3_left_field.show()
             self.p3_cards_layout.addWidget(self.p3_left_field)
-            self.p3_right_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget, readOnly=True)
+            self.p3_right_field = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
             self .p3_right_field.setObjectName("p3_right_field")
-            self.p3_right_field.setFont(font20)
+            self.p3_right_field.load(p3_file2)
+            self.p3_right_field.show()
             self.p3_cards_layout.addWidget(self.p3_right_field)
             self.p3_labelLayout.addWidget(self.p3_horizontalLayoutWidget)
 
@@ -1992,21 +2023,12 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_exit_button.setText("EXIT")
             self.p3_verticalLayout.addWidget(self.p3_exit_button)
 
-            self.your_cards_left_field.setPlainText(str(cards[1][0]))
-            self.your_cards_right_field.setPlainText(str(cards[1][1]))
-            print("P1 first cards: ", cards[1])
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
-            self.p2_left_field.setPlainText(str(cards[2][0]))
-            self.p2_right_field.setPlainText(str(cards[2][1]))
-            print("P2 first cards: ", cards[2])
             self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
-            self.p3_left_field.setPlainText(str(cards[3][0]))
-            self.p3_right_field.setPlainText(str(cards[3][1]))
-            print("P3 first cards: ", cards[3])
             self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
             self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
 
@@ -2200,16 +2222,23 @@ class Ui_GameWindow(QtCore.QObject):
             self.label.setFont(font10)
             self.label.setText("P1 Cards:")
             self.labelLayout.addWidget(self.label)
-            self.your_cards_left_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget, readOnly=True)
+
+            file1 = cards_to_img[str(cards[1][0])]
+            file2 = cards_to_img[str(cards[1][1])]
+            self.your_cards_left_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_left_field.setObjectName("your_cards_left_field")
-            self.your_cards_left_field.setFont(font20)
+            #self.your_cards_left_field.setFont(font20)
+            self.your_cards_left_field.load(file)
+            self.your_cards_left_field.show()
             self.your_cards_layout.addWidget(self.your_cards_left_field)
-            self.your_cards_right_field = QtWidgets.QPlainTextEdit(self.horizontalLayoutWidget, readOnly=True)
+            self.your_cards_right_field = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
             self.your_cards_right_field.setObjectName("your_cards_right_field")
-            self.your_cards_right_field.setFont(font20)
+            #self.your_cards_right_field.setFont(font20)
+            self.your_cards_right_field.load(file2)
+            self.your_cards_right_field.show()
             self.your_cards_layout.addWidget(self.your_cards_right_field)
+
             self.labelLayout.addWidget(self.horizontalLayoutWidget)
-            #self.p1_layout.addWidget(self.labelLayoutWidget)
 
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
@@ -2217,14 +2246,20 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_label.setFont(font10)
             self.p2_label.setText("P2 Cards:")
             self.p2_labelLayout.addWidget(self.p2_label)
-            self.p2_left_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget, readOnly=True)
+
+            p2_file1 = cards_to_img[str(cards[2][0])]
+            p2_file2 = cards_to_img[str(cards[2][1])]
+            self.p2_left_field = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
             self.p2_left_field.setObjectName("p2_left_field")
-            self.p2_left_field.setFont(font20)
+            self.p2_left_field.load(p2_file1)
+            self.p2_left_field.show()
             self.p2_cards_layout.addWidget(self.p2_left_field)
-            self.p2_right_field = QtWidgets.QPlainTextEdit(self.p2_horizontalLayoutWidget, readOnly=True)
+            self.p2_right_field = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
             self.p2_right_field.setObjectName("p2_right_field")
-            self.p2_right_field.setFont(font20)
+            self.p2_right_field.load(p2_file2)
+            self.p2_right_field.show()
             self.p2_cards_layout.addWidget(self.p2_right_field)
+
             self.p2_labelLayout.addWidget(self.p2_horizontalLayoutWidget)
 
             # PLAYER 3
@@ -2233,13 +2268,19 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_label.setFont(font10)
             self.p3_label.setText("P3 Cards:")
             self.p3_labelLayout.addWidget(self.p3_label)
-            self.p3_left_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget, readOnly=True)
+
+            p3_file1 = cards_to_img[str(cards[3][0])]
+            p3_file2 = cards_to_img[str(cards[3][1])]
+
+            self.p3_left_field = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
             self.p3_left_field.setObjectName("p3_left_field")
-            self.p3_left_field.setFont(font20)
+            self.p3_left_field.load(p3_file1)
+            self.p3_left_field.show()
             self.p3_cards_layout.addWidget(self.p3_left_field)
-            self.p3_right_field = QtWidgets.QPlainTextEdit(self.p3_horizontalLayoutWidget, readOnly=True)
+            self.p3_right_field = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
             self .p3_right_field.setObjectName("p3_right_field")
-            self.p3_right_field.setFont(font20)
+            self.p3_right_field.load(p3_file2)
+            self.p3_right_field.show()
             self.p3_cards_layout.addWidget(self.p3_right_field)
             self.p3_labelLayout.addWidget(self.p3_horizontalLayoutWidget)
 
@@ -2249,13 +2290,19 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_label.setFont(font10)
             self.p4_label.setText("P4 Cards:")
             self.p4_labelLayout.addWidget(self.p4_label)
-            self.p4_left_field = QtWidgets.QPlainTextEdit(self.p4_horizontalLayoutWidget, readOnly=True)
+
+            p4_file1 = cards_to_img[str(cards[4][0])]
+            p4_file2 = cards_to_img[str(cards[4][1])]
+
+            self.p4_left_field = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
             self.p4_left_field.setObjectName("p4_left_field")
-            self.p4_left_field.setFont(font20)
+            self.p4_left_field.load(p4_file1)
+            self.p4_left_field.show()
             self.p4_cards_layout.addWidget(self.p4_left_field)
-            self.p4_right_field = QtWidgets.QPlainTextEdit(self.p4_horizontalLayoutWidget, readOnly=True)
+            self.p4_right_field = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
             self.p4_right_field.setObjectName("p4_right_field")
-            self.p4_right_field.setFont(font20)
+            self.p4_right_field.load(p4_file2)
+            self.p4_right_field.show()
             self.p4_cards_layout.addWidget(self.p4_right_field)
             self.p4_labelLayout.addWidget(self.p4_horizontalLayoutWidget)
 
@@ -2372,23 +2419,15 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_exit_button.setText("EXIT")
             self.p4_verticalLayout.addWidget(self.p4_exit_button)
 
-            self.your_cards_left_field.setPlainText(str(cards[1][0]))
-            self.your_cards_right_field.setPlainText(str(cards[1][1]))
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
-            self.p2_left_field.setPlainText(str(cards[2][0]))
-            self.p2_right_field.setPlainText(str(cards[2][1]))
             self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
-            self.p3_left_field.setPlainText(str(cards[3][0]))
-            self.p3_right_field.setPlainText(str(cards[3][1]))
             self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
             self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
 
-            self.p4_left_field.setPlainText(str(cards[4][0]))
-            self.p4_right_field.setPlainText(str(cards[4][1]))
             self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
             self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))           
         #
