@@ -1154,38 +1154,44 @@ class Ui_GameWindow(QtCore.QObject):
                     for x in range(1, int(self.numPlayers)+1):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(player_results[x]))
                     self.ui.confirm_list_widget.addItem("WINNERS:")
-                    for x in range(len(wins)):
-                        self.ui.confirm_list_widget.addItem("P" + str(wins[x]) + ": " + str(player_results[x+1]))
+                    for x in range(1, len(wins)):
+                        if wins[x] == True:
+                            self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(player_results[x]))
 
                 elif self.gameMode == "Number of Wins":
                     self.ui.confirm_list_widget.addItem("NUMBER OF WINS RESULTS:")
                     for x in range(1, int(self.numPlayers)+1):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("WINNERS:")
-                    for x in range(len(wins)):
-                        self.ui.confirm_list_widget.addItem("P" + str(wins[x]) + ": " + str(wins_list[x+1]))
+                    for x in range(1, len(wins)):
+                        if wins[x] == True:
+                            self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins_list[x]))
 
                 elif self.gameMode == "Total Games":
                     self.ui.confirm_list_widget.addItem("TOTAL GAMES RESULTS:")
                     for x in range(1, int(self.numPlayers)+1):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("(TOTAL AMOUNT) WINNERS:")
-                    for x in range(len(wins)):
-                        self.ui.confirm_list_widget.addItem("P" + str(wins[x]) + ": " + str(player_results[x+1]))
+                    for x in range(1, len(wins)):
+                        if wins[x] == True:
+                            self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(player_results[x]))
                     self.ui.confirm_list_widget.addItem("(NUMBER OF WINS) WINNERS:")
-                    for x in range(len(alt_wins)):
-                        self.ui.confirm_list_widget.addItem("P" + str(alt_wins[x]) + ": " + str(wins_list[x+1]))
+                    for x in range(1, len(alt_wins)):
+                        if alt_wins[x] == True:
+                        self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins_list[x]))
 
                 elif self.gameMode == "Duration":
                     self.ui.confirm_list_widget.addItem("DURATION RESULTS:")
                     for x in range(1, int(self.numPlayers)+1):
                         self.ui.confirm_list_widget.addItem("P" + str(x) + " Wallet: " + str(player_results[x]) + ", Wins: " + str(wins_list[x]))
                     self.ui.confirm_list_widget.addItem("(TOTAL AMOUNT) WINNERS:")
-                    for x in range(len(wins)):
-                        self.ui.confirm_list_widget.addItem("P" + str(wins[x]) + ": " + str(player_results[x+1]))
+                    for x in range(1, len(wins)):
+                        if wins[x] == True:
+                            self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(player_results[x]))
                     self.ui.confirm_list_widget.addItem("(NUMBER OF WINS) WINNERS:")
-                    for x in range(len(alt_wins)):
-                        self.ui.confirm_list_widget.addItem("P" + str(alt_wins[x]) + ": " + str(wins_list[x+1]))
+                    for x in range(1, len(alt_wins)):
+                        if alt_wins[x] == True:
+                            self.ui.confirm_list_widget.addItem("P" + str(x) + ": " + str(wins_list[x]))
 
                 break
             else:
@@ -1209,23 +1215,27 @@ class Ui_GameWindow(QtCore.QObject):
 
                 if msg1.id == "p1_cards":
                     cards[1] = msg1.content[0]
-                    self.your_cards_left_field.setPlainText(str(cards[1]))
-                    self.your_cards_right_field.setPlainText("")
+                    mid = int(len(cards[1]) / 2)
+                    self.your_cards_left_field.setPlainText(str(cards[1][0:mid]))
+                    self.your_cards_right_field.setPlainText(str(cards[1][mid:len(cards[1])]))
                     self.current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p2_cards":
                     cards[2] = msg1.content[0]
-                    self.p2_left_field.setPlainText(str(cards[2]))
-                    self.p2_right_field.setPlainText(str(""))
+                    mid = int(len(cards[2]) / 2)
+                    self.p2_left_field.setPlainText(str(cards[2][0:mid]))
+                    self.p2_right_field.setPlainText(str(cards[2][mid:len(cards[2])]))
                     self.p2_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p3_cards":
                     cards[3] = msg1.content[0]
-                    self.p3_left_field.setPlainText(str(cards[3]))
-                    self.p3_right_field.setPlainText(str(""))
+                    mid = int(len(cards[3]) / 2)
+                    self.p3_left_field.setPlainText(str(cards[3][0:mid]))
+                    self.p3_right_field.setPlainText(str(cards[3][mid:len(cards[3])]))
                     self.p3_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p4_cards":
                     cards[4] = msg1.content[0]
-                    self.p4_left_field.setPlainText(str(cards[4]))
-                    self.p4_right_field.setPlainText(str(""))
+                    mid = int(len(cards[4]) / 2)
+                    self.p4_left_field.setPlainText(str(cards[4][0:mid]))
+                    self.p4_right_field.setPlainText(str(cards[4][mid:len(cards[4])]))
                     self.p4_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "continue":
                     self.reset_buttons(msg1.content)
@@ -2572,7 +2582,7 @@ class Ui_end_game(QtCore.QObject):
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(end_game)
-        self.widget.setGeometry(180, 100, 500, 200)
+        self.widget.setGeometry(180, 50, 500, 300)
         self.widget.setObjectName("widget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)

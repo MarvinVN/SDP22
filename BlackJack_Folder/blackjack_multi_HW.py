@@ -21,8 +21,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     done_player_round = False
     rounds = 0
     wins_list = [0,0,0,0,0]
-    winner = []
-    alt_winner = []
+    winner = [False, False, False, False, False]
+    alt_winner = [False, False, False, False, False]
     game_duration = 0 # keep track of length of game
     start_var = False
     round_score = []
@@ -150,28 +150,28 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 if gs.gameMode == "Winning Amount":
                     if gs.players[x].wallet >= gs.userInput:
                         done_game = True
-                        winner.append(x)
+                        winner[x] = True
                         print("Winning Amount Game Over")
                 elif gs.gameMode == "Number of Wins":
                     if wins_list[x] == gs.userInput:
                         done_game = True
-                        winner.append(x)
+                        winner[x] = True
                         print("Number of Wins Game Over")
                 elif gs.gameMode == "Total Games":
                     if rounds == gs.userInput:
                         done_game = True
                         if gs.players[x].wallet == max(gs.getWallets()):
-                            winner.append(x) # winners for most money
+                            winner[x] = True # winners for most money
                         if wins_list[x] == max(wins_list):
-                            alt_winner.append(x)
+                            alt_winner[x] = True
                         print("Total Games Game Over")
                 elif gs.gameMode == "Duration":
                     if total_time >= gs.userInput:
                         done_game = True
                         if gs.players[x].wallet == max(gs.getWallets()):
-                            winner.append(x) # winners for most money
+                            winner[x] = True # winners for most money
                         if wins_list[x] == max(wins_list):
-                            alt_winner.append(x)
+                            alt_winner[x] = True
                         print("Duration Game Over")
                 else:
                     print("no one won yet...")
