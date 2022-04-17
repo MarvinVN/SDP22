@@ -696,6 +696,15 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.ok_pushButton.setText("OK")
         self.ok_pushButton.setGeometry(180, 170, 500, 200)
 
+        # adding button manual (which button press for which actions)
+        self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+            readOnly=True)
+        self.button_actions_field.setFont(font10Bold)
+        self.button_actions_field.setGeometry(250, 380, 275, 45)
+        self.button_actions_field.setObjectName("button_actions_field")
+        self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
+
+
         #hb.button_press.connect(lambda: self.decrementBet)
         #db.button_press.connect(lambda: self.incrementBet)
         hb.button_press.connect(lambda: self.openWindow(self.p1_mw))
@@ -1685,14 +1694,14 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setObjectName("your_cards_layout")
             # PLAYER 1 LABEL CARDS LAYOUT
             self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.labelLayoutWidget.setGeometry(90, 70, 150, 100)
+            self.labelLayoutWidget.setGeometry(90, 70, 175, 125)
             self.labelLayoutWidget.setObjectName("labelLayoutWidget")
             self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
             self.labelLayout.setContentsMargins(0, 0, 0, 0)
             self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(250, 70, 70, 100)
+            self.verticalLayoutWidget.setGeometry(250, 70, 100, 100)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1714,14 +1723,14 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_cards_layout.setObjectName("p2_cards_layout")
             # PLAYER 2 LABEL CARDS LAYOUT
             self.p2_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_labelLayoutWidget.setGeometry(470, 70, 150, 100)
+            self.p2_labelLayoutWidget.setGeometry(470, 70, 175, 125)
             self.p2_labelLayoutWidget.setObjectName("p2_labelLayoutWidget")
             self.p2_labelLayout = QtWidgets.QVBoxLayout(self.p2_labelLayoutWidget)
             self.p2_labelLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_labelLayout.setObjectName("p2_labelLayout")
             # PLAYER 2 BUTTON LAYOUT
             self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_verticalLayoutWidget.setGeometry(630, 70, 70, 100)
+            self.p2_verticalLayoutWidget.setGeometry(630, 70, 100, 100)
             self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
             self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -1742,21 +1751,21 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_cards_layout.setObjectName("p3_cards_layout")
             # PLAYER 3 LABEL CARDS LAYOUT
             self.p3_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_labelLayoutWidget.setGeometry(275, 280, 150, 100)
+            self.p3_labelLayoutWidget.setGeometry(275, 230, 175, 125)
             self.p3_labelLayoutWidget.setObjectName("p3_labelLayoutWidget")
             self.p3_labelLayout = QtWidgets.QVBoxLayout(self.p3_labelLayoutWidget)
             self.p3_labelLayout.setContentsMargins(0, 0, 0, 0)
             self.p3_labelLayout.setObjectName("p3_labelLayout")
             # PLAYER 3 BUTTON LAYOUT
             self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_verticalLayoutWidget.setGeometry(435, 280, 70, 100)
+            self.p3_verticalLayoutWidget.setGeometry(435, 230, 100, 100)
             self.p3_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p3_verticalLayout = QtWidgets.QVBoxLayout(self.p3_verticalLayoutWidget)
             self.p3_verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.p3_verticalLayout.setObjectName("p3_verticalLayout")
             # PLAYER 3 BET LAYOUT
             self.p3_betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_betLayoutWidget.setGeometry(195, 300, 70, 70)
+            self.p3_betLayoutWidget.setGeometry(195, 250, 70, 70)
             self.p3_betLayoutWidget.setObjectName("p3_betLayoutWidget")
             self.p3_betLayout = QtWidgets.QVBoxLayout(self.p3_betLayoutWidget)
             self.p3_betLayout.setContentsMargins(0, 0, 0, 0)
@@ -1861,7 +1870,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font6)
+            self.amount_left_label.setFont(font8)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
@@ -1890,7 +1899,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 2 AMOUNT LEFT
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_amount_left_label.setFont(font6)
+            self.p2_amount_left_label.setFont(font8)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
             self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
@@ -1917,7 +1926,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 3 AMOUNT LEFT
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p3_amount_left_label.setFont(font6)
+            self.p3_amount_left_label.setFont(font8)
             self.p3_amount_left_label.setObjectName("p3_amount_left_label")
             self.p3_amount_left_label.setText(("Amount Left: ") + str(amounts_list[3]))
             self.p3_verticalLayout.addWidget(self.p3_amount_left_label)
