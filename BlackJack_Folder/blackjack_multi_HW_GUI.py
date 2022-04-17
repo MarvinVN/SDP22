@@ -1431,7 +1431,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
             self.your_cards_layout.setObjectName("your_cards_layout")
 
-            file = cards_to_img[cards[1][0]]
+            file = cards_to_img[str(cards[1][0])]
             #self.svgWidget = QtSvg.QSvgWidget(MainWindow)
             #self.svgWidget.load(file)
             #self.svgWidget.show()
