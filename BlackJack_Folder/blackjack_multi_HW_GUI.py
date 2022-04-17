@@ -1687,6 +1687,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_exit_button.setText("EXIT")
             self.p2_verticalLayout.addWidget(self.p2_exit_button)
 
+            """
             #print(cards)
             self.your_cards_left_field.setPlainText(str(cards[1][0]))
             self.your_cards_right_field.setPlainText(str(cards[1][1]))
@@ -1694,12 +1695,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
+
             self.p2_left_field.setPlainText(str(cards[2][0]))
             self.p2_right_field.setPlainText(str(cards[2][1]))
             print("P2 first cards: ", cards[2])
             self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
-
+            """
         #
         #
         #########################################################################
@@ -1976,6 +1978,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_exit_button.setText("EXIT")
             self.p3_verticalLayout.addWidget(self.p3_exit_button)
 
+            """
             self.your_cards_left_field.setPlainText(str(cards[1][0]))
             self.your_cards_right_field.setPlainText(str(cards[1][1]))
             print("P1 first cards: ", cards[1])
@@ -1993,7 +1996,7 @@ class Ui_GameWindow(QtCore.QObject):
             print("P3 first cards: ", cards[3])
             self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
             self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
-
+            """
         #
         #
         #########################################################################
@@ -2356,6 +2359,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_exit_button.setText("EXIT")
             self.p4_verticalLayout.addWidget(self.p4_exit_button)
 
+            """
             self.your_cards_left_field.setPlainText(str(cards[1][0]))
             self.your_cards_right_field.setPlainText(str(cards[1][1]))
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
@@ -2375,6 +2379,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_right_field.setPlainText(str(cards[4][1]))
             self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
             self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))           
+            """
         #
         #
         #########################################################################
