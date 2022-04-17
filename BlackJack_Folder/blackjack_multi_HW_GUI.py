@@ -1194,6 +1194,9 @@ class Ui_GameWindow(QtCore.QObject):
                 for i in reversed(range(self.p4_cards_layout.count())): 
                     self.p4_cards_layout.itemAt(i).widget().setParent(None)
 
+                p4_file1 = cards_to_img[str(cards[4][0])]
+                p4_file2 = cards_to_img[str(cards[4][1])]
+
                 self.p4_left_field = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
                 self.p4_left_field.setObjectName("p4_left_field")
                 self.p4_left_field.load(p4_file1)
