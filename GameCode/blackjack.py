@@ -10,9 +10,11 @@ import dealer
 
 #input pins and their corresponding roles/players
 player_buttons = {
-    1: {"hit": 17, "stand": 27},
-    2: {"hit": 22, "stand": 23}
-}
+    1: {"hit": 2, "stand": 3, "double": 4},
+    2: {"hit": 14, "stand": 15, "double": 18},
+    3: {"hit": 17, "stand": 27, "double": 22},
+    4: {"hit": 23, "stand": 24, "double": 25}
+    }
 
 #categorize pins for setup
 input_pins = [x for pins in player_buttons.values() for x in pins.values()]
@@ -38,13 +40,25 @@ def main():
     gs = gameState(1)
     gs.deck.build()
 
-    gs.deck.shuffle()
     dealer.shuffle()
 
     #main game loop
     while(1):
         totals = []
-        players = (int)(input("How many people are playing?\n"))
+        players = 1
+        x = ''
+        print("How many people are playing?")
+        while(True):
+            print(f"Players: {players}")
+            x = button_move(1)
+            print(x)
+            if x == 'h' and players < 4:
+                players += 1
+            elif x == 's' and players > 1:
+                players -= 1
+            elif x == 'd':
+                break
+
         gs.setPlayers(players)
         gs.resetHands()
 
@@ -55,7 +69,9 @@ def main():
                 tmp = button_move(1)
             dealer.shuffle()    
 
-        #TODO: sync timing of dealing/RFID loop
+        for x in range(1, gs.numPlay):
+            playerBet(gs.players[x])
+
         print("Dealing...")
         gs.dealCards()
         
@@ -75,11 +91,25 @@ def main():
             GPIO.cleanup()
             quit() #should go to menu screen once GUI implemented
 
+def playerBet(player):
+    move = ''
+    bet = 10
+    print(f"How much does Player {player.pos} want to bet? Current wallet = {player.wallet}")
+    while(move != 'd'):
+        print(f"Bet: {bet}")
+        move = button_move(player.pos)
+        if move == 'h' and bet < player.wallet:
+            bet += 10
+        elif move == 's' and bet > 10:
+            bet -= 10
+        elif move == 'd':
+            break    
+    player.addBet(bet) 
+
 #takes in the player and deck as args, returns the value of player's hand    
 def playerTurn(player, deck):
     move = ''
-    bet = (int) (input("How much do you want to bet? Current wallet = {}\n".format(player.wallet)))
-    player.addBet(bet) 
+    print(f"Player {player.pos}'s Turn! Bet Amount = {player.totalBet}")
     while move != 's':  #player move loop
         total = checkValue(player.hand)
         player.showHand()
@@ -116,23 +146,38 @@ def dealerTurn(player, deck):
     return total
 
 def button_move(pos):
+    player_buttons = {
+    1: {"hit": 2, "stand": 3, "double": 4},
+    2: {"hit": 14, "stand": 15, "double": 18},
+    3: {"hit": 17, "stand": 27, "double": 22},
+    4: {"hit": 23, "stand": 24, "double": 25}
+    }
+
     move = ""
-    hit, stand = player_buttons[pos]["hit"], player_buttons[pos]["stand"]
+    hit, stand, double = player_buttons[pos]["hit"], player_buttons[pos]["stand"], player_buttons[pos]["double"]
     
     GPIO.add_event_detect(hit, GPIO.FALLING, bouncetime=500)
     GPIO.add_event_detect(stand, GPIO.FALLING, bouncetime=500)
+    GPIO.add_event_detect(double, GPIO.FALLING, bouncetime=500)
 
     while True:
-        sleep(.01)
+        sleep(.2)
         if GPIO.event_detected(hit):
-            move =  'h'
+            move = 'h'
             break
         elif GPIO.event_detected(stand):
-            move =  's'
+            move = 's'
             break
-        
+        elif GPIO.event_detected(double):
+            move = 'd'
+            break
+        else:
+            move = ''
+            continue
+
     GPIO.remove_event_detect(hit)
     GPIO.remove_event_detect(stand)
+    GPIO.remove_event_detect(double)
 
     return move
 
@@ -160,6 +205,8 @@ def score(players, totals):
         for x in range(1, len(players)):
             if totals[x] > 21:
                 settleBet(players[x], -1)
+            elif totals[x] == 21:
+                settleBet(players[x], 2)
             else:
                 settleBet(players[x], 1)
     elif dealer_score == 21:
@@ -174,13 +221,17 @@ def score(players, totals):
                 settleBet(players[x], -1)
             elif totals[x] == dealer_score:
                 settleBet(players[x], 0)
+            elif totals[x] == 21:
+                settleBet(players[x], 2)
             else:
                 settleBet(players[x], 1)
 
-#system pays out 2 to 1
+#system pays out 2 to 1, 2.5 to 1 for hitting blackjack
 #res: 1=win, 0=tie, -1=loss
 def settleBet(player, res):
-    if res == 1:
+    if res == 2:
+        player.wallet += player.totalBet * 2.5
+    elif res == 1:
         player.wallet += player.totalBet * 2
     elif res == 0:
         player.wallet += player.totalBet

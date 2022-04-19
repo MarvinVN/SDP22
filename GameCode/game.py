@@ -62,6 +62,9 @@ class Deck:
         random.shuffle(self.cards)
 
     def scan(self, card):
+        if len(self.cardsused) > 0 and card.Str == self.cardsused[-1].Str:
+            print("PREVIOUS CARD READ, TRY AGAIN")
+            return True
         if any(x.Str == card.Str for x in self.cardsused):
             print("CHEATING DETECTED, CARD ALREADY USED")
             while True:
@@ -69,11 +72,14 @@ class Deck:
         elif any(x.Str == card.Str for x in self.cards):
             print("worked")
             self.cardsused.append(card)
+            return False
         else:
             print("BAD READ")
+            return True
 
     #deals digital deck; same as above
     def deal(self, pos):
+        from blackjack import button_move
         #make global
         switch = {
             'A': 1,
@@ -94,16 +100,29 @@ class Deck:
         elif pos == 4:
             dealer.p4()
 
-        card = RFID.read()
-        print(card)
-        rank, suit = card[:-1], card[-1]
+        while True:
+            card = RFID.read()
+            while(card == False):
+                tmp = ''
+                if pos > 0:
+                    print("Dispense failed, press hit to try again.")
+                    while not tmp == 'h':
+                        tmp = button_move(pos)
+                dealer.p0() #for confirmation to dispense again
+                card = RFID.read()
 
-        if rank in switch.keys():
-            rank = switch[rank]
+            print(card)
+            rank, suit = card[:-1], card[-1]
 
-        res = Card(int(rank), suit, card)
-        self.scan(res)
-        res.show()
+            if rank in switch.keys():
+                rank = switch[rank]
+
+            res = Card(int(rank), suit, card)
+            if self.scan(res):
+                continue
+            else:
+                res.show()
+                break
 
         dealer.scanConfirm() #signal that card has been scanned
         
