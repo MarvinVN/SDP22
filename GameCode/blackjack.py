@@ -109,8 +109,9 @@ def playerBet(player):
 #takes in the player and deck as args, returns the value of player's hand    
 def playerTurn(player, deck):
     move = ''
-    print(f"Player {player.pos}'s Turn! Bet Amount = {player.totalBet}")
-    while move != 's':  #player move loop
+    bet = player.totalBet
+    print(f"Player {player.pos}'s Turn! Bet Amount = {bet}")
+    while True:  #player move loop
         total = checkValue(player.hand)
         player.showHand()
         print("Total value: {}".format(total))
@@ -124,10 +125,20 @@ def playerTurn(player, deck):
             print("21!")
             break
         else:
-            print("Do you want to hit or stand (h/s)?")
+            print("Do you want to hit, stand, or double?")
             move = button_move(player.pos)
-            if move == 'h':
-                player.draw(deck)
+            if move == 's':
+                break
+            elif move == 'd':
+                if bet*2 > player.wallet:
+                    print("Not enough money!")
+                    continue
+                else:
+                    player.addBet(bet)
+                    print(f"Bet doubled! Bet amount = {player.totalBet}")
+                    player.draw(deck)
+                    break
+            player.draw(deck)
 
     return total
 
