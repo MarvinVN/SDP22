@@ -1342,7 +1342,7 @@ class Ui_GameWindow(QtCore.QObject):
                 current_player = msg1.id
 
                 if msg1.id == "p1_cards":
-                    cards[1] = msg1.content[0]
+                    cards[1] = msg1.content
                     last_card = cards[1][len(cards[1])-1]
                     file1 = cards_to_img[str(last_card)]
                     new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
