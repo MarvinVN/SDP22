@@ -2819,7 +2819,7 @@ class Ui_end_game(QtCore.QObject):
 
 
 def loadCardImages():
-    suit = ['s', 'h', 'd', 'c']
+    suit = ['S', 'H', 'D', 'C']
     numbers = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 
     for n in numbers:
