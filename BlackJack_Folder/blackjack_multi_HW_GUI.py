@@ -15,7 +15,7 @@ import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
 import blackjack_buttons as bjb
-# from adafruit_pn532.spi import PN532_SPI
+from adafruit_pn532.spi import PN532_SPI
 from RPi import GPIO
 import board
 import busio
