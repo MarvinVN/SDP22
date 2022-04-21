@@ -24,7 +24,7 @@ output_pins = [5,13,16,20,21]
 # pn532 = PN532_SPI(spi, cs_pin, debug=False)
 # pn532.SAM_configuration()
 
-def main():
+def black_process(gui_to_bj_queue, bj_to_gui_queue):
     t1 = time.time()
     t2 = time.time()
 
