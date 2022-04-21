@@ -1470,6 +1470,7 @@ class Ui_GameWindow(QtCore.QObject):
         # need to change so that the value of button press is sent over; if value is TRUE, update that player's stats
         msg = Message("hit", None) # take in button hit status, traverse through to find which button was pressed, update player stats
         gui_to_bj_queue.put(msg)
+        print("GUI entered hit")
 
         while(1):
             msg = bj_to_gui_queue.get()
@@ -1491,6 +1492,7 @@ class Ui_GameWindow(QtCore.QObject):
                 self.your_cards_layout.addWidget(new_card)
             elif msg.id == "p2_cards":
                 cards[2] = msg.content
+                print("GUI entered p2 hit")
                 last_card = cards[2][len(cards[2])-1]
                 file1 = cards_to_img[str(last_card)]
                 new_card = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
@@ -1517,6 +1519,7 @@ class Ui_GameWindow(QtCore.QObject):
                 new_card.show()
                 self.p4_cards_layout.addWidget(new_card)
             elif msg.id == "switch":
+                print("GUI entered hit SWITCH")
                 self.reset_buttons(msg.content)
             elif msg.id == "continue":
                 print("GUI entered hit CONTINUE")
