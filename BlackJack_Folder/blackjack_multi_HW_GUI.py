@@ -788,7 +788,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # close current betting window
         temp_w.hide()
 
-"""
+
     def cardsLoadedConfirmation(self):
         print("entered cardsLoadedConfirmation")
         self.timer.stop()
@@ -796,7 +796,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.player_not_hit = False
         gui_msg = Message("hit", None)
         gui_to_bj_queue.put(gui_msg)
-"""
+
 
     # OFFICIALLY STARTS BLACKJACK GAME; GAME_PROCESS STARTED
     def startBlackJack(self):
