@@ -55,6 +55,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
         if msg.id == "game_start":
             print("BJ in initial round...")
+            msg = ""
             initial_round = False
             numPlayers = msg.content[0]
             playerWallets = msg.content[1]
