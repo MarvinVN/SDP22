@@ -1,6 +1,6 @@
 import random
 from time import sleep
-# import RFID
+import RFID
 import dealer
 
 class Card:
@@ -80,54 +80,55 @@ class Deck:
     #deals digital deck; same as above
     def deal(self, pos):
         return self.cards.pop()
-        # #make global
-        # switch = {
-        #     'A': 1,
-        #     'J': 11,
-        #     'Q': 12,
-        #     'K': 13
-        # }
+        #make global
+        switch = {
+            'A': 1,
+            'J': 11,
+            'Q': 12,
+            'K': 13
+        }
         
-        # print(pos)
-        # if pos == 0:
-        #     dealer.p0()
-        # elif pos == 1:
-        #     dealer.p1()
-        # elif pos == 2:
-        #     dealer.p2()
-        # elif pos == 3:
-        #     dealer.p3()
-        # elif pos == 4:
-        #     dealer.p4()
+        print(pos)
+        if pos == 0:
+            dealer.p0()
+        elif pos == 1:
+            dealer.p1()
+        elif pos == 2:
+            dealer.p2()
+        elif pos == 3:
+            dealer.p3()
+        elif pos == 4:
+            dealer.p4()
 
-        # while True:
-        #     # card = RFID.read()
-        #     while(card == False):
-        #         tmp = ''
-        #         if pos > 0:
-        #             print("Dispense failed, press hit to try again.")
-        #             bj_msg = Message("dispense_again", None)
-        #             while not tmp == 'h':
-        #                 # tmp = button_move(pos)
-        #         dealer.p0() #for confirmation to dispense again
-        #         # card = RFID.read()
+        while True:
+            card = RFID.read()
+            """
+            while(card == False):
+                tmp = ''
+                if pos > 0:
+                    print("Dispense failed, press hit to try again.")
+                    bj_msg = Message("dispense_again", None)
+                    while not tmp == 'h':
+                        # tmp = button_move(pos)
+                dealer.p0() #for confirmation to dispense again
+                card = RFID.read()
+            """
+            print(card)
+            rank, suit = card[:-1], card[-1]
 
-        #     print(card)
-        #     rank, suit = card[:-1], card[-1]
+            if rank in switch.keys():
+                rank = switch[rank]
 
-        #     if rank in switch.keys():
-        #         rank = switch[rank]
+            res = Card(int(rank), suit, card)
+            if self.scan(res):
+                continue
+            else:
+                res.show()
+                break
 
-        #     res = Card(int(rank), suit, card)
-        #     if self.scan(res):
-        #         continue
-        #     else:
-        #         res.show()
-        #         break
-
-        # dealer.scanConfirm() #signal that card has been scanned
+        dealer.scanConfirm() #signal that card has been scanned
         
-        # return res
+        return res
 
     #calls show() on each card to print out current deck
     def show(self):

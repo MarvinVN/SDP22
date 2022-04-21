@@ -4,8 +4,8 @@ import time
 import board
 import busio
 from blackjack_globals import Message
-# from digitalio import DigitalInOut
-# from adafruit_pn532.spi import PN532_SPI
+from digitalio import DigitalInOut
+from adafruit_pn532.spi import PN532_SPI
 from gameState import gameState
 import dealer
 
@@ -19,10 +19,10 @@ output_pins = [5,13,16,20,21]
 GPIO.setwarnings(False)
 GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
 
-# spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
-# cs_pin = DigitalInOut(board.D5)
-# pn532 = PN532_SPI(spi, cs_pin, debug=False)
-# pn532.SAM_configuration()
+spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
+cs_pin = DigitalInOut(board.D5)
+pn532 = PN532_SPI(spi, cs_pin, debug=False)
+pn532.SAM_configuration()
 
 def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
     t1 = time.time()
