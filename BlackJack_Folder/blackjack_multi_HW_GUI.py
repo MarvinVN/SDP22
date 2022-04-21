@@ -22,6 +22,8 @@ import busio
 from digitalio import DigitalInOut
 #from time import sleep
 
+GPIO.cleanup()
+
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480
 WIDTH = 800
