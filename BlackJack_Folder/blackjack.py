@@ -60,7 +60,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             gameMode = msg.content[3]
             gs.userInput = msg.content[4]
         
-            player_msg = start_game(gs, numPlayers, playerWallets, bet, gameMode, gs.userInput)
+            player_msg = start_game(gs, numPlayers, playerWallets, bet, gameMode, gs.userInput, gui_to_bj_queue)
             # sending initial player cards to GUI
             for x in player_msg:
                 bj_to_gui_queue.put(x)
@@ -149,7 +149,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             bj_msg = Message("continue", None)
             bj_to_gui_queue.put(bj_msg)
 
-def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
+def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput, gui_to_bj_queue):
     # making msg list for each player
     msg = []
 
@@ -169,7 +169,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
         if msg.id == "hit":
             waiting_for_msg = False
             print("bj received hit for shuffle....")
-            
+
     print("Shuffling initial shuffle....")
     dealer.shuffle()    
 
