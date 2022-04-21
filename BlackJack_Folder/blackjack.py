@@ -77,6 +77,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         # saving the round score to update gui
         round_score = score(gs.players, totals)
         gs.showWallets()
+        print("done round, sending to gui....")
 
         # finished one round, inform gui
         bj_msg = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets(), gs.checkCardCount()])

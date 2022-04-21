@@ -1434,7 +1434,7 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
                 wallets = msg.content[2] # need to update everyone's amount left from wallet
-                load_cards = msg1.content[3]
+                load_cards = msg.content[3]
 
                 for x in range(int(self.numPlayers)+1):
                     amounts_list[x] = wallets[x]
@@ -1519,7 +1519,7 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
                 wallets = msg.content[2]
-                load_cards = msg1.content[3]
+                load_cards = msg.content[3]
 
                 for x in range(int(self.numPlayers)+1):
                     amounts_list[x] = wallets[x]
