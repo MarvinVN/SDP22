@@ -274,10 +274,12 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                         bj_to_gui_queue.put(bj_msg)
                 # if msg is double
                 elif msg.id == "double":
+                    print("BJ entered double")
                     waiting_for_msg = False
                     new_bet = bet*2
                     # not sufficient funds to double
-                    if new_bet > player.wallet:
+                    if new_bet > int(player.wallet):
+                        print("BJ entered new bet > wallet")
                         # TODO: add message to GUI
                         bj_msg = Message("p" + str(player.pos) + "_broke", None)
                         bj_to_gui_queue.put(bj_msg)
