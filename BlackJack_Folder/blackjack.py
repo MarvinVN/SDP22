@@ -267,6 +267,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                     player.draw(deck)
                     bj_msg = Message("p" + str(player.pos) + "_cards", player.hand)
                     bj_to_gui_queue.put(bj_msg)
+                    total = checkValue(player.hand)                    
 
                     # player continues move if under 21
                     if total < 21:
