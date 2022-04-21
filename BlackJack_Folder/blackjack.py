@@ -62,7 +62,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             gameMode = msg.content[3]
             gs.userInput = msg.content[4]
         
-            player_msg = start_game(gs, numPlayers, playerWallets, bet, gameMode, gs.userInput, gui_to_bj_queue)
+            player_msg = start_game(gs, numPlayers, playerWallets, bet, gameMode, gs.userInput, gui_to_bj_queue, bj_to_gui_queue)
             # sending initial player cards to GUI
             for x in player_msg:
                 print("entered player_msg: ", x)
@@ -145,7 +145,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             # 3. check message for confirm button to re-load
             dealer.shuffle()
 
-        gs.dealCards()
+        gs.dealCards(gui_to_bj_queue, bj_to_gui_queue)
 
         for x in range(gs.numPlay):
             gs.players[x].resetBet()
@@ -158,7 +158,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             bj_msg = Message("continue", None)
             bj_to_gui_queue.put(bj_msg)
 
-def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput, gui_to_bj_queue):
+def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput, gui_to_bj_queue, bj_to_gui_queue):
     # making msg list for each player
     msg = []
 
@@ -183,7 +183,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput, gui_to_bj
     dealer.shuffle()    
 
     print("Dealing...")
-    gs.dealCards()
+    gs.dealCards(gui_to_bj_queue, bj_to_gui_queue)
 
     for x in range(gs.numPlay):
         gs.players[x].wallet = playerAmount
