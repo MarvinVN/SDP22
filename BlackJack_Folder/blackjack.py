@@ -222,18 +222,18 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
         if total > 21:
             print("Bust!")
             # switch to next player
-            if player.pos != numPlayers:
+            if player.pos != int(numPlayers):
                 bj_msg = Message("switch", player.pos)
                 bj_to_gui_queue.put(bj_msg)
             player_not_done = False
         elif total == 21:
             print("21!")
-            if player.pos != numPlayers:
+            if player.pos != int(numPlayers):
                 bj_msg = Message("switch", player.pos)
                 bj_to_gui_queue.put(bj_msg)
             player_not_done = False
         elif double:
-            if player.pos != numPlayers:
+            if player.pos != int(numPlayers):
                 bj_msg = Message("switch", player.pos)
                 bj_to_gui_queue.put(bj_msg)
             player_not_done = False
@@ -249,7 +249,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                     waiting_for_msg = False
                     # tell GUI to continue if not last player
                     print("player.pos: ", player.pos, ", numPlayers: ", numPlayers)
-                    if player.pos != numPlayers:
+                    if player.pos != int(numPlayers):
                         print("entered if switch...")
                         bj_msg = Message("switch", player.pos)
                         bj_to_gui_queue.put(bj_msg)
