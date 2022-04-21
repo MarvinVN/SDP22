@@ -813,7 +813,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         print("Game pid: ", game_process_pid)
         print("Press HIT button after loading cards into shuffler...")
         while self.player_not_hit:
-            pass
+            print(".....waiting for shuffling confirmation")
         self.player_not_hit = True
 
         counter = -1

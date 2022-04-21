@@ -168,10 +168,12 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput):
             msg = gui_to_bj_queue.get()
             if msg.id == "hit":
                 waiting_for_msg = False
+                print("bj received hit for shuffle....")
         # TODO:
         # 1. send msg to GUI, display message
         # 2. receive msg from GUI
         # 3. check message for confirm button to re-load
+        print("Shuffling initial shuffle....")
         dealer.shuffle()    
 
     print("Dealing...")
@@ -208,7 +210,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
     bet = player.totalBet
     player_not_done = True
     double = False
-    print("player " + str(player.pos) + "turn")
+    print("player " + str(player.pos) + " turn")
     while player_not_done:  #player move loop
         total = checkValue(player.hand)
         player.showHand()
