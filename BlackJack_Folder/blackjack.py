@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from time
+import time
 
 import board
 import busio
