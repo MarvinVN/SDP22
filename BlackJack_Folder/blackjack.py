@@ -270,6 +270,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
 
                     # player continues move if under 21
                     if total < 21:
+                        print("BJ total is under 21...")
                         bj_msg = Message("continue", None)
                         bj_to_gui_queue.put(bj_msg)
                 # if msg is double
