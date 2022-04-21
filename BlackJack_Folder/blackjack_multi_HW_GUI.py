@@ -22,16 +22,13 @@ import busio
 from digitalio import DigitalInOut
 #from time import sleep
 
-GPIO.cleanup()
-GPIO.setmode(GPIO.BCM)
-
 #categorize pins for setup
 output_pins = [5,13,16,20,21]
 #5 for RFID, 13 for confirm, [16,20,21] for ATmega comm.
 
 # Hardware setup (RPi GPIO and RFID)
-# GPIO.cleanup()
-# GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
+GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
 
