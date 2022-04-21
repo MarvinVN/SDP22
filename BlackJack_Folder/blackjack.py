@@ -63,6 +63,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             player_msg = start_game(gs, numPlayers, playerWallets, bet, gameMode, gs.userInput, gui_to_bj_queue)
             # sending initial player cards to GUI
             for x in player_msg:
+                print("entered player_msg: ", x)
                 bj_to_gui_queue.put(x)
 
         totals.append(0) #temp dealer score; will be calculated after players' turn
