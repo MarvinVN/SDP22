@@ -2,11 +2,13 @@ from game import Card, Deck, Player
 
 class gameState:
     #initialize gamestate with number of players
-    def __init__(self, numPlay):
+    def __init__(self, numPlay, gameMode, userInput):
         self.numPlay = 0
         self.players = []
         self.deck = Deck()
         self.setPlayers(numPlay)
+        self.gameMode = gameMode
+        self.userInput = userInput
 
     #set amount of players for current game
     def setPlayers(self, numPlay):
