@@ -109,6 +109,7 @@ class Deck:
                 tmp = ''
                 if pos > 0:
                     print("Dispense failed, press hit to try again.")
+                    # testing this 
                     bj_msg = Message("dispense_again", None)
                     bj_to_gui_queue.put(bj_msg)
                     while not tmp == 'confirm':
