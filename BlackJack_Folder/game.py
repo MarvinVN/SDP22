@@ -106,6 +106,7 @@ class Deck:
         #         tmp = ''
         #         if pos > 0:
         #             print("Dispense failed, press hit to try again.")
+        #             bj_msg = Message("dispense_again", None)
         #             while not tmp == 'h':
         #                 # tmp = button_move(pos)
         #         dealer.p0() #for confirmation to dispense again

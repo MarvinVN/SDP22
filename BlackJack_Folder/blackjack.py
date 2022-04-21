@@ -86,7 +86,6 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         # finished one round, inform gui
         bj_msg = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets(), gs.checkCardCount()])
         bj_to_gui_queue.put(bj_msg)
-        #print("sent msg to gui: ", bj_msg[0], bj_msg[1], bj_msg[2], bj_msg[3])
         print("sent msg to gui: " + bj_msg.id)
 
         # checking game end states
@@ -347,6 +346,7 @@ def button_move(pos):
 #takes a player's hand; returns value
 def checkValue(hand):
     val = 0
+    temp_hand = hand
     #sort and add Aces last so choose between 1/11 values
     for card in hand:
         if card.rank == "J":
@@ -357,8 +357,8 @@ def checkValue(hand):
             card.rank = 13
         elif card.rank == "A":
             card.rank = 1
-    hand.sort(key=lambda x: int(float(x.rank)), reverse=True)
-    for x in hand:
+    temp_hand.sort(key=lambda x: int(float(x.rank)), reverse=True)
+    for x in temp_hand:
         if x.rank in [13, 12, 11]: #K, Q, J
             val += 10
         elif x.rank == 1: #Ace
