@@ -207,7 +207,7 @@ def playerTurn(player, deck, numPlayers):
     bet = player.totalBet
     player_not_done = True
     double = False
-    print("player " + str(player_pos) + "turn")
+    print("player " + str(player.pos) + "turn")
     while player_not_done:  #player move loop
         total = checkValue(player.hand)
         player.showHand()
