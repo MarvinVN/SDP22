@@ -177,7 +177,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput, gui_to_bj
     print("Dealing...")
     gs.dealCards()
 
-    for x in range(1, gs.numPlay):
+    for x in range(gs.numPlay):
         gs.players[x].wallet = playerAmount
         gs.players[x].addBet(bet)
         player_msg = Message("p" + str(x) + "_cards", gs.players[x].hand)
