@@ -23,6 +23,7 @@ from digitalio import DigitalInOut
 #from time import sleep
 
 GPIO.cleanup()
+GPIO.setmode(GPIO.BCM)
 
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480
