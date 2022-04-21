@@ -1519,6 +1519,7 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg.id == "continue":
                 break
             elif msg.id == "done_round":
+                print("GUI entered hit done_round....")
                 # after every player goes, display the contents of the round
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
