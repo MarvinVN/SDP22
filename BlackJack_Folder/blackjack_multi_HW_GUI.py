@@ -32,13 +32,10 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
 
-
 spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
 cs_pin = DigitalInOut(board.D5)
 pn532 = PN532_SPI(spi, cs_pin, debug=False)
 pn532.SAM_configuration()
-
-
 
 # DIMENSIONS OF TOUCH DISPLAY
 HEIGHT = 480

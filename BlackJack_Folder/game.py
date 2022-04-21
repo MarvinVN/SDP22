@@ -78,7 +78,7 @@ class Deck:
             return True
 
     #deals digital deck; same as above
-    def deal(self, pos):
+    def deal(self, pos, gui_to_bj_queue, bj_to_gui_queue):
         #return self.cards.pop()
         from blackjack_globals import Message
 
