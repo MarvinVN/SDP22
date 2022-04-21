@@ -231,13 +231,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
             if player.pos != int(numPlayers):
                 bj_msg = Message("switch", player.pos)
                 bj_to_gui_queue.put(bj_msg)
-            player_not_done = False
-        elif total == 21:
-            print("21!")
-            if player.pos != int(numPlayers):
-                bj_msg = Message("switch", player.pos)
-                bj_to_gui_queue.put(bj_msg)
-            player_not_done = False
+            player_not_done = False    
         elif double:
             if player.pos != int(numPlayers):
                 bj_msg = Message("switch", player.pos)
@@ -271,7 +265,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                     total = checkValue(player.hand)                    
 
                     # player continues move if under 21
-                    if total < 21:
+                    if total <= 21:
                         print("BJ total is under 21...")
                         bj_msg = Message("continue", None)
                         bj_to_gui_queue.put(bj_msg)
