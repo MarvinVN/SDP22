@@ -165,8 +165,8 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput, gui_to_bj
     waiting_for_msg = True
     # wait for confirmation from GUI that "hit" button was pressed, and we can shuffle the cards
     while(waiting_for_msg):
-        msg = gui_to_bj_queue.get()
-        if msg.id == "hit":
+        bj_msg = gui_to_bj_queue.get()
+        if bj_msg.id == "hit":
             waiting_for_msg = False
             print("bj received hit for shuffle....")
 
