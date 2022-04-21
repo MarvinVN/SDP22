@@ -784,6 +784,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         temp_w.hide()
 
     def cardsLoadedConfirmation(self):
+        print("entered cardsLoadedConfirmation")
         self.timer.stop()
         hb.button_press.disconnect()
         self.player_not_hit = False
@@ -813,7 +814,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         print("Game pid: ", game_process_pid)
         print("Press HIT button after loading cards into shuffler...")
         while self.player_not_hit:
-            print(".....waiting for shuffling confirmation")
+            #print(".....waiting for shuffling confirmation")
         self.player_not_hit = True
 
         counter = -1
