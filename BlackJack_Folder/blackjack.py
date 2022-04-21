@@ -67,7 +67,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             for x in player_msg:
                 print("entered player_msg: ", x)
                 bj_to_gui_queue.put(x)
-            msg = None
+            msg = Message("None", None)
         print("BJ about to append to totals...")
         totals.append(0) #temp dealer score; will be calculated after players' turn
         # one full round of players
