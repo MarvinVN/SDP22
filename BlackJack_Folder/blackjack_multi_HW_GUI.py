@@ -2677,9 +2677,9 @@ class Ui_confirm_round(QtCore.QObject):
         self.buttonBox.accepted.connect(lambda: self.confirm_connection(prev_w_settings))
         #self.buttonBox.rejected.connect(lambda: self.reject_connection())
         hb.button_press.connect(self.buttonBox.accepted)
-        db.button_press.connect(self.buttonBox.rejected)
+        #db.button_press.connect(self.buttonBox.rejected)
         #self.buttonBox.accepted.connect(self.accept_connection)
-        self.buttonBox.rejected.connect(self.reject_connection)
+        #self.buttonBox.rejected.connect(self.reject_connection)
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(confirm_round)
