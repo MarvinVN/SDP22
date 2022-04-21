@@ -662,6 +662,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.userInput = userInput
         self.bet = 0
         self.player_not_hit = True
+        self.hit_msg = Message("hit", None)
         # testing button functionality for multiple function calls
         self.timer = QtCore.QTimer(interval=50)
 
@@ -764,6 +765,10 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         hb.button_press.disconnect() # TESTING DISCONNECTION
         sb.button_press.disconnect()
         db.button_press.disconnect()
+        #gui_msg = Message("hit", None)
+        self.player_not_hit = False
+        #gui_to_bj_queue.put(gui_msg)
+
 #############################
 
     # START BLACKJACK GAME; OPEN GAME WINDOW
@@ -783,6 +788,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # close current betting window
         temp_w.hide()
 
+"""
     def cardsLoadedConfirmation(self):
         print("entered cardsLoadedConfirmation")
         self.timer.stop()
@@ -790,16 +796,16 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.player_not_hit = False
         gui_msg = Message("hit", None)
         gui_to_bj_queue.put(gui_msg)
-
+"""
 
     # OFFICIALLY STARTS BLACKJACK GAME; GAME_PROCESS STARTED
     def startBlackJack(self):
-        # game_process is started here
-        #game_process.start()
+        """
         self.timer = QtCore.QTimer(interval=50)
         self.timer.timeout.connect(hb.check)
         self.timer.start()
         hb.button_press.connect(self.cardsLoadedConfirmation)
+        """
 
         # saving bet data from previous input
         self.bet = self.scroll_bet.value()
@@ -812,11 +818,16 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # printing game_process pid (for debugging/killing process)
         game_process_pid = game_process.pid
         print("Game pid: ", game_process_pid)
+        if not self.player_not_hit:
+            gui_to_bj_queue.put(self.hit_msg)
+            self.player_not_hit = True
+        """
         print("Press HIT button after loading cards into shuffler...")
         while self.player_not_hit:
             #print(".....waiting for shuffling confirmation")
             pass
         self.player_not_hit = True
+        """
 
         counter = -1
 
