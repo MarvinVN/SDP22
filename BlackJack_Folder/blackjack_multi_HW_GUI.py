@@ -1517,6 +1517,7 @@ class Ui_GameWindow(QtCore.QObject):
             elif msg.id == "switch":
                 self.reset_buttons(msg.content)
             elif msg.id == "continue":
+                print("GUI entered hit CONTINUE")
                 break
             elif msg.id == "done_round":
                 print("GUI entered hit done_round....")
