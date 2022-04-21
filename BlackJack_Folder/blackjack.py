@@ -400,6 +400,7 @@ def score(players, totals):
                 settleBet(players[x], 2)
             else:
                 settleBet(players[x], 1)
+    return "{}".format(totals) # testing
 
 #system pays out 2 to 1, 2.5 to 1 for hitting blackjack
 #res: 1=win, 0=tie, -1=loss

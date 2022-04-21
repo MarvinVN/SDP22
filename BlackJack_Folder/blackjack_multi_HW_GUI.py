@@ -27,7 +27,7 @@ HEIGHT = 480
 WIDTH = 800
 
 # TIME DELAY (IN MILLISECONDS)
-DELAYED = 3000
+DELAYED = 1000
 
 # GAME ENDS
 ENDED = False
@@ -1350,6 +1350,7 @@ class Ui_GameWindow(QtCore.QObject):
                     new_card.load(file1)
                     new_card.show()
                     self.your_cards_layout.addWidget(new_card)
+                    self.current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p2_cards":
                     cards[2] = msg1.content[0]
                     last_card = cards[2][len(cards[2])-1]
@@ -1359,6 +1360,7 @@ class Ui_GameWindow(QtCore.QObject):
                     new_card.load(file1)
                     new_card.show()
                     self.p2_cards_layout.addWidget(new_card)
+                    self.p2_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p3_cards":
                     cards[3] = msg1.content[0]
                     last_card = cards[3][len(cards[3])-1]
@@ -1368,6 +1370,7 @@ class Ui_GameWindow(QtCore.QObject):
                     new_card.load(file1)
                     new_card.show()
                     self.p3_cards_layout.addWidget(new_card)
+                    self.p3_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "p4_cards":
                     cards[4] = msg1.content[0]
                     last_card = cards[4][len(cards[4])-1]
@@ -1377,6 +1380,7 @@ class Ui_GameWindow(QtCore.QObject):
                     new_card.load(file1)
                     new_card.show()
                     self.p4_cards_layout.addWidget(new_card)
+                    self.p4_current_bet_field.setPlainText(msg1.content[1])
                 elif msg1.id == "switch":
                     self.reset_buttons(msg1.content)
                     break
