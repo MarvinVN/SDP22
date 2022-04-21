@@ -661,6 +661,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.gameMode = gameMode
         self.userInput = userInput
         self.bet = 0
+        self.player_not_hit = True
         # testing button functionality for multiple function calls
         self.timer = QtCore.QTimer(interval=50)
 
@@ -785,6 +786,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
     def cardsLoadedConfirmation(self):
         self.timer.stop()
         hb.button_press.disconnect()
+        self.player_not_hit = False
         gui_msg = Message("hit", None)
         gui_to_bj_queue.put(gui_msg)
 
@@ -810,7 +812,9 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         game_process_pid = game_process.pid
         print("Game pid: ", game_process_pid)
         print("Press HIT button after loading cards into shuffler...")
-
+        while self.player_not_hit:
+            pass
+        self.player_not_hit = True
 
         counter = -1
 

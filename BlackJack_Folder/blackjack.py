@@ -16,8 +16,8 @@ output_pins = [5,13,16,20,21]
 # Hardware setup (RPi GPIO and RFID)
 # GPIO.cleanup()
 # GPIO.setmode(GPIO.BCM)
-# GPIO.setwarnings(False)
-# GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setwarnings(False)
+GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
 
 # spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
 # cs_pin = DigitalInOut(board.D5)
