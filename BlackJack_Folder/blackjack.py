@@ -345,6 +345,8 @@ def checkValue(hand):
             card.rank = 12
         elif card.rank == "K":
             card.rank = 13
+        elif card.rank == "A":
+            card.rank = 1
     hand.sort(key=lambda x: int(float(x.rank)), reverse=True)
     for x in hand:
         if x.rank in [13, 12, 11]: #K, Q, J
