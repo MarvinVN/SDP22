@@ -11,11 +11,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets, QtTest, QtSvg
-import blackjack_multi_HW
+import blackjack
 from blackjack_globals import Message
 import multiprocessing as mp
 import blackjack_buttons as bjb
-from adafruit_pn532.spi import PN532_SPI
+# from adafruit_pn532.spi import PN532_SPI
 from RPi import GPIO
 import board
 import busio
@@ -123,7 +123,7 @@ gui_to_bj_queue = mp.Queue()    # gui write, blackjack read
 bj_to_gui_queue = mp.Queue()    # blackjack write, gui read
 
 # GAME PROCESS IS CREATED, CHILD PROCESS TO BLACKJACK ALGORITHM IS FORKED
-game_process = mp.Process(target=blackjack_multi_HW.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
+game_process = mp.Process(target=blackjack.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
 
 
 ###################################################################
@@ -782,10 +782,21 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # close current betting window
         temp_w.hide()
 
+    def cardsLoadedConfirmation(self):
+        self.timer.stop()
+        hb.button_press.disconnect()
+        gui_msg = Message("hit", None)
+        gui_to_bj_queue.put(gui_msg)
+
+
     # OFFICIALLY STARTS BLACKJACK GAME; GAME_PROCESS STARTED
     def startBlackJack(self):
         # game_process is started here
         #game_process.start()
+        self.timer = QtCore.QTimer(interval=50)
+        self.timer.timeout.connect(hb.check)
+        self.timer.start()
+        hb.button_press.connect(self.cardsLoadedConfirmation)
 
         # saving bet data from previous input
         self.bet = self.scroll_bet.value()
@@ -798,6 +809,8 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # printing game_process pid (for debugging/killing process)
         game_process_pid = game_process.pid
         print("Game pid: ", game_process_pid)
+        print("Press HIT button after loading cards into shuffler...")
+
 
         counter = -1
 
@@ -918,6 +931,8 @@ class Ui_GameWindow(QtCore.QObject):
         self.gameMode = gameMode
         self.userInput = userInput
         self.bet = bet
+
+        self.player_not_hit = True
 
         self.player_bets = [bet, bet, bet, bet, bet] # initializing each player bets, added index 0 for dealer
         self.double_button_clicked = False
@@ -1046,8 +1061,14 @@ class Ui_GameWindow(QtCore.QObject):
 
         self.timer.start()
 
-    
-    def open_next_round(self, scoring, wallets):
+    def cardsLoadedConfirmation(self):
+        self.timer.stop()
+        self.player_not_hit = False
+        hb.button_press.disconnect()
+        gui_msg = Message("hit", None)
+        gui_to_bj_queue.put(gui_msg)
+
+    def open_next_round(self, scoring, wallets, load_cards):
         global cards
 
         # opening up the next round screen
@@ -1074,7 +1095,16 @@ class Ui_GameWindow(QtCore.QObject):
             sb4.button_press.disconnect()
             db4.button_press.disconnect()
             eb4.button_press.disconnect()
-        
+
+        if load_cards:
+            self.timer = QtCore.QTimer(interval=50)
+            self.timer.timeout.connect(hb.check)
+            hb.button_press.connect(self.cardsLoadedConfirmation)
+            print("Load cards into shuffler....")
+            while self.player_not_hit:
+                pass
+
+        self.player_not_hit = True
         #self.reset_buttons()
 
         self.window = QtWidgets.QDialog()
@@ -1331,7 +1361,7 @@ class Ui_GameWindow(QtCore.QObject):
                     new_card.load(file1)
                     new_card.show()
                     self.p4_cards_layout.addWidget(new_card)
-                elif msg1.id == "continue":
+                elif msg1.id == "switch":
                     self.reset_buttons(msg1.content)
                     break
                 elif msg1.id == "done_round":
@@ -1342,6 +1372,7 @@ class Ui_GameWindow(QtCore.QObject):
                     cards[0] = msg1.content[0]
                     scoring = msg1.content[1]
                     wallets = msg1.content[2]
+                    load_cards = msg1.content[3]
 
                     for x in range(int(self.numPlayers)+1):
                         amounts_list[x] = wallets[x]
@@ -1357,7 +1388,7 @@ class Ui_GameWindow(QtCore.QObject):
                     QtTest.QTest.qWait(DELAYED)
                     # put in the player and dealer cards to display in next round screen
                     #self.reset_buttons()
-                    self.open_next_round(scoring, wallets)
+                    self.open_next_round(scoring, wallets, load_cards)
                     QtTest.QTest.qWait(DELAYED)
                     self.done_round()
                     break
@@ -1387,6 +1418,7 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
                 wallets = msg.content[2] # need to update everyone's amount left from wallet
+                load_cards = msg1.content[3]
 
                 for x in range(int(self.numPlayers)+1):
                     amounts_list[x] = wallets[x]
@@ -1402,11 +1434,11 @@ class Ui_GameWindow(QtCore.QObject):
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
                 #self.reset_buttons()
-                self.open_next_round(scoring, wallets)
+                self.open_next_round(scoring, wallets, load_cards)
                 QtTest.QTest.qWait(DELAYED)
                 self.done_round()
                 break
-            elif msg.id == "continue":
+            elif msg.id == "switch":
                 self.reset_buttons(msg.content)
                 print("...received CONTINUE msg from BJ")
                 break
@@ -1471,6 +1503,7 @@ class Ui_GameWindow(QtCore.QObject):
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
                 wallets = msg.content[2]
+                load_cards = msg1.content[3]
 
                 for x in range(int(self.numPlayers)+1):
                     amounts_list[x] = wallets[x]
@@ -1486,7 +1519,7 @@ class Ui_GameWindow(QtCore.QObject):
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
                 #self.reset_buttons()
-                self.open_next_round(scoring, wallets)
+                self.open_next_round(scoring, wallets, load_cards)
                 QtTest.QTest.qWait(DELAYED)
                 self.done_round()
                 break
@@ -2698,7 +2731,7 @@ class Ui_end_game(QtCore.QObject):
         self.timer.stop()
         hb.button_press.disconnect()
         db.button_press.disconnect()
-        game_process = mp.Process(target=blackjack_multi_HW.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
+        game_process = mp.Process(target=blackjack.blackjack_process, args=(gui_to_bj_queue, bj_to_gui_queue))
 
         game_process.start()
         # testing this

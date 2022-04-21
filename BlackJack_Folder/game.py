@@ -1,12 +1,14 @@
 import random
+from time import sleep
+# import RFID
+import dealer
 
-#in full implementation, RFID will be scanned and looked up in dictionary for suit/rank
-#think about ways to do this... async?
 class Card:
-
-    def __init__(self, rank, suit):
+    #initialize card with suit and rank
+    def __init__(self, rank, suit, Str):
         self.rank = rank
         self.suit = suit
+        self.Str = Str
 
     #functions to help print out card
     def __unicode__(self):
@@ -16,6 +18,7 @@ class Card:
     def __repr__(self):
         return self.show()
 
+    #print card
     def show(self):
         if self.rank == 1:
             rank = "A"
@@ -30,44 +33,121 @@ class Card:
 
         return "{}{}".format(rank, self.suit)
 
-#will be mostly unneeded in full implementation
 class Deck:  
+    #initialize deck; used/dealt cards are taken from card to cardsused; for RFID validation and cheat prevention
     def __init__(self):
         self.cards = []
+        self.cardsused = []
         self.build()
 
+    #build deck in order
     def build(self):
         self.cards = []
-        for suit in ['s', 'h', 'd', 'c']:
-            for rank in range(1,14):
-                self.cards.append(Card(rank, suit))
+        self.cardsused = []
+        switch = {
+            1: 'A',
+            11: 'J',
+            12: 'Q',
+            13: 'K'
+        }
 
+        for suit in ['S', 'H', 'D', 'C']:
+            for rank in range(1,14):
+                if rank in switch.keys():
+                    rank = switch[rank]
+                self.cards.append(Card(rank,suit, str(rank)+suit))
+
+    #currently just shuffles digital deck, can think about importing/using dealer.py here
     def shuffle(self):
         random.shuffle(self.cards)
 
-    def deal(self):
-        return self.cards.pop()
+    def scan(self, card):
+        if len(self.cardsused) > 0 and card.Str == self.cardsused[-1].Str:
+            print("PREVIOUS CARD READ, TRY AGAIN")
+            return True
+        if any(x.Str == card.Str for x in self.cardsused):
+            print("CHEATING DETECTED, CARD ALREADY USED")
+            while True:
+                sleep(1)
+        elif any(x.Str == card.Str for x in self.cards):
+            print("worked")
+            self.cardsused.append(card)
+            return False
+        else:
+            print("BAD READ")
+            return True
 
+    #deals digital deck; same as above
+    def deal(self, pos):
+        return self.cards.pop()
+        # #make global
+        # switch = {
+        #     'A': 1,
+        #     'J': 11,
+        #     'Q': 12,
+        #     'K': 13
+        # }
+        
+        # print(pos)
+        # if pos == 0:
+        #     dealer.p0()
+        # elif pos == 1:
+        #     dealer.p1()
+        # elif pos == 2:
+        #     dealer.p2()
+        # elif pos == 3:
+        #     dealer.p3()
+        # elif pos == 4:
+        #     dealer.p4()
+
+        # while True:
+        #     # card = RFID.read()
+        #     while(card == False):
+        #         tmp = ''
+        #         if pos > 0:
+        #             print("Dispense failed, press hit to try again.")
+        #             while not tmp == 'h':
+        #                 # tmp = button_move(pos)
+        #         dealer.p0() #for confirmation to dispense again
+        #         # card = RFID.read()
+
+        #     print(card)
+        #     rank, suit = card[:-1], card[-1]
+
+        #     if rank in switch.keys():
+        #         rank = switch[rank]
+
+        #     res = Card(int(rank), suit, card)
+        #     if self.scan(res):
+        #         continue
+        #     else:
+        #         res.show()
+        #         break
+
+        # dealer.scanConfirm() #signal that card has been scanned
+        
+        # return res
+
+    #calls show() on each card to print out current deck
     def show(self):
         for card in self.cards:
             print(card.show())
 
 class Player:
-    def __init__(self, pos): # (start_amount)
+    #initalize player with position number
+    #TODO: once UI is realized, change wallet for user input
+    def __init__(self, pos):
         self.pos = pos
         self.hand = []
-        self.wallet = 1000  # start_amount
+        self.wallet = 1000
         self.totalBet = 0
 
-    def draw(self, deck, num):
-        for x in range(num):
-            card = deck.deal()
-            if card:
-                self.hand.append(card)
-            else:
-                return False #unlikely event, but figure out what to do here anyways
-        return True
+    #draw one card from deck using deal()
+    def draw(self, deck):
+        card = deck.deal(self.pos)
+        self.hand.append(card)
 
+    #get money from wallet to bet
     def addBet(self, num):
         if num <= self.wallet:
             self.totalBet += num
@@ -75,12 +155,14 @@ class Player:
         else:
             return False #will change
     
+    #resets bet to 0
     def resetBet(self):
         self.totalBet = 0
 
+    #not used, think about removing
     def allIn(self):
         self.addBet(self.wallet)
-
-    # TODO: change so that instead of printing, it sends to GUI queue and have GUI read it.
+    
+    #print player's hand
     def showHand(self):
         print("Player {}'s hand: {}".format(self.pos, self.hand))
