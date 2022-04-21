@@ -243,6 +243,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
 
                 # if msg is stand
                 if msg.id == "stand":
+                    print("received stand msg from GUI")
                     waiting_for_msg = False
                     # tell GUI to continue if not last player
                     if player.pos != numPlayers:
