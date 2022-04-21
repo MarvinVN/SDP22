@@ -346,7 +346,7 @@ def button_move(pos):
 #takes a player's hand; returns value
 def checkValue(hand):
     val = 0
-    temp_hand = hand
+    ace = False
     #sort and add Aces last so choose between 1/11 values
     for card in hand:
         if card.rank == "J":
@@ -357,17 +357,19 @@ def checkValue(hand):
             card.rank = 13
         elif card.rank == "A":
             card.rank = 1
-    temp_hand.sort(key=lambda x: int(float(x.rank)), reverse=True)
-    for x in temp_hand:
+    #temp_hand.sort(key=lambda x: int(float(x.rank)), reverse=True)
+    for x in hand:
         if x.rank in [13, 12, 11]: #K, Q, J
             val += 10
         elif x.rank == 1: #Ace
-            if val >= 11:
-                val += 1
-            else:
-                val += 11
+            ace = True
         else:
             val += x.rank
+    if ace:
+        if val >= 11:
+            val += 1
+        else:
+            val += 11
     return val
 
 def score(players, totals):
