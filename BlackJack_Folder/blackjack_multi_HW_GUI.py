@@ -2630,6 +2630,7 @@ class Ui_confirm_round(QtCore.QObject):
 
         self.timer.timeout.connect(hb.check)
         self.timer.timeout.connect(db.check)
+        self.timer.timeout.connect(eb.check)
 
         # just start one timer
         self.timer.start()
@@ -2646,6 +2647,7 @@ class Ui_confirm_round(QtCore.QObject):
         self.timer.stop() # TESTING STOP TIMER
         hb.button_press.disconnect()
         db.button_press.disconnect()
+        eb.button_press.disconnect()
         button_counter += 1 # changing state
 
         hb.button_press.connect(prev_w.hit_it)
@@ -2682,7 +2684,7 @@ class Ui_confirm_round(QtCore.QObject):
         self.buttonBox.setObjectName("buttonBox")
         self.buttonBox.accepted.connect(lambda: self.confirm_connection(prev_w_settings))
         #self.buttonBox.rejected.connect(lambda: self.reject_connection())
-        hb.button_press.connect(self.buttonBox.accepted)
+        eb.button_press.connect(self.buttonBox.accepted)
         #db.button_press.connect(self.buttonBox.rejected)
         #self.buttonBox.accepted.connect(self.accept_connection)
         #self.buttonBox.rejected.connect(self.reject_connection)
