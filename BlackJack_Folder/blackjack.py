@@ -251,7 +251,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
 
                 # if msg is stand
                 if msg.id == "stand":
-                    print("received stand msg from GUI")
+                    print("BJ entered stand")
                     waiting_for_msg = False
                     # tell GUI to continue if not last player
                     print("player.pos: ", player.pos, ", numPlayers: ", numPlayers)
@@ -263,6 +263,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                 # if msg is hit
                 elif msg.id == "hit":
                     waiting_for_msg = False
+                    print("BJ entered hit")
 
                     player.draw(deck)
                     bj_msg = Message("p" + str(player.pos) + "_cards", player.hand)

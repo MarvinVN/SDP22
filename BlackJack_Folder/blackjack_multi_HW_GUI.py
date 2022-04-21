@@ -1482,6 +1482,7 @@ class Ui_GameWindow(QtCore.QObject):
                 """
                 last_card = cards[1][len(cards[1])-1]
                 print("GUI last card as string: ", str(last_card))
+                # TODO: this isn't grabbing correct card due to cards being set in order (in Marvin's code)
                 file1 = cards_to_img[str(last_card)]
                 new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
                 new_card.setObjectName("new_card")
