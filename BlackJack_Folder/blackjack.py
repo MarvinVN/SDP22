@@ -337,7 +337,14 @@ def button_move(pos):
 def checkValue(hand):
     val = 0
     #sort and add Aces last so choose between 1/11 values
-    hand.sort(key=lambda x: int(x.rank), reverse=True)
+    for card in hand:
+        if card.rank == "J":
+            card.rank = 11
+        elif card.rank == "Q":
+            card.rank = 12
+        elif card.rank == "K":
+            card.rank = 13
+    hand.sort(key=lambda x: int(float(x.rank)), reverse=True)
     for x in hand:
         if x.rank in [13, 12, 11]: #K, Q, J
             val += 10
