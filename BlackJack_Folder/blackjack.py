@@ -250,6 +250,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                     # tell GUI to continue if not last player
                     print("player.pos: ", player.pos, ", numPlayers: ", numPlayers)
                     if player.pos != numPlayers:
+                        print("entered if switch...")
                         bj_msg = Message("switch", player.pos)
                         bj_to_gui_queue.put(bj_msg)
                     player_not_done = False
