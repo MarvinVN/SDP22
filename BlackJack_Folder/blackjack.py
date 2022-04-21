@@ -68,7 +68,8 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         totals.append(0) #temp dealer score; will be calculated after players' turn
         # one full round of players
         for x in range(1, gs.numPlay):
-            totals.append(playerTurn(gs.players[x], gs.deck, gs.numPlay))
+            totals.append(playerTurn(gs.players[x], gs.deck, gs.numPlay,
+                gui_to_bj_queue, bj_to_gui_queue))
 
         totals[0] = dealerTurn(gs.players[0], gs.deck)
 
@@ -202,7 +203,7 @@ def playerBet(player):
 """
 
 #takes in the player and deck as args, returns the value of player's hand    
-def playerTurn(player, deck, numPlayers):
+def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
     move = ''
     bet = player.totalBet
     player_not_done = True
