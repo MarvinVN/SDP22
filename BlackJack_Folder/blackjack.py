@@ -46,6 +46,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
 
     #main game loop
     while(1):
+        print("entered the start of a round loop")
         totals = []
         #players = 1
 
@@ -122,12 +123,14 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
                 pass
 
         gs.resetHands()
+        print("reset hands after a round completes")
         # checking if the game has ended (given the end state)
         if done_game: # send over winner's winning information (two winner lists)
             bj_msg = Message("GAME OVER!", [winner, alt_winner, gs.getWallets(), wins_list])
             bj_to_gui_queue.put(bj_msg)
         # check if the deck is empty
         elif gs.checkCardCount():
+            print("entered checkCardCount")
             waiting_for_msg = True
             # wait for confirmation from GUI that "hit" button was pressed, and we can shuffle the cards
             while(waiting_for_msg):
