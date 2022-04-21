@@ -66,10 +66,10 @@ class gameState:
         print(wallets)
 
     #deal 2 cards to all players
-    def dealCards(self):
+    def dealCards(self, gui_to_bj_queue, bj_to_gui_queue):
         for _ in range(2):
             for x in range(self.numPlay):
-                self.players[x].draw(self.deck)
+                self.players[x].draw(self.deck, gui_to_bj_queue, bj_to_gui_queue)
 
     def checkCardCount(self):
         target = 52 - (self.numPlay * 3)

@@ -79,7 +79,9 @@ class Deck:
 
     #deals digital deck; same as above
     def deal(self, pos):
-        return self.cards.pop()
+        #return self.cards.pop()
+        from blackjack_globals import Message
+
         #make global
         switch = {
             'A': 1,
@@ -102,17 +104,18 @@ class Deck:
 
         while True:
             card = RFID.read()
-            """
+            
             while(card == False):
                 tmp = ''
                 if pos > 0:
                     print("Dispense failed, press hit to try again.")
                     bj_msg = Message("dispense_again", None)
-                    while not tmp == 'h':
-                        # tmp = button_move(pos)
+                    bj_to_gui_queue.put(bj_msg)
+                    while not tmp == 'confirm':
+                        tmp = gui_to_bj_queue.get()
                 dealer.p0() #for confirmation to dispense again
                 card = RFID.read()
-            """
+            
             print(card)
             rank, suit = card[:-1], card[-1]
 
@@ -145,8 +148,8 @@ class Player:
         self.totalBet = 0
 
     #draw one card from deck using deal()
-    def draw(self, deck):
-        card = deck.deal(self.pos)
+    def draw(self, deck, gui_to_bj_queue, bj_to_gui_queue):
+        card = deck.deal(self.pos, gui_to_bj_queue, bj_to_gui_queue)
         self.hand.append(card)
 
     #get money from wallet to bet

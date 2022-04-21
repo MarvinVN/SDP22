@@ -76,7 +76,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
             totals.append(playerTurn(gs.players[x], gs.deck, numPlayers,
                 gui_to_bj_queue, bj_to_gui_queue))
 
-        totals[0] = dealerTurn(gs.players[0], gs.deck)
+        totals[0] = dealerTurn(gs.players[0], gs.deck, gui_to_bj_queue, bj_to_gui_queue)
 
         # saving the round score to update gui
         round_score = score(gs.players, totals)
@@ -210,6 +210,7 @@ def playerBet(player):
     player.addBet(bet) 
 """
 
+
 #takes in the player and deck as args, returns the value of player's hand    
 def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
     move = ''
@@ -258,7 +259,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                     waiting_for_msg = False
                     print("BJ entered hit")
 
-                    player.draw(deck)
+                    player.draw(deck, gs)
                     bj_msg = Message("p" + str(player.pos) + "_cards", player.hand)
                     bj_to_gui_queue.put(bj_msg)
                     total = checkValue(player.hand)                    
@@ -282,7 +283,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                     else:
                         # sufficient funds, draw a card, send to GUI
                         player.addBet(bet)
-                        player.draw(deck)
+                        player.draw(deck, gs)
                         bj_msg = Message("p" + str(player.pos) + "_cards", [player.hand, new_bet])
                         bj_to_gui_queue.put(bj_msg)
                         double = True
@@ -290,7 +291,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
     return total
 
 #same as above; follows blackjack dealer rules
-def dealerTurn(player, deck):
+def dealerTurn(player, deck, gui_to_bj_queue, bj_to_gui_queue):
     total = 0
     while total < 17:
         total = checkValue(player.hand)
@@ -299,7 +300,7 @@ def dealerTurn(player, deck):
         if total >= 17:
             break
         else:
-            player.draw(deck)
+            player.draw(deck, gs)
         time.sleep(1)
     return total
 

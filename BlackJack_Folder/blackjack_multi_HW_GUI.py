@@ -797,15 +797,26 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         gui_msg = Message("hit", None)
         gui_to_bj_queue.put(gui_msg)
 
+    def dispensing(self):
+        print("GUI entered dispensing...")
+        self.timer.stop()
+        eb.button_press.disconnect()
+        gui_msg = Message("confirm", None)
+        gui_to_bj_queue.put(gui_msg)
+        self.need_to_dispense = False
+
+
+
+
 
     # OFFICIALLY STARTS BLACKJACK GAME; GAME_PROCESS STARTED
     def startBlackJack(self):
-        """
+        
         self.timer = QtCore.QTimer(interval=50)
         self.timer.timeout.connect(hb.check)
         self.timer.start()
-        hb.button_press.connect(self.cardsLoadedConfirmation)
-        """
+        eb.button_press.connect(self.dispensing)
+        
 
         # saving bet data from previous input
         self.bet = self.scroll_bet.value()
@@ -820,6 +831,10 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         print("Game pid: ", game_process_pid)
         if not self.player_not_hit:
             gui_to_bj_queue.put(self.hit_msg)
+            bj_msg = bj_to_gui_queue.get()
+            if bj_msg.id == "dispense_again":
+                while(self.need_to_dispense):
+                    pass # wait here to dispense
             self.player_not_hit = True
         """
         print("Press HIT button after loading cards into shuffler...")
