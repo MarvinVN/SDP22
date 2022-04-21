@@ -82,6 +82,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         # finished one round, inform gui
         bj_msg = Message("done_round", [gs.players[0].hand, round_score, gs.getWallets(), gs.checkCardCount()])
         bj_to_gui_queue.put(bj_msg)
+        print("sent msg to gui: ", bj_msg[0], bj_msg[1], bj_msg[2], bj_msg[3])
 
         # checking game end states
         t2 = time.time()
@@ -246,6 +247,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
                     print("received stand msg from GUI")
                     waiting_for_msg = False
                     # tell GUI to continue if not last player
+                    print("player.pos: ", player.pos, ", numPlayers: ", numPlayers)
                     if player.pos != numPlayers:
                         bj_msg = Message("switch", player.pos)
                         bj_to_gui_queue.put(bj_msg)
