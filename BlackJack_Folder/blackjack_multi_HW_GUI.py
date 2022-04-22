@@ -1914,11 +1914,12 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_stand_button.setText("STAND")
             self.p2_verticalLayout.addWidget(self.p2_stand_button)
             # PLAYER 2
+            """
             self.p2_exit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.p2_exit_button.setObjectName("p2_exit_button")
             self.p2_exit_button.setText("EXIT")
             self.p2_verticalLayout.addWidget(self.p2_exit_button)
-
+            """
             print("P1 first cards: ", cards[1])
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
@@ -2189,11 +2190,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_stand_button.setObjectName("p2_stand_button")
             self.p2_stand_button.setText("STAND")
             self.p2_verticalLayout.addWidget(self.p2_stand_button)
+            """
             # PLAYER 2
             self.p2_exit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.p2_exit_button.setObjectName("p2_exit_button")
             self.p2_exit_button.setText("EXIT")
             self.p2_verticalLayout.addWidget(self.p2_exit_button)
+            """
 
             # PLAYER 3 AMOUNT LEFT
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
@@ -2216,11 +2219,14 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_stand_button.setObjectName("p3_stand_button")
             self.p3_stand_button.setText("STAND")
             self.p3_verticalLayout.addWidget(self.p3_stand_button)
+
+            """
             # PLAYER 3
             self.p3_exit_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.p3_exit_button.setObjectName("p3_exit_button")
             self.p3_exit_button.setText("EXIT")
             self.p3_verticalLayout.addWidget(self.p3_exit_button)
+            """
 
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
@@ -2558,11 +2564,14 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_stand_button.setObjectName("p2_stand_button")
             self.p2_stand_button.setText("STAND")
             self.p2_verticalLayout.addWidget(self.p2_stand_button)
+
+            """
             # PLAYER 2
             self.p2_exit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.p2_exit_button.setObjectName("p2_exit_button")
             self.p2_exit_button.setText("EXIT")
             self.p2_verticalLayout.addWidget(self.p2_exit_button)
+            """
 
             # PLAYER 3 AMOUNT LEFT
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
@@ -2585,12 +2594,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_stand_button.setObjectName("p3_stand_button")
             self.p3_stand_button.setText("STAND")
             self.p3_verticalLayout.addWidget(self.p3_stand_button)
+            """
             # PLAYER 3
             self.p3_exit_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.p3_exit_button.setObjectName("p3_exit_button")
             self.p3_exit_button.setText("EXIT")
             self.p3_verticalLayout.addWidget(self.p3_exit_button)
-
+            """
             # PLAYER 4 AMOUNT LEFT
             self.p4_amount_left_label = QtWidgets.QLabel(self.centralwidget)
             self.p4_amount_left_label.setFont(font8)
@@ -2612,12 +2622,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_stand_button.setObjectName("p4_stand_button")
             self.p4_stand_button.setText("STAND")
             self.p4_verticalLayout.addWidget(self.p4_stand_button)
+            """
             # PLAYER 4
             self.p4_exit_button = QtWidgets.QPushButton(self.p4_verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.p4_exit_button.setObjectName("p4_exit_button")
             self.p4_exit_button.setText("EXIT")
             self.p4_verticalLayout.addWidget(self.p4_exit_button)
-
+            """
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
