@@ -245,7 +245,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue, gs):
                     waiting_for_msg = False
                     print("BJ entered hit")
 
-                    player.draw(deck, gs)
+                    player.draw(deck, gui_to_bj_queue, bj_to_gui_queue)
                     bj_msg = Message("p" + str(player.pos) + "_cards", player.hand)
                     bj_to_gui_queue.put(bj_msg)
                     total = checkValue(player.hand)                    
@@ -269,7 +269,7 @@ def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue, gs):
                     else:
                         # sufficient funds, draw a card, send to GUI
                         player.addBet(bet)
-                        player.draw(deck, gs)
+                        player.draw(deck, gui_to_bj_queue, bj_to_gui_queue)
                         bj_msg = Message("p" + str(player.pos) + "_cards", [player.hand, new_bet])
                         bj_to_gui_queue.put(bj_msg)
                         double = True
@@ -286,7 +286,7 @@ def dealerTurn(player, deck, gui_to_bj_queue, bj_to_gui_queue):
         if total >= 17:
             break
         else:
-            player.draw(deck, gs)
+            player.draw(deck, gui_to_bj_queue, bj_to_gui_queue)
         time.sleep(1)
     return total
 
