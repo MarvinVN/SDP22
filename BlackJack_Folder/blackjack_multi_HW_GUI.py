@@ -1419,7 +1419,7 @@ class Ui_GameWindow(QtCore.QObject):
                     new_card.load(file1)
                     new_card.show()
                     self.p4_cards_layout.addWidget(new_card)
-                    self.p4_current_bet_field.setPlainText(msg1.content[1])
+                    self.p4_current_bet_field.setPlainText(str(msg1.content[1]))
                 elif msg1.id == "switch":
                     self.reset_buttons(msg1.content)
                     break
