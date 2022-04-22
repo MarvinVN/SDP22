@@ -4,13 +4,13 @@ from digitalio import DigitalInOut
 from adafruit_pn532.spi import PN532_SPI
 import time
 
-"""
+
 spi = busio.SPI(board.SCK, board.MOSI, board.MISO)
 cs_pin = DigitalInOut(board.D5)
 pn532 = PN532_SPI(spi, cs_pin, debug=False)
 
 pn532.SAM_configuration()
-"""
+
 
 cards = [
 ['0x4', '0xAD', '0x23', '0x8A', '0x2', '0x6C', '0x84'],
