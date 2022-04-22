@@ -21,6 +21,7 @@ import board
 import busio
 from digitalio import DigitalInOut
 import time
+import dealer
 
 #categorize pins for setup
 output_pins = [5,13,16,20,21]
@@ -76,8 +77,8 @@ db = bjb.HWButton(d1)
 eb = bjb.HWButton(e1)
 
 # PLAYER 2
-h2 = 10
-d2 = 9
+h2 = 14
+d2 = 15
 s2 = 6
 e2 = 19
 
@@ -821,10 +822,6 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         gui_to_bj_queue.put(gui_msg)
         self.need_to_dispense = False
 
-
-
-
-
     # OFFICIALLY STARTS BLACKJACK GAME; GAME_PROCESS STARTED
     def startBlackJack(self):
         
@@ -856,7 +853,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
                 pass # wait here to dispense
         self.player_not_hit = True
         """
-        
+
         """
         print("Press HIT button after loading cards into shuffler...")
         while self.player_not_hit:

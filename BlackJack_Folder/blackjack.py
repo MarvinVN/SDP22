@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-
 import board
 import busio
 from blackjack_globals import Message
