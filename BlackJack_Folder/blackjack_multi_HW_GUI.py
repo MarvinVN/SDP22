@@ -782,6 +782,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         db.button_press.disconnect()
         #gui_msg = Message("hit", None)
         self.player_not_hit = False
+        print("GUI set the player_not_hit to FALSE")
         #gui_to_bj_queue.put(gui_msg)
 
 #############################
@@ -844,14 +845,14 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # printing game_process pid (for debugging/killing process)
         game_process_pid = game_process.pid
         print("Game pid: ", game_process_pid)
-        if not self.player_not_hit:
-            gui_to_bj_queue.put(self.hit_msg)
-            bj_msg = bj_to_gui_queue.get()
-            print("GUI received bj_msg.....:")
-            if bj_msg.id == "dispense_again":
-                while(self.need_to_dispense):
-                    pass # wait here to dispense
-            self.player_not_hit = True
+
+        gui_to_bj_queue.put(self.hit_msg)
+        bj_msg = bj_to_gui_queue.get()
+        print("GUI received bj_msg.....:")
+        if bj_msg.id == "dispense_again":
+            while(self.need_to_dispense):
+                pass # wait here to dispense
+        self.player_not_hit = True
         """
         print("Press HIT button after loading cards into shuffler...")
         while self.player_not_hit:
