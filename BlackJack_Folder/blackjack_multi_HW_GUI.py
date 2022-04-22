@@ -985,6 +985,9 @@ class Ui_GameWindow(QtCore.QObject):
         self.player_bets = [bet, bet, bet, bet, bet] # initializing each player bets, added index 0 for dealer
         self.double_button_clicked = False
 
+        self.timer.stop()
+        eb.button_press.disconnect()
+
         self.timer = QtCore.QTimer(interval=50)
 
         # P1

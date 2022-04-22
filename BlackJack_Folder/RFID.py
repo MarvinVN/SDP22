@@ -75,6 +75,7 @@ def read():
     while True:
         uid = pn532.read_passive_target(timeout=0.5)
         now = time.time()
+        print(uid)
         if uid is None:
             if now-start > 7:
                 return False 
