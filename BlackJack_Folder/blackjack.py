@@ -60,7 +60,7 @@ def blackjack_process(gui_to_bj_queue, bj_to_gui_queue):
         for x in range(1, gs.numPlay):
             print("BJ entering player turn...")
             totals.append(playerTurn(gs.players[x], gs.deck, numPlayers,
-                gui_to_bj_queue, bj_to_gui_queue))
+                gui_to_bj_queue, bj_to_gui_queue, gs))
 
         totals[0] = dealerTurn(gs.players[0], gs.deck, gui_to_bj_queue, bj_to_gui_queue)
 
@@ -198,7 +198,7 @@ def playerBet(player):
 
 
 #takes in the player and deck as args, returns the value of player's hand    
-def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue):
+def playerTurn(player, deck, numPlayers, gui_to_bj_queue, bj_to_gui_queue, gs):
     move = ''
     bet = player.totalBet
     player_not_done = True
