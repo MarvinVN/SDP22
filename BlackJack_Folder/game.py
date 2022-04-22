@@ -90,7 +90,7 @@ class Deck:
             'K': 13
         }
         
-        print(pos)
+        print("GAME player position: ",pos)
         if pos == 0:
             dealer.p0()
         elif pos == 1:
@@ -103,6 +103,7 @@ class Deck:
             dealer.p4()
 
         while True:
+            print("GAME entered while TRUE; looking for card")
             card = RFID.read()
             
             while(card == False):
@@ -116,6 +117,7 @@ class Deck:
                         tmp = gui_to_bj_queue.get()
                 dealer.p0() #for confirmation to dispense again
                 card = RFID.read()
+                print("GAME stuck in while(card==FALSE)")
             
             print(card)
             rank, suit = card[:-1], card[-1]
