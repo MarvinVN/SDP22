@@ -109,12 +109,14 @@ class Deck:
             while(card == False):
                 tmp = ''
                 if pos > 0:
+                    """
                     print("Dispense failed, press hit to try again.")
                     # testing this 
                     bj_msg = Message("dispense_again", None)
                     bj_to_gui_queue.put(bj_msg)
                     while not tmp == 'confirm':
                         tmp = gui_to_bj_queue.get()
+                    """
                 dealer.p0() #for confirmation to dispense again
                 card = RFID.read()
                 print("GAME stuck in while(card==FALSE)")
