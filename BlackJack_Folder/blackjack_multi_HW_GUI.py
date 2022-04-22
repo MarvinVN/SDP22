@@ -80,23 +80,23 @@ eb = bjb.HWButton(e1)
 h2 = 14
 d2 = 15
 s2 = 6
-e2 = 19
+#e2 = 19
 
 hb2 = bjb.HWButton(h2)
 db2 = bjb.HWButton(d2)
 sb2 = bjb.HWButton(s2)
-eb2 = bjb.HWButton(e2)
+#eb2 = bjb.HWButton(e2)
 
 # PLAYER 3
 h3 = 26
 d3 = 12
 s3 = 7
-e3 = 8
+#e3 = 8
 
 hb3 = bjb.HWButton(h3)
 db3 = bjb.HWButton(d3)
 sb3 = bjb.HWButton(s3)
-eb3 = bjb.HWButton(e3)
+#eb3 = bjb.HWButton(e3)
 
 # PLAYER 4
 h4 = 25
@@ -107,7 +107,8 @@ e4 = 4
 hb4 = bjb.HWButton(h4)
 db4 = bjb.HWButton(d4)
 sb4 = bjb.HWButton(s4)
-eb4 = bjb.HWButton(e4)
+#eb4 = bjb.HWButton(e4)
+
 """
 output_pins = [5, 13, 16, 20, 21]
 GPIO.setup(output_pins, GPIO.OUT, initial=GPIO.LOW)
@@ -990,7 +991,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.timer.stop()
         eb.button_press.disconnect()
         """
-        
+
         self.timer = QtCore.QTimer(interval=50)
 
         # P1
@@ -1015,34 +1016,34 @@ class Ui_GameWindow(QtCore.QObject):
             hb.button_press.disconnect()
             sb.button_press.disconnect()
             db.button_press.disconnect()
-            eb.button_press.disconnect()
+            #eb.button_press.disconnect()
 
         elif self.numPlayers == "3":
             hb.button_press.disconnect()
             sb.button_press.disconnect()
             db.button_press.disconnect()
-            eb.button_press.disconnect()
+            #eb.button_press.disconnect()
             
             hb2.button_press.disconnect()
             sb2.button_press.disconnect()
             db2.button_press.disconnect()
-            eb2.button_press.disconnect()
+            #eb2.button_press.disconnect()
 
         elif self.numPlayers == "4":
             hb.button_press.disconnect()
             sb.button_press.disconnect()
             db.button_press.disconnect()
-            eb.button_press.disconnect()
+            #eb.button_press.disconnect()
             
             hb2.button_press.disconnect()
             sb2.button_press.disconnect()
             db2.button_press.disconnect()
-            eb2.button_press.disconnect()
+            #eb2.button_press.disconnect()
             
             hb3.button_press.disconnect()
             sb3.button_press.disconnect()
             db3.button_press.disconnect()
-            eb3.button_press.disconnect()
+            #eb3.button_press.disconnect()
 
 
     def reset_buttons(self, currentPlayer):
@@ -1056,53 +1057,53 @@ class Ui_GameWindow(QtCore.QObject):
             hb.button_press.disconnect()
             sb.button_press.disconnect()
             db.button_press.disconnect()
-            eb.button_press.disconnect()
+            #eb.button_press.disconnect()
 
             self.timer.timeout.connect(hb2.check)
             self.timer.timeout.connect(sb2.check)
             self.timer.timeout.connect(db2.check)
-            self.timer.timeout.connect(eb2.check)
+            #self.timer.timeout.connect(eb2.check)
             hb2.button_press.connect(self.hit_it)
             sb2.button_press.connect(self.stand_it)
             db2.button_press.connect(self.double_it)
-            eb2.button_press.connect(self.exit_it)
+            #eb2.button_press.connect(self.exit_it)
 
         elif str(currentPlayer) == "2":
             hb2.button_press.disconnect()
             sb2.button_press.disconnect()
             db2.button_press.disconnect()
-            eb2.button_press.disconnect()
+            #eb2.button_press.disconnect()
 
             self.timer.timeout.connect(hb3.check)
             self.timer.timeout.connect(sb3.check)
             self.timer.timeout.connect(db3.check)
-            self.timer.timeout.connect(eb3.check)
+            #self.timer.timeout.connect(eb3.check)
             hb3.button_press.connect(self.hit_it)
             sb3.button_press.connect(self.stand_it)
             db3.button_press.connect(self.double_it)
-            eb3.button_press.connect(self.exit_it)
+            #eb3.button_press.connect(self.exit_it)
 
         elif str(currentPlayer) == "3":
             hb3.button_press.disconnect()
             sb3.button_press.disconnect()
             db3.button_press.disconnect()
-            eb3.button_press.disconnect()
+            #eb3.button_press.disconnect()
 
             self.timer.timeout.connect(hb4.check)
             self.timer.timeout.connect(sb4.check)
             self.timer.timeout.connect(db4.check)
-            self.timer.timeout.connect(eb4.check)
+            #self.timer.timeout.connect(eb4.check)
             hb4.button_press.connect(self.hit_it)
             sb4.button_press.connect(self.stand_it)
             db4.button_press.connect(self.double_it)
-            eb4.button_press.connect(self.exit_it)
+            #eb4.button_press.connect(self.exit_it)
 
         # this should never happen (this method does not take the last player)
         elif str(currentPlayer) == "4":
             hb4.button_press.disconnect()
             sb4.button_press.disconnect()
             db4.button_press.disconnect()
-            eb4.button_press.disconnect()
+            #eb4.button_press.disconnect()
 
             self.timer.timeout.connect(hb.check)
             self.timer.timeout.connect(sb.check)
@@ -1133,22 +1134,22 @@ class Ui_GameWindow(QtCore.QObject):
             hb.button_press.disconnect()
             sb.button_press.disconnect()
             db.button_press.disconnect()
-            eb.button_press.disconnect()
+            #eb.button_press.disconnect()
         elif int(self.numPlayers) == 2:
             hb2.button_press.disconnect()
             sb2.button_press.disconnect()
             db2.button_press.disconnect()
-            eb2.button_press.disconnect()
+            #eb2.button_press.disconnect()
         elif int(self.numPlayers) == 3:
             hb3.button_press.disconnect()
             sb3.button_press.disconnect()
             db3.button_press.disconnect()
-            eb3.button_press.disconnect()
+            #eb3.button_press.disconnect()
         elif int(self.numPlayers) == 4:
             hb4.button_press.disconnect()
             sb4.button_press.disconnect()
             db4.button_press.disconnect()
-            eb4.button_press.disconnect()
+            #eb4.button_press.disconnect()
 
         if load_cards:
             self.timer = QtCore.QTimer(interval=50)
