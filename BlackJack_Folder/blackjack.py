@@ -169,7 +169,7 @@ def start_game(gs, numPlayers, playerAmount, bet, gameMode, userInput, gui_to_bj
     print("Shuffling initial shuffle....")
     dealer.shuffle()    
 
-    print("Dealing...")
+    print("BLACKJACK Dealing...")
     gs.dealCards(gui_to_bj_queue, bj_to_gui_queue)
 
     for x in range(gs.numPlay):

@@ -71,7 +71,7 @@ names = ["2C", "AC", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC"
 
 def read():
     start = time.time()
-    print("Waiting for card...")
+    print("RFID Waiting for card...")
     while True:
         uid = pn532.read_passive_target(timeout=0.5)
         now = time.time()

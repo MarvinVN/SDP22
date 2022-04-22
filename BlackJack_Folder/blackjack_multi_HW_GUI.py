@@ -847,6 +847,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         if not self.player_not_hit:
             gui_to_bj_queue.put(self.hit_msg)
             bj_msg = bj_to_gui_queue.get()
+            print("GUI received bj_msg.....:")
             if bj_msg.id == "dispense_again":
                 while(self.need_to_dispense):
                     pass # wait here to dispense

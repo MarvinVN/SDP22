@@ -32,7 +32,7 @@ def signal(state):
     GPIO.output(pin_list, GPIO.LOW)
 
 def shuffle():
-    print("Shuffling...")
+    print("DEALER Shuffling...")
     signal(states["shuffler"])
     sleep(1)
 
@@ -42,7 +42,7 @@ def init_deal():
 
 
 def p0():
-    print("dealer card")
+    print("DEALER dealer card")
     signal(states["p0"])
 
 def p1():
