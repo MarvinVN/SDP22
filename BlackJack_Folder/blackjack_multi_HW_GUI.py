@@ -20,7 +20,7 @@ from RPi import GPIO
 import board
 import busio
 from digitalio import DigitalInOut
-#from time import sleep
+import time
 
 #categorize pins for setup
 output_pins = [5,13,16,20,21]
