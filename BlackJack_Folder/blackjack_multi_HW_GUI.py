@@ -39,8 +39,8 @@ pn532 = PN532_SPI(spi, cs_pin, debug=False)
 pn532.SAM_configuration()
 
 # DIMENSIONS OF TOUCH DISPLAY
-HEIGHT = 480
-WIDTH = 800
+HEIGHT = 1080
+WIDTH = 1920
 
 # TIME DELAY (IN MILLISECONDS)
 DELAYED = 1000
@@ -182,9 +182,9 @@ class Ui_MainWindow(QtCore.QObject):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SettingsWindow()
         self.ui.setupUi(self.window)
-        #self.window.show()
+        self.window.show()
         #self.window.showMaximized() # testing
-        self.window.showFullScreen() # testing pt.2
+        #self.window.showFullScreen() # testing pt.2
         temp_w.hide()
 
     # STYLES/SETUP OF MAIN GUI
@@ -400,6 +400,7 @@ class Ui_SettingsWindow(QtCore.QObject):
             "Starting Amount: " + str(initial_amount),
             "Game Mode: " + str(game_mode),
             "User Input: " + str(user_input)])
+        #self.window.showFullScreen()
         self.window.show()
 
     def gameModeChanged(self, game_mode):
@@ -576,6 +577,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_Player_ReadyWindow(self.number_of_players, self.initial_amount, self.game_mode, self.user_input, self.window)
         self.ui.setupUi(self.window)
+        #self.window.showFullScreen()
         self.window.show()
 
     # UPON CANCEL BUTTON PRESS: RESET BUTTON CONNECTIONS
@@ -803,6 +805,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.bet = self.scroll_bet.value()
         self.ui = Ui_GameWindow(self.numPlayers, self.startingAmount, self.gameMode, self.userInput, self.bet)
         self.ui.setupUi(self.window)
+        #self.window.showFullScreen()
         self.window.show()
 
         # close current betting window
@@ -1168,6 +1171,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.window = QtWidgets.QDialog()
         self.ui = Ui_confirm_round()
         self.ui.setupUi(self, self.window)
+        #self.window.showFullScreen()
         self.window.show()
 
         # displaying the values onto confirmation box
@@ -1317,6 +1321,7 @@ class Ui_GameWindow(QtCore.QObject):
                 self.window = QtWidgets.QDialog()
                 self.ui = Ui_end_game() # (player, num_wins, if player won)
                 self.ui.setupUi(self.window, temp_w)
+                #self.window.showFullScreen()
                 self.window.show()
 
                 if self.gameMode == "Winning Amount":
@@ -2825,6 +2830,7 @@ class Ui_end_game(QtCore.QObject):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SettingsWindow()
         self.ui.setupUi(self.window)
+        #self.window.showFullScreen()
         self.window.show()
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
@@ -2908,6 +2914,7 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
+    #MainWindow.showFullScreen()
     game_process.start()
     
     #  This line will close the app, but I have it above in exit_it() function
