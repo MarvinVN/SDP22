@@ -182,7 +182,8 @@ class Ui_MainWindow(QtCore.QObject):
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SettingsWindow()
         self.ui.setupUi(self.window)
-        self.window.show()
+        #self.window.show()
+        self.window.showMaximized() # testing
         temp_w.hide()
 
     # STYLES/SETUP OF MAIN GUI
