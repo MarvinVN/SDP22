@@ -226,7 +226,7 @@ class Ui_MainWindow(QtCore.QObject):
         self.formLayout.setContentsMargins(0, 0, 0, 0)
         self.formLayout.setObjectName("formLayout")
         
-        file = "JACKBLACK.svg"
+        file = "/home/pi/GUI/BlackJackFolder/JACKBLACK.svg"
         self.svgWidget = QtSvg.QSvgWidget(self.formLayoutWidget)
         self.svgWidget.load(file)
         self.svgWidget.show()
@@ -2895,7 +2895,7 @@ def loadCardImages():
     for n in numbers:
         for s in suit:
             card = n+s
-            img_path = "./svg/" + s + "_" + n + ".svg"
+            img_path = "/home/pi/GUI/BlackJackFolder/svg/" + s + "_" + n + ".svg"
             cards_to_img[card] = img_path
 
 
