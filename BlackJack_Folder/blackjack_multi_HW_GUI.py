@@ -983,6 +983,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.bet = bet
 
         self.player_not_hit = True
+        self.hit_flag = False # flag (to prevent player from doubling after hitting)
 
         self.player_bets = [bet, bet, bet, bet, bet] # initializing each player bets, added index 0 for dealer
         self.double_button_clicked = False
@@ -1367,94 +1368,96 @@ class Ui_GameWindow(QtCore.QObject):
     # UPON DOUBLE BUTTON PRESSED; UPDATE BET VALUE
     # FIX END ROUND PART
     def double_it(self):
-        current_player = "p0"
-        self.double_button_clicked = True
+        # only allow double functionality if hit_flag is False
+        if not self.hit_flag:
+            current_player = "p0"
+            self.double_button_clicked = True
 
-        if self.double_button_clicked: # need to make self.bet into a list of bets
-        # maybe instead of checking button states, just manually make it go from p1 to p4
-            msg = Message("double", self.player_bets)
-            gui_to_bj_queue.put(msg)
+            if self.double_button_clicked: # need to make self.bet into a list of bets
+            # maybe instead of checking button states, just manually make it go from p1 to p4
+                msg = Message("double", self.player_bets)
+                gui_to_bj_queue.put(msg)
 
-            while(1):
-                msg1 = bj_to_gui_queue.get()
-                print("GUI received msg: " + str(msg1.id) + ", Content: " + str(msg1.content))
-                current_player = msg1.id
+                while(1):
+                    msg1 = bj_to_gui_queue.get()
+                    print("GUI received msg: " + str(msg1.id) + ", Content: " + str(msg1.content))
+                    current_player = msg1.id
 
-                if msg1.id == "p1_cards":
-                    cards[1] = msg1.content[0]
-                    last_card = cards[1][len(cards[1])-1]
-                    file1 = cards_to_img[str(last_card)]
-                    new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
-                    new_card.setObjectName("new_card")
-                    new_card.load(file1)
-                    new_card.show()
-                    self.your_cards_layout.addWidget(new_card)
-                    self.current_bet_field.setPlainText(str(msg1.content[1]))
-                elif msg1.id == "p2_cards":
-                    cards[2] = msg1.content[0]
-                    last_card = cards[2][len(cards[2])-1]
-                    file1 = cards_to_img[str(last_card)]
-                    new_card = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
-                    new_card.setObjectName("new_card")
-                    new_card.load(file1)
-                    new_card.show()
-                    self.p2_cards_layout.addWidget(new_card)
-                    self.p2_current_bet_field.setPlainText(str(msg1.content[1]))
-                elif msg1.id == "p3_cards":
-                    cards[3] = msg1.content[0]
-                    last_card = cards[3][len(cards[3])-1]
-                    file1 = cards_to_img[str(last_card)]
-                    new_card = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
-                    new_card.setObjectName("new_card")
-                    new_card.load(file1)
-                    new_card.show()
-                    self.p3_cards_layout.addWidget(new_card)
-                    self.p3_current_bet_field.setPlainText(str(msg1.content[1]))
-                elif msg1.id == "p4_cards":
-                    cards[4] = msg1.content[0]
-                    last_card = cards[4][len(cards[4])-1]
-                    file1 = cards_to_img[str(last_card)]
-                    new_card = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
-                    new_card.setObjectName("new_card")
-                    new_card.load(file1)
-                    new_card.show()
-                    self.p4_cards_layout.addWidget(new_card)
-                    self.p4_current_bet_field.setPlainText(str(msg1.content[1]))
-                elif msg1.id == "switch":
-                    self.reset_buttons(msg1.content)
-                    break
-                elif msg1.id == "done_round":
-                    # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
-                    self.double_button_clicked == False
-                    
-                    # need to change this for multiplayer
-                    cards[0] = msg1.content[0]
-                    scoring = msg1.content[1]
-                    wallets = msg1.content[2]
-                    load_cards = msg1.content[3]
+                    if msg1.id == "p1_cards":
+                        cards[1] = msg1.content[0]
+                        last_card = cards[1][len(cards[1])-1]
+                        file1 = cards_to_img[str(last_card)]
+                        new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
+                        new_card.setObjectName("new_card")
+                        new_card.load(file1)
+                        new_card.show()
+                        self.your_cards_layout.addWidget(new_card)
+                        self.current_bet_field.setPlainText(str(msg1.content[1]))
+                    elif msg1.id == "p2_cards":
+                        cards[2] = msg1.content[0]
+                        last_card = cards[2][len(cards[2])-1]
+                        file1 = cards_to_img[str(last_card)]
+                        new_card = QtSvg.QSvgWidget(self.p2_horizontalLayoutWidget)
+                        new_card.setObjectName("new_card")
+                        new_card.load(file1)
+                        new_card.show()
+                        self.p2_cards_layout.addWidget(new_card)
+                        self.p2_current_bet_field.setPlainText(str(msg1.content[1]))
+                    elif msg1.id == "p3_cards":
+                        cards[3] = msg1.content[0]
+                        last_card = cards[3][len(cards[3])-1]
+                        file1 = cards_to_img[str(last_card)]
+                        new_card = QtSvg.QSvgWidget(self.p3_horizontalLayoutWidget)
+                        new_card.setObjectName("new_card")
+                        new_card.load(file1)
+                        new_card.show()
+                        self.p3_cards_layout.addWidget(new_card)
+                        self.p3_current_bet_field.setPlainText(str(msg1.content[1]))
+                    elif msg1.id == "p4_cards":
+                        cards[4] = msg1.content[0]
+                        last_card = cards[4][len(cards[4])-1]
+                        file1 = cards_to_img[str(last_card)]
+                        new_card = QtSvg.QSvgWidget(self.p4_horizontalLayoutWidget)
+                        new_card.setObjectName("new_card")
+                        new_card.load(file1)
+                        new_card.show()
+                        self.p4_cards_layout.addWidget(new_card)
+                        self.p4_current_bet_field.setPlainText(str(msg1.content[1]))
+                    elif msg1.id == "switch":
+                        self.reset_buttons(msg1.content)
+                        break
+                    elif msg1.id == "done_round":
+                        # need to go back and reset DOUBLE/STAND/HIT BUTTON functionality
+                        self.double_button_clicked == False
+                        
+                        # need to change this for multiplayer
+                        cards[0] = msg1.content[0]
+                        scoring = msg1.content[1]
+                        wallets = msg1.content[2]
+                        load_cards = msg1.content[3]
 
-                    for x in range(int(self.numPlayers)+1):
-                        amounts_list[x] = wallets[x]
-                        if x == 1:
-                            self.amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
-                        elif x == 2:
-                            self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
-                        elif x == 3:
-                            self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
-                        elif x == 4:
-                            self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
+                        for x in range(int(self.numPlayers)+1):
+                            amounts_list[x] = wallets[x]
+                            if x == 1:
+                                self.amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
+                            elif x == 2:
+                                self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
+                            elif x == 3:
+                                self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
+                            elif x == 4:
+                                self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[x]))
 
-                    QtTest.QTest.qWait(DELAYED)
-                    # put in the player and dealer cards to display in next round screen
-                    #self.reset_buttons()
-                    self.open_next_round(scoring, wallets, load_cards)
-                    QtTest.QTest.qWait(DELAYED)
-                    self.done_round()
-                    break
-                else:
-                    pass
-        else:
-            pass
+                        QtTest.QTest.qWait(DELAYED)
+                        # put in the player and dealer cards to display in next round screen
+                        #self.reset_buttons()
+                        self.open_next_round(scoring, wallets, load_cards)
+                        QtTest.QTest.qWait(DELAYED)
+                        self.done_round()
+                        break
+                    else:
+                        pass
+            else:
+                pass
         
 
         #self.double_button_clicked = True
@@ -1473,6 +1476,7 @@ class Ui_GameWindow(QtCore.QObject):
             msg = bj_to_gui_queue.get()
             if msg.id == "done_round":
                 print("...received done_round msg from BJ")
+                self.hit_flag = False
                 # change these for multiplayer
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
@@ -1510,6 +1514,8 @@ class Ui_GameWindow(QtCore.QObject):
         msg = Message("hit", None) # take in button hit status, traverse through to find which button was pressed, update player stats
         gui_to_bj_queue.put(msg)
         print("GUI entered hit")
+        # change the flag after entering HIT
+        self.hit_flag = True
 
         while(1):
             msg = bj_to_gui_queue.get()
@@ -1522,7 +1528,6 @@ class Ui_GameWindow(QtCore.QObject):
                 """
                 last_card = cards[1][len(cards[1])-1]
                 print("GUI last card as string: ", str(last_card))
-                # TODO: this isn't grabbing correct card due to cards being set in order (in Marvin's code)
                 file1 = cards_to_img[str(last_card)]
                 new_card = QtSvg.QSvgWidget(self.horizontalLayoutWidget)
                 new_card.setObjectName("new_card")
@@ -1565,6 +1570,7 @@ class Ui_GameWindow(QtCore.QObject):
                 break
             elif msg.id == "done_round":
                 print("GUI entered hit done_round....")
+                self.hit_flag = False
                 # after every player goes, display the contents of the round
                 cards[0] = msg.content[0]
                 scoring = msg.content[1]
