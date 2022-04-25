@@ -183,7 +183,8 @@ class Ui_MainWindow(QtCore.QObject):
         self.ui = Ui_SettingsWindow()
         self.ui.setupUi(self.window)
         #self.window.show()
-        self.window.showMaximized() # testing
+        #self.window.showMaximized() # testing
+        self.window.showFullScreen() # testing pt.2
         temp_w.hide()
 
     # STYLES/SETUP OF MAIN GUI
@@ -226,7 +227,7 @@ class Ui_MainWindow(QtCore.QObject):
         self.formLayout.setContentsMargins(0, 0, 0, 0)
         self.formLayout.setObjectName("formLayout")
         
-        file = "/home/pi/GUI/BlackJackFolder/JACKBLACK.svg"
+        file = "/home/pi/GUI/BlackJack_Folder/JACKBLACK.svg"
         self.svgWidget = QtSvg.QSvgWidget(self.formLayoutWidget)
         self.svgWidget.load(file)
         self.svgWidget.show()
@@ -2895,7 +2896,7 @@ def loadCardImages():
     for n in numbers:
         for s in suit:
             card = n+s
-            img_path = "/home/pi/GUI/BlackJackFolder/svg/" + s + "_" + n + ".svg"
+            img_path = "/home/pi/GUI/BlackJack_Folder/svg/" + s + "_" + n + ".svg"
             cards_to_img[card] = img_path
 
 
