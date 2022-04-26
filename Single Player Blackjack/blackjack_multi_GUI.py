@@ -178,13 +178,13 @@ class Ui_MainWindow(QtCore.QObject):
 
         # push button styling/actions
         self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.mainToSettings(MainWindow))
-        self.pushButton.setGeometry(675, 576, 310, 50)
+        self.pushButton.setGeometry(720, 540, 310, 50)
         self.pushButton.setFont(font18)
         self.pushButton.setObjectName("pushButton")
 
         # JackBlack label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(855, 480, 360, 70)
+        self.label.setGeometry(912, 450, 360, 70)
         self.label.setFont(font30)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
@@ -392,13 +392,13 @@ class Ui_SettingsWindow(QtCore.QObject):
 
         # game play settings label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(112, 720, 360, 70)
+        self.label.setGeometry(300, 50, 360, 70)
         self.label.setFont(font14)
         self.label.setObjectName("label")
 
         # creating form layout of widgets
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(292, 432, 500, 200)
+        self.formLayoutWidget.setGeometry(180, 130, 500, 200)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
