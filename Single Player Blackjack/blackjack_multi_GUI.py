@@ -392,13 +392,13 @@ class Ui_SettingsWindow(QtCore.QObject):
 
         # game play settings label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(300, 50, 360, 70)
+        self.label.setGeometry(720, 112, 360, 70)
         self.label.setFont(font14)
         self.label.setObjectName("label")
 
         # creating form layout of widgets
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(180, 130, 500, 200)
+        self.formLayoutWidget.setGeometry(432, 292, 500, 200)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -555,7 +555,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
         # button styles/configurations
         self.buttonBox = QtWidgets.QDialogButtonBox(confirm_dialogbox)
-        self.buttonBox.setGeometry(180, 260, 500, 200)
+        self.buttonBox.setGeometry(432, 585, 500, 200)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
@@ -566,7 +566,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
         # confirm box geometry/layout
         self.widget = QtWidgets.QWidget(confirm_dialogbox)
-        self.widget.setGeometry(180, 100, 500, 200)
+        self.widget.setGeometry(432, 225, 500, 200)
         self.widget.setObjectName("widget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -658,7 +658,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.betting_label = QtWidgets.QLabel(self.centralwidget)
         self.betting_label.setText("Betting for this round?")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.betting_label)
-        self.betting_label.setGeometry(180, 100, 500, 200)
+        self.betting_label.setGeometry(432, 225, 500, 200)
         self.betting_label.setFont(font16)
         self.betting_label.setAcceptDrops(False)
         self.betting_label.setAlignment(QtCore.Qt.AlignCenter)
@@ -671,7 +671,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
             minimum=10,
             value=10,
             singleStep=10)
-        self.scroll_bet.setGeometry(400, 100, 500, 200)
+        self.scroll_bet.setGeometry(960, 225, 500, 200)
         self.scroll_bet.setFont(font16)
         self.scroll_bet.setObjectName("scroll_bet")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.scroll_bet)
@@ -679,7 +679,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # ok button styles/layout
         self.ok_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.openWindow(self.p1_mw))
         self.ok_pushButton.setText("OK")
-        self.ok_pushButton.setGeometry(180, 170, 500, 200)
+        self.ok_pushButton.setGeometry(432, 382, 500, 200)
 
         #hb.button_press.connect(lambda: self.decrementBet)
         #db.button_press.connect(lambda: self.incrementBet)
@@ -810,7 +810,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         # making a form layout
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(150, 130, 500, 200)
+        self.formLayoutWidget.setGeometry(360, 292, 500, 200)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -826,7 +826,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
 
         # ready_push button styling/layout
         self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it(Player_ReadyWindow))
-        self.ready_pushButton.setGeometry(100, 160, 250, 61)
+        self.ready_pushButton.setGeometry(240, 360, 250, 61)
         self.ready_pushButton.setFont(font12)
         self.ready_pushButton.setObjectName("ready_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ready_pushButton)        
