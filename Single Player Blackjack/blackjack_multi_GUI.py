@@ -45,8 +45,9 @@ font14 = QtGui.QFont('Helvetica',14)
 font16 = QtGui.QFont('Helvetica',16)
 font18 = QtGui.QFont('Helvetica',18)
 font20 = QtGui.QFont('Helvetica',20)
-font30 = QtGui.QFont('Helvetica',30, QtGui.QFont.Bold)
-font48 = QtGui.QFont('Helvetica',48)
+font24 = QtGui.QFont('Helvetica',24)
+font30 = QtGui.QFont('Helvetica',30)
+font48 = QtGui.QFont('Helvetica',48, QtGui.QFont.Bold)
 
 ######### BUTTONS ###########
 # PLAYER 1
@@ -2525,7 +2526,7 @@ class Ui_end_game(QtCore.QObject):
 
         # confirmation label text styles/layout
         self.confirm_label = QtWidgets.QLabel(self.widget)
-        self.confirm_label.setFont(font10)
+        self.confirm_label.setFont(font24)
         self.confirm_label.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.confirm_label.setAlignment(QtCore.Qt.AlignCenter)
         self.confirm_label.setObjectName("confirm_label")
