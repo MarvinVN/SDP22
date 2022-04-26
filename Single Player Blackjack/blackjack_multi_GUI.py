@@ -178,13 +178,13 @@ class Ui_MainWindow(QtCore.QObject):
 
         # push button styling/actions
         self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.mainToSettings(MainWindow))
-        self.pushButton.setGeometry(576, 675, 310, 50)
+        self.pushButton.setGeometry(675, 576, 310, 50)
         self.pushButton.setFont(font18)
         self.pushButton.setObjectName("pushButton")
 
         # JackBlack label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(480, 855, 360, 70)
+        self.label.setGeometry(855, 480, 360, 70)
         self.label.setFont(font30)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
