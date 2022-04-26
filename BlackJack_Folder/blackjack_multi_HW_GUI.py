@@ -180,7 +180,7 @@ class Ui_MainWindow(QtCore.QObject):
 
         # push button styling/actions
         self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.mainToSettings(MainWindow))
-        self.pushButton.setGeometry(576, 675, 310, 50)
+        self.pushButton.setGeometry(675, 576, 310, 50)
         self.pushButton.setFont(font18)
         self.pushButton.setObjectName("pushButton")
 
@@ -188,13 +188,13 @@ class Ui_MainWindow(QtCore.QObject):
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
         self.button_actions_field.setFont(font10Bold)
-        self.button_actions_field.setGeometry(480, 855, 375, 45)
+        self.button_actions_field.setGeometry(855, 480, 375, 45)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("                ***BUTTON INSTRUCTIONS***\n          (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
 
         # creating form layout of widgets
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(360, 225, 500, 400)
+        self.formLayoutWidget.setGeometry(225, 360, 500, 400)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -405,7 +405,7 @@ class Ui_SettingsWindow(QtCore.QObject):
 
         # game play settings label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(300, 50, 360, 70)
+        self.label.setGeometry(112, 720, 360, 70)
         self.label.setFont(font14)
         self.label.setObjectName("label")
 
