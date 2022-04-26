@@ -179,13 +179,13 @@ class Ui_MainWindow(QtCore.QObject):
         # push button styling/actions
         self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.mainToSettings(MainWindow))
         self.pushButton.setGeometry(720, 540, 744, 112)
-        self.pushButton.setFont(font18)
+        self.pushButton.setFont(font30)
         self.pushButton.setObjectName("pushButton")
 
         # JackBlack label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(240, 337, 1200, 900)
-        self.label.setFont(font30)
+        self.label.setGeometry(576, 758, 1200, 900)
+        self.label.setFont(font48)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -386,14 +386,14 @@ class Ui_SettingsWindow(QtCore.QObject):
         self.SettingsWindow = SettingsWindow
         self.SettingsWindow.setObjectName("SettingsWindow")
         self.SettingsWindow.resize(WIDTH, HEIGHT)
-        self.SettingsWindow.setFont(font12)
+        self.SettingsWindow.setFont(font30)
         self.centralwidget = QtWidgets.QWidget(SettingsWindow)
         self.centralwidget.setObjectName("centralwidget")
 
         # game play settings label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(720, 112, 864, 157)
-        self.label.setFont(font14)
+        self.label.setFont(font48)
         self.label.setObjectName("label")
 
         # creating form layout of widgets
@@ -574,7 +574,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
         # confirmation label text styles/layout
         self.confirm_label = QtWidgets.QLabel(self.widget)
-        self.confirm_label.setFont(font10)
+        self.confirm_label.setFont(font30)
         self.confirm_label.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.confirm_label.setAlignment(QtCore.Qt.AlignCenter)
         self.confirm_label.setObjectName("confirm_label")
@@ -659,7 +659,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.betting_label.setText("Betting for this round?")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.betting_label)
         self.betting_label.setGeometry(432, 225, 1200, 450)
-        self.betting_label.setFont(font16)
+        self.betting_label.setFont(font30)
         self.betting_label.setAcceptDrops(False)
         self.betting_label.setAlignment(QtCore.Qt.AlignCenter)
         self.betting_label.setObjectName("betting_label")
@@ -672,7 +672,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
             value=10,
             singleStep=10)
         self.scroll_bet.setGeometry(960, 225, 1200, 450)
-        self.scroll_bet.setFont(font16)
+        self.scroll_bet.setFont(font30)
         self.scroll_bet.setObjectName("scroll_bet")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.scroll_bet)
              
@@ -685,7 +685,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         #db.button_press.connect(lambda: self.incrementBet)
         hb.button_press.connect(lambda: self.openWindow(self.p1_mw))
 
-        self.ready_pushButton.setFont(font16)
+        self.ready_pushButton.setFont(font30)
         self.ready_pushButton.setObjectName("ok_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
 
@@ -827,7 +827,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # ready_push button styling/layout
         self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it(Player_ReadyWindow))
         self.ready_pushButton.setGeometry(240, 360, 600, 137)
-        self.ready_pushButton.setFont(font12)
+        self.ready_pushButton.setFont(font30)
         self.ready_pushButton.setObjectName("ready_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ready_pushButton)        
         #hb.button_press.connect(lambda: self.bet_it(Player_ReadyWindow))

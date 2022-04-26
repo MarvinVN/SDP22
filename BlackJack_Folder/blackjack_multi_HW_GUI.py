@@ -194,7 +194,7 @@ class Ui_MainWindow(QtCore.QObject):
 
         # creating form layout of widgets
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(240, 337, 1200, 900)
+        self.formLayoutWidget.setGeometry(576, 758, 1200, 900)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
