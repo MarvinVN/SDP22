@@ -2763,12 +2763,12 @@ class Ui_confirm_round(QtCore.QObject):
     def confirm_connection(self, prev_w):
         print("entered confirm_connection....")
         self.continueConfirmation()
-
+"""
         self.window = prev_w
         self.ui.setupUi(self.window)
         self.ui.setupUi(self, self.window)
         self.window.show()
-
+"""
         hb.button_press.connect(prev_w.hit_it)
         sb.button_press.connect(prev_w.stand_it)
         db.button_press.connect(prev_w.double_it)
