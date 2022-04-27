@@ -1541,10 +1541,7 @@ class Ui_GameWindow(QtCore.QObject):
         global cards, amounts_list, cards_to_img
         
         if str(self.numPlayers) == "1":
-            # FOR ONE PLAYER
-            ######################################################################
-            #
-            #
+            ############# LAYOUTS FOR EACH PLAYER ###########
             # DEALER CARDS LAYOUT
             self.d_horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
             self.d_horizontalLayoutWidget.setObjectName("d_horizontalLayoutWidget")
@@ -1553,25 +1550,78 @@ class Ui_GameWindow(QtCore.QObject):
             self.d_cards_layout.setObjectName("d_cards_layout")
             # DEALER LABEL CARDS LAYOUT
             self.d_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.d_labelLayoutWidget.setGeometry(240, 157, 420, 281)
+            self.d_labelLayoutWidget.setGeometry(740, 350, 420, 281)
             self.d_labelLayoutWidget.setObjectName("d_labelLayoutWidget")
             self.d_labelLayout = QtWidgets.QVBoxLayout(self.d_labelLayoutWidget)
             self.d_labelLayout.setContentsMargins(0, 0, 0, 0)
             self.d_labelLayout.setObjectName("d_labelLayout")
 
+            # PLAYER 1 CARDS LAYOUT
+            self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
+            self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
+            self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
+            self.your_cards_layout.setObjectName("your_cards_layout")
+            # PLAYER 1 LABEL CARDS LAYOUT
+            self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.labelLayoutWidget.setGeometry(240, 50, 420, 281)
+            self.labelLayoutWidget.setObjectName("labelLayoutWidget")
+            self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
+            self.labelLayout.setContentsMargins(0, 0, 0, 0)
+            self.labelLayout.setObjectName("labelLayout")
+            # PLAYER 1 BUTTON LAYOUT
+            self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.verticalLayoutWidget.setGeometry(672, 50, 240, 225)
+            self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+            self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+            self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+            self.verticalLayout.setObjectName("verticalLayout")
+            # PLAYER 1 BET LAYOUT
+            self.betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+            self.betLayoutWidget.setGeometry(48, 70, 168, 157)
+            self.betLayoutWidget.setObjectName("betLayoutWidget")
+            self.betLayout = QtWidgets.QVBoxLayout(self.betLayoutWidget)
+            self.betLayout.setContentsMargins(0, 0, 0, 0)
+            self.betLayout.setObjectName("betLayout")            
+
+            ########### CURRENT BET LAYOUT ##########
+            # PLAYER 1
+            self.label_3 = QtWidgets.QLabel(self.centralwidget)
+            self.label_3.setObjectName("label_3")
+            self.label_3.setFont(font30)
+            self.label_3.setText("P1 Bet:")
+            self.betLayout.addWidget(self.label_3)
+            self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
+            self.current_bet_field.setFont(font30)
+            self.current_bet_field.setStyleSheet("background-color: white")
+            self.current_bet_field.setObjectName("current_bet_field")
+            self.betLayout.addWidget(self.current_bet_field) 
+
+            # adding button manual (which button press for which actions)
+            self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.button_actions_field.setFont(font20)
+            self.button_actions_field.setStyleSheet("background-color: white")
+            self.button_actions_field.setGeometry(700, 900, 500, 90)
+            self.button_actions_field.setObjectName("button_actions_field")
+            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
+
+            ########### PLAYING CARD FIELDS ###########
+            # DEALER
             self.d_label = QtWidgets.QLabel(self.centralwidget)
             self.d_label.setObjectName("d_label")
-            self.d_label.setFont(font40)
+            self.d_label.setFont(font30)
             self.d_label.setText("Dealer Cards:")
             self.d_labelLayout.addWidget(self.d_label)
 
             #d_file1 = cards_to_img[str(cards[0][0])]
+            d_file1 = "/home/pi/GUI/BlackJack_Folder/svg/back_2.svg"
             d_file2 = cards_to_img[str(cards[0][1])]
-            #self.d_left_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
-            #self.d_left_field.setObjectName("d_left_field")
-            #self.d_left_field.load(d_file1)
-            #self.d_left_field.show()
-            #self.d_cards_layout.addWidget(self.d_left_field)
+            self.d_left_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
+            self.d_left_field.setObjectName("d_left_field")
+            self.d_left_field.load(d_file1)
+            self.d_left_field.show()
+            self.d_cards_layout.addWidget(self.d_left_field)
             self.d_right_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
             self.d_right_field.setObjectName("d_right_field")
             self.d_right_field.load(d_file2)
@@ -1581,13 +1631,11 @@ class Ui_GameWindow(QtCore.QObject):
             self.d_labelLayout.addWidget(self.d_horizontalLayoutWidget)
 
             # PLAYER 1
-            self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.horizontalLayoutWidget.setGeometry(600, 292, 720, 337)
-            self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-
-            self.your_cards_layout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
-            self.your_cards_layout.setContentsMargins(0, 0, 0, 0)
-            self.your_cards_layout.setObjectName("your_cards_layout")
+            self.label = QtWidgets.QLabel(self.centralwidget)
+            self.label.setObjectName("label")
+            self.label.setFont(font30)
+            self.label.setText("P1 Cards:")
+            self.labelLayout.addWidget(self.label)
 
             file1 = cards_to_img[str(cards[1][0])]
             file2 = cards_to_img[str(cards[1][1])]
@@ -1602,70 +1650,43 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_right_field.show()
             self.your_cards_layout.addWidget(self.your_cards_right_field)
 
-            self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
-                readOnly=True)
-            self.current_bet_field.setFont(font40)
-            self.current_bet_field.setStyleSheet("background-color: white")
-            self.current_bet_field.setGeometry(240, 360, 264, 247)
-            self.current_bet_field.setObjectName("current_bet_field")
+            self.labelLayout.addWidget(self.horizontalLayoutWidget)
 
-            # adding button manual (which button press for which actions)
-            self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
-                readOnly=True)
-            self.button_actions_field.setFont(font40)
-            self.button_actions_field.setStyleSheet("background-color: white")
-            self.button_actions_field.setGeometry(660, 855, 600, 101)
-            self.button_actions_field.setObjectName("button_actions_field")
-            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
+            ############### PLAYER VERTICAL BUTTONS ################
 
-            # creating the amount left label
+            # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font40)
-            self.amount_left_label.setGeometry(1440, 22, 720, 112)
+            self.amount_left_label.setFont(font20)
             self.amount_left_label.setObjectName("amount_left_label")
-
-            self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(1440, 292, 240, 337)
-            self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-            self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-            self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-            self.verticalLayout.setObjectName("verticalLayout")
+            self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
+            self.verticalLayout.addWidget(self.amount_left_label)
+            # PLAYER 1 HIT
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.hit_button.setObjectName("hit_button")
             self.hit_button.setText("HIT")
-            self.hit_button.setStyleSheet("background-color: white")
+            self.hit_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.hit_button)
+            # PLAYER 1 DOUBLE
             self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
             self.double_button.setObjectName("double_button")
             self.double_button.setText("DOUBLE")
-            self.double_button.setStyleSheet("background-color: white")
+            self.double_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.double_button)
+            # PLAYER 1 STAND
             self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.stand_button.setObjectName("stand_button")
             self.stand_button.setText("STAND")
-            self.stand_button.setStyleSheet("background-color: white")
+            self.stand_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.stand_button)
+            # PLAYER 1
             self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.exit_button.setObjectName("exit_button")
-            self.verticalLayout.addWidget(self.exit_button)
             self.exit_button.setText("EXIT")
-            self.exit_button.setStyleSheet("background-color: white")
+            self.exit_button.setStyleSheet("background-color: gray")
+            self.verticalLayout.addWidget(self.exit_button)
 
-            # change font size to be a lot bigger; maybe size 10?
-            self.label = QtWidgets.QLabel(self.centralwidget)
-            self.label.setGeometry(852, 112, 264, 247)
-            self.label.setObjectName("label")
-            self.label_3 = QtWidgets.QLabel(self.centralwidget)
-            self.label_3.setGeometry(264, 180, 264, 247)
-            self.label_3.setObjectName("label_3")
-            self.label.setFont(font40)
-            self.label_3.setFont(font40)
-            self.label.setText("P1 Cards:")
-            self.label_3.setText("P1 Bet:")
-
-            print("P1 first cards: ", cards[1])
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
-            self.current_bet_field.setPlainText(str(self.player_bets[1]))
+            self.current_bet_field.setPlainText(str(self.player_bets[1]))           
         #
         #
         #########################################################################
@@ -1684,7 +1705,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.d_cards_layout.setObjectName("d_cards_layout")
             # DEALER LABEL CARDS LAYOUT
             self.d_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.d_labelLayoutWidget.setGeometry(240, 157, 420, 281)
+            self.d_labelLayoutWidget.setGeometry(740, 350, 420, 281)
             self.d_labelLayoutWidget.setObjectName("d_labelLayoutWidget")
             self.d_labelLayout = QtWidgets.QVBoxLayout(self.d_labelLayoutWidget)
             self.d_labelLayout.setContentsMargins(0, 0, 0, 0)
@@ -1698,21 +1719,21 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setObjectName("your_cards_layout")
             # PLAYER 1 LABEL CARDS LAYOUT
             self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.labelLayoutWidget.setGeometry(240, 292, 420, 281)
+            self.labelLayoutWidget.setGeometry(240, 50, 420, 281)
             self.labelLayoutWidget.setObjectName("labelLayoutWidget")
             self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
             self.labelLayout.setContentsMargins(0, 0, 0, 0)
             self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(672, 292, 240, 225)
+            self.verticalLayoutWidget.setGeometry(672, 50, 240, 225)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout.setObjectName("verticalLayout")
             # PLAYER 1 BET LAYOUT
             self.betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.betLayoutWidget.setGeometry(48, 337, 168, 157)
+            self.betLayoutWidget.setGeometry(48, 70, 168, 157)
             self.betLayoutWidget.setObjectName("betLayoutWidget")
             self.betLayout = QtWidgets.QVBoxLayout(self.betLayoutWidget)
             self.betLayout.setContentsMargins(0, 0, 0, 0)
@@ -1726,72 +1747,76 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_cards_layout.setObjectName("p2_cards_layout")
             # PLAYER 2 LABEL CARDS LAYOUT
             self.p2_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_labelLayoutWidget.setGeometry(1200, 292, 420, 281)
+            self.p2_labelLayoutWidget.setGeometry(1200, 50, 420, 281)
             self.p2_labelLayoutWidget.setObjectName("p2_labelLayoutWidget")
             self.p2_labelLayout = QtWidgets.QVBoxLayout(self.p2_labelLayoutWidget)
             self.p2_labelLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_labelLayout.setObjectName("p2_labelLayout")
             # PLAYER 2 BUTTON LAYOUT
             self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_verticalLayoutWidget.setGeometry(1632,292, 240, 225)
+            self.p2_verticalLayoutWidget.setGeometry(1632, 50, 240, 225)
             self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
             self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_verticalLayout.setObjectName("p2_verticalLayout")
             # PLAYER 2 BET LAYOUT
             self.p2_betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_betLayoutWidget.setGeometry(984, 337, 168, 157)
+            self.p2_betLayoutWidget.setGeometry(1008, 70, 168, 157)
             self.p2_betLayoutWidget.setObjectName("p2_betLayoutWidget")
             self.p2_betLayout = QtWidgets.QVBoxLayout(self.p2_betLayoutWidget)
             self.p2_betLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_betLayout.setObjectName("p2_betLayout")
 
-            # adding button manual (which button press for which actions)
-            self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
-                readOnly=True)
-            self.button_actions_field.setFont(font40)
-            self.button_actions_field.setGeometry(660, 855, 600, 101)
-            self.button_actions_field.setObjectName("button_actions_field")
-            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
-
             ########### CURRENT BET LAYOUT ##########
             # PLAYER 1
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
             self.label_3.setObjectName("label_3")
-            self.label_3.setFont(font40)
+            self.label_3.setFont(font30)
             self.label_3.setText("P1 Bet:")
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.current_bet_field.setFont(font40)
+            self.current_bet_field.setFont(font30)
+            self.current_bet_field.setStyleSheet("background-color: white")
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
             # PLAYER 2
             self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p2_label_2.setObjectName("p2_label_2")
-            self.p2_label_2.setFont(font40)
+            self.p2_label_2.setFont(font30)
             self.p2_label_2.setText("P2 Bet:")
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p2_current_bet_field.setFont(font40)
+            self.p2_current_bet_field.setFont(font30)
+            self.p2_current_bet_field.setStyleSheet("background-color: white")
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
+
+            # adding button manual (which button press for which actions)
+            self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.button_actions_field.setFont(font20)
+            self.button_actions_field.setStyleSheet("background-color: white")
+            self.button_actions_field.setGeometry(700, 900, 500, 90)
+            self.button_actions_field.setObjectName("button_actions_field")
+            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
 
             ########### PLAYING CARD FIELDS ###########
             # DEALER
             self.d_label = QtWidgets.QLabel(self.centralwidget)
             self.d_label.setObjectName("d_label")
-            self.d_label.setFont(font40)
+            self.d_label.setFont(font30)
             self.d_label.setText("Dealer Cards:")
             self.d_labelLayout.addWidget(self.d_label)
 
             #d_file1 = cards_to_img[str(cards[0][0])]
+            d_file1 = "/home/pi/GUI/BlackJack_Folder/svg/back_2.svg"
             d_file2 = cards_to_img[str(cards[0][1])]
-            #self.d_left_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
-            #self.d_left_field.setObjectName("d_left_field")
-            #self.d_left_field.load(d_file1)
-            #self.d_left_field.show()
-            #self.d_cards_layout.addWidget(self.d_left_field)
+            self.d_left_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
+            self.d_left_field.setObjectName("d_left_field")
+            self.d_left_field.load(d_file1)
+            self.d_left_field.show()
+            self.d_cards_layout.addWidget(self.d_left_field)
             self.d_right_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
             self.d_right_field.setObjectName("d_right_field")
             self.d_right_field.load(d_file2)
@@ -1803,7 +1828,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.label = QtWidgets.QLabel(self.centralwidget)
             self.label.setObjectName("label")
-            self.label.setFont(font40)
+            self.label.setFont(font30)
             self.label.setText("P1 Cards:")
             self.labelLayout.addWidget(self.label)
 
@@ -1825,7 +1850,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_label.setObjectName("p2_label")
-            self.p2_label.setFont(font40)
+            self.p2_label.setFont(font30)
             self.p2_label.setText("P2 Cards:")
             self.p2_labelLayout.addWidget(self.p2_label)
 
@@ -1848,7 +1873,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font40)
+            self.amount_left_label.setFont(font20)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
@@ -1856,26 +1881,30 @@ class Ui_GameWindow(QtCore.QObject):
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.hit_button.setObjectName("hit_button")
             self.hit_button.setText("HIT")
+            self.hit_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.hit_button)
             # PLAYER 1 DOUBLE
             self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
             self.double_button.setObjectName("double_button")
             self.double_button.setText("DOUBLE")
+            self.double_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.double_button)
             # PLAYER 1 STAND
             self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.stand_button.setObjectName("stand_button")
             self.stand_button.setText("STAND")
+            self.stand_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.stand_button)
             # PLAYER 1
             self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.exit_button.setObjectName("exit_button")
             self.exit_button.setText("EXIT")
+            self.exit_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.exit_button)
 
             # PLAYER 2 AMOUNT LEFT
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_amount_left_label.setFont(font40)
+            self.p2_amount_left_label.setFont(font20)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
             self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
@@ -1883,25 +1912,26 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.p2_hit_button.setObjectName("p2_hit_button")
             self.p2_hit_button.setText("HIT")
+            self.p2_hit_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_hit_button)
             # PLAYER 2 DOUBLE
             self.p2_double_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.double_it())
             self.p2_double_button.setObjectName("p2_double_button")
             self.p2_double_button.setText("DOUBLE")
+            self.p2_double_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_double_button)
             # PLAYER 2 STAND
             self.p2_stand_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.p2_stand_button.setObjectName("p2_stand_button")
             self.p2_stand_button.setText("STAND")
+            self.p2_stand_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_stand_button)
 
-            print("P1 first cards: ", cards[1])
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
-            print("P2 first cards: ", cards[2])
             self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
-            self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
+            self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))           
         #
         #
         #########################################################################
@@ -1920,7 +1950,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.d_cards_layout.setObjectName("d_cards_layout")
             # DEALER LABEL CARDS LAYOUT
             self.d_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.d_labelLayoutWidget.setGeometry(240, 157, 420, 281)
+            self.d_labelLayoutWidget.setGeometry(740, 350, 420, 281)
             self.d_labelLayoutWidget.setObjectName("d_labelLayoutWidget")
             self.d_labelLayout = QtWidgets.QVBoxLayout(self.d_labelLayoutWidget)
             self.d_labelLayout.setContentsMargins(0, 0, 0, 0)
@@ -1934,21 +1964,21 @@ class Ui_GameWindow(QtCore.QObject):
             self.your_cards_layout.setObjectName("your_cards_layout")
             # PLAYER 1 LABEL CARDS LAYOUT
             self.labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.labelLayoutWidget.setGeometry(216, 157, 420, 281)
+            self.labelLayoutWidget.setGeometry(240, 50, 420, 281)
             self.labelLayoutWidget.setObjectName("labelLayoutWidget")
             self.labelLayout = QtWidgets.QVBoxLayout(self.labelLayoutWidget)
             self.labelLayout.setContentsMargins(0, 0, 0, 0)
             self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(672, 157, 240, 225)
+            self.verticalLayoutWidget.setGeometry(672, 50, 240, 225)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout.setObjectName("verticalLayout")
             # PLAYER 1 BET LAYOUT
             self.betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.betLayoutWidget.setGeometry(24, 202, 168, 157)
+            self.betLayoutWidget.setGeometry(48, 70, 168, 157)
             self.betLayoutWidget.setObjectName("betLayoutWidget")
             self.betLayout = QtWidgets.QVBoxLayout(self.betLayoutWidget)
             self.betLayout.setContentsMargins(0, 0, 0, 0)
@@ -1962,21 +1992,21 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_cards_layout.setObjectName("p2_cards_layout")
             # PLAYER 2 LABEL CARDS LAYOUT
             self.p2_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_labelLayoutWidget.setGeometry(1128, 157, 420, 281)
+            self.p2_labelLayoutWidget.setGeometry(1200, 50, 420, 281)
             self.p2_labelLayoutWidget.setObjectName("p2_labelLayoutWidget")
             self.p2_labelLayout = QtWidgets.QVBoxLayout(self.p2_labelLayoutWidget)
             self.p2_labelLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_labelLayout.setObjectName("p2_labelLayout")
             # PLAYER 2 BUTTON LAYOUT
             self.p2_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_verticalLayoutWidget.setGeometry(1584, 157, 240, 225)
+            self.p2_verticalLayoutWidget.setGeometry(1632, 50, 240, 225)
             self.p2_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p2_verticalLayout = QtWidgets.QVBoxLayout(self.p2_verticalLayoutWidget)
             self.p2_verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.p2_verticalLayout.setObjectName("p2_verticalLayout")
             # PLAYER 2 BET LAYOUT
             self.p2_betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p2_betLayoutWidget.setGeometry(936, 202, 168, 157)
+            self.p2_betLayoutWidget.setGeometry(1008, 70, 168, 157)
             self.p2_betLayoutWidget.setObjectName("p2_betLayoutWidget")
             self.p2_betLayout = QtWidgets.QVBoxLayout(self.p2_betLayoutWidget)
             self.p2_betLayout.setContentsMargins(0, 0, 0, 0)
@@ -1990,83 +2020,88 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_cards_layout.setObjectName("p3_cards_layout")
             # PLAYER 3 LABEL CARDS LAYOUT
             self.p3_labelLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_labelLayoutWidget.setGeometry(780, 517, 420, 281)
+            self.p3_labelLayoutWidget.setGeometry(240, 640, 420, 281)
             self.p3_labelLayoutWidget.setObjectName("p3_labelLayoutWidget")
             self.p3_labelLayout = QtWidgets.QVBoxLayout(self.p3_labelLayoutWidget)
             self.p3_labelLayout.setContentsMargins(0, 0, 0, 0)
             self.p3_labelLayout.setObjectName("p3_labelLayout")
             # PLAYER 3 BUTTON LAYOUT
             self.p3_verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_verticalLayoutWidget.setGeometry(1236, 517, 240, 225)
+            self.p3_verticalLayoutWidget.setGeometry(672, 640, 240, 225)
             self.p3_verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.p3_verticalLayout = QtWidgets.QVBoxLayout(self.p3_verticalLayoutWidget)
             self.p3_verticalLayout.setContentsMargins(0, 0, 0, 0)
             self.p3_verticalLayout.setObjectName("p3_verticalLayout")
             # PLAYER 3 BET LAYOUT
             self.p3_betLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.p3_betLayoutWidget.setGeometry(588, 562, 168, 157)
+            self.p3_betLayoutWidget.setGeometry(48, 685, 168, 157)
             self.p3_betLayoutWidget.setObjectName("p3_betLayoutWidget")
             self.p3_betLayout = QtWidgets.QVBoxLayout(self.p3_betLayoutWidget)
             self.p3_betLayout.setContentsMargins(0, 0, 0, 0)
             self.p3_betLayout.setObjectName("p3_betLayout")
 
-            # adding button manual (which button press for which actions)
-            self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
-                readOnly=True)
-            self.button_actions_field.setFont(font40)
-            self.button_actions_field.setGeometry(660, 855, 600, 101)
-            self.button_actions_field.setObjectName("button_actions_field")
-            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
-
             ########### CURRENT BET LAYOUT ##########
             # PLAYER 1
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
             self.label_3.setObjectName("label_3")
-            self.label_3.setFont(font40)
+            self.label_3.setFont(font30)
             self.label_3.setText("P1 Bet:")
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.current_bet_field.setFont(font40)
+            self.current_bet_field.setFont(font30)
+            self.current_bet_field.setStyleSheet("background-color: white")
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
             # PLAYER 2
             self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p2_label_2.setObjectName("p2_label_2")
-            self.p2_label_2.setFont(font40)
+            self.p2_label_2.setFont(font30)
             self.p2_label_2.setText("P2 Bet:")
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p2_current_bet_field.setFont(font40)
+            self.p2_current_bet_field.setFont(font30)
+            self.p2_current_bet_field.setStyleSheet("background-color: white")
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
 
             # PLAYER 3
             self.p3_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p3_label_2.setObjectName("p3_label_2")
-            self.p3_label_2.setFont(font40)
+            self.p3_label_2.setFont(font30)
             self.p3_label_2.setText("P3 Bet:")
             self.p3_betLayout.addWidget(self.p3_label_2)
             self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p3_current_bet_field.setFont(font40)
+            self.p3_current_bet_field.setFont(font30)
+            self.p3_current_bet_field.setStyleSheet("background-color: white")
             self.p3_current_bet_field.setObjectName("p3_current_bet_field")
             self.p3_betLayout.addWidget(self.p3_current_bet_field)
+
+            # adding button manual (which button press for which actions)
+            self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
+                readOnly=True)
+            self.button_actions_field.setFont(font20)
+            self.button_actions_field.setStyleSheet("background-color: white")
+            self.button_actions_field.setGeometry(700, 900, 500, 90)
+            self.button_actions_field.setObjectName("button_actions_field")
+            self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
 
             ########### PLAYING CARD FIELDS ###########
             # DEALER
             self.d_label = QtWidgets.QLabel(self.centralwidget)
             self.d_label.setObjectName("d_label")
-            self.d_label.setFont(font40)
+            self.d_label.setFont(font30)
             self.d_label.setText("Dealer Cards:")
             self.d_labelLayout.addWidget(self.d_label)
 
             #d_file1 = cards_to_img[str(cards[0][0])]
+            d_file1 = "/home/pi/GUI/BlackJack_Folder/svg/back_2.svg"
             d_file2 = cards_to_img[str(cards[0][1])]
-            #self.d_left_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
-            #self.d_left_field.setObjectName("d_left_field")
-            #self.d_left_field.load(d_file1)
-            #self.d_left_field.show()
-            #self.d_cards_layout.addWidget(self.d_left_field)
+            self.d_left_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
+            self.d_left_field.setObjectName("d_left_field")
+            self.d_left_field.load(d_file1)
+            self.d_left_field.show()
+            self.d_cards_layout.addWidget(self.d_left_field)
             self.d_right_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
             self.d_right_field.setObjectName("d_right_field")
             self.d_right_field.load(d_file2)
@@ -2078,7 +2113,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.label = QtWidgets.QLabel(self.centralwidget)
             self.label.setObjectName("label")
-            self.label.setFont(font40)
+            self.label.setFont(font30)
             self.label.setText("P1 Cards:")
             self.labelLayout.addWidget(self.label)
 
@@ -2100,7 +2135,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_label.setObjectName("p2_label")
-            self.p2_label.setFont(font40)
+            self.p2_label.setFont(font30)
             self.p2_label.setText("P2 Cards:")
             self.p2_labelLayout.addWidget(self.p2_label)
 
@@ -2122,7 +2157,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 3
             self.p3_label = QtWidgets.QLabel(self.centralwidget)
             self.p3_label.setObjectName("p3_label")
-            self.p3_label.setFont(font40)
+            self.p3_label.setFont(font30)
             self.p3_label.setText("P3 Cards:")
             self.p3_labelLayout.addWidget(self.p3_label)
 
@@ -2145,7 +2180,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font40)
+            self.amount_left_label.setFont(font20)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
@@ -2153,26 +2188,30 @@ class Ui_GameWindow(QtCore.QObject):
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.hit_button.setObjectName("hit_button")
             self.hit_button.setText("HIT")
+            self.hit_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.hit_button)
             # PLAYER 1 DOUBLE
             self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
             self.double_button.setObjectName("double_button")
             self.double_button.setText("DOUBLE")
+            self.double_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.double_button)
             # PLAYER 1 STAND
             self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.stand_button.setObjectName("stand_button")
             self.stand_button.setText("STAND")
+            self.stand_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.stand_button)
             # PLAYER 1
             self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.exit_button.setObjectName("exit_button")
             self.exit_button.setText("EXIT")
+            self.exit_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.exit_button)
 
             # PLAYER 2 AMOUNT LEFT
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_amount_left_label.setFont(font40)
+            self.p2_amount_left_label.setFont(font20)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
             self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
@@ -2180,21 +2219,24 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.p2_hit_button.setObjectName("p2_hit_button")
             self.p2_hit_button.setText("HIT")
+            self.p2_hit_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_hit_button)
             # PLAYER 2 DOUBLE
             self.p2_double_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.double_it())
             self.p2_double_button.setObjectName("p2_double_button")
             self.p2_double_button.setText("DOUBLE")
+            self.p2_double_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_double_button)
             # PLAYER 2 STAND
             self.p2_stand_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.p2_stand_button.setObjectName("p2_stand_button")
             self.p2_stand_button.setText("STAND")
+            self.p2_stand_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_stand_button)
 
             # PLAYER 3 AMOUNT LEFT
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p3_amount_left_label.setFont(font40)
+            self.p3_amount_left_label.setFont(font20)
             self.p3_amount_left_label.setObjectName("p3_amount_left_label")
             self.p3_amount_left_label.setText(("Amount Left: ") + str(amounts_list[3]))
             self.p3_verticalLayout.addWidget(self.p3_amount_left_label)
@@ -2203,15 +2245,18 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_hit_button.setObjectName("p3_hit_button")
             self.p3_verticalLayout.addWidget(self.p3_hit_button)
             self.p3_hit_button.setText("HIT")
+            self.p3_hit_button.setStyleSheet("background-color: gray")
             # PLAYER 3 DOUBLE
             self.p3_double_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.double_it())
             self.p3_double_button.setObjectName("p3_double_button")
             self.p3_double_button.setText("DOUBLE")
+            self.p3_double_button.setStyleSheet("background-color: gray")
             self.p3_verticalLayout.addWidget(self.p3_double_button)
             # PLAYER 3 STAND
             self.p3_stand_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.p3_stand_button.setObjectName("p3_stand_button")
             self.p3_stand_button.setText("STAND")
+            self.p3_stand_button.setStyleSheet("background-color: gray")
             self.p3_verticalLayout.addWidget(self.p3_stand_button)
 
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
@@ -2221,7 +2266,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
             self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
-            self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
+            self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))          
         #
         #
         #########################################################################
