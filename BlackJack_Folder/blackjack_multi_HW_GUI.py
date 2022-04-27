@@ -2780,6 +2780,12 @@ class Ui_confirm_round(QtCore.QObject):
     def reject_connection(self):
         print("rejected the connection...")
 
+    def continueConfirmation(self):
+        global button_counter
+        self.timer.stop() # TESTING STOP TIMER
+        button_counter += 1 # changing state
+        eb.button_press.disconnect()
+
 
     # STYLES/SETUP OF CONFIRM BOX GUI
     def setupUi(self, prev_w, confirm_round):
