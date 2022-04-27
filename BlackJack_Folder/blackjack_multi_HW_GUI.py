@@ -193,11 +193,11 @@ class Ui_MainWindow(QtCore.QObject):
         self.button_actions_field.setFont(font20)
         self.button_actions_field.setGeometry(580, 840, 744, 112)
         self.button_actions_field.setObjectName("button_actions_field")
-        self.button_actions_field.setPlainText("                ***BUTTON INSTRUCTIONS***\n          (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
+        self.button_actions_field.setPlainText("                ***BUTTON INSTRUCTIONS***\n          (CONTINUE) (N/A) (N/A) (N/A)")
 
         # creating form layout of widgets
         self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.formLayoutWidget.setGeometry(570, 340, 1200, 900)
+        self.formLayoutWidget.setGeometry(370, 340, 1200, 900)
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -920,6 +920,7 @@ class Ui_GameWindow(QtCore.QObject):
     def __init__(self, numPlayers, startingAmount, gameMode, userInput, bet):
         super().__init__()
         global cards, player_turn
+        self.setStyleSheet("background-color: green;")
 
         self.numPlayers = numPlayers
         self.currentAmount = startingAmount
@@ -1394,6 +1395,20 @@ class Ui_GameWindow(QtCore.QObject):
                 self.hit_flag = False
                 # change these for multiplayer
                 cards[0] = msg.content[0]
+
+                # clearing all widgets (necessary to avoid errors)
+                for i in reversed(range(self.d_cards_layout.count())): 
+                    self.d_cards_layout.itemAt(i).widget().setParent(None)
+
+                for j in (len(cards[0])-1):
+                    last_card = cards[0][j]
+                    file1 = cards_to_img[str(last_card)]
+                    new_card = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
+                    new_card.setObjectName("new_card")
+                    new_card.load(file1)
+                    new_card.show()
+                    self.d_cards_layout.addWidget(new_card)
+
                 # TODO: display updated dealer cards
                 scoring = msg.content[1]
                 wallets = msg.content[2] # need to update everyone's amount left from wallet
@@ -2399,12 +2414,13 @@ class Ui_GameWindow(QtCore.QObject):
             self.d_labelLayout.addWidget(self.d_label)
 
             #d_file1 = cards_to_img[str(cards[0][0])]
+            d_file1 = "/home/pi/GUI/BlackJack_Folder/svg/back_2.svg"
             d_file2 = cards_to_img[str(cards[0][1])]
-            #self.d_left_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
-            #self.d_left_field.setObjectName("d_left_field")
-            #self.d_left_field.load(d_file1)
-            #self.d_left_field.show()
-            #self.d_cards_layout.addWidget(self.d_left_field)
+            self.d_left_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
+            self.d_left_field.setObjectName("d_left_field")
+            self.d_left_field.load(d_file1)
+            self.d_left_field.show()
+            self.d_cards_layout.addWidget(self.d_left_field)
             self.d_right_field = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
             self.d_right_field.setObjectName("d_right_field")
             self.d_right_field.load(d_file2)
@@ -2505,7 +2521,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font30)
+            self.amount_left_label.setFont(font20)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
@@ -2532,7 +2548,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 2 AMOUNT LEFT
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_amount_left_label.setFont(font30)
+            self.p2_amount_left_label.setFont(font20)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
             self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
@@ -2554,7 +2570,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 3 AMOUNT LEFT
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p3_amount_left_label.setFont(font30)
+            self.p3_amount_left_label.setFont(font20)
             self.p3_amount_left_label.setObjectName("p3_amount_left_label")
             self.p3_amount_left_label.setText(("Amount Left: ") + str(amounts_list[3]))
             self.p3_verticalLayout.addWidget(self.p3_amount_left_label)
@@ -2576,7 +2592,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 4 AMOUNT LEFT
             self.p4_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p4_amount_left_label.setFont(font30)
+            self.p4_amount_left_label.setFont(font20)
             self.p4_amount_left_label.setObjectName("p4_amount_left_label")
             self.p4_amount_left_label.setText(("Amount Left: ") + str(amounts_list[4]))
             self.p4_verticalLayout.addWidget(self.p4_amount_left_label)
