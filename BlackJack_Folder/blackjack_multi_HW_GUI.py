@@ -920,8 +920,6 @@ class Ui_GameWindow(QtCore.QObject):
     def __init__(self, numPlayers, startingAmount, gameMode, userInput, bet):
         super().__init__()
         global cards, player_turn
-        self.setStyleSheet("background-color: green;")
-
         self.numPlayers = numPlayers
         self.currentAmount = startingAmount
         self.gameMode = gameMode
@@ -1536,6 +1534,7 @@ class Ui_GameWindow(QtCore.QObject):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(WIDTH, HEIGHT)
+        self.setStyleSheet("background-color: green;")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         global cards, amounts_list, cards_to_img
