@@ -1642,7 +1642,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.current_bet_field.setFont(font30)
-            self.current_bet_field.setStyleSheet("color: black; background-color: white")
+            self.current_bet_field.setStyleSheet("color: black; background-color: white; border-style: none")
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field) 
 
@@ -2461,7 +2461,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.current_bet_field.setFont(font30)
-            self.current_bet_field.setStyleSheet("color: black; background-color: white")
+            self.current_bet_field.setStyleSheet("color: black; background-color: white; border-style: none")
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
@@ -2473,7 +2473,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.p2_current_bet_field.setFont(font30)
-            self.p2_current_bet_field.setStyleSheet("color: black; background-color: white")
+            self.p2_current_bet_field.setStyleSheet("color: black; background-color: white; border-style: none")
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
 
