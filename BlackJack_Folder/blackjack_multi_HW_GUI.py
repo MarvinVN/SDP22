@@ -570,7 +570,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
         # button styles/configurations
         self.buttonBox = QtWidgets.QDialogButtonBox(confirm_dialogbox)
-        self.buttonBox.setGeometry(800, 585, 1200, 450)
+        self.buttonBox.setGeometry(432, 585, 1200, 450)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
@@ -1399,7 +1399,7 @@ class Ui_GameWindow(QtCore.QObject):
                 for i in reversed(range(self.d_cards_layout.count())): 
                     self.d_cards_layout.itemAt(i).widget().setParent(None)
 
-                for j in (len(cards[0])-1):
+                for j in range(0, len(cards[0])-1):
                     last_card = cards[0][j]
                     file1 = cards_to_img[str(last_card)]
                     new_card = QtSvg.QSvgWidget(self.d_horizontalLayoutWidget)
@@ -1535,7 +1535,7 @@ class Ui_GameWindow(QtCore.QObject):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(WIDTH, HEIGHT)
-        MainWindow.setStyleSheet("background-color: green;")
+        MainWindow.setStyleSheet("color: white; background-color: green;")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         global cards, amounts_list, cards_to_img
@@ -1605,6 +1605,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
             self.current_bet_field.setFont(font40)
+            self.current_bet_field.setStyleSheet("background-color: white")
             self.current_bet_field.setGeometry(240, 360, 264, 247)
             self.current_bet_field.setObjectName("current_bet_field")
 
@@ -1612,6 +1613,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
             self.button_actions_field.setFont(font40)
+            self.button_actions_field.setStyleSheet("background-color: white")
             self.button_actions_field.setGeometry(660, 855, 600, 101)
             self.button_actions_field.setObjectName("button_actions_field")
             self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
@@ -1631,19 +1633,23 @@ class Ui_GameWindow(QtCore.QObject):
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.hit_button.setObjectName("hit_button")
             self.hit_button.setText("HIT")
+            self.hit_button.setStyleSheet("background-color: white")
             self.verticalLayout.addWidget(self.hit_button)
             self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
             self.double_button.setObjectName("double_button")
             self.double_button.setText("DOUBLE")
+            self.double_button.setStyleSheet("background-color: white")
             self.verticalLayout.addWidget(self.double_button)
             self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.stand_button.setObjectName("stand_button")
             self.stand_button.setText("STAND")
+            self.stand_button.setStyleSheet("background-color: white")
             self.verticalLayout.addWidget(self.stand_button)
             self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.exit_button.setObjectName("exit_button")
             self.verticalLayout.addWidget(self.exit_button)
             self.exit_button.setText("EXIT")
+            self.exit_button.setStyleSheet("background-color: white")
 
             # change font size to be a lot bigger; maybe size 10?
             self.label = QtWidgets.QLabel(self.centralwidget)
@@ -2255,7 +2261,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.labelLayout.setObjectName("labelLayout")
             # PLAYER 1 BUTTON LAYOUT
             self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-            self.verticalLayoutWidget.setGeometry(750, 50, 240, 225)
+            self.verticalLayoutWidget.setGeometry(672, 50, 240, 225)
             self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
             self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
             self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -2361,6 +2367,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.current_bet_field.setFont(font30)
+            self.current_bet_field.setStyleSheet("background-color: white")
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
@@ -2372,6 +2379,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.p2_current_bet_field.setFont(font30)
+            self.p2_current_bet_field.setStyleSheet("background-color: white")
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
 
@@ -2383,6 +2391,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_betLayout.addWidget(self.p3_label_2)
             self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.p3_current_bet_field.setFont(font30)
+            self.p3_current_bet_field.setStyleSheet("background-color: white")
             self.p3_current_bet_field.setObjectName("p3_current_bet_field")
             self.p3_betLayout.addWidget(self.p3_current_bet_field)
 
@@ -2394,6 +2403,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_betLayout.addWidget(self.p4_label_2)
             self.p4_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.p4_current_bet_field.setFont(font30)
+            self.p4_current_bet_field.setStyleSheet("background-color: white")
             self.p4_current_bet_field.setObjectName("p4_current_bet_field")  
             self.p4_betLayout.addWidget(self.p4_current_bet_field)  
 
@@ -2401,7 +2411,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
             self.button_actions_field.setFont(font20)
-            self.button_actions_field.setGeometry(700, 900, 550, 80)
+            self.button_actions_field.setStyleSheet("background-color: white")
+            self.button_actions_field.setGeometry(700, 900, 500, 90)
             self.button_actions_field.setObjectName("button_actions_field")
             self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
 
@@ -2529,21 +2540,25 @@ class Ui_GameWindow(QtCore.QObject):
             self.hit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.hit_button.setObjectName("hit_button")
             self.hit_button.setText("HIT")
+            self.hit_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.hit_button)
             # PLAYER 1 DOUBLE
             self.double_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.double_it())
             self.double_button.setObjectName("double_button")
             self.double_button.setText("DOUBLE")
+            self.double_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.double_button)
             # PLAYER 1 STAND
             self.stand_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.stand_button.setObjectName("stand_button")
             self.stand_button.setText("STAND")
+            self.stand_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.stand_button)
             # PLAYER 1
             self.exit_button = QtWidgets.QPushButton(self.verticalLayoutWidget, clicked=lambda: self.exit_it())
             self.exit_button.setObjectName("exit_button")
             self.exit_button.setText("EXIT")
+            self.exit_button.setStyleSheet("background-color: gray")
             self.verticalLayout.addWidget(self.exit_button)
 
             # PLAYER 2 AMOUNT LEFT
@@ -2556,16 +2571,19 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_hit_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.hit_it())
             self.p2_hit_button.setObjectName("p2_hit_button")
             self.p2_hit_button.setText("HIT")
+            self.p2_hit_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_hit_button)
             # PLAYER 2 DOUBLE
             self.p2_double_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.double_it())
             self.p2_double_button.setObjectName("p2_double_button")
             self.p2_double_button.setText("DOUBLE")
+            self.p2_double_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_double_button)
             # PLAYER 2 STAND
             self.p2_stand_button = QtWidgets.QPushButton(self.p2_verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.p2_stand_button.setObjectName("p2_stand_button")
             self.p2_stand_button.setText("STAND")
+            self.p2_stand_button.setStyleSheet("background-color: gray")
             self.p2_verticalLayout.addWidget(self.p2_stand_button)
 
             # PLAYER 3 AMOUNT LEFT
@@ -2579,15 +2597,18 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_hit_button.setObjectName("p3_hit_button")
             self.p3_verticalLayout.addWidget(self.p3_hit_button)
             self.p3_hit_button.setText("HIT")
+            self.p3_hit_button.setStyleSheet("background-color: gray")
             # PLAYER 3 DOUBLE
             self.p3_double_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.double_it())
             self.p3_double_button.setObjectName("p3_double_button")
             self.p3_double_button.setText("DOUBLE")
+            self.p3_double_button.setStyleSheet("background-color: gray")
             self.p3_verticalLayout.addWidget(self.p3_double_button)
             # PLAYER 3 STAND
             self.p3_stand_button = QtWidgets.QPushButton(self.p3_verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.p3_stand_button.setObjectName("p3_stand_button")
             self.p3_stand_button.setText("STAND")
+            self.p3_stand_button.setStyleSheet("background-color: gray")
             self.p3_verticalLayout.addWidget(self.p3_stand_button)
 
             # PLAYER 4 AMOUNT LEFT
@@ -2601,15 +2622,18 @@ class Ui_GameWindow(QtCore.QObject):
             self.p4_hit_button.setObjectName("p4_hit_button")
             self.p4_verticalLayout.addWidget(self.p4_hit_button)
             self.p4_hit_button.setText("HIT")
+            self.p4_hit_button.setStyleSheet("background-color: gray")
             # PLAYER 4 DOUBLE
             self.p4_double_button = QtWidgets.QPushButton(self.p4_verticalLayoutWidget, clicked=lambda: self.double_it())
             self.p4_double_button.setObjectName("p4_double_button")
             self.p4_double_button.setText("DOUBLE")
+            self.p4_double_button.setStyleSheet("background-color: gray")
             self.p4_verticalLayout.addWidget(self.p4_double_button)
             # PLAYER 4 STAND
             self.p4_stand_button = QtWidgets.QPushButton(self.p4_verticalLayoutWidget, clicked=lambda: self.stand_it())
             self.p4_stand_button.setObjectName("p4_stand_button")
             self.p4_stand_button.setText("STAND")
+            self.p4_stand_button.setStyleSheet("background-color: gray")
             self.p4_verticalLayout.addWidget(self.p4_stand_button)
 
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
