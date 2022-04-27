@@ -2794,6 +2794,7 @@ class Ui_confirm_round(QtCore.QObject):
     def confirm_connection(self, prev_w):
         global button_counter
         print("entered confirmation button method...")
+        self.window.hide()
 
         self.timer.stop() # TESTING STOP TIMER
         #hb.button_press.disconnect()
