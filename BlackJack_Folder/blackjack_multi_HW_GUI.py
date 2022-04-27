@@ -63,6 +63,7 @@ font18 = QtGui.QFont('Helvetica',18)
 font20 = QtGui.QFont('Helvetica',20)
 font24 = QtGui.QFont('Helvetica',24)
 font30 = QtGui.QFont('Helvetica',30)
+font40 = QtGui.QFont('Helvetica',40)
 font48 = QtGui.QFont('Helvetica',48, QtGui.QFont.Bold)
 font50 = QtGui.QFont('Helvetica',50, QtGui.QFont.Bold)
 
@@ -182,13 +183,13 @@ class Ui_MainWindow(QtCore.QObject):
         # push button styling/actions
         self.pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.mainToSettings(MainWindow))
         self.pushButton.setGeometry(680, 540, 744, 112)
-        self.pushButton.setFont(font30)
+        self.pushButton.setFont(font40)
         self.pushButton.setObjectName("pushButton")
 
         # adding button manual (which button press for which actions)
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
-        self.button_actions_field.setFont(font30)
+        self.button_actions_field.setFont(font40)
         self.button_actions_field.setGeometry(680, 840, 744, 112)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("                ***BUTTON INSTRUCTIONS***\n          (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
@@ -400,14 +401,14 @@ class Ui_SettingsWindow(QtCore.QObject):
         self.SettingsWindow = SettingsWindow
         self.SettingsWindow.setObjectName("SettingsWindow")
         self.SettingsWindow.resize(WIDTH, HEIGHT)
-        self.SettingsWindow.setFont(font30)
+        self.SettingsWindow.setFont(font40)
         self.centralwidget = QtWidgets.QWidget(SettingsWindow)
         self.centralwidget.setObjectName("centralwidget")
 
         # game play settings label styling
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(800, 112, 864, 157)
-        self.label.setFont(font30)
+        self.label.setFont(font40)
         self.label.setObjectName("label")
 
         # creating form layout of widgets
@@ -465,7 +466,7 @@ class Ui_SettingsWindow(QtCore.QObject):
         # adding button manual (which button press for which actions)
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
-        self.button_actions_field.setFont(font30)
+        self.button_actions_field.setFont(font40)
         self.button_actions_field.setGeometry(480, 855, 900, 101)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("                ***BUTTON INSTRUCTIONS***\n          (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
@@ -587,7 +588,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
 
         # confirmation label text styles/layout
         self.confirm_label = QtWidgets.QLabel(self.widget)
-        self.confirm_label.setFont(font30)
+        self.confirm_label.setFont(font40)
         self.confirm_label.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.confirm_label.setAlignment(QtCore.Qt.AlignCenter)
         self.confirm_label.setObjectName("confirm_label")
@@ -599,7 +600,7 @@ class Ui_confirm_dialogbox(QtCore.QObject):
         # adding button manual (which button press for which actions)
         self.button_actions_field = QtWidgets.QPlainTextEdit(confirm_dialogbox,
             readOnly=True)
-        self.button_actions_field.setFont(font30)
+        self.button_actions_field.setFont(font40)
         self.button_actions_field.setGeometry(600, 855, 660, 101)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n         (OK) (CANCEL) (N/A) (N/A)")
@@ -671,7 +672,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.betting_label.setText("Betting for this round?")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.betting_label)
         self.betting_label.setGeometry(432, 225, 800, 450)
-        self.betting_label.setFont(font30)
+        self.betting_label.setFont(font40)
         self.betting_label.setAcceptDrops(False)
         self.betting_label.setAlignment(QtCore.Qt.AlignCenter)
         self.betting_label.setObjectName("betting_label")
@@ -683,7 +684,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
             value=10,
             singleStep=10)
         self.scroll_bet.setGeometry(960, 225, 800, 450)
-        self.scroll_bet.setFont(font30)
+        self.scroll_bet.setFont(font40)
         self.scroll_bet.setObjectName("scroll_bet")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.scroll_bet)
              
@@ -695,14 +696,14 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # adding button manual (which button press for which actions)
         self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
             readOnly=True)
-        self.button_actions_field.setFont(font30)
+        self.button_actions_field.setFont(font40)
         self.button_actions_field.setGeometry(480, 855, 900, 101)
         self.button_actions_field.setObjectName("button_actions_field")
         self.button_actions_field.setPlainText("                ***BUTTON INSTRUCTIONS***\n          (CONTINUE) (DECREMENT) (INCREMENT) (N/A)")
 
         hb.button_press.connect(lambda: self.openWindow(self.p1_mw))
 
-        self.ready_pushButton.setFont(font30)
+        self.ready_pushButton.setFont(font40)
         self.ready_pushButton.setObjectName("ok_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ok_pushButton)
 
@@ -866,7 +867,7 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         # ready_push button styling/layout
         self.ready_pushButton = QtWidgets.QPushButton(self.centralwidget, clicked=lambda: self.bet_it(Player_ReadyWindow))
         self.ready_pushButton.setGeometry(240, 360, 600, 137)
-        self.ready_pushButton.setFont(font30)
+        self.ready_pushButton.setFont(font40)
         self.ready_pushButton.setObjectName("ready_pushButton")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.ready_pushButton)        
         #hb.button_press.connect(lambda: self.bet_it(Player_ReadyWindow))
@@ -1543,7 +1544,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             self.d_label = QtWidgets.QLabel(self.centralwidget)
             self.d_label.setObjectName("d_label")
-            self.d_label.setFont(font30)
+            self.d_label.setFont(font40)
             self.d_label.setText("Dealer Cards:")
             self.d_labelLayout.addWidget(self.d_label)
 
@@ -1586,21 +1587,21 @@ class Ui_GameWindow(QtCore.QObject):
 
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
-            self.current_bet_field.setFont(font30)
+            self.current_bet_field.setFont(font40)
             self.current_bet_field.setGeometry(240, 360, 264, 247)
             self.current_bet_field.setObjectName("current_bet_field")
 
             # adding button manual (which button press for which actions)
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
-            self.button_actions_field.setFont(font30)
+            self.button_actions_field.setFont(font40)
             self.button_actions_field.setGeometry(660, 855, 600, 101)
             self.button_actions_field.setObjectName("button_actions_field")
             self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
 
             # creating the amount left label
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font30)
+            self.amount_left_label.setFont(font40)
             self.amount_left_label.setGeometry(1440, 22, 720, 112)
             self.amount_left_label.setObjectName("amount_left_label")
 
@@ -1634,8 +1635,8 @@ class Ui_GameWindow(QtCore.QObject):
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
             self.label_3.setGeometry(264, 180, 264, 247)
             self.label_3.setObjectName("label_3")
-            self.label.setFont(font30)
-            self.label_3.setFont(font30)
+            self.label.setFont(font40)
+            self.label_3.setFont(font40)
             self.label.setText("P1 Cards:")
             self.label_3.setText("P1 Bet:")
 
@@ -1725,7 +1726,7 @@ class Ui_GameWindow(QtCore.QObject):
             # adding button manual (which button press for which actions)
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
-            self.button_actions_field.setFont(font30)
+            self.button_actions_field.setFont(font40)
             self.button_actions_field.setGeometry(660, 855, 600, 101)
             self.button_actions_field.setObjectName("button_actions_field")
             self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
@@ -1734,22 +1735,22 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
             self.label_3.setObjectName("label_3")
-            self.label_3.setFont(font30)
+            self.label_3.setFont(font40)
             self.label_3.setText("P1 Bet:")
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.current_bet_field.setFont(font30)
+            self.current_bet_field.setFont(font40)
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
             # PLAYER 2
             self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p2_label_2.setObjectName("p2_label_2")
-            self.p2_label_2.setFont(font30)
+            self.p2_label_2.setFont(font40)
             self.p2_label_2.setText("P2 Bet:")
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p2_current_bet_field.setFont(font30)
+            self.p2_current_bet_field.setFont(font40)
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
 
@@ -1757,7 +1758,7 @@ class Ui_GameWindow(QtCore.QObject):
             # DEALER
             self.d_label = QtWidgets.QLabel(self.centralwidget)
             self.d_label.setObjectName("d_label")
-            self.d_label.setFont(font30)
+            self.d_label.setFont(font40)
             self.d_label.setText("Dealer Cards:")
             self.d_labelLayout.addWidget(self.d_label)
 
@@ -1779,7 +1780,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.label = QtWidgets.QLabel(self.centralwidget)
             self.label.setObjectName("label")
-            self.label.setFont(font30)
+            self.label.setFont(font40)
             self.label.setText("P1 Cards:")
             self.labelLayout.addWidget(self.label)
 
@@ -1801,7 +1802,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_label.setObjectName("p2_label")
-            self.p2_label.setFont(font30)
+            self.p2_label.setFont(font40)
             self.p2_label.setText("P2 Cards:")
             self.p2_labelLayout.addWidget(self.p2_label)
 
@@ -1824,7 +1825,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font30)
+            self.amount_left_label.setFont(font40)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
@@ -1851,7 +1852,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 2 AMOUNT LEFT
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_amount_left_label.setFont(font30)
+            self.p2_amount_left_label.setFont(font40)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
             self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
@@ -1989,7 +1990,7 @@ class Ui_GameWindow(QtCore.QObject):
             # adding button manual (which button press for which actions)
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
                 readOnly=True)
-            self.button_actions_field.setFont(font30)
+            self.button_actions_field.setFont(font40)
             self.button_actions_field.setGeometry(660, 855, 600, 101)
             self.button_actions_field.setObjectName("button_actions_field")
             self.button_actions_field.setPlainText("        ***BUTTON INSTRUCTIONS***\n       (HIT) (DOUBLE) (STAND) (EXIT)")
@@ -1998,33 +1999,33 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
             self.label_3.setObjectName("label_3")
-            self.label_3.setFont(font30)
+            self.label_3.setFont(font40)
             self.label_3.setText("P1 Bet:")
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.current_bet_field.setFont(font30)
+            self.current_bet_field.setFont(font40)
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
             # PLAYER 2
             self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p2_label_2.setObjectName("p2_label_2")
-            self.p2_label_2.setFont(font30)
+            self.p2_label_2.setFont(font40)
             self.p2_label_2.setText("P2 Bet:")
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p2_current_bet_field.setFont(font30)
+            self.p2_current_bet_field.setFont(font40)
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
 
             # PLAYER 3
             self.p3_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p3_label_2.setObjectName("p3_label_2")
-            self.p3_label_2.setFont(font30)
+            self.p3_label_2.setFont(font40)
             self.p3_label_2.setText("P3 Bet:")
             self.p3_betLayout.addWidget(self.p3_label_2)
             self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p3_current_bet_field.setFont(font30)
+            self.p3_current_bet_field.setFont(font40)
             self.p3_current_bet_field.setObjectName("p3_current_bet_field")
             self.p3_betLayout.addWidget(self.p3_current_bet_field)
 
@@ -2032,7 +2033,7 @@ class Ui_GameWindow(QtCore.QObject):
             # DEALER
             self.d_label = QtWidgets.QLabel(self.centralwidget)
             self.d_label.setObjectName("d_label")
-            self.d_label.setFont(font30)
+            self.d_label.setFont(font40)
             self.d_label.setText("Dealer Cards:")
             self.d_labelLayout.addWidget(self.d_label)
 
@@ -2054,7 +2055,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.label = QtWidgets.QLabel(self.centralwidget)
             self.label.setObjectName("label")
-            self.label.setFont(font30)
+            self.label.setFont(font40)
             self.label.setText("P1 Cards:")
             self.labelLayout.addWidget(self.label)
 
@@ -2076,7 +2077,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_label.setObjectName("p2_label")
-            self.p2_label.setFont(font30)
+            self.p2_label.setFont(font40)
             self.p2_label.setText("P2 Cards:")
             self.p2_labelLayout.addWidget(self.p2_label)
 
@@ -2098,7 +2099,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 3
             self.p3_label = QtWidgets.QLabel(self.centralwidget)
             self.p3_label.setObjectName("p3_label")
-            self.p3_label.setFont(font30)
+            self.p3_label.setFont(font40)
             self.p3_label.setText("P3 Cards:")
             self.p3_labelLayout.addWidget(self.p3_label)
 
@@ -2121,7 +2122,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font30)
+            self.amount_left_label.setFont(font40)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
@@ -2148,7 +2149,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 2 AMOUNT LEFT
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_amount_left_label.setFont(font30)
+            self.p2_amount_left_label.setFont(font40)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
             self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
@@ -2170,7 +2171,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 3 AMOUNT LEFT
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p3_amount_left_label.setFont(font30)
+            self.p3_amount_left_label.setFont(font40)
             self.p3_amount_left_label.setObjectName("p3_amount_left_label")
             self.p3_amount_left_label.setText(("Amount Left: ") + str(amounts_list[3]))
             self.p3_verticalLayout.addWidget(self.p3_amount_left_label)
@@ -2338,44 +2339,44 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.label_3 = QtWidgets.QLabel(self.centralwidget)
             self.label_3.setObjectName("label_3")
-            self.label_3.setFont(font30)
+            self.label_3.setFont(font40)
             self.label_3.setText("P1 Bet:")
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.current_bet_field.setFont(font30)
+            self.current_bet_field.setFont(font40)
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
             # PLAYER 2
             self.p2_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p2_label_2.setObjectName("p2_label_2")
-            self.p2_label_2.setFont(font30)
+            self.p2_label_2.setFont(font40)
             self.p2_label_2.setText("P2 Bet:")
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p2_current_bet_field.setFont(font30)
+            self.p2_current_bet_field.setFont(font40)
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
 
             # PLAYER 3
             self.p3_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p3_label_2.setObjectName("p3_label_2")
-            self.p3_label_2.setFont(font30)
+            self.p3_label_2.setFont(font40)
             self.p3_label_2.setText("P3 Bet:")
             self.p3_betLayout.addWidget(self.p3_label_2)
             self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p3_current_bet_field.setFont(font30)
+            self.p3_current_bet_field.setFont(font40)
             self.p3_current_bet_field.setObjectName("p3_current_bet_field")
             self.p3_betLayout.addWidget(self.p3_current_bet_field)
 
             # PLAYER 4
             self.p4_label_2 = QtWidgets.QLabel(self.centralwidget)
             self.p4_label_2.setObjectName("p4_label_2")
-            self.p4_label_2.setFont(font30)
+            self.p4_label_2.setFont(font40)
             self.p4_label_2.setText("P4 Bet:") 
             self.p4_betLayout.addWidget(self.p4_label_2)
             self.p4_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
-            self.p4_current_bet_field.setFont(font30)
+            self.p4_current_bet_field.setFont(font40)
             self.p4_current_bet_field.setObjectName("p4_current_bet_field")  
             self.p4_betLayout.addWidget(self.p4_current_bet_field)  
 
@@ -2391,7 +2392,7 @@ class Ui_GameWindow(QtCore.QObject):
             # DEALER
             self.d_label = QtWidgets.QLabel(self.centralwidget)
             self.d_label.setObjectName("d_label")
-            self.d_label.setFont(font30)
+            self.d_label.setFont(font40)
             self.d_label.setText("Dealer Cards:")
             self.d_labelLayout.addWidget(self.d_label)
 
@@ -2413,7 +2414,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 1
             self.label = QtWidgets.QLabel(self.centralwidget)
             self.label.setObjectName("label")
-            self.label.setFont(font30)
+            self.label.setFont(font40)
             self.label.setText("P1 Cards:")
             self.labelLayout.addWidget(self.label)
 
@@ -2435,7 +2436,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 2
             self.p2_label = QtWidgets.QLabel(self.centralwidget)
             self.p2_label.setObjectName("p2_label")
-            self.p2_label.setFont(font30)
+            self.p2_label.setFont(font40)
             self.p2_label.setText("P2 Cards:")
             self.p2_labelLayout.addWidget(self.p2_label)
 
@@ -2457,7 +2458,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 3
             self.p3_label = QtWidgets.QLabel(self.centralwidget)
             self.p3_label.setObjectName("p3_label")
-            self.p3_label.setFont(font30)
+            self.p3_label.setFont(font40)
             self.p3_label.setText("P3 Cards:")
             self.p3_labelLayout.addWidget(self.p3_label)
 
@@ -2479,7 +2480,7 @@ class Ui_GameWindow(QtCore.QObject):
             # PLAYER 4
             self.p4_label = QtWidgets.QLabel(self.centralwidget)
             self.p4_label.setObjectName("p4_label")
-            self.p4_label.setFont(font30)
+            self.p4_label.setFont(font40)
             self.p4_label.setText("P4 Cards:")
             self.p4_labelLayout.addWidget(self.p4_label)
 
@@ -2502,7 +2503,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 1 AMOUNT LEFT
             self.amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.amount_left_label.setFont(font30)
+            self.amount_left_label.setFont(font40)
             self.amount_left_label.setObjectName("amount_left_label")
             self.amount_left_label.setText(("Amount Left: ") + str(amounts_list[1]))
             self.verticalLayout.addWidget(self.amount_left_label)
@@ -2529,7 +2530,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 2 AMOUNT LEFT
             self.p2_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p2_amount_left_label.setFont(font30)
+            self.p2_amount_left_label.setFont(font40)
             self.p2_amount_left_label.setObjectName("p2_amount_left_label")
             self.p2_amount_left_label.setText(("Amount Left: ") + str(amounts_list[2]))
             self.p2_verticalLayout.addWidget(self.p2_amount_left_label)
@@ -2551,7 +2552,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 3 AMOUNT LEFT
             self.p3_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p3_amount_left_label.setFont(font30)
+            self.p3_amount_left_label.setFont(font40)
             self.p3_amount_left_label.setObjectName("p3_amount_left_label")
             self.p3_amount_left_label.setText(("Amount Left: ") + str(amounts_list[3]))
             self.p3_verticalLayout.addWidget(self.p3_amount_left_label)
@@ -2573,7 +2574,7 @@ class Ui_GameWindow(QtCore.QObject):
 
             # PLAYER 4 AMOUNT LEFT
             self.p4_amount_left_label = QtWidgets.QLabel(self.centralwidget)
-            self.p4_amount_left_label.setFont(font30)
+            self.p4_amount_left_label.setFont(font40)
             self.p4_amount_left_label.setObjectName("p4_amount_left_label")
             self.p4_amount_left_label.setText(("Amount Left: ") + str(amounts_list[4]))
             self.p4_verticalLayout.addWidget(self.p4_amount_left_label)
@@ -2701,7 +2702,7 @@ class Ui_confirm_round(QtCore.QObject):
 
         # confirmation label text styles/layout
         self.confirm_label = QtWidgets.QLabel(self.widget)
-        self.confirm_label.setFont(font30)
+        self.confirm_label.setFont(font40)
         self.confirm_label.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.confirm_label.setAlignment(QtCore.Qt.AlignCenter)
         self.confirm_label.setObjectName("confirm_label")
@@ -2804,7 +2805,7 @@ class Ui_end_game(QtCore.QObject):
 
         # confirmation label text styles/layout
         self.confirm_label = QtWidgets.QLabel(self.widget)
-        self.confirm_label.setFont(font30)
+        self.confirm_label.setFont(font40)
         self.confirm_label.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.confirm_label.setAlignment(QtCore.Qt.AlignCenter)
         self.confirm_label.setObjectName("confirm_label")
