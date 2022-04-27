@@ -1374,7 +1374,7 @@ class Ui_GameWindow(QtCore.QObject):
                         # put in the player and dealer cards to display in next round screen
                         self.open_next_round(scoring, wallets, load_cards)
                         QtTest.QTest.qWait(DELAYED)
-                        #self.done_round()
+                        self.done_round()
                         break
                     else:
                         pass
@@ -1431,7 +1431,7 @@ class Ui_GameWindow(QtCore.QObject):
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(scoring, wallets, load_cards)
                 QtTest.QTest.qWait(DELAYED)
-                #self.done_round()
+                self.done_round()
                 break
             elif msg.id == "switch":
                 self.reset_buttons(msg.content)
@@ -1533,7 +1533,7 @@ class Ui_GameWindow(QtCore.QObject):
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(scoring, wallets, load_cards)
                 QtTest.QTest.qWait(DELAYED)
-                #self.done_round()
+                self.done_round()
                 break
             else:
                 pass        
@@ -2769,7 +2769,7 @@ class Ui_confirm_round(QtCore.QObject):
         db.button_press.connect(prev_w.double_it)
         eb.button_press.connect(prev_w.exit_it)
 
-        self.done_round()
+        #self.done_round()
 
     # UPON CANCEL BUTTON PRESS: DO NOTHING
     def reject_connection(self):
