@@ -1383,7 +1383,7 @@ class Ui_GameWindow(QtCore.QObject):
                             new_card.load(file1)
                             new_card.show()
                             self.d_cards_layout.addWidget(new_card)
-                            QtTest.QTest.qWait(DELAYED)
+                            #QtTest.QTest.qWait(DELAYED)
 
                         # TODO: display updated dealer cards
                         scoring = msg1.content[1]
@@ -1440,7 +1440,7 @@ class Ui_GameWindow(QtCore.QObject):
                     new_card.load(file1)
                     new_card.show()
                     self.d_cards_layout.addWidget(new_card)
-                    QtTest.QTest.qWait(DELAYED)
+                    #QtTest.QTest.qWait(DELAYED)
 
                 # TODO: display updated dealer cards
                 scoring = msg.content[1]
@@ -1543,7 +1543,7 @@ class Ui_GameWindow(QtCore.QObject):
                     new_card.load(file1)
                     new_card.show()
                     self.d_cards_layout.addWidget(new_card)
-                    QtTest.QTest.qWait(DELAYED)
+                    #QtTest.QTest.qWait(DELAYED)
 
                 scoring = msg.content[1]
                 wallets = msg.content[2]
@@ -1644,7 +1644,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field.setFont(font30)
             self.current_bet_field.setStyleSheet("color: black; background-color: white; border-style: none")
             self.current_bet_field.setObjectName("current_bet_field")
-            self.betLayout.addWidget(self.current_bet_field) 
+            self.betLayout.addWidget(self.current_bet_field)
 
             # adding button manual (which button press for which actions)
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
@@ -1735,7 +1735,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.verticalLayout.addWidget(self.exit_button)
 
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
-            self.current_bet_field.setPlainText(str(self.player_bets[1]))           
+            self.current_bet_field.setPlainText(str(self.player_bets[1]))
         #
         #
         #########################################################################
@@ -1825,7 +1825,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.current_bet_field.setFont(font30)
-            self.current_bet_field.setStyleSheet("color: black; background-color: white")
+            self.current_bet_field.setStyleSheet("color: black; background-color: white; border-style: none")
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
@@ -1837,7 +1837,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.p2_current_bet_field.setFont(font30)
-            self.p2_current_bet_field.setStyleSheet("color: black; background-color: white")
+            self.p2_current_bet_field.setStyleSheet("color: black; background-color: white; border-style: none")
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
 
@@ -1980,7 +1980,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
 
             self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
-            self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))           
+            self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
         #
         #
         #########################################################################
@@ -2098,7 +2098,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.betLayout.addWidget(self.label_3)
             self.current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.current_bet_field.setFont(font30)
-            self.current_bet_field.setStyleSheet("color: black; background-color: white")
+            self.current_bet_field.setStyleSheet("color: black; background-color: white; border-style: none")
             self.current_bet_field.setObjectName("current_bet_field")
             self.betLayout.addWidget(self.current_bet_field)
 
@@ -2110,7 +2110,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_betLayout.addWidget(self.p2_label_2)
             self.p2_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.p2_current_bet_field.setFont(font30)
-            self.p2_current_bet_field.setStyleSheet("color: black; background-color: white")
+            self.p2_current_bet_field.setStyleSheet("color: black; background-color: white; border-style: none")
             self.p2_current_bet_field.setObjectName("p2_current_bet_field")
             self.p2_betLayout.addWidget(self.p2_current_bet_field)
 
@@ -2122,9 +2122,9 @@ class Ui_GameWindow(QtCore.QObject):
             self.p3_betLayout.addWidget(self.p3_label_2)
             self.p3_current_bet_field = QtWidgets.QPlainTextEdit(self.centralwidget, readOnly=True)
             self.p3_current_bet_field.setFont(font30)
-            self.p3_current_bet_field.setStyleSheet("color: black; background-color: white")
+            #self.p3_current_bet_field.setStyleSheet("background-color: white")
             self.p3_current_bet_field.setObjectName("p3_current_bet_field")
-            self.p3_betLayout.addWidget(self.p3_current_bet_field)
+            self.p3_betLayout.addWidget(self.p3_current_bet_field) 
 
             # adding button manual (which button press for which actions)
             self.button_actions_field = QtWidgets.QPlainTextEdit(self.centralwidget,
@@ -2315,7 +2315,7 @@ class Ui_GameWindow(QtCore.QObject):
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
 
             self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
-            self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))          
+            self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
         #
         #
         #########################################################################
@@ -2732,19 +2732,15 @@ class Ui_GameWindow(QtCore.QObject):
 
             self.amount_left_label.setText("Amount Left: " + str(amounts_list[1]))
             self.current_bet_field.setPlainText(str(self.player_bets[1]))
-            self.current_bet_field.setStyleSheet("color: black")
 
             self.p2_amount_left_label.setText("Amount Left: " + str(amounts_list[2]))
             self.p2_current_bet_field.setPlainText(str(self.player_bets[2]))
-            self.p2_current_bet_field.setStyleSheet("color: black")
 
             self.p3_amount_left_label.setText("Amount Left: " + str(amounts_list[3]))
             self.p3_current_bet_field.setPlainText(str(self.player_bets[3]))
-            self.p3_current_bet_field.setStyleSheet("color: black")
 
             self.p4_amount_left_label.setText("Amount Left: " + str(amounts_list[4]))
             self.p4_current_bet_field.setPlainText(str(self.player_bets[4]))
-            self.current_bet_field.setStyleSheet("color: black")           
         #
         #
         #########################################################################
