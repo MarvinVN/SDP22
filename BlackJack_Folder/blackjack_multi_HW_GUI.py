@@ -47,7 +47,7 @@ WIDTH = 1920
 
 # TIME DELAY (IN MILLISECONDS)
 DELAYED = 1000
-WAITING_DELAY = 10000 # waiting before shooting out the cards for the next round
+WAITING_DELAY = 10000 # waiting before shooting out the cards for the next
 
 # GAME ENDS
 ENDED = False
@@ -1072,6 +1072,8 @@ class Ui_GameWindow(QtCore.QObject):
         self.ui = Ui_confirm_round()
         self.ui.setupUi(self, self.window)
         self.window.show()
+        #  This line will close the app, but I have it above in exit_it() function
+        sys.exit(app.exec_())
 
         # displaying the values onto confirmation box
         self.ui.confirm_list_widget.addItem("Dealer Cards: " + str(cards[0]))
@@ -1388,11 +1390,9 @@ class Ui_GameWindow(QtCore.QObject):
                         QtTest.QTest.qWait(DELAYED)
                         # put in the player and dealer cards to display in next round screen
                         self.open_next_round(scoring, wallets, load_cards)
-                        #QtTest.QTest.qWait(DELAYED)
-                        #QtTest.QTest.qWait(WAITING_DELAY)
-                        #  This line will close the app, but I have it above in exit_it() function
-                        sys.exit(app.exec_())
-                        #self.done_round()
+                        QtTest.QTest.qWait(DELAYED)
+                        QtTest.QTest.qWait(WAITING_DELAY)
+                        self.done_round()
                         break
                     else:
                         pass
@@ -1448,11 +1448,9 @@ class Ui_GameWindow(QtCore.QObject):
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(scoring, wallets, load_cards)
-                #QtTest.QTest.qWait(DELAYED)
-                #QtTest.QTest.qWait(WAITING_DELAY)
-                #  This line will close the app, but I have it above in exit_it() function
-                sys.exit(app.exec_())
-                #self.done_round()
+                QtTest.QTest.qWait(DELAYED)
+                QtTest.QTest.qWait(WAITING_DELAY)
+                self.done_round()
                 break
             elif msg.id == "switch":
                 self.reset_buttons(msg.content)
@@ -1553,11 +1551,9 @@ class Ui_GameWindow(QtCore.QObject):
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(scoring, wallets, load_cards)
-                #QtTest.QTest.qWait(DELAYED)
-                #QtTest.QTest.qWait(WAITING_DELAY)
-                #  This line will close the app, but I have it above in exit_it() function
-                sys.exit(app.exec_())
-                #self.done_round()
+                QtTest.QTest.qWait(DELAYED)
+                QtTest.QTest.qWait(WAITING_DELAY)
+                self.done_round()
                 break
             else:
                 pass        
@@ -2794,8 +2790,6 @@ class Ui_confirm_round(QtCore.QObject):
         sb.button_press.connect(prev_w.stand_it)
         db.button_press.connect(prev_w.double_it)
         eb.button_press.connect(prev_w.exit_it)
-        #  This line will close the app, but I have it above in exit_it() function
-        sys.exit(app.exec_())
 
         #self.done_round()
 
