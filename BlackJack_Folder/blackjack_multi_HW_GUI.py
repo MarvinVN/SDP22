@@ -47,6 +47,7 @@ WIDTH = 1920
 
 # TIME DELAY (IN MILLISECONDS)
 DELAYED = 1000
+WAITING_DELAY = 10000 # waiting before shooting out the cards for the next round
 
 # GAME ENDS
 ENDED = False
@@ -899,6 +900,20 @@ class Ui_Player_ReadyWindow(QtCore.QObject):
         self.ready_pushButton.setText(_translate("Player_ReadyWindow", "PRESS HERE WHEN READY!"))
 
 
+###################################################################
+###################################################################
+###################################################################
+########                                                 ##########
+########                   WAITING CLASS                 ##########
+########                                                 ##########
+########         This class creates the WAITING          ##########
+########   GUI and waits for cards to be scanned.        ##########
+########                                                 ##########
+###################################################################
+###################################################################
+
+# TODO: add another widget here
+
 
 ###################################################################
 ###################################################################
@@ -1374,6 +1389,7 @@ class Ui_GameWindow(QtCore.QObject):
                         # put in the player and dealer cards to display in next round screen
                         self.open_next_round(scoring, wallets, load_cards)
                         QtTest.QTest.qWait(DELAYED)
+                        QtTest.QTest.qWait(WAITING_DELAY)
                         self.done_round()
                         break
                     else:
@@ -1431,6 +1447,7 @@ class Ui_GameWindow(QtCore.QObject):
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(scoring, wallets, load_cards)
                 QtTest.QTest.qWait(DELAYED)
+                QtTest.QTest.qWait(WAITING_DELAY)
                 self.done_round()
                 break
             elif msg.id == "switch":
@@ -1533,6 +1550,7 @@ class Ui_GameWindow(QtCore.QObject):
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(scoring, wallets, load_cards)
                 QtTest.QTest.qWait(DELAYED)
+                QtTest.QTest.qWait(WAITING_DELAY)
                 self.done_round()
                 break
             else:
@@ -2761,6 +2779,8 @@ class Ui_confirm_round(QtCore.QObject):
 
     # UPON CONFIRM BUTTON PRESS: CLOSE CURRENT GUIS, OPEN PLAYER_READY GUI
     def confirm_connection(self, prev_w):
+        # this works only after receiving all rfid cards
+        # TODO: add a waiting for cards gui here
         print("entered confirm_connection....")
         self.continueConfirmation()
 
