@@ -117,7 +117,7 @@ class Deck:
                     while not tmp == 'confirm':
                         tmp = gui_to_bj_queue.get()
                     """
-                dealer.p0() #for confirmation to dispense again
+                sleep(.1)
                 card = RFID.read()
                 print("GAME stuck in while(card==FALSE)")
             
@@ -133,9 +133,8 @@ class Deck:
             else:
                 res.show()
                 break
-
-        dealer.scanConfirm() #signal that card has been scanned
-        
+        sleep(2)
+                
         return res
 
     #calls show() on each card to print out current deck
