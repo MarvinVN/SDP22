@@ -1388,8 +1388,8 @@ class Ui_GameWindow(QtCore.QObject):
                         QtTest.QTest.qWait(DELAYED)
                         # put in the player and dealer cards to display in next round screen
                         self.open_next_round(scoring, wallets, load_cards)
-                        QtTest.QTest.qWait(DELAYED)
-                        QtTest.QTest.qWait(WAITING_DELAY)
+                        #QtTest.QTest.qWait(DELAYED)
+                        #QtTest.QTest.qWait(WAITING_DELAY)
                         #  This line will close the app, but I have it above in exit_it() function
                         sys.exit(app.exec_())
                         #self.done_round()
@@ -1448,8 +1448,8 @@ class Ui_GameWindow(QtCore.QObject):
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(scoring, wallets, load_cards)
-                QtTest.QTest.qWait(DELAYED)
-                QtTest.QTest.qWait(WAITING_DELAY)
+                #QtTest.QTest.qWait(DELAYED)
+                #QtTest.QTest.qWait(WAITING_DELAY)
                 #  This line will close the app, but I have it above in exit_it() function
                 sys.exit(app.exec_())
                 #self.done_round()
@@ -1553,8 +1553,8 @@ class Ui_GameWindow(QtCore.QObject):
                 QtTest.QTest.qWait(DELAYED)
                 # put in the player and dealer cards to display in next round screen
                 self.open_next_round(scoring, wallets, load_cards)
-                QtTest.QTest.qWait(DELAYED)
-                QtTest.QTest.qWait(WAITING_DELAY)
+                #QtTest.QTest.qWait(DELAYED)
+                #QtTest.QTest.qWait(WAITING_DELAY)
                 #  This line will close the app, but I have it above in exit_it() function
                 sys.exit(app.exec_())
                 #self.done_round()
@@ -2794,6 +2794,8 @@ class Ui_confirm_round(QtCore.QObject):
         sb.button_press.connect(prev_w.stand_it)
         db.button_press.connect(prev_w.double_it)
         eb.button_press.connect(prev_w.exit_it)
+        #  This line will close the app, but I have it above in exit_it() function
+        sys.exit(app.exec_())
 
         #self.done_round()
 
