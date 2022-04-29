@@ -1073,7 +1073,7 @@ class Ui_GameWindow(QtCore.QObject):
         self.ui.setupUi(self, self.window)
         self.window.show()
         #  This line will close the app, but I have it above in exit_it() function
-        sys.exit(app.exec_())
+        #sys.exit(app.exec_())
 
         # displaying the values onto confirmation box
         self.ui.confirm_list_widget.addItem("Dealer Cards: " + str(cards[0]))
