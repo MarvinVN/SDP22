@@ -1390,7 +1390,9 @@ class Ui_GameWindow(QtCore.QObject):
                         self.open_next_round(scoring, wallets, load_cards)
                         QtTest.QTest.qWait(DELAYED)
                         QtTest.QTest.qWait(WAITING_DELAY)
-                        self.done_round()
+                        #  This line will close the app, but I have it above in exit_it() function
+                        sys.exit(app.exec_())
+                        #self.done_round()
                         break
                     else:
                         pass
@@ -1448,7 +1450,9 @@ class Ui_GameWindow(QtCore.QObject):
                 self.open_next_round(scoring, wallets, load_cards)
                 QtTest.QTest.qWait(DELAYED)
                 QtTest.QTest.qWait(WAITING_DELAY)
-                self.done_round()
+                #  This line will close the app, but I have it above in exit_it() function
+                sys.exit(app.exec_())
+                #self.done_round()
                 break
             elif msg.id == "switch":
                 self.reset_buttons(msg.content)
@@ -1551,7 +1555,9 @@ class Ui_GameWindow(QtCore.QObject):
                 self.open_next_round(scoring, wallets, load_cards)
                 QtTest.QTest.qWait(DELAYED)
                 QtTest.QTest.qWait(WAITING_DELAY)
-                self.done_round()
+                #  This line will close the app, but I have it above in exit_it() function
+                sys.exit(app.exec_())
+                #self.done_round()
                 break
             else:
                 pass        
